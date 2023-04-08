@@ -1,0 +1,1035 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Lab 2 - Data Retrieval with SQL and Cypher - HackMD
+    </title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+    <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" integrity="sha256-QiWfLIsCT02Sdwkogf6YMiQlj4NE84MKkzEMkZnMGdg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i|Source+Code+Pro:300,400,500|Source+Sans+Pro:300,300i,400,400i,600,600i|Source+Serif+Pro&subset=latin-ext);.hljs{background:#fff;color:#333;display:block;overflow-x:auto;padding:.5em}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-string,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-number,.hljs-symbol{color:#0086b3}.hljs-built_in,.hljs-builtin-name{color:#005cc5}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#795da3}.hljs-addition{background-color:#eaffea;color:#55a532}.hljs-deletion{background-color:#ffecec;color:#bd2c00}.hljs-link{text-decoration:underline}.markdown-body{word-wrap:break-word;font-size:16px;line-height:1.5}.markdown-body:after,.markdown-body:before{content:"";display:table}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;line-height:1;margin-left:-20px;padding-right:4px}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-bottom:16px;margin-top:0}.markdown-body hr{background-color:#e7e7e7;border:0;height:.25em;margin:24px 0;padding:0}.markdown-body blockquote{border-left:.25em solid #ddd;color:#777;font-size:16px;padding:0 1em}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body kbd,.popover kbd{background-color:#fcfcfc;border:1px solid;border-color:#ccc #ccc #bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb;color:#555;display:inline-block;font-size:11px;line-height:10px;padding:3px 5px;vertical-align:middle}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{font-weight:600;line-height:1.25;margin-bottom:16px;margin-top:24px}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#000;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{border-bottom:1px solid #eee;padding-bottom:.3em}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{color:#777;font-size:.85em}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{list-style-type:none;padding:0}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-bottom:0;margin-top:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{padding-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{font-size:1em;font-style:italic;font-weight:700;margin-top:16px;padding:0}.markdown-body dl dd{margin-bottom:16px;padding:0 16px}.markdown-body table{display:block;overflow:auto;width:100%;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{border:1px solid #ddd;padding:6px 13px}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{background-color:#fff;box-sizing:initial;max-width:100%}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{background-color:initial;max-width:none;vertical-align:text-top}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{border:1px solid #ddd;display:block;float:left;margin:13px 0 0;overflow:hidden;padding:7px;width:auto}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{clear:both;color:#333;display:block;padding:5px 0 0}.markdown-body span.align-center{clear:both;display:block;overflow:hidden}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{clear:both;display:block;overflow:hidden}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{background-color:#0000000a;border-radius:3px;font-size:85%;margin:0;padding:.2em 0}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{content:"\00a0";letter-spacing:-.2em}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{background:#0000;border:0;font-size:100%;margin:0;padding:0;white-space:pre;word-break:normal}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{background-color:#f7f7f7;border-radius:3px;font-size:85%;line-height:1.45;overflow:auto;padding:16px}.markdown-body pre code,.markdown-body pre tt{word-wrap:normal;background-color:initial;border:0;display:inline;line-height:inherit;margin:0;max-width:auto;overflow:visible;padding:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{font-size:12px;line-height:1;overflow:hidden;padding:5px;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{background:#fff;border:0;padding:10px 8px 9px;text-align:right}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{background:#f8f8f8;border-top:0;font-weight:700}.news .alert .markdown-body blockquote{border:0;padding:0 0 0 40px}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{cursor:default!important;float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle}.markdown-body{max-width:758px;overflow:visible!important;padding-bottom:40px;padding-top:40px;position:relative}.markdown-body .emoji{vertical-align:top}.markdown-body pre{border:inherit!important}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{border-right:3px solid #6ce26c!important;box-sizing:initial;color:#afafaf!important;cursor:default;display:inline-block;min-width:20px;padding:0 8px 0 0;position:relative;text-align:right;z-index:4}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-bottom:none;border-left:none;border-top:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-collapse:inherit!important;border-spacing:0}.markdown-body code[data-gist-id]{background:none;padding:0}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{margin-bottom:unset;overflow:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p:last-child{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{background-color:inherit;border-radius:0;overflow:visible;text-align:center;white-space:inherit}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{height:100%;max-width:100%}.markdown-body pre>code.wrap{word-wrap:break-word;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap}.markdown-body .alert>p:last-child,.markdown-body .alert>ul:last-child{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body .mark,.markdown-body mark{background-color:#fff1a7}.vimeo,.youtube{background-color:#000;background-position:50%;background-repeat:no-repeat;background-size:contain;cursor:pointer;display:table;overflow:hidden;text-align:center}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{object-fit:contain;width:100%;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{height:100%;left:0;position:absolute;top:0;width:100%}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{color:#fff;height:auto;left:50%;opacity:.3;position:absolute;top:50%;transform:translate(-50%,-50%);transition:opacity .2s;width:auto;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{bottom:0;height:100%;left:0;position:absolute;right:0;top:0;width:100%}.figma{display:table;padding-bottom:56.25%;position:relative;width:100%}.figma iframe{border:1px solid #eee;bottom:0;height:100%;left:0;position:absolute;right:0;top:0;width:100%}.markmap-container{height:300px}.markmap-container>svg{height:100%;width:100%}.MJX_Assistive_MathML{display:none}#MathJax_Message{z-index:1000!important}.ui-infobar{color:#777;margin:25px auto -25px;max-width:760px;position:relative;z-index:2}.toc .invisable-node{list-style-type:none}.ui-toc{bottom:20px;position:fixed;z-index:998}.ui-toc.both-mode{margin-left:8px}.ui-toc.both-mode .ui-toc-label{border-bottom-left-radius:0;border-top-left-radius:0;height:40px;padding:10px 4px}.ui-toc-label{background-color:#e6e6e6;border:none;color:#868686;transition:opacity .2s}.ui-toc .open .ui-toc-label{color:#fff;opacity:1;transition:opacity .2s}.ui-toc-label:focus{background-color:#ccc;color:#000;opacity:.3}.ui-toc-label:hover{background-color:#ccc;opacity:1;transition:opacity .2s}.ui-toc-dropdown{margin-bottom:20px;margin-top:20px;max-height:70vh;max-width:45vw;overflow:auto;padding-left:10px;padding-right:10px;text-align:inherit;width:25vw}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{letter-spacing:.0029em;padding-right:0}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{color:#767676;display:block;font-size:13px;font-weight:500;padding:4px 20px}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{background-color:initial;border-left:1px solid #000;color:#000;padding-left:19px;text-decoration:none}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{border-left:none;border-right:1px solid #000;padding-right:19px}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{background-color:initial;border-left:2px solid #000;color:#000;font-weight:700;padding-left:18px}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{border-left:none;border-right:2px solid #000;padding-right:18px}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{font-size:12px;font-weight:400;padding-bottom:1px;padding-left:30px;padding-top:1px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{font-size:12px;font-weight:400;padding-bottom:1px;padding-left:40px;padding-top:1px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{font-weight:500;padding-left:28px}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{font-weight:500;padding-left:38px}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang^=ja] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang=zh-tw] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang=zh-cn] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html .markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html .markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html .markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang^=ja] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ Ｐゴシック,sans-serif}html[lang=zh-tw] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html[lang=zh-cn] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}html .ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ Ｐゴシック,sans-serif}html .ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html .ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}.ui-affix-toc{max-height:70vh;max-width:15vw;overflow:auto;position:fixed;top:0}.back-to-top,.expand-toggle,.go-to-bottom{color:#999;display:block;font-size:12px;font-weight:500;margin-left:10px;margin-top:10px;padding:4px 10px}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{background-position:50%;background-repeat:no-repeat;background-size:cover;border-radius:50%;display:block;height:20px;margin-bottom:2px;margin-right:5px;margin-top:2px;width:20px}.ui-user-icon.small{display:inline-block;height:18px;margin:0 0 .2em;vertical-align:middle;width:18px}.ui-infobar>small>span{line-height:22px}.ui-infobar>small .dropdown{display:inline-block}.ui-infobar>small .dropdown a:focus,.ui-infobar>small .dropdown a:hover{text-decoration:none}.ui-more-info{color:#888;cursor:pointer;vertical-align:middle}.ui-more-info .fa{font-size:16px}.ui-connectedGithub,.ui-published-note{color:#888}.ui-connectedGithub{line-height:23px;white-space:nowrap}.ui-connectedGithub a.file-path{color:#888;padding-left:22px;text-decoration:none}.ui-connectedGithub a.file-path:active,.ui-connectedGithub a.file-path:hover{color:#888;text-decoration:underline}.ui-connectedGithub .fa{font-size:20px}.ui-published-note .fa{font-size:20px;vertical-align:top}.unselectable{-webkit-user-select:none;-o-user-select:none;user-select:none}.selectable{-webkit-user-select:text;-o-user-select:text;user-select:text}.inline-spoiler-section{cursor:pointer}.inline-spoiler-section .spoiler-text{background-color:#333;border-radius:2px}.inline-spoiler-section .spoiler-text>*{opacity:0}.inline-spoiler-section .spoiler-img{filter:blur(10px)}.inline-spoiler-section.raw{background-color:#333;border-radius:2px}.inline-spoiler-section.raw>*{opacity:0}.inline-spoiler-section.unveil{cursor:auto}.inline-spoiler-section.unveil .spoiler-text{background-color:#3333331a}.inline-spoiler-section.unveil .spoiler-text>*{opacity:1}.inline-spoiler-section.unveil .spoiler-img{filter:none}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{color:#222;position:relative;z-index:1}.markdown-body.slides:before{background-color:currentColor;bottom:0;box-shadow:0 0 0 50vw;content:"";display:block;left:0;position:absolute;right:0;top:0;z-index:-1}.markdown-body.slides section[data-markdown]{background-color:#fff;margin-bottom:1.5em;position:relative;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{left:1em;max-height:100%;overflow:hidden;position:absolute;right:1em;top:50%;transform:translateY(-50%)}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{border:3px solid #777;content:"";height:1.5em;position:absolute;right:1em;top:-1.5em}.site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,sans-serif}html[lang^=ja] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif}html[lang=zh-tw] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}html[lang^=ja] body{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif}html[lang=zh-tw] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}abbr[data-original-title],abbr[title]{cursor:help}body.modal-open{overflow-y:auto;padding-right:0!important}svg{text-shadow:none}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h1 id="Lab-2---Data-Retrieval-with-SQL-and-Cypher" data-id="Lab-2---Data-Retrieval-with-SQL-and-Cypher"><a class="anchor hidden-xs" href="#Lab-2---Data-Retrieval-with-SQL-and-Cypher" title="Lab-2---Data-Retrieval-with-SQL-and-Cypher"><span class="octicon octicon-link"></span></a><span>Lab 2 - Data Retrieval with SQL and Cypher</span></h1><p><strong><span>Course:</span></strong><span> Intro to Big Data - IU S23</span><br>
+<strong><span>Author:</span></strong><span> Firas Jolha</span></p><h1 id="Dataset" data-id="Dataset"><a class="anchor hidden-xs" href="#Dataset" title="Dataset"><span class="octicon octicon-link"></span></a><span>Dataset</span></h1><ul>
+<li><a href="https://disk.yandex.ru/d/HlBEEgUJmkD6Xg" target="_blank" rel="noopener"><span>Users and Posts</span></a></li>
+</ul><h1 id="Agenda" data-id="Agenda"><a class="anchor hidden-xs" href="#Agenda" title="Agenda"><span class="octicon octicon-link"></span></a><span>Agenda</span></h1><p><span class="toc"><ul>
+<li><a href="#Lab-2---Data-Retrieval-with-SQL-and-Cypher" title="Lab 2 - Data Retrieval with SQL and Cypher">Lab 2 - Data Retrieval with SQL and Cypher</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li><a href="#Dataset-Descripion" title="Dataset Descripion">Dataset Descripion</a></li>
+<li><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
+<li><a href="#PostgreSQL-Meta-commands" title="PostgreSQL Meta-commands">PostgreSQL Meta-commands</a></li>
+<li><a href="#Build-the-Database" title="Build the Database">Build the Database</a><ul>
+<li><a href="#Fix-Friends-table" title="Fix Friends table">Fix Friends table</a></li>
+</ul>
+</li>
+<li><a href="#Data-Retrieval-using-SQL" title="Data Retrieval using SQL">Data Retrieval using SQL</a><ul>
+<li><a href="#Data-Retrieval-from-a-single-table" title="Data Retrieval from a single table">Data Retrieval from a single table</a></li>
+<li><a href="#Data-Retrieval-from-multiple-tables-Joining-tables" title="Data Retrieval from multiple tables (Joining tables)">Data Retrieval from multiple tables (Joining tables)</a></li>
+<li><a href="#Aggregation-and-grouping" title="Aggregation and grouping">Aggregation and grouping</a></li>
+</ul>
+</li>
+<li><a href="#Graph-databases" title="Graph databases">Graph databases</a><ul>
+<li><a href="#Download-and-Install-Neo4j" title="Download and Install Neo4j">Download and Install Neo4j</a></li>
+</ul>
+</li>
+<li><a href="#Cypher" title="Cypher">Cypher</a><ul>
+<li><a href="#Property-types" title="Property types">Property types</a></li>
+<li><a href="#Structural-types" title="Structural types">Structural types</a></li>
+<li><a href="#Composite-types" title="Composite types">Composite types</a></li>
+<li><a href="#How-to-define-a-variable" title="How to define a variable">How to define a variable</a></li>
+<li><a href="#Operators" title="Operators">Operators</a><ul>
+<li><a href="#DISTINCT-aggregation-operator" title="DISTINCT (aggregation operator)">DISTINCT (aggregation operator)</a></li>
+<li><a href="#Property-operators" title="Property operators">Property operators</a></li>
+<li><a href="#Mathemtical-operators" title="Mathemtical operators">Mathemtical operators</a></li>
+<li><a href="#Comparison-operators" title="Comparison operators">Comparison operators</a></li>
+<li><a href="#Boolean-operators" title="Boolean operators">Boolean operators</a></li>
+<li><a href="#String-operators" title="String operators">String operators</a></li>
+</ul>
+</li>
+<li><a href="#Patterns" title="Patterns">Patterns</a><ul>
+<li><a href="#Patterns-for-nodes" title="Patterns for nodes">Patterns for nodes</a></li>
+<li><a href="#Patterns-for-related-nodes" title="Patterns for related nodes">Patterns for related nodes</a></li>
+<li><a href="#Patterns-for-labels" title="Patterns for labels">Patterns for labels</a></li>
+<li><a href="#Specifying-properties" title="Specifying properties">Specifying properties</a></li>
+<li><a href="#Patterns-for-relationships" title="Patterns for relationships">Patterns for relationships</a></li>
+<li><a href="#Variable-length-pattern-matching" title="Variable-length pattern matching">Variable-length pattern matching</a></li>
+<li><a href="#Assigning-to-path-variables" title="Assigning to path variables">Assigning to path variables</a></li>
+</ul>
+</li>
+<li><a href="#Build-the-database" title="Build the database">Build the database</a></li>
+</ul>
+</li>
+<li><a href="#Data-Retrieval-with-Cypher" title="Data Retrieval with Cypher">Data Retrieval with Cypher</a></li>
+<li><a href="#Common-issues" title="Common issues">Common issues</a></li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</span></p><h1 id="Prerequisites" data-id="Prerequisites"><a class="anchor hidden-xs" href="#Prerequisites" title="Prerequisites"><span class="octicon octicon-link"></span></a><span>Prerequisites</span></h1><ul>
+<li><span>HDP Sandbox is installed</span></li>
+<li><span>Familiarity with SQL and PostgreSQL server</span></li>
+</ul><h1 id="Objectives" data-id="Objectives"><a class="anchor hidden-xs" href="#Objectives" title="Objectives"><span class="octicon octicon-link"></span></a><span>Objectives</span></h1><ul>
+<li><span>Access </span><code>PostgreSQL</code><span> database server</span></li>
+<li><span>Review CRUD operations on a relational database</span></li>
+<li><span>Install Neo4j on HDP Sandbox</span></li>
+<li><span>Perform some CRUD operations on a graph database</span></li>
+</ul><h1 id="Introduction" data-id="Introduction"><a class="anchor hidden-xs" href="#Introduction" title="Introduction"><span class="octicon octicon-link"></span></a><span>Introduction</span></h1><p><span>The Structured Query Language (SQL) is the most extensively used database language. SQL is composed of a data definition language (DDL), which allows the specification of database schemas; a data manipulation language (DML), which supports operations to retrieve, store, modify and delete data. In this lab, we will practice how to retrieve structured data from relational databases using SQL.  Then we will build a graph for the same dataset on Neo4j and return connected data via Cypher queries.</span></p><h1 id="Dataset-Descripion" data-id="Dataset-Descripion"><a class="anchor hidden-xs" href="#Dataset-Descripion" title="Dataset-Descripion"><span class="octicon octicon-link"></span></a><span>Dataset Descripion</span></h1><p><span>This dataset contains four tables about social media users.</span></p><ul>
+<li><strong><span>users. csv</span></strong><span> contains data about the users of the social net.</span></li>
+<li><strong><span>friends.csv</span></strong><span> contains data about their friendship status</span></li>
+<li><strong><span>posts.csv</span></strong><span> contains data about the posts they made</span></li>
+</ul><table>
+<thead>
+<tr>
+<th><span>File name</span></th>
+<th><span>Description</span></th>
+<th><span>Fields</span></th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><span>users.csv</span></td>
+<td><span>A line is added to this file when a user is subscribed to the socia media along with the age and subscription date time</span></td>
+<td><span>userid, surname, name, age, timestamp</span></td>
+</tr>
+<tr>
+<td><span>posts.csv</span></td>
+<td><span>The user can add multiple posts and for each post we have post type and post unix timestamp</span></td>
+<td><span>postid, user, posttype, posttimestamp</span></td>
+</tr>
+<tr>
+<td><span>friends.csv</span></td>
+<td><span>The user can have friends and this relationship is mutual</span></td>
+<td><span>friend1, friend2</span></td>
+</tr>
+</tbody>
+</table><h1 id="Access-PostgreSQL-server" data-id="Access-PostgreSQL-server"><a class="anchor hidden-xs" href="#Access-PostgreSQL-server" title="Access-PostgreSQL-server"><span class="octicon octicon-link"></span></a><span>Access PostgreSQL server</span></h1><p><span>In fact, HDP Sandbox comes with a pre-installed PostgreSQL server so you do not to install any additional software to use PostgreSQL. You can access it via </span><code>psql</code><span> as </span><code>postgres</code><span> user:</span></p><pre><code class="sh hljs">[root@sandbox-hdp ~]<span class="hljs-comment">#  psql -U postgres</span>
+</code></pre><p><span>This will open a CLI to interact with PostgreSQL. You can access the databases using </span><code>\c</code><span> command and the tables via </span><code>\dt</code><span> command. For example, you can access the database </span><code>ambari</code><span> (a default database on HDP Sandbox) by running the following command in postgreSQL CLI.</span></p><pre><code class="sh hljs">postgres=# \c ambari
+You are now connected <span class="hljs-keyword">to</span> <span class="hljs-keyword">database</span> "ambari" <span class="hljs-keyword">as</span> <span class="hljs-keyword">user</span> "postgres".
+</code></pre><div class="alert alert-info">
+<p><span>The version of PostgreSQL in HDP 2.6.5 is 9.2.23 as shown below. So you should read the documentation for this version of PostgreSQL.</span></p>
+<p><img src="https://i.imgur.com/5pVBcTu.png" alt="" loading="lazy"></p>
+</div><h1 id="PostgreSQL-Meta-commands" data-id="PostgreSQL-Meta-commands"><a class="anchor hidden-xs" href="#PostgreSQL-Meta-commands" title="PostgreSQL-Meta-commands"><span class="octicon octicon-link"></span></a><span>PostgreSQL Meta-commands</span></h1><p><span>Anything you enter in psql that begins with an unquoted backslash is a psql meta-command that is processed by psql itself. These commands make psql more useful for administration or scripting. Meta-commands are often called slash or backslash commands.</span></p><ul>
+<li><span>Switch connection to a new database </span><code>dbname</code><span> as a user </span><code>username</code></li>
+</ul><pre><code class="sql hljs">\c <span class="hljs-operator">&lt;</span>dbname<span class="hljs-operator">&gt;</span> <span class="hljs-operator">&lt;</span>username<span class="hljs-operator">&gt;</span>
+</code></pre><ul>
+<li><span>List available databases</span></li>
+</ul><pre><code class="sql hljs">\l
+</code></pre><ul>
+<li><span>List available tables</span></li>
+</ul><pre><code class="sql hljs">\dt
+</code></pre><ul>
+<li><span>Describe a table </span><code>&lt;table_name&gt;</code></li>
+</ul><pre><code class="sql hljs">\d <span class="hljs-operator">&lt;</span>table_name<span class="hljs-operator">&gt;</span>
+</code></pre><ul>
+<li><span>Execute psql commands from a file </span><code>&lt;file.sql&gt;</code></li>
+</ul><pre><code class="sql hljs">\i <span class="hljs-operator">&lt;</span>file.sql<span class="hljs-operator">&gt;</span>
+</code></pre><ul>
+<li><span>Get help on psql commands</span></li>
+</ul><pre><code class="sql hljs">\?
+\h <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span>
+</code></pre><ul>
+<li><span>Turn on query execution time</span></li>
+</ul><pre><code class="sql hljs">\timing
+</code></pre><div class="alert alert-info">
+<p><span>You use the same command </span><code>\timing</code><span> to turn it off.</span></p>
+</div><ul>
+<li><span>Quit psql</span></li>
+</ul><pre><code class="sql hljs">\q
+</code></pre><div class="alert alert-info">
+<p><span>You can run the shell commands in psql CLI via </span><code>\! </code><span>. For instance, to print the current working directory we write:</span></p>
+<pre><code class="wrap powershell hljs">\! <span class="hljs-built_in">pwd</span>
+</code></pre>
+</div><h1 id="Build-the-Database" data-id="Build-the-Database"><a class="anchor hidden-xs" href="#Build-the-Database" title="Build-the-Database"><span class="octicon octicon-link"></span></a><span>Build the Database</span></h1><div class="alert alert-warning">
+<p><span>Note: Explore the dataset using any data analysis tool (Python+Pandas, Excel, Google Sheet, …etc) you have before building the database.</span></p>
+<p><span>Another note: You do not need to create a new role/user. Just use the current role </span><code>postgres</code><span>.</span></p>
+</div><p><span>The dataset are csv files and need to be imported into PostgreSQL tables.</span></p><p><span>To copy the values from csv files into the table, you need to use Postgres </span><code>COPY</code><span> method od data-loading. Postgres’s COPY comes in two separate variants, COPY and \COPY: COPY is server based, \COPY is client based. COPY will be run by the PostgreSQL backend (user “postgres”). The backend user requires permissions to read &amp; write to the data file in order to copy from/to it. You need to use an absolute pathname with COPY. \COPY on the other hand, runs under the current $USER, and with that users environment. And \COPY can handle relative pathnames. The psql \COPY is accordingly much easier to use if it handles what you need. So, you can use the meta-command </span><code>\COPY</code><span> to import the data from csv files into PostgreSQL tables but you need to make sure that the primary keys and foreign keys are set according to the given ER diagram. You can learn more about ER diagrams from </span><a href="https://www.lucidchart.com/pages/ER-diagram-symbols-and-meaning" target="_blank" rel="noopener"><span>here</span></a><span>.</span></p><div class="alert alert-warning">
+<p><span>Notice that you need to create tables before importing their data from files. You can detect the datatype of the column from its values.</span></p>
+</div><ol>
+<li><span>Create the database </span><code>social</code></li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-comment">-- Create Database</span>
+<span class="hljs-keyword">CREATE</span> DATABASE social;
+
+<span class="hljs-comment">-- Switch to the Database</span>
+\c social;
+
+<span class="hljs-comment">-- add User table</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> Users(
+userid <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+surname <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>),
+name <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>),
+age <span class="hljs-type">INT</span>,
+_timestamp <span class="hljs-type">timestamp</span>,
+temp <span class="hljs-type">BIGINT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>
+);
+
+<span class="hljs-comment">-- add Post table</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> Posts(
+postid <span class="hljs-type">INT</span> <span class="hljs-keyword">PRIMARY</span> KEY <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+userid <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+posttype <span class="hljs-type">VARCHAR</span>(<span class="hljs-number">50</span>),
+posttimestamp <span class="hljs-type">timestamp</span>,
+temp <span class="hljs-type">BIGINT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>
+);
+
+<span class="hljs-comment">-- add Friend table</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> IF <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> Friends(
+friend1 <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>,
+friend2 <span class="hljs-type">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>
+);
+
+<span class="hljs-comment">-- add constrains</span>
+<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Friends
+<span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> fk_User_userid_friend1
+<span class="hljs-keyword">FOREIGN</span> KEY (friend1)
+<span class="hljs-keyword">REFERENCES</span> Users (userid);
+
+<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Friends
+<span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> fk_User_userid_friend2
+<span class="hljs-keyword">FOREIGN</span> KEY (friend2)
+<span class="hljs-keyword">REFERENCES</span> Users (userid);
+
+<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Posts
+<span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> fk_User_userid_userid
+<span class="hljs-keyword">FOREIGN</span> KEY (userid)
+<span class="hljs-keyword">REFERENCES</span> Users (userid);
+</code></pre><ol start="2">
+<li><span>Upload the csv data into tables</span></li>
+</ol><pre><code class="wrap sql hljs">
+\<span class="hljs-keyword">COPY</span> Users(userid, surname, name, age, temp)  <span class="hljs-keyword">FROM</span> <span class="hljs-string">'users.csv'</span>  DELIMITER <span class="hljs-string">','</span>  CSV HEADER;
+<span class="hljs-keyword">UPDATE</span> Users <span class="hljs-keyword">SET</span> _timestamp <span class="hljs-operator">=</span> TO_TIMESTAMP(temp);
+<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Users <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">COLUMN</span> temp;
+
+
+\<span class="hljs-keyword">COPY</span> Posts(postid, userid, posttype, temp) <span class="hljs-keyword">FROM</span> <span class="hljs-string">'posts.csv'</span> CSV HEADER;
+<span class="hljs-keyword">UPDATE</span> Posts <span class="hljs-keyword">SET</span> posttimestamp <span class="hljs-operator">=</span> TO_TIMESTAMP(temp);
+<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> Posts <span class="hljs-keyword">DROP</span> <span class="hljs-keyword">COLUMN</span> temp;
+
+
+\<span class="hljs-keyword">COPY</span> Friends <span class="hljs-keyword">from</span> <span class="hljs-string">'friends.csv'</span> csv header;
+</code></pre><h2 id="Fix-Friends-table" data-id="Fix-Friends-table"><a class="anchor hidden-xs" href="#Fix-Friends-table" title="Fix-Friends-table"><span class="octicon octicon-link"></span></a><span>Fix Friends table</span></h2><pre><code class="wrap sql hljs"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> friends2 <span class="hljs-keyword">AS</span>
+<span class="hljs-keyword">SELECT</span> friend1, friend2 <span class="hljs-keyword">FROM</span> friends
+<span class="hljs-keyword">UNION</span>
+<span class="hljs-keyword">SELECT</span> friend2, friend1 <span class="hljs-keyword">FROM</span> friends;
+
+
+<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> friends RENAME <span class="hljs-keyword">TO</span> friends_old;
+
+<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> friends2 RENAMT <span class="hljs-keyword">TO</span> friends;
+
+</code></pre><h1 id="Data-Retrieval-using-SQL" data-id="Data-Retrieval-using-SQL"><a class="anchor hidden-xs" href="#Data-Retrieval-using-SQL" title="Data-Retrieval-using-SQL"><span class="octicon octicon-link"></span></a><span>Data Retrieval using SQL</span></h1><p><span>In this part of the lab, we will practice on writing SQL queries to retrieve data from our database.</span></p><h2 id="Data-Retrieval-from-a-single-table" data-id="Data-Retrieval-from-a-single-table"><a class="anchor hidden-xs" href="#Data-Retrieval-from-a-single-table" title="Data-Retrieval-from-a-single-table"><span class="octicon octicon-link"></span></a><span>Data Retrieval from a single table</span></h2><p><span>You can return data from a single table by using </span><code>SELECT</code><span> command. This kind of data retrieval is the simplest way to get data from a single table.</span></p><div class="alert alert-success">
+<h3 id="Exercises" data-id="Exercises"><a class="anchor hidden-xs" href="#Exercises" title="Exercises"><span class="octicon octicon-link"></span></a><span>Exercises</span></h3>
+<ol>
+<li><span>Who are the users who have posts?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> userid
+<span class="hljs-keyword">FROM</span> posts;
+</code></pre>
+<ol start="2">
+<li><span>What are the posts of the users?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> postid
+<span class="hljs-keyword">FROM</span> posts;
+</code></pre>
+<ol start="3">
+<li><span>Which posts published after 2012?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span>
+<span class="hljs-keyword">FROM</span> posts
+<span class="hljs-keyword">WHERE</span> <span class="hljs-built_in">EXTRACT</span>(<span class="hljs-keyword">YEAR</span> <span class="hljs-keyword">FROM</span> posttimestamp) <span class="hljs-operator">&gt;</span> <span class="hljs-number">2012</span>;
+</code></pre>
+<ol start="4">
+<li><span>What is the oldest and recent dates of the posts?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">MAX</span>(posttimestamp), <span class="hljs-built_in">MIN</span>(posttimestamp)
+<span class="hljs-keyword">FROM</span> posts;
+</code></pre>
+<ol start="5">
+<li><span>What are the top 5 most recent posts whose type is </span><code>Image</code><span>?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> 
+<span class="hljs-keyword">FROM</span> posts
+<span class="hljs-keyword">WHERE</span> posttype<span class="hljs-operator">=</span><span class="hljs-string">'Image'</span>
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> posttimestamp <span class="hljs-keyword">DESC</span>
+LIMIT <span class="hljs-number">5</span>;
+</code></pre>
+<ol start="6">
+<li><span>Which top 5 users who posted an </span><code>Image</code><span> or </span><code>Video</code><span> recently?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> userid, posttype
+<span class="hljs-keyword">FROM</span> posts
+<span class="hljs-keyword">WHERE</span> posttype <span class="hljs-keyword">IN</span> (<span class="hljs-string">'Image'</span>, <span class="hljs-string">'Video'</span>)
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> posttimestamp <span class="hljs-keyword">DESC</span>
+LIMIT <span class="hljs-number">5</span>;
+</code></pre>
+<ol start="7">
+<li><span>What is the age of the eldest and youngest persons?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">MAX</span>(age), <span class="hljs-built_in">MIN</span>(age)
+<span class="hljs-keyword">FROM</span> users;
+
+<span class="hljs-keyword">UPDATE</span> users
+<span class="hljs-keyword">SET</span> age <span class="hljs-operator">=</span> <span class="hljs-keyword">CASE</span>
+           <span class="hljs-keyword">WHEN</span> age <span class="hljs-operator">&lt;</span> <span class="hljs-number">0</span> <span class="hljs-keyword">THEN</span> <span class="hljs-operator">-</span>age
+           <span class="hljs-keyword">ELSE</span> age
+          <span class="hljs-keyword">END</span>;
+
+</code></pre>
+</div><div class="alert alert-warning">
+<p><span>In PostgreSQL, double quotes </span><code>""</code><span> are used to indicate identifiers within the database, which are objects like tables, column names, and roles. In contrast, single quotes </span><code>''</code><span> are used to indicate string literals.</span></p>
+</div><h2 id="Data-Retrieval-from-multiple-tables-Joining-tables" data-id="Data-Retrieval-from-multiple-tables-Joining-tables"><a class="anchor hidden-xs" href="#Data-Retrieval-from-multiple-tables-Joining-tables" title="Data-Retrieval-from-multiple-tables-Joining-tables"><span class="octicon octicon-link"></span></a><span>Data Retrieval from multiple tables (Joining tables)</span></h2><div class="alert alert-success">
+<h3 id="Exercises1" data-id="Exercises"><a class="anchor hidden-xs" href="#Exercises1" title="Exercises1"><span class="octicon octicon-link"></span></a><span>Exercises</span></h3>
+<ol start="8">
+<li><span>Who is the 2nd youngest person who published </span><code>Image</code><span> posts?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> name, surname, age, posttype
+<span class="hljs-keyword">FROM</span> posts 
+<span class="hljs-keyword">JOIN</span> users <span class="hljs-keyword">ON</span> posts.userid <span class="hljs-operator">=</span> users.userid
+<span class="hljs-keyword">WHERE</span> posts.posttype<span class="hljs-operator">=</span><span class="hljs-string">'Image'</span>
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> age <span class="hljs-keyword">ASC</span>
+LIMIT <span class="hljs-number">1</span>
+<span class="hljs-keyword">OFFSET</span> <span class="hljs-number">1</span>;
+</code></pre>
+<ol start="9">
+<li><span>What are the posts that are published by people who are between 20 and 30?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> postid, posttype, age, users.userid
+<span class="hljs-keyword">FROM</span> posts 
+<span class="hljs-keyword">JOIN</span> users <span class="hljs-keyword">ON</span> posts.userid <span class="hljs-operator">=</span> users.userid
+<span class="hljs-keyword">WHERE</span> age <span class="hljs-operator">&lt;</span>@ int4range(<span class="hljs-number">20</span>, <span class="hljs-number">30</span>)
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> age;
+</code></pre>
+<ol start="10">
+<li><span>What are the friends of the youngest person?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">WITH</span> youngest <span class="hljs-keyword">AS</span>(
+    <span class="hljs-keyword">SELECT</span> userid 
+    <span class="hljs-keyword">FROM</span> users 
+    <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> age 
+    <span class="hljs-keyword">ASC</span> LIMIT <span class="hljs-number">1</span>
+)
+<span class="hljs-keyword">SELECT</span> friend1 <span class="hljs-keyword">AS</span> <span class="hljs-keyword">user</span>, friend2 <span class="hljs-keyword">AS</span> friend
+<span class="hljs-keyword">FROM</span> youngest, friends
+<span class="hljs-keyword">JOIN</span> users <span class="hljs-keyword">ON</span> friends.friend1 <span class="hljs-operator">=</span> users.userid
+<span class="hljs-keyword">WHERE</span> users.userid <span class="hljs-operator">=</span> youngest.userid;
+</code></pre>
+<ol start="11">
+<li><span>How many friends for the surname </span><code>Thronton</code><span>?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(friend2)
+<span class="hljs-keyword">FROM</span> users
+<span class="hljs-keyword">JOIN</span> friends <span class="hljs-keyword">ON</span> (users.userid <span class="hljs-operator">=</span> friends.friend1)
+<span class="hljs-keyword">WHERE</span> users.surname <span class="hljs-operator">=</span> <span class="hljs-string">'Thronton'</span>;
+</code></pre>
+</div><h2 id="Aggregation-and-grouping" data-id="Aggregation-and-grouping"><a class="anchor hidden-xs" href="#Aggregation-and-grouping" title="Aggregation-and-grouping"><span class="octicon octicon-link"></span></a><span>Aggregation and grouping</span></h2><div class="alert alert-success">
+<h3 id="Exercises2" data-id="Exercises"><a class="anchor hidden-xs" href="#Exercises2" title="Exercises2"><span class="octicon octicon-link"></span></a><span>Exercises</span></h3>
+<ol start="12">
+<li><span>How many posts for each user?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> users.userid, <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">as</span> c
+<span class="hljs-keyword">FROM</span> users
+<span class="hljs-keyword">JOIN</span> posts <span class="hljs-keyword">ON</span> (users.userid <span class="hljs-operator">=</span> posts.userid)
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> users.userid
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> c <span class="hljs-keyword">DESC</span>;
+</code></pre>
+<ol start="13">
+<li><span>Who are the friends of users who posted </span><code>Image</code><span>?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> u2.userid, u2.name, u2.surname, u2.age, u.userid, u.name, u.surname
+<span class="hljs-keyword">FROM</span> users u
+<span class="hljs-keyword">JOIN</span> friends f <span class="hljs-keyword">ON</span> f.friend1 <span class="hljs-operator">=</span> u.userid
+<span class="hljs-keyword">JOIN</span> posts <span class="hljs-keyword">ON</span> posts.userid <span class="hljs-operator">=</span> u.userid
+<span class="hljs-keyword">JOIN</span> users u2 <span class="hljs-keyword">ON</span> f.friend2 <span class="hljs-operator">=</span> u2.userid
+<span class="hljs-keyword">WHERE</span> posts.posttype <span class="hljs-operator">=</span> <span class="hljs-string">'Image'</span>;
+</code></pre>
+<ol start="14">
+<li><span>How many friends of users whose age is less than 20?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> f1.friend2) <span class="hljs-keyword">as</span> c
+<span class="hljs-keyword">FROM</span> users u
+<span class="hljs-keyword">JOIN</span> friends f1 <span class="hljs-keyword">ON</span> (u.userid <span class="hljs-operator">=</span> f1.friend1)
+<span class="hljs-keyword">WHERE</span> u.age <span class="hljs-operator">&lt;</span> <span class="hljs-number">20</span>;
+</code></pre>
+<ol start="15">
+<li><span>How many friends of friends of users whose age is less than 20?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-keyword">DISTINCT</span> f2.friend2) <span class="hljs-keyword">as</span> c
+<span class="hljs-keyword">FROM</span> users u
+<span class="hljs-keyword">JOIN</span> friends f1 <span class="hljs-keyword">ON</span> (u.userid <span class="hljs-operator">=</span> f1.friend1)
+<span class="hljs-keyword">JOIN</span> friends f2 <span class="hljs-keyword">ON</span> (f1.friend2 <span class="hljs-operator">=</span> f2.friend1)
+<span class="hljs-keyword">WHERE</span> u.age <span class="hljs-operator">&lt;</span> <span class="hljs-number">20</span> <span class="hljs-keyword">AND</span> f2.friend2 <span class="hljs-operator">&lt;&gt;</span> u.userid;
+</code></pre>
+<ol start="16">
+<li><span>How many users have more than 10 posts?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">WITH</span> users_10_posts <span class="hljs-keyword">AS</span> (
+    <span class="hljs-keyword">SELECT</span> posts.userid, <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">as</span> c
+    <span class="hljs-keyword">FROM</span> posts
+    <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> posts.userid
+    <span class="hljs-keyword">HAVING</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-operator">&gt;</span> <span class="hljs-number">10</span>
+)
+<span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">as</span> c
+<span class="hljs-keyword">FROM</span> users_10_posts;
+</code></pre>
+<ol start="17">
+<li><span>What is the average number of posts published at noon and by the friends of the users whose age is more than 40? Calculate the percentage of posts.</span></li>
+</ol>
+<pre><code class="wrap sql hljs">
+<span class="hljs-keyword">WITH</span> post_count <span class="hljs-keyword">AS</span> (
+    <span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(posts.postid) <span class="hljs-keyword">AS</span> c
+    <span class="hljs-keyword">FROM</span> users u
+    <span class="hljs-keyword">JOIN</span> friends f <span class="hljs-keyword">ON</span> f.friend1 <span class="hljs-operator">=</span> u.userid
+    <span class="hljs-keyword">JOIN</span> posts <span class="hljs-keyword">ON</span> posts.userid <span class="hljs-operator">=</span> f.friend1
+    <span class="hljs-keyword">JOIN</span> users u2 <span class="hljs-keyword">ON</span> f.friend1 <span class="hljs-operator">=</span> u2.userid
+    <span class="hljs-keyword">WHERE</span> <span class="hljs-built_in">EXTRACT</span>(<span class="hljs-keyword">HOUR</span> <span class="hljs-keyword">FROM</span> u2._timestamp) <span class="hljs-operator">=</span> <span class="hljs-number">12</span> <span class="hljs-keyword">AND</span> u.age <span class="hljs-operator">&gt;</span> <span class="hljs-number">40</span>
+)
+<span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">AVG</span>(c)
+<span class="hljs-keyword">FROM</span> post_count;
+</code></pre>
+<ol start="18">
+<li><span>What is the percentage of posts published at noon and by the friends of the users whose age is more than 40?</span></li>
+</ol>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">WITH</span> post_count <span class="hljs-keyword">AS</span> (
+    <span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(posts.postid) <span class="hljs-keyword">AS</span> c
+    <span class="hljs-keyword">FROM</span> users u
+    <span class="hljs-keyword">JOIN</span> friends f <span class="hljs-keyword">ON</span> f.friend1 <span class="hljs-operator">=</span> u.userid
+    <span class="hljs-keyword">JOIN</span> posts <span class="hljs-keyword">ON</span> posts.userid <span class="hljs-operator">=</span> f.friend1
+    <span class="hljs-keyword">JOIN</span> users u2 <span class="hljs-keyword">ON</span> f.friend1 <span class="hljs-operator">=</span> u2.userid
+    <span class="hljs-keyword">WHERE</span> <span class="hljs-built_in">EXTRACT</span>(<span class="hljs-keyword">HOUR</span> <span class="hljs-keyword">FROM</span> u2._timestamp) <span class="hljs-operator">=</span> <span class="hljs-number">12</span> <span class="hljs-keyword">AND</span> u.age <span class="hljs-operator">&gt;</span> <span class="hljs-number">40</span>) ,
+    post_total <span class="hljs-keyword">AS</span> (
+        <span class="hljs-keyword">SELECT</span> <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) <span class="hljs-keyword">as</span> c2
+        <span class="hljs-keyword">FROM</span> posts
+    )
+<span class="hljs-keyword">SELECT</span> <span class="hljs-number">100</span> <span class="hljs-operator">*</span> c<span class="hljs-operator">/</span>c2 <span class="hljs-operator">||</span> <span class="hljs-string">'%'</span>
+<span class="hljs-keyword">FROM</span> post_total, post_count;
+</code></pre>
+</div><h1 id="Graph-databases" data-id="Graph-databases"><a class="anchor hidden-xs" href="#Graph-databases" title="Graph-databases"><span class="octicon octicon-link"></span></a><span>Graph databases</span></h1><p><span>A graph database stores nodes and relationships instead of tables, or documents. Data is stored just like you might sketch ideas on a whiteboard. Your data is stored without restricting it to a pre-defined model, allowing a very flexible way of thinking about and using it.</span></p><p><span>Graph databases address big challenges many of us tackle daily. Modern data problems often involve many-to-many relationships with heterogeneous data that sets up needs to:</span></p><ul>
+<li><span>Navigate deep hierarchies,</span></li>
+<li><span>Find hidden connections between distant items, and</span></li>
+<li><span>Discover inter-relationships between items.</span></li>
+</ul><p><span>Whether it’s a social network, payment networks, or road network you’ll find that everything is an interconnected graph of relationships. And when we want to ask questions about the real world, many questions are about the relationships rather than about the individual data elements.</span></p><center>
+<img src="https://i.imgur.com/TolfC5Q.png" width="400">
+<p>Example of a simple graph database
+</p>
+</center><p><span>Neo4j is an open-source, NoSQL, native graph database that provides an ACID-compliant transactional backend for your applications that has been publicly available since 2007. In Neo4j, information is organized as nodes, relationships, and properties. We can retrieve data from Neo4j via its query language called Cypher which is a declarative query language similar to SQL, but optimized for graphs.</span></p><center>
+<img src="https://i.imgur.com/JE0Cr95.png" width="400">
+<p>Building blocks of the property graph model
+</p>
+</center><p><span>The property graph model consists of mainly nodes and relationships. Nodes are the entities in the graph.</span></p><ul>
+<li><span>Nodes can be tagged with labels, representing their different roles in your domain. (For example, Person).</span></li>
+<li><span>Nodes can hold any number of key-value pairs, or properties. (For example, name).</span></li>
+<li><span>Node labels may also attach metadata (such as index or constraint information) to certain nodes.</span></li>
+</ul><p><span>Whereas relationships provide directed, named, connections between two node entities (e.g. Person LOVES Person).</span></p><ul>
+<li><span>Relationships always have a direction, a type, a start node, and an end node, and they can have properties, just like nodes.</span></li>
+<li><span>Nodes can have any number or type of relationships without sacrificing performance.</span></li>
+<li><span>Although relationships are always directed, they can be navigated efficiently in any direction.</span></li>
+</ul><h2 id="Download-and-Install-Neo4j" data-id="Download-and-Install-Neo4j"><a class="anchor hidden-xs" href="#Download-and-Install-Neo4j" title="Download-and-Install-Neo4j"><span class="octicon octicon-link"></span></a><span>Download and Install Neo4j</span></h2><p><span>Neo4j can be installed as an interpreter in Zeppelin but in HDP 2.6.5, Zeppelin 0.7.3 is installed and does not support neo4j interpreter. Installing Neo4j on HDP 2.6.5 as a Zeppelin interpreter will not work. The latest version (in Feb. 2023) of Zeppelin 0.10.0 supports Neo4j but we do not need to install it. Indeed, HDP 3.0 has Zeppelin 0.8.0 installed and supports neo4j interpreter but it is not a big deal to install HDP 3.0 just for neo4j since our work on the sandbox will not be mostly on graph databases.</span></p><div class="alert alert-danger">
+<p><span>If you are downloading Neo4j Desktop from Russia, select </span><code>other</code><span> from country list and use some proxy server.</span></p>
+</div><p><span>The </span><strong><span>easy</span></strong><span> approach is to install Neo4j Desktop on your local machine. You can find here (</span><a href="https://neo4j.com/docs/desktop-manual/current/installation/download-installation/" target="_blank" rel="noopener"><span>https://neo4j.com/docs/desktop-manual/current/installation/download-installation/</span></a><span>) some information about installing Neo4j Desktop and you can find here (</span><a href="https://neo4j.com/download-center/" target="_blank" rel="noopener"><span>https://neo4j.com/download-center/</span></a><span>) download links. After you start downloading, the website will give a long key you need to use when you install the software as follows:</span><br>
+<img src="https://i.imgur.com/bwbGHJ5.png" alt="" loading="lazy"></p><p><span>The software will prepare the environment for installation as follows.</span></p><center>
+<img src="https://i.imgur.com/XvkI0rv.png" width="300">
+<p>Installing Neo4j Desktop
+</p>
+</center><p><span>When you succeed installation, it will show the following dashboard.</span><br>
+<img src="https://i.imgur.com/P3QBb6U.png" alt="" loading="lazy"></p><p><span>The </span><strong><span>less easy</span></strong><span> approach is to install Neo4j on your cluster node via </span><code>yum</code><span> OR offline via </span><code>rpm</code><span>. You can find here (</span><a href="https://yum.neo4j.com" target="_blank" rel="noopener"><span>https://yum.neo4j.com</span></a><span>) some information about installing neo4j via </span><code>yum</code><span> and here (</span><a href="https://neo4j.com/docs/operations-manual/3.5/installation/linux/rpm/#linux-yum" target="_blank" rel="noopener"><span>https://neo4j.com/docs/operations-manual/3.5/installation/linux/rpm/#linux-yum</span></a><span>) some information about offline installation. After that, you can forward the port of the server to some custom port 10015 to the host machine in order to access Neo4j Browser (change this setting </span><code>server.http.listen_address</code><span> to 10015 in </span><code>neo4j.conf</code><span> file of the Neo4j DBMS instance).</span></p><div class="alert alert-warning">
+<p><span>If you want to install Neo4j on the cluster, you need to know that the old versions of Neo4j can be installed. I suggest the version 3.5.35.1 and you can see below the cypher shell dependencies.</span><br>
+<img src="https://i.imgur.com/I6bj6a9.png" alt="" loading="lazy"><br>
+<img src="https://i.imgur.com/xrZ2Eib.png" alt="" loading="lazy"></p>
+</div><div class="alert alert-info">
+<p><span>You can access the guest machine in VirtualBox by ssh into the </span><code>HostSSH</code><span> port specified in the </span><code>port forwarding rules</code><span> which can be reached from the network settings of the virtual machine. You can also add your rules to the list.</span></p>
+</div><p><span>You can access the Neo4j Browser usually at </span><a href="http://localhost:7474" target="_blank" rel="noopener"><span>http://localhost:7474</span></a><span>.</span></p><div class="alert alert-danger">
+<p><span>If you can not install Neo4j due to some reason, you can open a free session of Neo4j Sandbox at </span><a href="https://neo4j.com/sandbox/" target="_blank" rel="noopener"><span>https://neo4j.com/sandbox/</span></a><span> but you need proxy.</span></p>
+</div><h1 id="Cypher" data-id="Cypher"><a class="anchor hidden-xs" href="#Cypher" title="Cypher"><span class="octicon octicon-link"></span></a><span>Cypher</span></h1><p><span>Cypher is Neo4j’s graph database query language that allows users to store and retrieve data from the graph database. It is a declarative, SQL-inspired language for describing visual patterns in graphs. The syntax provides a visual and logical way to match patterns of nodes and relationships in the graph. Cypher keywords are not case-sensitive but it is case-sensitive for variables.</span></p><p><span>All Neo4j servers contain a built-in database called </span><code>system</code><span>, which behaves differently than all other databases. The </span><code>system</code><span> database stores system data and you can not perform graph queries against it. A fresh installation of Neo4j includes two databases:</span></p><ul>
+<li><strong><span>system</span></strong><span> - the system database described above, containing meta-data on the DBMS and security configuration.</span></li>
+<li><strong><span>neo4j</span></strong><span> - the default database, named using the config option dbms.default_database=neo4j.</span></li>
+</ul><p><span>Cypher provides first class support for a number of data types. These fall into the following three categories: property, structural, and composite.</span></p><h2 id="Property-types" data-id="Property-types"><a class="anchor hidden-xs" href="#Property-types" title="Property-types"><span class="octicon octicon-link"></span></a><span>Property types</span></h2><p><span>The following data types are included in the property types category: Integer, Float, String, Boolean, Point, Date, Time, LocalTime, DateTime, LocalDateTime, and Duration. For more details, visit the </span><a href="https://neo4j.com/docs/cypher-manual/4.4/syntax/values/#_property_type_details" target="_blank" rel="noopener"><span>documentation</span></a><span>.</span></p><h2 id="Structural-types" data-id="Structural-types"><a class="anchor hidden-xs" href="#Structural-types" title="Structural-types"><span class="octicon octicon-link"></span></a><span>Structural types</span></h2><p><span>The following data types are included in the structural types category: Node, Relationship, and Path.</span></p><ul>
+<li><span>The </span><strong><span>Node</span></strong><span> data type includes: Id, Label(s), and Map (of properties). Note that labels are not values, but a form of pattern syntax.</span></li>
+<li><span>The </span><strong><span>Relationship</span></strong><span> data type includes: Id, Type, Map (of properties), Id of start node, and Id of end node.</span></li>
+<li><span>The </span><strong><span>Path</span></strong><span> data type is an alternating sequence of nodes and relationships.</span></li>
+</ul><p><span>Nodes, relationships, and paths are returned as a result of pattern matching. In Neo4j, all relationships have a direction. However, you can have the notion of undirected relationships at query time.</span></p><h2 id="Composite-types" data-id="Composite-types"><a class="anchor hidden-xs" href="#Composite-types" title="Composite-types"><span class="octicon octicon-link"></span></a><span>Composite types</span></h2><p><span>The following data types are included in the composite types category: List and Map.</span></p><pre><code class="wrap cpp hljs">RETURN <span class="token punctuation">[</span><span class="token number">1</span><span class="token punctuation">,</span><span class="token number">2</span><span class="token punctuation">,</span><span class="token number">3</span><span class="token punctuation">,</span><span class="token number">4</span><span class="token punctuation">,</span><span class="token number">5</span><span class="token punctuation">]</span><span class="token punctuation">,</span> <span class="token punctuation">{</span>id<span class="token operator">:</span><span class="token number">1</span><span class="token punctuation">,</span> msg<span class="token operator">:</span> <span class="token char">'hello'</span><span class="token punctuation">,</span> age<span class="token operator">:</span> <span class="token number">31</span><span class="token punctuation">}</span>
+</code></pre><h2 id="How-to-define-a-variable" data-id="How-to-define-a-variable"><a class="anchor hidden-xs" href="#How-to-define-a-variable" title="How-to-define-a-variable"><span class="octicon octicon-link"></span></a><span>How to define a variable</span></h2><p><span>When you reference parts of a pattern or a query, you do so by naming them. The names you give the different parts are called variables.</span><br>
+<span>In this example:</span></p><pre><code class="wrap cpp hljs"><span class="token function">MATCH</span> <span class="token punctuation">(</span>n<span class="token punctuation">)</span><span class="token operator">--</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+RETURN b
+</code></pre><p><span>The variables are n and b.</span></p><pre><code class="wrap cpp hljs"><span class="token comment">// this is a comment</span>
+</code></pre><p><span>A comment begin with double slash (//) and continue to the end of the line. Comments do not execute, they are for humans to read.</span></p><h2 id="Operators" data-id="Operators"><a class="anchor hidden-xs" href="#Operators" title="Operators"><span class="octicon octicon-link"></span></a><span>Operators</span></h2><h3 id="DISTINCT-aggregation-operator" data-id="DISTINCT-aggregation-operator"><a class="anchor hidden-xs" href="#DISTINCT-aggregation-operator" title="DISTINCT-aggregation-operator"><span class="octicon octicon-link"></span></a><strong><span>DISTINCT</span></strong><span> (aggregation operator)</span></h3><pre><code class="wrap sql hljs"><span class="hljs-keyword">WITH</span> [<span class="hljs-string">'a'</span>, <span class="hljs-string">'a'</span>, <span class="hljs-number">4</span>, <span class="hljs-string">'b'</span>, <span class="hljs-number">4</span>] <span class="hljs-keyword">AS</span> ps
+UNWIND ps <span class="hljs-keyword">AS</span> p
+<span class="hljs-keyword">RETURN</span> <span class="hljs-keyword">DISTINCT</span> p
+</code></pre><p><span>The output will have only ‘a’, 4, and ‘b’.</span></p><h3 id="Property-operators" data-id="Property-operators"><a class="anchor hidden-xs" href="#Property-operators" title="Property-operators"><span class="octicon octicon-link"></span></a><span>Property operators</span></h3><h4 id="The-operator--statically-access-the-property-of-a-node-or-relationship" data-id="The-operator--statically-access-the-property-of-a-node-or-relationship"><a class="anchor hidden-xs" href="#The-operator--statically-access-the-property-of-a-node-or-relationship" title="The-operator--statically-access-the-property-of-a-node-or-relationship"><span class="octicon octicon-link"></span></a><span>The operator </span><code>.</code><span> statically access the property of a node or relationship</span></h4><h4 id="The-operator--used-for-filtering-on-a-dynamically-computed-property-key" data-id="The-operator--used-for-filtering-on-a-dynamically-computed-property-key"><a class="anchor hidden-xs" href="#The-operator--used-for-filtering-on-a-dynamically-computed-property-key" title="The-operator--used-for-filtering-on-a-dynamically-computed-property-key"><span class="octicon octicon-link"></span></a><span>The operator </span><code>[]</code><span> used for filtering on a dynamically-computed property key</span></h4><pre><code class="wrap cpp hljs"><span class="token function">CREATE</span>
+  <span class="token punctuation">(</span>a<span class="token operator">:</span>Restaurant <span class="token punctuation">{</span>name<span class="token operator">:</span> <span class="token char">'Hungry Jo'</span><span class="token punctuation">,</span> rating_hygiene<span class="token operator">:</span> <span class="token number">10</span><span class="token punctuation">,</span> rating_food<span class="token operator">:</span> <span class="token number">7</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">(</span>b<span class="token operator">:</span>Restaurant <span class="token punctuation">{</span>name<span class="token operator">:</span> <span class="token char">'Buttercup Tea Rooms'</span><span class="token punctuation">,</span> rating_hygiene<span class="token operator">:</span> <span class="token number">5</span><span class="token punctuation">,</span> rating_food<span class="token operator">:</span> <span class="token number">6</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">(</span>c1<span class="token operator">:</span>Category <span class="token punctuation">{</span>name<span class="token operator">:</span> <span class="token char">'hygiene'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">,</span>
+  <span class="token punctuation">(</span>c2<span class="token operator">:</span>Category <span class="token punctuation">{</span>name<span class="token operator">:</span> <span class="token char">'food'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+WITH a<span class="token punctuation">,</span> b<span class="token punctuation">,</span> c1<span class="token punctuation">,</span> c2
+<span class="token function">MATCH</span> <span class="token punctuation">(</span>restaurant<span class="token operator">:</span>Restaurant<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token punctuation">(</span>category<span class="token operator">:</span>Category<span class="token punctuation">)</span>
+WHERE restaurant<span class="token punctuation">[</span><span class="token string">"rating_"</span> <span class="token operator">+</span> category<span class="token punctuation">.</span>name<span class="token punctuation">]</span> <span class="token operator">&gt;</span> <span class="token number">6</span>
+RETURN DISTINCT restaurant<span class="token punctuation">.</span>name
+</code></pre><h4 id="The-operator--used-for-replacing-all-properties-of-a-node-or-relationship" data-id="The-operator--used-for-replacing-all-properties-of-a-node-or-relationship"><a class="anchor hidden-xs" href="#The-operator--used-for-replacing-all-properties-of-a-node-or-relationship" title="The-operator--used-for-replacing-all-properties-of-a-node-or-relationship"><span class="octicon octicon-link"></span></a><span>The operator </span><code>=</code><span> used for replacing all properties of a node or relationship</span></h4><pre><code class="wrap cpp hljs"><span class="token function">CREATE</span> <span class="token punctuation">(</span>a<span class="token operator">:</span>Person <span class="token punctuation">{</span>name<span class="token operator">:</span> <span class="token char">'Jane'</span><span class="token punctuation">,</span> age<span class="token operator">:</span> <span class="token number">20</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+WITH a
+<span class="token function">MATCH</span> <span class="token punctuation">(</span>p<span class="token operator">:</span>Person <span class="token punctuation">{</span>name<span class="token operator">:</span> <span class="token char">'Jane'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+SET p <span class="token operator">=</span> <span class="token punctuation">{</span>name<span class="token operator">:</span> <span class="token char">'Ellen'</span><span class="token punctuation">,</span> livesIn<span class="token operator">:</span> <span class="token char">'London'</span><span class="token punctuation">}</span>
+RETURN p<span class="token punctuation">.</span>name<span class="token punctuation">,</span> p<span class="token punctuation">.</span>age<span class="token punctuation">,</span> p<span class="token punctuation">.</span>livesIn
+</code></pre><h3 id="Mathemtical-operators" data-id="Mathemtical-operators"><a class="anchor hidden-xs" href="#Mathemtical-operators" title="Mathemtical-operators"><span class="octicon octicon-link"></span></a><span>Mathemtical operators</span></h3><p><span>The mathematical operators comprise:</span></p><ul>
+<li><span>addition: +</span></li>
+<li><span>subtraction or unary minus: -</span></li>
+<li><span>multiplication: *</span></li>
+<li><span>division: /</span></li>
+<li><span>modulo division: %</span></li>
+<li><span>exponentiation: ^</span></li>
+</ul><h3 id="Comparison-operators" data-id="Comparison-operators"><a class="anchor hidden-xs" href="#Comparison-operators" title="Comparison-operators"><span class="octicon octicon-link"></span></a><span>Comparison operators</span></h3><p><span>The comparison operators comprise:</span></p><ul>
+<li><span>equality: =</span></li>
+<li><span>inequality: &lt;&gt;</span></li>
+<li><span>less than: &lt;</span></li>
+<li><span>greater than: &gt;</span></li>
+<li><span>less than or equal to: &lt;=</span></li>
+<li><span>greater than or equal to: &gt;=</span></li>
+<li><span>IS NULL</span></li>
+<li><span>IS NOT NULL</span></li>
+</ul><p><span>String-specific comparison operators comprise:</span></p><ul>
+<li><span>STARTS WITH: perform case-sensitive prefix searching on strings</span></li>
+<li><span>ENDS WITH: perform case-sensitive suffix searching on strings</span></li>
+<li><span>CONTAINS: perform case-sensitive inclusion searching in strings</span></li>
+<li><span>=~: regular expression for matching a pattern</span></li>
+</ul><pre><code class="wrap cpp hljs">WITH <span class="token punctuation">[</span><span class="token char">'mouse'</span><span class="token punctuation">,</span> <span class="token char">'chair'</span><span class="token punctuation">,</span> <span class="token char">'door'</span><span class="token punctuation">,</span> <span class="token char">'house'</span><span class="token punctuation">]</span> AS wordlist
+UNWIND wordlist AS word
+WITH word
+WHERE word <span class="token operator">=</span><span class="token operator">~</span> <span class="token char">'.*ous.*'</span>
+RETURN word
+</code></pre><h3 id="Boolean-operators" data-id="Boolean-operators"><a class="anchor hidden-xs" href="#Boolean-operators" title="Boolean-operators"><span class="octicon octicon-link"></span></a><span>Boolean operators</span></h3><p><span>The boolean operators — also known as logical operators — comprise: </span><code>AND</code><span>, </span><code>OR</code><span>, </span><code>XOR</code><span>, </span><code>NOT</code><span>.</span></p><h3 id="String-operators" data-id="String-operators"><a class="anchor hidden-xs" href="#String-operators" title="String-operators"><span class="octicon octicon-link"></span></a><span>String operators</span></h3><p><span>The string operators comprise: concatenating strings: </span><code>+</code></p><pre><code class="wrap cpp hljs">RETURN <span class="token char">'neo'</span> <span class="token operator">+</span> <span class="token char">'4j'</span> AS result
+</code></pre><p><span>Check other operators from the documentation.</span></p><h2 id="Patterns" data-id="Patterns"><a class="anchor hidden-xs" href="#Patterns" title="Patterns"><span class="octicon octicon-link"></span></a><span>Patterns</span></h2><p><span>Patterns and pattern-matching are at the very heart of Cypher, so being effective with Cypher requires a good understanding of patterns.</span><br>
+<span>Using patterns, you describe the shape of the data you are looking for. For example, in the MATCH clause you describe the shape with a pattern, and Cypher will figure out how to get that data for you.</span></p><p><span>The pattern describes the data using a form that is very similar to how one typically draws the shape of property graph data on a whiteboard: usually as circles (representing nodes) and arrows between them to represent relationships.</span></p><p><span>Patterns appear in multiple places in Cypher: in </span><code>MATCH</code><span>, </span><code>CREATE</code><span> and </span><code>MERGE</code><span> clauses, and in pattern expressions.</span></p><h3 id="Patterns-for-nodes" data-id="Patterns-for-nodes"><a class="anchor hidden-xs" href="#Patterns-for-nodes" title="Patterns-for-nodes"><span class="octicon octicon-link"></span></a><span>Patterns for nodes</span></h3><p><span>This simple pattern describes a single node, and names that node using the variable a.</span></p><pre><code class="wrap cpp hljs"><span class="token punctuation">(</span>a<span class="token punctuation">)</span>
+</code></pre><h3 id="Patterns-for-related-nodes" data-id="Patterns-for-related-nodes"><a class="anchor hidden-xs" href="#Patterns-for-related-nodes" title="Patterns-for-related-nodes"><span class="octicon octicon-link"></span></a><span>Patterns for related nodes</span></h3><p><span>This pattern describes a very simple data shape: two nodes, and a single relationship from one to the other.</span></p><pre><code class="wrap cpp hljs"><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">--</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+</code></pre><p><span>This manner of describing nodes and relationships can be extended to cover an arbitrary number of nodes and the relationships between them, for example:</span></p><pre><code class="wrap cpp hljs"><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">--</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token operator">--</span><span class="token punctuation">(</span>c<span class="token punctuation">)</span>
+</code></pre><p><span>Such a series of connected nodes and relationships is called a </span><strong><span>“path”</span></strong><span>.</span></p><h3 id="Patterns-for-labels" data-id="Patterns-for-labels"><a class="anchor hidden-xs" href="#Patterns-for-labels" title="Patterns-for-labels"><span class="octicon octicon-link"></span></a><span>Patterns for labels</span></h3><p><span>The most simple attribute that can be described in the pattern is a label that the node must have. For example:</span></p><pre><code class="wrap cpp hljs"><span class="token punctuation">(</span>a<span class="token operator">:</span>User<span class="token punctuation">)</span><span class="token operator">--</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+</code></pre><p><span>One can also describe a node that has multiple labels:</span></p><pre><code class="wrap cpp hljs"><span class="token punctuation">(</span>a<span class="token operator">:</span>User<span class="token operator">:</span>Admin<span class="token punctuation">)</span><span class="token operator">--</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+</code></pre><h3 id="Specifying-properties" data-id="Specifying-properties"><a class="anchor hidden-xs" href="#Specifying-properties" title="Specifying-properties"><span class="octicon octicon-link"></span></a><span>Specifying properties</span></h3><p><span>Properties can be expressed in patterns using a map-construct: curly brackets surrounding a number of key-expression pairs, separated by commas. E.g. a node with two properties on it would look like:</span></p><pre><code class="wrap cpp hljs"><span class="token punctuation">(</span>a <span class="token punctuation">{</span>name<span class="token operator">:</span> <span class="token char">'Andy'</span><span class="token punctuation">,</span> sport<span class="token operator">:</span> <span class="token char">'Brazilian Ju-Jitsu'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+</code></pre><p><span>A relationship with expectations on it is given by:</span></p><pre><code class="wrap cpp hljs"><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token punctuation">{</span>blocked<span class="token operator">:</span> <span class="token boolean">false</span><span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token operator">-&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+</code></pre><h3 id="Patterns-for-relationships" data-id="Patterns-for-relationships"><a class="anchor hidden-xs" href="#Patterns-for-relationships" title="Patterns-for-relationships"><span class="octicon octicon-link"></span></a><span>Patterns for relationships</span></h3><p><span>The simplest way to describe a relationship is by using the arrow between two nodes, as in the previous examples. Using this technique, you can describe that the relationship should exist and the directionality of it. If you don’t care about the direction of the relationship, the arrow head can be omitted, as exemplified by:</span></p><pre><code class="wrap cpp hljs"><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">--</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+
+<span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span>r<span class="token punctuation">]</span><span class="token operator">-&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+
+<span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span>r<span class="token operator">:</span>REL_TYPE<span class="token punctuation">]</span><span class="token operator">-&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+    
+<span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span>r<span class="token operator">:</span>TYPE1<span class="token operator">|</span>TYPE2<span class="token punctuation">]</span><span class="token operator">-&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+
+<span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">:</span>REL_TYPE<span class="token punctuation">]</span><span class="token operator">-&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+</code></pre><h3 id="Variable-length-pattern-matching" data-id="Variable-length-pattern-matching"><a class="anchor hidden-xs" href="#Variable-length-pattern-matching" title="Variable-length-pattern-matching"><span class="octicon octicon-link"></span></a><span>Variable-length pattern matching</span></h3><p><span>Rather than describing a long path using a sequence of many node and relationship descriptions in a pattern, many relationships (and the intermediate nodes) can be described by specifying a length in the relationship description of a pattern. For example:</span></p><pre><code class="wrap cpp hljs"><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">-&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span> 
+</code></pre><p><span>This describes a graph of three nodes and two relationships, all in one path (a path of length 2). This is equivalent to:</span></p><pre><code class="wrap cpp hljs"><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">--</span><span class="token operator">&gt;</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token operator">--</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+</code></pre><p><span>A range of lengths can also be specified: such relationship patterns are called ‘variable length relationships’. For example:</span></p><pre><code class="wrap cpp hljs"><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">*</span><span class="token number">3.</span><span class="token number">.5</span><span class="token punctuation">]</span><span class="token operator">-&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+</code></pre><p><span>This is a minimum length of 3, and a maximum of 5. It describes a graph of either 4 nodes and 3 relationships, 5 nodes and 4 relationships or 6 nodes and 5 relationships, all connected together in a single path.</span></p><p><span>Either bound can be omitted. For example, to describe paths of length 3 or more, use:</span></p><pre><code class="wrap cpp hljs"><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">*</span><span class="token number">3.</span><span class="token punctuation">.</span><span class="token punctuation">]</span><span class="token operator">-&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+</code></pre><p><span>To describe paths of length 5 or less, use:</span></p><pre><code class="wrap cpp hljs"><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">*</span><span class="token punctuation">.</span><span class="token number">.5</span><span class="token punctuation">]</span><span class="token operator">-&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+</code></pre><p><span>Omitting both bounds is equivalent to specifying a minimum of 1, allowing paths of any positive length to be described:</span></p><pre><code class="wrap cpp hljs"><span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">*</span><span class="token punctuation">]</span><span class="token operator">-&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+</code></pre><h3 id="Assigning-to-path-variables" data-id="Assigning-to-path-variables"><a class="anchor hidden-xs" href="#Assigning-to-path-variables" title="Assigning-to-path-variables"><span class="octicon octicon-link"></span></a><span>Assigning to path variables</span></h3><p><span>Cypher allows paths to be named using an identifer, as exemplified by:</span></p><pre><code class="wrap cpp hljs">p <span class="token operator">=</span> <span class="token punctuation">(</span>a<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">*</span><span class="token number">3.</span><span class="token number">.5</span><span class="token punctuation">]</span><span class="token operator">-&gt;</span><span class="token punctuation">(</span>b<span class="token punctuation">)</span>
+</code></pre><h2 id="Build-the-database" data-id="Build-the-database"><a class="anchor hidden-xs" href="#Build-the-database" title="Build-the-database"><span class="octicon octicon-link"></span></a><span>Build the database</span></h2><p><span>In Neo4j Desktop, create a new project as follows:</span><br>
+<img src="https://i.imgur.com/zHfzGM7.png" alt="" loading="lazy"></p><p><span>and add a local DBMs to the new project. Then, start the database as follows:</span><br>
+<img src="https://i.imgur.com/sr40QXb.png" alt="" loading="lazy"></p><p><span>As you can see in the following screenshot, the database is active and we can access it as a default user </span><code>neo4j</code><span> by opening a dashboard with </span><code>Neo4j Browser</code><span>.</span><br>
+<img src="https://i.imgur.com/orOE6Ch.png" alt="" loading="lazy"></p><p><span>In order to load csv files to the database, you need to add them to the </span><code>import</code><span> of the database (do not add them to the project directory) as follows:</span><br>
+<img src="https://i.imgur.com/71ItvTP.png" alt="" loading="lazy"></p><p><span>After copying/pasting the csv files, the </span><code>import</code><span> directory will be as follows:</span><br>
+<img src="https://i.imgur.com/qLTdMJO.png" alt="" loading="lazy"></p><ol>
+<li><span>Create a new database and access it.</span></li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-keyword">CREATE</span> DATABASE socialmedia
+
+:use socialmedia
+</code></pre><ol start="2">
+<li><span>Create nodes and relationships</span><br>
+<span>Each of the 3 CSV files needs to be loaded into Neo4j using the LOAD CSV command that reads each row of the file and then assigns the imported values to the nodes and edges of the graph.</span></li>
+</ol><pre><code class="cpp hljs">
+<span class="token comment">// Create Index for users on userid field</span>
+CREATE INDEX <span class="token function">FOR</span> <span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">)</span> <span class="token function">ON</span> <span class="token punctuation">(</span>u<span class="token punctuation">.</span>userid<span class="token punctuation">)</span>
+    
+<span class="token comment">// Create Index for posts on postid field</span>
+CREATE INDEX <span class="token function">FOR</span> <span class="token punctuation">(</span>u<span class="token operator">:</span>Post<span class="token punctuation">)</span> <span class="token function">ON</span> <span class="token punctuation">(</span>u<span class="token punctuation">.</span>postid<span class="token punctuation">)</span>
+
+<span class="token comment">// Load users data</span>
+LOAD CSV WITH HEADERS 
+FROM <span class="token string">"file:///users.csv"</span> AS row 
+FIELDTERMINATOR <span class="token char">','</span>
+<span class="token function">CREATE</span> <span class="token punctuation">(</span>
+    <span class="token operator">:</span>User <span class="token punctuation">{</span>
+        userid<span class="token operator">:</span> <span class="token function">toInteger</span><span class="token punctuation">(</span>row<span class="token punctuation">[</span><span class="token char">'userid'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+        name<span class="token operator">:</span>row<span class="token punctuation">[</span><span class="token char">'name'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+        surname<span class="token operator">:</span> row<span class="token punctuation">[</span><span class="token char">'surname'</span><span class="token punctuation">]</span><span class="token punctuation">,</span> 
+        age<span class="token operator">:</span> <span class="token function">toInteger</span><span class="token punctuation">(</span>row<span class="token punctuation">[</span><span class="token char">'age'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+        timestamp<span class="token operator">:</span> <span class="token function">datetime</span><span class="token punctuation">(</span><span class="token punctuation">{</span>epochSeconds<span class="token operator">:</span> <span class="token function">toInteger</span><span class="token punctuation">(</span>row<span class="token punctuation">[</span><span class="token char">'timestamp'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">}</span>
+<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    
+    
+<span class="token comment">// Load posts data</span>
+LOAD CSV WITH HEADERS 
+FROM <span class="token string">"file:///posts.csv"</span> AS row 
+FIELDTERMINATOR <span class="token char">','</span>
+<span class="token function">MATCH</span> <span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">{</span>userid<span class="token operator">:</span><span class="token function">toInteger</span><span class="token punctuation">(</span>row<span class="token punctuation">[</span><span class="token char">'userid'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token function">MERGE</span> <span class="token punctuation">(</span>
+    <span class="token operator">:</span>Post <span class="token punctuation">{</span>
+        postid<span class="token operator">:</span> <span class="token function">toInteger</span><span class="token punctuation">(</span>row<span class="token punctuation">[</span><span class="token char">'postid'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span>  
+        userid<span class="token operator">:</span> <span class="token function">toInteger</span><span class="token punctuation">(</span>row<span class="token punctuation">[</span><span class="token char">'userid'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">,</span> 
+        posttype<span class="token operator">:</span>row<span class="token punctuation">[</span><span class="token char">'posttype'</span><span class="token punctuation">]</span>
+        <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">:</span>ADD<span class="token punctuation">{</span>
+    posttimestamp<span class="token operator">:</span> <span class="token function">datetime</span><span class="token punctuation">(</span><span class="token punctuation">{</span>epochSeconds<span class="token operator">:</span> <span class="token function">toInteger</span><span class="token punctuation">(</span>row<span class="token punctuation">[</span><span class="token char">'posttimestamp'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+    <span class="token punctuation">}</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Retrieve some nodes</span>
+<span class="token function">MATCH</span> <span class="token punctuation">(</span>n<span class="token punctuation">)</span>
+RETURN n
+LIMIT <span class="token number">10</span><span class="token punctuation">;</span>
+
+<span class="token comment">// Load Friends</span>
+<span class="token operator">:</span><span class="token keyword">auto</span> USING PERIODIC COMMIT
+LOAD CSV WITH HEADERS 
+FROM <span class="token string">"file:///friends.csv"</span> AS row 
+FIELDTERMINATOR <span class="token char">','</span>
+<span class="token function">MATCH</span> <span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">{</span>userid<span class="token operator">:</span><span class="token function">toInteger</span><span class="token punctuation">(</span>row<span class="token punctuation">[</span><span class="token char">'friend1'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token function">MATCH</span> <span class="token punctuation">(</span>v<span class="token operator">:</span>User<span class="token punctuation">{</span>userid<span class="token operator">:</span><span class="token function">toInteger</span><span class="token punctuation">(</span>row<span class="token punctuation">[</span><span class="token char">'friend2'</span><span class="token punctuation">]</span><span class="token punctuation">)</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token function">MERGE</span> <span class="token punctuation">(</span>u<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">:</span>FRIEND<span class="token punctuation">]</span><span class="token operator">-&gt;</span><span class="token punctuation">(</span>v<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">:</span>FRIEND<span class="token punctuation">]</span><span class="token operator">-&gt;</span><span class="token punctuation">(</span>u<span class="token punctuation">)</span>
+</code></pre><h1 id="Data-Retrieval-with-Cypher" data-id="Data-Retrieval-with-Cypher"><a class="anchor hidden-xs" href="#Data-Retrieval-with-Cypher" title="Data-Retrieval-with-Cypher"><span class="octicon octicon-link"></span></a><span>Data Retrieval with Cypher</span></h1><p><span>Cypher is Neo4j’s graph query language that lets you retrieve data from the graph. It is like SQL for graphs, and was inspired by SQL so it lets you focus on what data you want out of the graph (not how to go get it). It is the easiest graph language to learn by far because of its similarity to other languages and intiutiveness.</span></p><div class="alert alert-success">
+<h2 id="Exercises3" data-id="Exercises"><a class="anchor hidden-xs" href="#Exercises3" title="Exercises3"><span class="octicon octicon-link"></span></a><span>Exercises</span></h2>
+<ol>
+<li><span>Who are the users who have posts?</span></li>
+</ol>
+<pre><code class="wrap javascript hljs"><span class="token constant">MATCH</span> <span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">:</span><span class="token constant">ADD</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token constant">RETURN</span> u
+<span class="token constant">LIMIT</span> <span class="token number">10</span> <span class="token comment">// This is added just to not display all nodes</span>
+</code></pre>
+<ol start="2">
+<li><span>What are the posts of the users?</span></li>
+</ol>
+<pre><code class="wrap javascript hljs"><span class="token constant">MATCH</span> <span class="token punctuation">(</span>p<span class="token operator">:</span>Post<span class="token punctuation">)</span>
+<span class="token constant">RETURN</span> p
+<span class="token constant">LIMIT</span> <span class="token number">10</span> <span class="token comment">// This is added just to not display all nodes</span>
+</code></pre>
+<ol start="3">
+<li><span>Which posts published after 2012?</span></li>
+</ol>
+<pre><code class="wrap javascript hljs"><span class="token constant">MATCH</span> <span class="token punctuation">(</span>p<span class="token operator">:</span>Post<span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token operator">-</span><span class="token punctuation">[</span>a<span class="token operator">:</span><span class="token constant">ADD</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token constant">WHERE</span> a<span class="token punctuation">.</span>posttimestamp<span class="token punctuation">.</span>year <span class="token operator">&gt;</span> <span class="token number">2012</span>
+<span class="token constant">RETURN</span> p
+<span class="token constant">LIMIT</span> <span class="token number">10</span> <span class="token comment">// This is added just to not display all nodes</span>
+</code></pre>
+<ol start="4">
+<li><span>What is the oldest and recent dates of the posts?</span></li>
+</ol>
+<pre><code class="wrap javascript hljs"><span class="token constant">MATCH</span> <span class="token punctuation">(</span>p<span class="token operator">:</span>Post<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span>a<span class="token operator">:</span><span class="token constant">ADD</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token constant">RETURN</span> <span class="token constant">MAX</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>posttimestamp<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token constant">MIN</span><span class="token punctuation">(</span>a<span class="token punctuation">.</span>posttimestamp<span class="token punctuation">)</span>
+</code></pre>
+<ol start="5">
+<li><span>What are the top 5 most recent posts whose type is </span><code>Image</code><span>?</span></li>
+</ol>
+<pre><code class="wrap javascript hljs"><span class="token constant">MATCH</span> <span class="token punctuation">(</span>p<span class="token operator">:</span>Post<span class="token punctuation">{</span><span class="token literal-property property">posttype</span><span class="token operator">:</span><span class="token string">'Image'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span>a<span class="token operator">:</span><span class="token constant">ADD</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token punctuation">(</span><span class="token punctuation">)</span>
+<span class="token constant">RETURN</span> p<span class="token punctuation">,</span> a
+<span class="token constant">ORDER</span> <span class="token constant">BY</span> a<span class="token punctuation">.</span>posttimestamp <span class="token constant">DESC</span>
+<span class="token constant">LIMIT</span> <span class="token number">5</span>
+</code></pre>
+<ol start="6">
+<li><span>Which top 5 users who posted an </span><code>Image</code><span> or </span><code>Video</code><span> recently?</span></li>
+</ol>
+<pre><code class="wrap javascript hljs"><span class="token constant">MATCH</span> <span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span>a<span class="token operator">:</span><span class="token constant">ADD</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>p<span class="token operator">:</span>Post<span class="token punctuation">)</span>
+<span class="token constant">WHERE</span> p<span class="token punctuation">.</span>posttype <span class="token constant">IN</span> <span class="token punctuation">[</span><span class="token string">'Image'</span><span class="token punctuation">,</span> <span class="token string">'Video'</span><span class="token punctuation">]</span>
+<span class="token constant">RETURN</span> u<span class="token punctuation">,</span> p
+<span class="token constant">ORDER</span> <span class="token constant">BY</span> a<span class="token punctuation">.</span>posttimestamp
+<span class="token constant">LIMIT</span> <span class="token number">5</span>
+</code></pre>
+<ol start="7">
+<li><span>What is the age of the eldest and youngest persons?</span></li>
+</ol>
+<pre><code class="wrap javascript hljs"><span class="token constant">MATCH</span> <span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">)</span>
+<span class="token constant">RETURN</span> <span class="token constant">MAX</span><span class="token punctuation">(</span>u<span class="token punctuation">.</span>age<span class="token punctuation">)</span><span class="token punctuation">,</span> <span class="token constant">MIN</span><span class="token punctuation">(</span>u<span class="token punctuation">.</span>age<span class="token punctuation">)</span>
+
+<span class="token comment">// Update the age of the person</span>
+<span class="token constant">MATCH</span> <span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">)</span>
+<span class="token constant">SET</span> u<span class="token punctuation">.</span>age <span class="token operator">=</span> <span class="token constant">CASE</span>
+           <span class="token constant">WHEN</span> u<span class="token punctuation">.</span>age <span class="token operator">&lt;</span> <span class="token number">0</span> <span class="token constant">THEN</span> <span class="token operator">-</span>u<span class="token punctuation">.</span>age
+           <span class="token constant">ELSE</span> u<span class="token punctuation">.</span>age
+          <span class="token constant">END</span>
+</code></pre>
+<ol start="8">
+<li><span>Who is the 2nd youngest person who published </span><code>Image</code><span> posts?</span></li>
+</ol>
+<pre><code class="wrap javascript hljs"><span class="token constant">MATCH</span> <span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">:</span><span class="token constant">ADD</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token operator">&gt;</span><span class="token punctuation">(</span>p<span class="token operator">:</span>Post<span class="token punctuation">{</span><span class="token literal-property property">posttype</span><span class="token operator">:</span><span class="token string">'Image'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token constant">RETURN</span> <span class="token constant">DISTINCT</span> u<span class="token punctuation">.</span>name<span class="token punctuation">,</span> u<span class="token punctuation">.</span>surname<span class="token punctuation">,</span> u<span class="token punctuation">.</span>age<span class="token punctuation">,</span> p<span class="token punctuation">.</span>posttype
+<span class="token constant">ORDER</span> <span class="token constant">BY</span> u<span class="token punctuation">.</span>age <span class="token constant">ASC</span>
+<span class="token constant">SKIP</span> <span class="token number">1</span>
+<span class="token constant">LIMIT</span> <span class="token number">1</span>
+</code></pre>
+<ol start="9">
+<li><span>What are the posts that are published by people who are between 20 and 30?</span></li>
+</ol>
+<pre><code class="wrap javascript hljs"><span class="token constant">MATCH</span> <span class="token punctuation">(</span>p<span class="token operator">:</span>Post<span class="token punctuation">)</span><span class="token operator">&lt;</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">:</span><span class="token constant">ADD</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">)</span>
+<span class="token constant">WHERE</span> u<span class="token punctuation">.</span>age <span class="token constant">IN</span> <span class="token function">range</span><span class="token punctuation">(</span><span class="token number">20</span><span class="token punctuation">,</span> <span class="token number">30</span><span class="token punctuation">)</span>
+<span class="token constant">RETURN</span> p<span class="token punctuation">.</span>postid<span class="token punctuation">,</span> p<span class="token punctuation">.</span>posttype<span class="token punctuation">,</span> u<span class="token punctuation">.</span>age<span class="token punctuation">,</span> u<span class="token punctuation">.</span>userid
+<span class="token constant">ORDER</span> <span class="token constant">BY</span> u<span class="token punctuation">.</span>age
+</code></pre>
+<ol start="10">
+<li><span>What are the friends of the youngest person?</span></li>
+</ol>
+<pre><code class="wrap javascript hljs"><span class="token constant">CALL</span><span class="token punctuation">{</span>
+    <span class="token constant">MATCH</span> <span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">)</span>
+    <span class="token constant">RETURN</span> u<span class="token punctuation">.</span>userid <span class="token constant">AS</span> youngest
+    <span class="token constant">ORDER</span> <span class="token constant">BY</span> u<span class="token punctuation">.</span>age <span class="token constant">ASC</span>
+    <span class="token constant">LIMIT</span> <span class="token number">1</span>
+<span class="token punctuation">}</span>
+<span class="token constant">WITH</span> youngest
+<span class="token constant">MATCH</span> <span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">{</span><span class="token literal-property property">userid</span><span class="token operator">:</span>youngest<span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">:</span><span class="token constant">FRIEND</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token punctuation">(</span>f1<span class="token operator">:</span>User<span class="token punctuation">)</span>
+<span class="token constant">RETURN</span> <span class="token constant">DISTINCT</span> u<span class="token punctuation">.</span>userid <span class="token constant">AS</span> user<span class="token punctuation">,</span> f1<span class="token punctuation">.</span>userid <span class="token constant">AS</span> friend
+</code></pre>
+<ol start="11">
+<li><span>How many friends for the surname </span><code>Thronton</code><span>?</span></li>
+</ol>
+<pre><code class="wrap javascript hljs"><span class="token constant">MATCH</span> <span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">{</span><span class="token literal-property property">surname</span><span class="token operator">:</span><span class="token string">'Thronton'</span><span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">:</span><span class="token constant">FRIEND</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token punctuation">(</span>f1<span class="token operator">:</span>User<span class="token punctuation">)</span>
+<span class="token constant">RETURN</span> <span class="token constant">COUNT</span><span class="token punctuation">(</span><span class="token constant">DISTINCT</span> f1<span class="token punctuation">)</span>
+</code></pre>
+<ol start="12">
+<li><span>How many posts for each user?</span></li>
+</ol>
+<pre><code class="wrap javascript hljs"><span class="token constant">MATCH</span> <span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">)</span><span class="token operator">--</span><span class="token punctuation">(</span>p<span class="token operator">:</span>Post<span class="token punctuation">)</span>
+<span class="token constant">RETURN</span> u<span class="token punctuation">.</span>userid <span class="token constant">AS</span> user<span class="token punctuation">,</span> <span class="token constant">COUNT</span><span class="token punctuation">(</span><span class="token operator">*</span><span class="token punctuation">)</span> <span class="token constant">AS</span> c
+<span class="token constant">ORDER</span> <span class="token constant">BY</span> c <span class="token constant">DESC</span>
+</code></pre>
+<ol start="13">
+<li><span>Who are the friends of users who posted </span><code>Image</code><span>?</span></li>
+</ol>
+<pre><code class="wrap javascript hljs"><span class="token constant">MATCH</span> <span class="token punctuation">(</span>f<span class="token operator">:</span>User<span class="token punctuation">)</span><span class="token operator">--</span><span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">)</span><span class="token operator">--</span><span class="token punctuation">(</span><span class="token operator">:</span>Post<span class="token punctuation">{</span><span class="token literal-property property">posttype</span><span class="token operator">:</span><span class="token string">'Image'</span><span class="token punctuation">}</span><span class="token punctuation">)</span>
+<span class="token constant">RETURN</span> <span class="token constant">DISTINCT</span> u<span class="token punctuation">.</span>userid<span class="token punctuation">,</span> u<span class="token punctuation">.</span>name<span class="token punctuation">,</span> u<span class="token punctuation">.</span>surname<span class="token punctuation">,</span> f<span class="token punctuation">.</span>userid<span class="token punctuation">,</span> f<span class="token punctuation">.</span>name<span class="token punctuation">,</span> f<span class="token punctuation">.</span>surname<span class="token punctuation">,</span> f<span class="token punctuation">.</span>age
+</code></pre>
+<ol start="14">
+<li><span>How many friends of users whose age is less than 20?</span></li>
+</ol>
+<pre><code class="wrap javascript hljs"><span class="token constant">MATCH</span> <span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">)</span><span class="token operator">--</span><span class="token punctuation">(</span>f1<span class="token operator">:</span>User<span class="token punctuation">)</span>
+<span class="token constant">WHERE</span> u<span class="token punctuation">.</span>age <span class="token operator">&lt;</span> <span class="token number">20</span>
+<span class="token constant">RETURN</span> <span class="token constant">COUNT</span><span class="token punctuation">(</span><span class="token constant">DISTINCT</span> f1<span class="token punctuation">.</span>userid<span class="token punctuation">)</span> <span class="token constant">AS</span> c
+</code></pre>
+<ol start="15">
+<li><span>How many friends of friends of users whose age is less than 20?</span></li>
+</ol>
+<pre><code class="wrap javascript hljs"><span class="token constant">MATCH</span> <span class="token punctuation">(</span>u<span class="token operator">:</span>User<span class="token punctuation">)</span><span class="token operator">-</span><span class="token punctuation">[</span><span class="token operator">:</span><span class="token constant">FRIEND</span><span class="token operator">*</span><span class="token number">2</span><span class="token punctuation">]</span><span class="token operator">-</span><span class="token punctuation">(</span>f2<span class="token operator">:</span>User<span class="token punctuation">)</span>
+<span class="token constant">WHERE</span> u<span class="token punctuation">.</span>age <span class="token operator">&lt;</span> <span class="token number">20</span> <span class="token constant">AND</span> f2<span class="token punctuation">.</span>userid <span class="token operator">&lt;</span><span class="token operator">&gt;</span> u<span class="token punctuation">.</span>userid
+<span class="token constant">RETURN</span> <span class="token constant">COUNT</span><span class="token punctuation">(</span><span class="token constant">DISTINCT</span> f2<span class="token punctuation">.</span>userid<span class="token punctuation">)</span> <span class="token constant">AS</span> c
+</code></pre>
+<ol start="16">
+<li><span>How many users have more than 10 posts?</span></li>
+<li><span>What is the average number of posts published at noon and by the friends of the users whose age is more than 40? Calculate the percentage of posts.</span></li>
+<li><span>What is the percentage of posts published at noon and by the friends of the users whose age is more than 40?</span></li>
+</ol>
+</div><h1 id="Common-issues" data-id="Common-issues"><a class="anchor hidden-xs" href="#Common-issues" title="Common-issues"><span class="octicon octicon-link"></span></a><span>Common issues</span></h1><ul>
+<li><span>When you try to access the database by running the command </span><code>psql -U postgres</code><span> as </span><code>[root@sandbox-hdp data]# psql -U postgres</code><span>. You may get the following error:</span>
+<blockquote>
+<p><span>psql: FATAL:  Peer authentication failed for user “postgres”</span></p>
+</blockquote>
+<ul>
+<li><span>Possible reasons:</span>
+<ul>
+<li><span>The database is configured to allow access only through the credentials of the user.</span></li>
+</ul>
+</li>
+<li><span>Possible solutions:</span>
+<ul>
+<li><span>You can change this configuration to allow all users to access the database without the need to enter credentials. Add the line </span><code>local all all trust</code><span> at the beginning of the file </span><code>/var/lib/pgsql/data/pg_hba.conf</code><span> then restart PostgreSQL service by running the command </span><code>systemctl restart postgresql</code><span> as root user.</span></li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><div class="alert alert-warning">
+<p><strong><span>NB:</span></strong><span> If you have other issues, please contact the TA.</span></p>
+</div><h1 id="References" data-id="References"><a class="anchor hidden-xs" href="#References" title="References"><span class="octicon octicon-link"></span></a><span>References</span></h1><ul>
+<li><a href="https://quickref.me/postgres" target="_blank" rel="noopener"><span>PostgreSQL cheatsheet</span></a></li>
+<li><span>Yasin N. Silva, Isadora Almeida, and Michell Queiroz. 2016. SQL: From Traditional Databases to Big Data. In Proceedings of the 47th ACM Technical Symposium on Computing Science Education (SIGCSE '16). Association for Computing Machinery, New York, NY, USA, 413–418. </span><a href="https://doi.org/10.1145/2839509.2844560" target="_blank" rel="noopener"><span>https://doi.org/10.1145/2839509.2844560</span></a></li>
+<li><a href="https://www.postgresqltutorial.com" target="_blank" rel="noopener"><span>Comprehensive PostgreSQL Tutorial</span></a></li>
+<li><a href="https://www.postgresql.org/docs/9.2/app-psql.html" target="_blank" rel="noopener"><span>psql 9.2 Documentation</span></a></li>
+<li><a href="https://neo4j.com/docs/cypher-manual/4.4/" target="_blank" rel="noopener"><span>Cypher Manual</span></a></li>
+</ul></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li><a href="#Lab-2---Data-Retrieval-with-SQL-and-Cypher" title="Lab 2 - Data Retrieval with SQL and Cypher">Lab 2 - Data Retrieval with SQL and Cypher</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li><a href="#Dataset-Descripion" title="Dataset Descripion">Dataset Descripion</a></li>
+<li><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
+<li><a href="#PostgreSQL-Meta-commands" title="PostgreSQL Meta-commands">PostgreSQL Meta-commands</a></li>
+<li><a href="#Build-the-Database" title="Build the Database">Build the Database</a><ul class="nav">
+<li><a href="#Fix-Friends-table" title="Fix Friends table">Fix Friends table</a></li>
+</ul>
+</li>
+<li><a href="#Data-Retrieval-using-SQL" title="Data Retrieval using SQL">Data Retrieval using SQL</a><ul class="nav">
+<li><a href="#Data-Retrieval-from-a-single-table" title="Data Retrieval from a single table">Data Retrieval from a single table</a></li>
+<li><a href="#Data-Retrieval-from-multiple-tables-Joining-tables" title="Data Retrieval from multiple tables (Joining tables)">Data Retrieval from multiple tables (Joining tables)</a></li>
+<li><a href="#Aggregation-and-grouping" title="Aggregation and grouping">Aggregation and grouping</a></li>
+</ul>
+</li>
+<li><a href="#Graph-databases" title="Graph databases">Graph databases</a><ul class="nav">
+<li><a href="#Download-and-Install-Neo4j" title="Download and Install Neo4j">Download and Install Neo4j</a></li>
+</ul>
+</li>
+<li><a href="#Cypher" title="Cypher">Cypher</a><ul class="nav">
+<li><a href="#Property-types" title="Property types">Property types</a></li>
+<li><a href="#Structural-types" title="Structural types">Structural types</a></li>
+<li><a href="#Composite-types" title="Composite types">Composite types</a></li>
+<li><a href="#How-to-define-a-variable" title="How to define a variable">How to define a variable</a></li>
+<li><a href="#Operators" title="Operators">Operators</a><ul class="nav">
+<li><a href="#DISTINCT-aggregation-operator" title="DISTINCT (aggregation operator)">DISTINCT (aggregation operator)</a></li>
+<li><a href="#Property-operators" title="Property operators">Property operators</a></li>
+<li><a href="#Mathemtical-operators" title="Mathemtical operators">Mathemtical operators</a></li>
+<li><a href="#Comparison-operators" title="Comparison operators">Comparison operators</a></li>
+<li><a href="#Boolean-operators" title="Boolean operators">Boolean operators</a></li>
+<li><a href="#String-operators" title="String operators">String operators</a></li>
+</ul>
+</li>
+<li><a href="#Patterns" title="Patterns">Patterns</a><ul class="nav">
+<li><a href="#Patterns-for-nodes" title="Patterns for nodes">Patterns for nodes</a></li>
+<li><a href="#Patterns-for-related-nodes" title="Patterns for related nodes">Patterns for related nodes</a></li>
+<li><a href="#Patterns-for-labels" title="Patterns for labels">Patterns for labels</a></li>
+<li><a href="#Specifying-properties" title="Specifying properties">Specifying properties</a></li>
+<li><a href="#Patterns-for-relationships" title="Patterns for relationships">Patterns for relationships</a></li>
+<li><a href="#Variable-length-pattern-matching" title="Variable-length pattern matching">Variable-length pattern matching</a></li>
+<li><a href="#Assigning-to-path-variables" title="Assigning to path variables">Assigning to path variables</a></li>
+</ul>
+</li>
+<li><a href="#Build-the-database" title="Build the database">Build the database</a></li>
+</ul>
+</li>
+<li><a href="#Data-Retrieval-with-Cypher" title="Data Retrieval with Cypher">Data Retrieval with Cypher</a></li>
+<li><a href="#Common-issues" title="Common issues">Common issues</a></li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;" null null>
+        <div class="toc"><ul class="nav">
+<li><a href="#Lab-2---Data-Retrieval-with-SQL-and-Cypher" title="Lab 2 - Data Retrieval with SQL and Cypher">Lab 2 - Data Retrieval with SQL and Cypher</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li><a href="#Dataset-Descripion" title="Dataset Descripion">Dataset Descripion</a></li>
+<li><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
+<li><a href="#PostgreSQL-Meta-commands" title="PostgreSQL Meta-commands">PostgreSQL Meta-commands</a></li>
+<li><a href="#Build-the-Database" title="Build the Database">Build the Database</a><ul class="nav">
+<li><a href="#Fix-Friends-table" title="Fix Friends table">Fix Friends table</a></li>
+</ul>
+</li>
+<li><a href="#Data-Retrieval-using-SQL" title="Data Retrieval using SQL">Data Retrieval using SQL</a><ul class="nav">
+<li><a href="#Data-Retrieval-from-a-single-table" title="Data Retrieval from a single table">Data Retrieval from a single table</a></li>
+<li><a href="#Data-Retrieval-from-multiple-tables-Joining-tables" title="Data Retrieval from multiple tables (Joining tables)">Data Retrieval from multiple tables (Joining tables)</a></li>
+<li><a href="#Aggregation-and-grouping" title="Aggregation and grouping">Aggregation and grouping</a></li>
+</ul>
+</li>
+<li><a href="#Graph-databases" title="Graph databases">Graph databases</a><ul class="nav">
+<li><a href="#Download-and-Install-Neo4j" title="Download and Install Neo4j">Download and Install Neo4j</a></li>
+</ul>
+</li>
+<li><a href="#Cypher" title="Cypher">Cypher</a><ul class="nav">
+<li><a href="#Property-types" title="Property types">Property types</a></li>
+<li><a href="#Structural-types" title="Structural types">Structural types</a></li>
+<li><a href="#Composite-types" title="Composite types">Composite types</a></li>
+<li><a href="#How-to-define-a-variable" title="How to define a variable">How to define a variable</a></li>
+<li><a href="#Operators" title="Operators">Operators</a><ul class="nav">
+<li><a href="#DISTINCT-aggregation-operator" title="DISTINCT (aggregation operator)">DISTINCT (aggregation operator)</a></li>
+<li><a href="#Property-operators" title="Property operators">Property operators</a></li>
+<li><a href="#Mathemtical-operators" title="Mathemtical operators">Mathemtical operators</a></li>
+<li><a href="#Comparison-operators" title="Comparison operators">Comparison operators</a></li>
+<li><a href="#Boolean-operators" title="Boolean operators">Boolean operators</a></li>
+<li><a href="#String-operators" title="String operators">String operators</a></li>
+</ul>
+</li>
+<li><a href="#Patterns" title="Patterns">Patterns</a><ul class="nav">
+<li><a href="#Patterns-for-nodes" title="Patterns for nodes">Patterns for nodes</a></li>
+<li><a href="#Patterns-for-related-nodes" title="Patterns for related nodes">Patterns for related nodes</a></li>
+<li><a href="#Patterns-for-labels" title="Patterns for labels">Patterns for labels</a></li>
+<li><a href="#Specifying-properties" title="Specifying properties">Specifying properties</a></li>
+<li><a href="#Patterns-for-relationships" title="Patterns for relationships">Patterns for relationships</a></li>
+<li><a href="#Variable-length-pattern-matching" title="Variable-length pattern matching">Variable-length pattern matching</a></li>
+<li><a href="#Assigning-to-path-variables" title="Assigning to path variables">Assigning to path variables</a></li>
+</ul>
+</li>
+<li><a href="#Build-the-database" title="Build the database">Build the database</a></li>
+</ul>
+</li>
+<li><a href="#Data-Retrieval-with-Cypher" title="Data Retrieval with Cypher">Data Retrieval with Cypher</a></li>
+<li><a href="#Common-issues" title="Common issues">Common issues</a></li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>

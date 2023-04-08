@@ -1,0 +1,448 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Assignment 3 - MonogDB - HackMD
+    </title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+    <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" integrity="sha256-QiWfLIsCT02Sdwkogf6YMiQlj4NE84MKkzEMkZnMGdg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i|Source+Code+Pro:300,400,500|Source+Sans+Pro:300,300i,400,400i,600,600i|Source+Serif+Pro&subset=latin-ext);.hljs{background:#fff;color:#333;display:block;overflow-x:auto;padding:.5em}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-string,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-number,.hljs-symbol{color:#0086b3}.hljs-built_in,.hljs-builtin-name{color:#005cc5}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#795da3}.hljs-addition{background-color:#eaffea;color:#55a532}.hljs-deletion{background-color:#ffecec;color:#bd2c00}.hljs-link{text-decoration:underline}.markdown-body{word-wrap:break-word;font-size:16px;line-height:1.5}.markdown-body:after,.markdown-body:before{content:"";display:table}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;line-height:1;margin-left:-20px;padding-right:4px}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-bottom:16px;margin-top:0}.markdown-body hr{background-color:#e7e7e7;border:0;height:.25em;margin:24px 0;padding:0}.markdown-body blockquote{border-left:.25em solid #ddd;color:#777;font-size:16px;padding:0 1em}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body kbd,.popover kbd{background-color:#fcfcfc;border:1px solid;border-color:#ccc #ccc #bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb;color:#555;display:inline-block;font-size:11px;line-height:10px;padding:3px 5px;vertical-align:middle}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{font-weight:600;line-height:1.25;margin-bottom:16px;margin-top:24px}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#000;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{border-bottom:1px solid #eee;padding-bottom:.3em}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{color:#777;font-size:.85em}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{list-style-type:none;padding:0}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-bottom:0;margin-top:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{padding-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{font-size:1em;font-style:italic;font-weight:700;margin-top:16px;padding:0}.markdown-body dl dd{margin-bottom:16px;padding:0 16px}.markdown-body table{display:block;overflow:auto;width:100%;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{border:1px solid #ddd;padding:6px 13px}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{background-color:#fff;box-sizing:initial;max-width:100%}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{background-color:initial;max-width:none;vertical-align:text-top}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{border:1px solid #ddd;display:block;float:left;margin:13px 0 0;overflow:hidden;padding:7px;width:auto}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{clear:both;color:#333;display:block;padding:5px 0 0}.markdown-body span.align-center{clear:both;display:block;overflow:hidden}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{clear:both;display:block;overflow:hidden}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{background-color:#0000000a;border-radius:3px;font-size:85%;margin:0;padding:.2em 0}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{content:"\00a0";letter-spacing:-.2em}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{background:#0000;border:0;font-size:100%;margin:0;padding:0;white-space:pre;word-break:normal}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{background-color:#f7f7f7;border-radius:3px;font-size:85%;line-height:1.45;overflow:auto;padding:16px}.markdown-body pre code,.markdown-body pre tt{word-wrap:normal;background-color:initial;border:0;display:inline;line-height:inherit;margin:0;max-width:auto;overflow:visible;padding:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{font-size:12px;line-height:1;overflow:hidden;padding:5px;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{background:#fff;border:0;padding:10px 8px 9px;text-align:right}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{background:#f8f8f8;border-top:0;font-weight:700}.news .alert .markdown-body blockquote{border:0;padding:0 0 0 40px}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{cursor:default!important;float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle}.markdown-body{max-width:758px;overflow:visible!important;padding-bottom:40px;padding-top:40px;position:relative}.markdown-body .emoji{vertical-align:top}.markdown-body pre{border:inherit!important}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{border-right:3px solid #6ce26c!important;box-sizing:initial;color:#afafaf!important;cursor:default;display:inline-block;min-width:20px;padding:0 8px 0 0;position:relative;text-align:right;z-index:4}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-bottom:none;border-left:none;border-top:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-collapse:inherit!important;border-spacing:0}.markdown-body code[data-gist-id]{background:none;padding:0}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{margin-bottom:unset;overflow:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p:last-child{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{background-color:inherit;border-radius:0;overflow:visible;text-align:center;white-space:inherit}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{height:100%;max-width:100%}.markdown-body pre>code.wrap{word-wrap:break-word;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap}.markdown-body .alert>p:last-child,.markdown-body .alert>ul:last-child{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body .mark,.markdown-body mark{background-color:#fff1a7}.vimeo,.youtube{background-color:#000;background-position:50%;background-repeat:no-repeat;background-size:contain;cursor:pointer;display:table;overflow:hidden;text-align:center}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{object-fit:contain;width:100%;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{height:100%;left:0;position:absolute;top:0;width:100%}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{color:#fff;height:auto;left:50%;opacity:.3;position:absolute;top:50%;transform:translate(-50%,-50%);transition:opacity .2s;width:auto;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{bottom:0;height:100%;left:0;position:absolute;right:0;top:0;width:100%}.figma{display:table;padding-bottom:56.25%;position:relative;width:100%}.figma iframe{border:1px solid #eee;bottom:0;height:100%;left:0;position:absolute;right:0;top:0;width:100%}.markmap-container{height:300px}.markmap-container>svg{height:100%;width:100%}.MJX_Assistive_MathML{display:none}#MathJax_Message{z-index:1000!important}.ui-infobar{color:#777;margin:25px auto -25px;max-width:760px;position:relative;z-index:2}.toc .invisable-node{list-style-type:none}.ui-toc{bottom:20px;position:fixed;z-index:998}.ui-toc.both-mode{margin-left:8px}.ui-toc.both-mode .ui-toc-label{border-bottom-left-radius:0;border-top-left-radius:0;height:40px;padding:10px 4px}.ui-toc-label{background-color:#e6e6e6;border:none;color:#868686;transition:opacity .2s}.ui-toc .open .ui-toc-label{color:#fff;opacity:1;transition:opacity .2s}.ui-toc-label:focus{background-color:#ccc;color:#000;opacity:.3}.ui-toc-label:hover{background-color:#ccc;opacity:1;transition:opacity .2s}.ui-toc-dropdown{margin-bottom:20px;margin-top:20px;max-height:70vh;max-width:45vw;overflow:auto;padding-left:10px;padding-right:10px;text-align:inherit;width:25vw}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{letter-spacing:.0029em;padding-right:0}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{color:#767676;display:block;font-size:13px;font-weight:500;padding:4px 20px}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{background-color:initial;border-left:1px solid #000;color:#000;padding-left:19px;text-decoration:none}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{border-left:none;border-right:1px solid #000;padding-right:19px}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{background-color:initial;border-left:2px solid #000;color:#000;font-weight:700;padding-left:18px}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{border-left:none;border-right:2px solid #000;padding-right:18px}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{font-size:12px;font-weight:400;padding-bottom:1px;padding-left:30px;padding-top:1px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{font-size:12px;font-weight:400;padding-bottom:1px;padding-left:40px;padding-top:1px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{font-weight:500;padding-left:28px}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{font-weight:500;padding-left:38px}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang^=ja] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang=zh-tw] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang=zh-cn] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html .markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html .markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html .markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang^=ja] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ Ｐゴシック,sans-serif}html[lang=zh-tw] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html[lang=zh-cn] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}html .ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ Ｐゴシック,sans-serif}html .ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html .ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}.ui-affix-toc{max-height:70vh;max-width:15vw;overflow:auto;position:fixed;top:0}.back-to-top,.expand-toggle,.go-to-bottom{color:#999;display:block;font-size:12px;font-weight:500;margin-left:10px;margin-top:10px;padding:4px 10px}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{background-position:50%;background-repeat:no-repeat;background-size:cover;border-radius:50%;display:block;height:20px;margin-bottom:2px;margin-right:5px;margin-top:2px;width:20px}.ui-user-icon.small{display:inline-block;height:18px;margin:0 0 .2em;vertical-align:middle;width:18px}.ui-infobar>small>span{line-height:22px}.ui-infobar>small .dropdown{display:inline-block}.ui-infobar>small .dropdown a:focus,.ui-infobar>small .dropdown a:hover{text-decoration:none}.ui-more-info{color:#888;cursor:pointer;vertical-align:middle}.ui-more-info .fa{font-size:16px}.ui-connectedGithub,.ui-published-note{color:#888}.ui-connectedGithub{line-height:23px;white-space:nowrap}.ui-connectedGithub a.file-path{color:#888;padding-left:22px;text-decoration:none}.ui-connectedGithub a.file-path:active,.ui-connectedGithub a.file-path:hover{color:#888;text-decoration:underline}.ui-connectedGithub .fa{font-size:20px}.ui-published-note .fa{font-size:20px;vertical-align:top}.unselectable{-webkit-user-select:none;-o-user-select:none;user-select:none}.selectable{-webkit-user-select:text;-o-user-select:text;user-select:text}.inline-spoiler-section{cursor:pointer}.inline-spoiler-section .spoiler-text{background-color:#333;border-radius:2px}.inline-spoiler-section .spoiler-text>*{opacity:0}.inline-spoiler-section .spoiler-img{filter:blur(10px)}.inline-spoiler-section.raw{background-color:#333;border-radius:2px}.inline-spoiler-section.raw>*{opacity:0}.inline-spoiler-section.unveil{cursor:auto}.inline-spoiler-section.unveil .spoiler-text{background-color:#3333331a}.inline-spoiler-section.unveil .spoiler-text>*{opacity:1}.inline-spoiler-section.unveil .spoiler-img{filter:none}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{color:#222;position:relative;z-index:1}.markdown-body.slides:before{background-color:currentColor;bottom:0;box-shadow:0 0 0 50vw;content:"";display:block;left:0;position:absolute;right:0;top:0;z-index:-1}.markdown-body.slides section[data-markdown]{background-color:#fff;margin-bottom:1.5em;position:relative;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{left:1em;max-height:100%;overflow:hidden;position:absolute;right:1em;top:50%;transform:translateY(-50%)}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{border:3px solid #777;content:"";height:1.5em;position:absolute;right:1em;top:-1.5em}.site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,sans-serif}html[lang^=ja] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif}html[lang=zh-tw] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}html[lang^=ja] body{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif}html[lang=zh-tw] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}abbr[data-original-title],abbr[title]{cursor:help}body.modal-open{overflow-y:auto;padding-right:0!important}svg{text-shadow:none}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="true"><h1 id="Assignment-3--MongoDB" data-id="Assignment-3--MongoDB"><a class="anchor hidden-xs" href="#Assignment-3--MongoDB" title="Assignment-3--MongoDB"><span class="octicon octicon-link"></span></a><span>Assignment 3 : MongoDB</span></h1><p><strong><span>Course:</span></strong><span> Big Data - IU S23</span><br>
+<strong><span>Author:</span></strong><span> Firas Jolha</span></p><h1 id="Dataset" data-id="Dataset"><a class="anchor hidden-xs" href="#Dataset" title="Dataset"><span class="octicon octicon-link"></span></a><span>Dataset</span></h1><ul>
+<li><a href="https://disk.yandex.com/d/1KAE4C7xns3OhA" target="_blank" rel="noopener"><span>JIRA Dataset</span></a><span> (~2GB)</span></li>
+<li><a href="https://raw.githubusercontent.com/firas-jolha/BigData-IU-S23/main/projects.csv" target="_blank" rel="noopener"><span>projects DataFrame</span></a></li>
+</ul><h1 id="Report-format" data-id="Report-format"><a class="anchor hidden-xs" href="#Report-format" title="Report-format"><span class="octicon octicon-link"></span></a><span>Report format</span></h1><ul>
+<li><a href="https://docs.google.com/document/d/15A2DKg_fLEDBck5-lFKrshuA1-pTIzxQJ4-9QY-zAOA/edit?usp=sharing" target="_blank" rel="noopener"><span>https://docs.google.com/document/d/15A2DKg_fLEDBck5-lFKrshuA1-pTIzxQJ4-9QY-zAOA/edit?usp=sharing</span></a></li>
+</ul><h1 id="Agenda" data-id="Agenda"><a class="anchor hidden-xs" href="#Agenda" title="Agenda"><span class="octicon octicon-link"></span></a><span>Agenda</span></h1><p><span class="toc"><ul>
+<li><a href="#Assignment-3--MongoDB" title="Assignment 3 : MongoDB">Assignment 3 : MongoDB</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Report-format" title="Report format">Report format</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Description" title="Description">Description</a></li>
+<li><a href="#Install-MongoDB-Server-amp-Compass" title="Install MongoDB Server &amp; Compass">Install MongoDB Server &amp; Compass</a><ul>
+<li><a href="#Install-MongoDB-Server" title="Install MongoDB Server">Install MongoDB Server</a></li>
+<li><a href="#Install-MongoDB-Compass" title="Install MongoDB Compass">Install MongoDB Compass</a></li>
+<li><a href="#Download-MongoDB-Command-Line-Database-Tools" title="Download MongoDB Command Line Database Tools">Download MongoDB Command Line Database Tools</a></li>
+</ul>
+</li>
+<li><a href="#Import-the-database-dump" title="Import the database dump">Import the database dump</a></li>
+<li><a href="#Demo-on-MongoDB-Compass" title="Demo on MongoDB Compass">Demo on MongoDB Compass</a></li>
+<li><a href="#Database-Description" title="Database Description">Database Description</a></li>
+<li><a href="#Instructions" title="Instructions">Instructions</a></li>
+<li><a href="#Exercises-on-MongoDB" title="Exercises on MongoDB">Exercises on MongoDB</a></li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</span></p><h1 id="Prerequisites" data-id="Prerequisites"><a class="anchor hidden-xs" href="#Prerequisites" title="Prerequisites"><span class="octicon octicon-link"></span></a><span>Prerequisites</span></h1><ul>
+<li><span>PC (4GB RAM, ~10GB Disk)</span></li>
+</ul><h1 id="Description" data-id="Description"><a class="anchor hidden-xs" href="#Description" title="Description"><span class="octicon octicon-link"></span></a><span>Description</span></h1><p><span>This assignment will be dedicated to practise on working with MongoDB Compass and MongoDB server for storing and retrieving data. You have to work on Jira dataset collected from </span><em><span>Apache Jira server</span></em><span> via an open source tool called </span><a href="https://github.com/AuthEceSoftEng/jira-apache-downloader" target="_blank" rel="noopener"><span>apache-jira-downloader</span></a><span>. Jira is an issue tracking tool developed by Atlassian, which is an Australian Company. Jira is used to track mostly bug related issues in software projects and also to provide a collaboration platform for developers. Jira provides similar functionality to Gihtub. The developers can create projects, add issues to projects, add comments to issues, generate events, and generate worklogs.</span></p><p><img src="https://i.imgur.com/3tmylTM.png" alt="" loading="lazy"></p><p><span>The database includes 1,013,964 Jira issues belong to 147,610 users who added 4,639,882 comments. The dataset contains information about 656 projects, 414,893 worklogs and 7,503,864 events.</span></p><div class="alert alert-danger">
+<p><strong><span>Important Note:</span></strong><span> In this assignment, you are required to retrive and analyze data considering an additional variable </span><strong><span>sid</span></strong><span>.</span></p>
+<ol>
+<li><span>You need to know your serial number (</span><strong><span>sid</span></strong><span>) from the list published by the TA.</span></li>
+<li><span>Your slice of projects data is </span><strong><span>projects[sid-1::50]</span></strong><br>
+<span>For example, for sid=10, your slice is projects[9::50]. You will work only on 13 projects.</span></li>
+</ol>
+<pre><code class="python hljs"><span class="hljs-meta">&gt;&gt;&gt; </span>ps[<span class="hljs-number">9</span>::<span class="hljs-number">50</span>]
+      project_name
+index
+<span class="hljs-number">9</span>       PRIMITIVES
+<span class="hljs-number">59</span>          THRIFT
+<span class="hljs-number">109</span>         TOBAGO
+<span class="hljs-number">159</span>       MRELEASE
+<span class="hljs-number">209</span>          TATPI
+<span class="hljs-number">259</span>         SENTRY
+<span class="hljs-number">309</span>        RAMPART
+<span class="hljs-number">359</span>        STREAMS
+<span class="hljs-number">409</span>        PARQUET
+<span class="hljs-number">459</span>         MJDEPS
+<span class="hljs-number">509</span>       ACCUMULO
+<span class="hljs-number">559</span>         HADOOP
+<span class="hljs-number">609</span>             IO
+</code></pre>
+<p><span>You can get your slice of projects by running the python code:</span></p>
+<pre><code class="python hljs">sid = &lt;your_sid&gt;
+df = pd.read_csv(<span class="hljs-string">"projects.csv"</span>)
+projects = df[sid-<span class="hljs-number">1</span>::<span class="hljs-number">50</span>][<span class="hljs-string">'project_name'</span>].values.tolist()
+<span class="hljs-built_in">print</span>(projects)
+</code></pre>
+<ol start="3">
+<li><span>You have to work only on the issues, comments, events, users and worklogs of your slice of projects. After loading the full data to the database, you have to delete all other documents which do not belong to your slice of projects. For instance, you can remove the documents from the collection </span><code>issues</code><span> as follows:</span></li>
+</ol>
+<pre><code class="wrap powershell hljs">db.issues.remove({ 
+project_name : { 
+    <span class="hljs-variable">$nin:</span> [<span class="hljs-string">'PRIMITIVES'</span>, <span class="hljs-string">'THRIFT'</span>, <span class="hljs-string">'TOBAGO'</span>, <span class="hljs-string">'MRELEASE'</span>, <span class="hljs-string">'TATPI'</span>, <span class="hljs-string">'SENTRY'</span>, <span class="hljs-string">'RAMPART'</span>, <span class="hljs-string">'STREAMS'</span>, <span class="hljs-string">'PARQUET'</span>, <span class="hljs-string">'MJDEPS'</span>, <span class="hljs-string">'ACCUMULO'</span>, <span class="hljs-string">'HADOOP'</span>, <span class="hljs-string">'IO'</span>]
+    }
+})
+</code></pre>
+<!-- 4. Or you can keep them but for every query you need to firstly filter results for your slice of projects then write your query. -->
+<ol start="5">
+<li><span>For users collection, keep only users who participated in one of your slice of projects at least. your slice of projects. Notice that they can also participate in other projects.</span></li>
+<li><span>Do not query, for projects out of your slice. Otherwise, your work will be penalized.</span></li>
+</ol>
+</div><h1 id="Install-MongoDB-Server-amp-Compass" data-id="Install-MongoDB-Server-amp-Compass"><a class="anchor hidden-xs" href="#Install-MongoDB-Server-amp-Compass" title="Install-MongoDB-Server-amp-Compass"><span class="octicon octicon-link"></span></a><span>Install MongoDB Server &amp; Compass</span></h1><p><span>In this assignment, you will practice on using MonogDB Compass to easily access your database, run queries, or monitor the performance of query execution. You need to install the following tools:</span></p><div class="alert alert-success">
+<p><strong><span>Exercises on MongoDB</span></strong></p>
+<ol>
+<li><strong><span>[1 points]</span></strong><span> Download and Install MongoDB Community Server.</span></li>
+<li><strong><span>[3 points]</span></strong><span> Download and Install MongoDB Compass.</span></li>
+<li><strong><span>[1 points]</span></strong><span> Download MongoDB Command Line Database Tools.</span></li>
+</ol>
+</div><h2 id="Install-MongoDB-Server" data-id="Install-MongoDB-Server"><a class="anchor hidden-xs" href="#Install-MongoDB-Server" title="Install-MongoDB-Server"><span class="octicon octicon-link"></span></a><span>Install MongoDB Server</span></h2><p><span>You can download the latest version of this server from the </span><a href="https://www.mongodb.com/try/download/community" target="_blank" rel="noopener"><span>official website</span></a><span>. You can install either the community or the enterprise version. This server does not have a GUI and we will use Compass for that purpose.</span></p><p><img src="https://i.imgur.com/uicNOiA.png" alt="" loading="lazy"></p><div class="alert alert-warning">
+<p><span>While you install the server, it will ask you to install Compass too. If you select that option or you have Compass installed then you can skip the step </span><code>Install MongoDB Compass</code><span>  and go to the step </span><code>Download MongoDB Command Line Database Tools</code><span>.</span></p>
+</div><h2 id="Install-MongoDB-Compass" data-id="Install-MongoDB-Compass"><a class="anchor hidden-xs" href="#Install-MongoDB-Compass" title="Install-MongoDB-Compass"><span class="octicon octicon-link"></span></a><span>Install MongoDB Compass</span></h2><p><span>You can install the latest version of this tool from the </span><a href="https://www.mongodb.com/try/download/compass" target="_blank" rel="noopener"><span>official webiste</span></a><span>. This tool is shipped separately from the server and you just need to run the server in order to connect to the database. Compass uses the default port </span><code>27017</code><span> for connecting to MongoDB service, so you need to make sure that the service is running. As shown below, click on </span><code>Connect</code><span> to connect to the service.</span><br>
+<img src="https://i.imgur.com/IhToXaK.png" alt="" loading="lazy"></p><p><span>If the connection is successful, you should get a list of avilable databases as shown below.</span></p><center>
+<img src="https://i.imgur.com/TSu8oes.png" width="350">
+<p>Databases in MongoDB Compass
+</p>
+</center><h2 id="Download-MongoDB-Command-Line-Database-Tools" data-id="Download-MongoDB-Command-Line-Database-Tools"><a class="anchor hidden-xs" href="#Download-MongoDB-Command-Line-Database-Tools" title="Download-MongoDB-Command-Line-Database-Tools"><span class="octicon octicon-link"></span></a><span>Download MongoDB Command Line Database Tools</span></h2><p><span>MongoDB provides tools for managing and maintaing the database instances and these tools are provided as CLI database tools. You need to download these tools from the </span><a href="https://www.mongodb.com/try/download/shell" target="_blank" rel="noopener"><span>official website</span></a><span>.</span></p><p><img src="https://i.imgur.com/dSYOb6Q.png" alt="" loading="lazy"></p><p><span>We will use the tool </span><code>mongorestore</code><span> to restore the database from dump files. You can also use other tools to import, export and dump the databases.</span></p><h1 id="Import-the-database-dump" data-id="Import-the-database-dump"><a class="anchor hidden-xs" href="#Import-the-database-dump" title="Import-the-database-dump"><span class="octicon octicon-link"></span></a><span>Import the database dump</span></h1><p><span>The dataset in this assignment is a dump of MongoDB database, called </span><code>jira</code><span>. You need to download the database dump file from the attached link, then restore it. You can restore </span><code>jira</code><span> database as follows:</span></p><div class="alert alert-success">
+<p><strong><span>Exercises on MongoDB</span></strong></p>
+<ol>
+<li><span>Download the zipped folder.</span></li>
+<li><span>Unzip it.</span></li>
+<li><span>Copy the files to some folder like </span><code>~/jira</code><span> on your local machine.</span></li>
+<li><span>Check that the service is running. In Linux, check that </span><em><span>mongod</span></em><span> is running by executing </span><code>systemctl status mongod.service</code><span> on the shell. In Windows, you need to go to </span><code>services. msc</code><span> and check that </span><code>MongoDB Database Server (MongoDB)</code><span> service is running.</span></li>
+<li><span>Go to the directory where you downloaded mongodb database tools and access the directory </span><code>bin</code><span>. You can add the path to </span><code>PATH</code><span> environment variable or run the tool from there.</span></li>
+<li><strong><span>[15 points]</span></strong><span> Open a shell or terminal on your machine and run the command </span><code>mongorestore --gzip --db jira ~/jira</code><span>. The dump is stored as  compressed collections. If the database exists before, then drop it by adding the option </span><code>--drop</code><span>. </span><code>~/jira</code><span> is the directory where you have </span><code>*.bson.gz</code><span> and </span><code>*.json.gz</code><span> dump files. Screenshot the command and the output and add it to the report before Task 1.</span></li>
+</ol>
+</div><div class="alert alert-warning">
+<p><span>Restoring </span><code>jira</code><span> database needs some time ~5-10 minutes, so wait till you restore all data and indexes from dump files.</span></p>
+</div><p><img src="https://i.imgur.com/OufwJ9t.png" alt="" loading="lazy"></p><h1 id="Demo-on-MongoDB-Compass" data-id="Demo-on-MongoDB-Compass"><a class="anchor hidden-xs" href="#Demo-on-MongoDB-Compass" title="Demo-on-MongoDB-Compass"><span class="octicon octicon-link"></span></a><span>Demo on MongoDB Compass</span></h1><p><span>After you restore the database dump as described in the previous section, you would get the database </span><code>jira</code><span> presented in Compass. If you do not see it, just reload the data as shown below. The default port used for MongoDB is 27017, and you can access it in MongoDB Compass via </span><a href="http://localhost:27017" target="_blank" rel="noopener"><span>http://localhost:27017</span></a><span>.</span></p><center>
+<img src="https://i.imgur.com/FTOz8F1.png" width="200">
+<p>Databases in MongoDB Compass
+</p>
+</center><p><span>Click on the </span><code>jira</code><span> database to go to the </span><em><span>Collections</span></em><span> window where you can see its collections.</span><br>
+<img src="https://i.imgur.com/uKZyvtT.png" alt="" loading="lazy"></p><p><span>You can click on any collection to see its documents. For example, if we click on </span><code>users</code><span> collection, we would go to the following window.</span></p><p><img src="https://i.imgur.com/ZGA4iHX.png" alt="" loading="lazy"></p><p><span>This </span><em><span>Documents</span></em><span> window has multiple tabs for different purposes. You can also open mutiple </span><em><span>Documents</span></em><span> windows for different collections. For example, I opened two windows for collections </span><code>users</code><span> and </span><code>projects</code><span> as shown below.</span><br>
+<img src="https://i.imgur.com/tnS45vm.png" alt="" loading="lazy"></p><p><em><span>Documents</span></em><span> window, consists of </span><code>Documents</code><span> tab where you can perform </span><code>find</code><span> operations on the documents in the collection, </span><code>Aggregations</code><span> tab where you can create your aggregation pipelines, </span><code>Schema</code><span> where you can gain exploratory information about the data, </span><code>Explain Plan</code><span> where you can see the execution plan of the query and track its performance, </span><code>Indexes</code><span> where you can manage the indexes for document fields, </span><code>Validation</code><span> where you can add validation rules to your documents. The most important tabs for now are </span><code>Documents</code><span> and </span><code>Aggregations</code><span> tabs.</span></p><p><strong><span>Example:</span></strong><br>
+<img src="https://i.imgur.com/T01gI7t.png" alt="" loading="lazy"></p><center>
+    <p>retrieve all projects whose names start with the letter 'A'
+</p>
+</center><p><img src="https://i.imgur.com/gsyOZHM.png" alt="" loading="lazy"></p><center>
+    <p>retrieve all projects whose names start with the letter 'A' and project/display only their description
+</p>
+</center><div class="alert alert-warning">
+<p><span>_id is used as a unique identifier of the documents and it is projected by default. To disable it, you need to explicitly remove it from projection as shown below.</span><br>
+<img src="https://i.imgur.com/qHvtJoF.png" alt="" loading="lazy"></p>
+</div><div class="alert alert-info">
+<p><span>To display the previous fields, you just need to click on </span><code>More Options</code><span> button.</span></p>
+<center>
+<img src="https://i.imgur.com/k3Nu7of.png" width="300">
+<p>More Options in Documents tab
+</p>
+</center>
+<!-- ![]() -->
+</div><p><code>Aggregations</code><span> tab allows you to build aggregation pipelines and run them against the collection. In the following figure, you can see that the pipeline is empty and does not have any stages.</span></p><p><img src="https://i.imgur.com/mW9UvNf.png" alt="" loading="lazy"></p><p><span>As you can see, there are buttons for saving pipelines, creating new pipelines and adding stages. For example, when you create a new pipeline, do not forget to save the previous one since it will be deleted.</span></p><center>
+<img src="https://i.imgur.com/TVcVV39.png" width="400">
+<p>More Options in Documents tab
+</p>
+</center><p><strong><span>Aggregation Pipeline Example 1:</span></strong><br>
+<span>I will show below the pipeline I created on </span><code>comments</code><span> collection. The pipeline consists of 4 stages </span><code>($match, $group, $match, $sort)</code><span>.</span><br>
+<img src="https://i.imgur.com/OBEkzzy.png" alt="" loading="lazy"></p><p><img src="https://i.imgur.com/w9GxiGa.png" alt="" loading="lazy"><br>
+<img src="https://i.imgur.com/7IY16iM.png" alt="" loading="lazy"></p><p><span>The query here is to retrieve the total number of comments added before 2011 with respect to each project and comment ids end with letter ‘E’ and sorted by the total number of comments in descending order. An optimization for this pipeline is to perform the second </span><code>$match</code><span> stage before the stage </span><code>$group</code><span> or merge both </span><code>$match</code><span> stages. You can return to the manual of MongoDB for learning more about aggregation pipelines. You can find the manual in </span><code>References</code><span> section of this tutorial.</span></p><div class="alert alert-warning">
+<p><span>You can still work with MongoDB shell </span><code>mongosh</code><span> directly on Compass by opening the embedded shell from the bottom toolbar.</span></p>
+<p><img src="https://i.imgur.com/jTFrIhC.png" alt="" loading="lazy"></p>
+</div><p><strong><span>Aggregation Pipeline Example 2:</span></strong><br>
+<span>You can join two collections in MongoDB via </span><code>$lookup</code><span> stage.</span></p><p><img src="https://i.imgur.com/Vu4rVyg.png" alt="" loading="lazy"></p><center>
+<p> Retrieve the comments of issues
+</p>
+</center><p><span>As you can see, we used the stage </span><code>$lookup</code><span> by setting </span><code>from</code><span> to the foreign collection </span><code>comments</code><span> linked to the current collection </span><code>issues</code><span>, </span><code>localfield</code><span> to the local field in </span><code>issues</code><span> collection, </span><code>foreignField</code><span> to the foreign field for </span><code>comments</code><span> collection, and </span><code>as</code><span> to the name of the new field to be added as the result of the join.</span></p><p><strong><span>Aggregation Pipeline Example 3:</span></strong><br>
+<span>You can search for text in some fields of the documents via using the operator </span><code>$text</code><span> in case of </span><code>find</code><span> operation and the stage </span><code>$text</code><span> in case of aggregation pipelines (</span><code>aggregate</code><span> operation).</span></p><div class="alert alert-danger">
+<p><span>Before using </span><code>$text</code><span>, you need to create </span><strong><span>text index</span></strong><span> for the fields where the text search will be performed. For example, we want to do text search on the field </span><code>description</code><span> in </span><code>projects</code><span> collection. You can create the index as follows. On MongoDB Compass, select </span><code>projects</code><span> collection, then go to </span><code>Indexes</code><span> tab and create an index.</span></p>
+<!-- ![]() -->
+<center>
+<img src="https://i.imgur.com/heAHOxv.png" width="600">
+<p>:Create a text index on MongoDB Compass:
+</p>
+</center>
+<!-- ![]() -->
+<!-- <center>
+<p> 
+</p>
+</center> -->
+<p><span>Then select the field </span><code>description</code><span> as shown below.</span></p>
+<!-- ![]() -->
+<!-- ![]() -->
+<!-- ![]() -->
+<center>
+<img src="https://i.imgur.com/XKJRz6W.png" width="400">
+<p>:Create a text index for project name in projects collection:
+</p>
+</center>
+<!-- ![]() -->
+<!-- <center>
+<p> 
+</p>
+</center> -->
+<p><span>This operation may take some time (do not click on other collections since the operation could be aborted), so you need to wait until the index is created. A collection can only have </span><strong><span>one text search index</span></strong><span>, but that index can cover multiple fields.</span></p>
+</div><p><span>After creating the index, you can search for word </span><code>Google</code><span> in </span><code>description</code><span> field of the projects by running the following </span><code>find</code><span> operation.</span><br>
+<img src="https://i.imgur.com/pdhQB1u.png" alt="" loading="lazy"></p><h1 id="Database-Description" data-id="Database-Description"><a class="anchor hidden-xs" href="#Database-Description" title="Database-Description"><span class="octicon octicon-link"></span></a><span>Database Description</span></h1><p><span>The dumped database consists of 6 collections and for each collection you need to download two files </span><code>*.bson.gz</code><span> and the metadata </span><code>*.json.gz</code><span>. In total, you will download 12 files. We explain in this section, each of the collections of the database </span><code>jira</code><span>.</span></p><p><strong><span>1. Users collection</span></strong><br>
+<span>This collection stores information about the Jira user. We present below a sample document from this collection. The main fields are the </span><code>_id</code><span> as a unique identifier of the user, </span><code>active</code><span> the status of the user, </span><code>displayName</code><span> the display name of the user, </span><code>name</code><span> the user name of the user, </span><code>projectname</code><span> the project names where the user participated and also other fields.</span></p><p><img src="https://i.imgur.com/dT0pLW9.png" alt="" loading="lazy"></p><p><strong><span>2. Projects collection</span></strong><br>
+<span>Jira projects consist of a collection of issues. The projects are created by leads. We present below a sample document from this collection. The main fields are the </span><code>_id</code><span> as a unique identifier of the project, </span><code>archived</code><span> whether the project is active or archived, </span><code>assigneeType</code><span> the status of the project whether it is assigned to some users, </span><code>components</code><span> the components of the project, </span><code>description</code><span> the description of the project, </span><code>expand</code><span> to include additional information in the response, </span><code>id</code><span> as the id of the project, </span><code>issueTypes</code><span> the issue types in this project, </span><code>lead</code><span> as the lead user in the project, </span><code>projectname</code><span> as the name of the project, </span><code>roles</code><span> as the roles of users in the project, </span><code>versions</code><span> the project versions as an array.</span><br>
+<img src="https://i.imgur.com/hjfHxhd.png" alt="" loading="lazy"></p><p><strong><span>3. Issues collection</span></strong><br>
+<span>This collection provides information about the Jira issues. We present below a sample document from this collection. The main fields are the </span><code>_id</code><span> as a unique identifier of the issue, </span><code>created</code><span> as the datetime when the issue created, </span><code>creator</code><span> as the user who created the issue, </span><code>description</code><span> as the issue description, </span><code>issuetype</code><span> as a document which contains information about the type of the issue and additional description of the type, </span><code>labels</code><span> as flags/labels given to the issues, </span><code>lastpubliccommentdate</code><span> the datetime of the last comment on the issue, </span><code>priority</code><span> as a document which provides info about the priority of the issue, </span><code>projectname</code><span> which specifies which project the issue belongs to, </span><code>status</code><span> as a document to give info whether the issue is open or closed, </span><code>updated</code><span> as the last datetime the issue has been updated, </span><code>versions</code><span> as an array of versions of the issue, </span><code>votes</code><span> which gives info about the user reactions on the issue.</span></p><p><img src="https://i.imgur.com/Ab6zwbL.png" alt="" loading="lazy"></p><p><strong><span>4. Comments collection</span></strong></p><p><span>This collection stores information about the user comments to the open issues. We present below a sample document from this collection. The main fields are the </span><code>_id</code><span> as a unique identifier of the issue, </span><code>author</code><span> as the user who added the comment, </span><code>body</code><span> as the comment content, </span><code>created</code><span> as the datetime when the comment is added, </span><code>issue</code><span> is the issue that the comment belongs to, </span><code>projectname</code><span> which specifies which project the comment belongs to, </span><code>updated</code><span> as the last datetime the comment has been updated.</span></p><p><img src="https://i.imgur.com/KHzNnAI.png" alt="" loading="lazy"></p><p><strong><span>5. Events collection</span></strong><br>
+<span>Jira uses an event-listener mechanism to alert the system that something has happened, and to perform appropriate action (e.g. send an email notification) based on the event that has occurred. Every issue operation within Jira is associated with a particular event - e.g. the Issue Created event is fired when an issue has been created.</span></p><p><span>This collection stores information about the Jira events. We present below a sample document from this collection. The main fields are the </span><code>_id</code><span> as a unique identifier of the issue, </span><code>author</code><span> as the user who triggered the event, </span><code>created</code><span> as the datetime when the event is added, </span><code>issue</code><span> is the issue that the event belongs to (there could be multiple events for the same issue), </span><code>projectname</code><span> which specifies which project the event belongs to.</span></p><p><img src="https://i.imgur.com/UEvaFEt.png" alt="" loading="lazy"></p><p><strong><span>6. Worklogs collection</span></strong></p><p><span>Issue worklogs provides a way to track the time each use spent on each issue at each project. This collection stores information about the Jira issue worklogs. We present below a sample document from this collection. The main fields are the </span><code>_id</code><span> as a unique identifier of the issue, </span><code>author</code><span> as the user who generated the worklog, </span><code>created</code><span> as the datetime when the event is added, </span><code>issue</code><span> is the issue that the worklog belongs to (there could be multiple worklogs for the same issue), </span><code>projectname</code><span> which specifies which project the event belongs to, </span><code>started</code><span> specifies the datetime when the worklog has been created, </span><code>updated</code><span> specifies the last datetime when the worklog has been updated, </span><code>timeSpent</code><span> as the time spent working on the issue as days (#d), hours (#h), or minutes (#m or #), </span><code>timeSpentSeconds</code><span> as the time spent working on the issue in seconds (</span><code>timeSpentSeconds</code><span> and </span><code>timeSpent</code><span> refer to the same time span but each has a different representation).</span></p><p><img src="https://i.imgur.com/tlqjTuO.png" alt="" loading="lazy"></p><h1 id="Instructions" data-id="Instructions"><a class="anchor hidden-xs" href="#Instructions" title="Instructions"><span class="octicon octicon-link"></span></a><span>Instructions</span></h1><p><span>In this assignment, you need to write MongoDB shell queries, and add them to the report. You also need to take a screenshot of the query output and add it to the report.</span></p><div class="alert alert-danger">
+<p><strong><span>Important note:</span></strong><span> When you take the screenshot of the query output, the screenshot should be </span><strong><span>FULL-SCREEN</span></strong><span> and it includes the query too. Screenshots of only part of the screen will not be considered.</span></p>
+<p><span>The output could be large, and it is ok to capture only the first shown rows.</span></p>
+</div><p><span>In </span><em><span>Documents</span></em><span> tab, you can export the query by clicking on the button </span><code>&lt;/&gt;</code><span> which will allow you to export your MongoDB shell code and also Python code if needed as shown below.</span><br>
+<img src="https://i.imgur.com/zZMnoJL.png" alt="" loading="lazy"></p><p><span>In the export pop-up window, copy the query in MongoDB shell code and put it in the report.</span><br>
+<img src="https://i.imgur.com/JFyomJA.png" alt="" loading="lazy"></p><p><span>If you want to submit Python code, then you have to check both </span><code>Include import statements</code><span> and </span><code>Include Driver syntax</code><span>. Copy the query in Python code and put it in the report.</span></p><div class="alert alert-danger">
+<p><span>Do not forget that you need to add the collection name on which the query will be executed in the </span><code>Collection name</code><span> column in each task of the report as shown below.</span><br>
+<img src="https://i.imgur.com/MXcBBMv.png" alt="" loading="lazy"></p>
+<p><span>If your answer to the task consists of multiple queries then you can create multiple rows and add them below the first query in the order one after another.</span></p>
+<p><span>If you did not submit the Collection name, the query cannot be evaluated.</span></p>
+</div><center>
+<img src="https://i.imgur.com/vZqF0EU.png" width="500">
+<p>Exporting results
+</p>
+</center><p><span>For aggregation pipelines, you need to go to </span><code>Aggregations</code><span> tab and export them by clicking on </span><code>&lt;/&gt; export to language</code><span> button as shown below. Copy the code in MongoDB Shell and add it to the report. Do not forget to specify the collection name on which you executed the query.</span><br>
+<img src="https://i.imgur.com/utzK0CO.png" alt="" loading="lazy"></p><p><span>For MonogDB queries, you can write them in Compass (then export as MongoDB shell code) or you can use </span><code>pymongo</code><span> library and write Python scripts (or maybe export them to Python but you have to check both </span><code>Include import statements</code><span> and </span><code>Include Driver syntax</code><span>).</span></p><p><span>You need to submit only the report. The total points for this assignment is 100.</span></p><h1 id="Exercises-on-MongoDB" data-id="Exercises-on-MongoDB"><a class="anchor hidden-xs" href="#Exercises-on-MongoDB" title="Exercises-on-MongoDB"><span class="octicon octicon-link"></span></a><span>Exercises on MongoDB</span></h1><div class="alert alert-success">
+<ol>
+<li><strong><span>[3 point]</span></strong><span> What are the projects whose </span><code>projectname</code><span> start with letter </span><code>A</code><span>? Retrieve the project name, roles, and description.</span></li>
+<li><strong><span>[4 point]</span></strong><span> Who are the leads of projects having more than 5 issue types? Retrieve the lead name, displayname and status (active or not).</span></li>
+<li><strong><span>[6 points]</span></strong><span> Search for </span><code>Bug</code><span> issues which are still open or not updated in the last 5 years.</span></li>
+<li><strong><span>[4 points]</span></strong><span> </span><s><span>How many users participated in each project?</span></s></li>
+<li><strong><span>[7 points]</span></strong><span> How many events created for each issue in each project? The output should have the project name, the issue id and the event count.</span></li>
+<li><strong><span>[5 points]</span></strong><span> What is the average time spent for each project by each user?</span></li>
+<li><strong><span>[8 points]</span></strong><span> Who are the top 2 active users who have spent most of the time in Jira?</span></li>
+<li><strong><span>[8 points]</span></strong><span> </span><s><span>Who are the top 5 </span><em><span>dirty</span></em><span> users who create most of the issues and add less number of comments?</span></s></li>
+<li><strong><span>[7 points]</span></strong><span> Who are the top-5 </span><em><span>veteran</span></em><span> users who add most comments and pariticpate in most projects?</span></li>
+<li><strong><span>[6 points]</span></strong><span> Which events created by top-5 </span><em><span>veteran</span></em><span> users?</span></li>
+<li><strong><span>[8 points]</span></strong><span> Which are dead projects that do not have any issues created in the last 5 years?</span></li>
+<li><strong><span>[4 points]</span></strong><span> Search in the description of projects for the keywords </span><code>Apache</code><span> and </span><code>Google</code><span> and return them? (In this query you need to use the operator </span><code>$text</code><span>)</span></li>
+<li><strong><span>[10 points]</span></strong><span> Search for words whose stem is the word </span><code>game</code><span> in the description of the issues and return them? In the output you should return the documents whose text includes the word stem </span><code>game</code><span>, sorted by text score (a relevance score for each document that specifies how well a document matches the query).</span></li>
+</ol>
+</div><div class="alert alert-danger">
+<p><span>Note: for query 13, you should use </span><code>$text</code><span> operator/stage and you may get problems when creating the text index since there is </span><code>language</code><span> field which has meaning for </span><code>$text</code><span> operator. You can remove the field </span><code>language</code><span> from all documents in </span><code>issues</code><span> collection, then try to create the index again OR try to resolve the issue with another method. You can also use embedded MongoDB shell if you want to specify additional parameters.</span></p>
+</div><h1 id="References" data-id="References"><a class="anchor hidden-xs" href="#References" title="References"><span class="octicon octicon-link"></span></a><span>References</span></h1><ul>
+<li><a href="https://doi.org/10.5281/zenodo.5665896" target="_blank" rel="noopener"><img src="https://zenodo.org/badge/DOI/10.5281/zenodo.5665896.svg" alt="DOI" loading="lazy"></a></li>
+<li><a href="https://www.mongodb.com/docs/manual/tutorial/getting-started/" target="_blank" rel="noopener"><span>MongoDB Manual</span></a></li>
+<li><a href="https://www.mongodb.com/docs/manual/core/aggregation-pipeline/" target="_blank" rel="noopener"><span>MongoDB Aggregation Pipelines</span></a></li>
+<li><a href="https://www.mongodb.com/docs/compass/current/" target="_blank" rel="noopener"><span>MongoDB Compass</span></a></li>
+</ul></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li><a href="#Assignment-3--MongoDB" title="Assignment 3 : MongoDB">Assignment 3 : MongoDB</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Report-format" title="Report format">Report format</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Description" title="Description">Description</a></li>
+<li><a href="#Install-MongoDB-Server-amp-Compass" title="Install MongoDB Server &amp; Compass">Install MongoDB Server &amp; Compass</a><ul class="nav">
+<li><a href="#Install-MongoDB-Server" title="Install MongoDB Server">Install MongoDB Server</a></li>
+<li><a href="#Install-MongoDB-Compass" title="Install MongoDB Compass">Install MongoDB Compass</a></li>
+<li><a href="#Download-MongoDB-Command-Line-Database-Tools" title="Download MongoDB Command Line Database Tools">Download MongoDB Command Line Database Tools</a></li>
+</ul>
+</li>
+<li><a href="#Import-the-database-dump" title="Import the database dump">Import the database dump</a></li>
+<li><a href="#Demo-on-MongoDB-Compass" title="Demo on MongoDB Compass">Demo on MongoDB Compass</a></li>
+<li><a href="#Database-Description" title="Database Description">Database Description</a></li>
+<li><a href="#Instructions" title="Instructions">Instructions</a></li>
+<li><a href="#Exercises-on-MongoDB" title="Exercises on MongoDB">Exercises on MongoDB</a></li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;" null null>
+        <div class="toc"><ul class="nav">
+<li><a href="#Assignment-3--MongoDB" title="Assignment 3 : MongoDB">Assignment 3 : MongoDB</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Report-format" title="Report format">Report format</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Description" title="Description">Description</a></li>
+<li><a href="#Install-MongoDB-Server-amp-Compass" title="Install MongoDB Server &amp; Compass">Install MongoDB Server &amp; Compass</a><ul class="nav">
+<li><a href="#Install-MongoDB-Server" title="Install MongoDB Server">Install MongoDB Server</a></li>
+<li><a href="#Install-MongoDB-Compass" title="Install MongoDB Compass">Install MongoDB Compass</a></li>
+<li><a href="#Download-MongoDB-Command-Line-Database-Tools" title="Download MongoDB Command Line Database Tools">Download MongoDB Command Line Database Tools</a></li>
+</ul>
+</li>
+<li><a href="#Import-the-database-dump" title="Import the database dump">Import the database dump</a></li>
+<li><a href="#Demo-on-MongoDB-Compass" title="Demo on MongoDB Compass">Demo on MongoDB Compass</a></li>
+<li><a href="#Database-Description" title="Database Description">Database Description</a></li>
+<li><a href="#Instructions" title="Instructions">Instructions</a></li>
+<li><a href="#Exercises-on-MongoDB" title="Exercises on MongoDB">Exercises on MongoDB</a></li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu"><a class="expand-toggle" href="#">Expand all</a><a class="back-to-top" href="#">Back to top</a><a class="go-to-bottom" href="#">Go to bottom</a></div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>

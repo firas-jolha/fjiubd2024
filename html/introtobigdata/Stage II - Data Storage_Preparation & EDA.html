@@ -1,0 +1,429 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Stage II - Data Storage/Preparation &amp; EDA - HackMD
+    </title>
+    <link rel="icon" type="image/png" href="https://hackmd.io/favicon.png">
+    <link rel="apple-touch-icon" href="https://hackmd.io/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/css/bootstrap.min.css" integrity="sha256-916EbMg70RQy9LHiGkXzG8hSg9EdNy97GazNG/aiY1w=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css" integrity="sha256-eZrrJcwDc/3uDhsdt61sL2oOBY362qM3lon1gyExkL0=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/octicons/3.5.0/octicons.min.css" integrity="sha256-QiWfLIsCT02Sdwkogf6YMiQlj4NE84MKkzEMkZnMGdg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Roboto:300,300i,400,400i,500,500i|Source+Code+Pro:300,400,500|Source+Sans+Pro:300,300i,400,400i,600,600i|Source+Serif+Pro&subset=latin-ext);.hljs{background:#fff;color:#333;display:block;overflow-x:auto;padding:.5em}.hljs-comment,.hljs-meta{color:#969896}.hljs-emphasis,.hljs-quote,.hljs-string,.hljs-strong,.hljs-template-variable,.hljs-variable{color:#df5000}.hljs-keyword,.hljs-selector-tag,.hljs-type{color:#a71d5d}.hljs-attribute,.hljs-bullet,.hljs-literal,.hljs-number,.hljs-symbol{color:#0086b3}.hljs-built_in,.hljs-builtin-name{color:#005cc5}.hljs-name,.hljs-section{color:#63a35c}.hljs-tag{color:#333}.hljs-attr,.hljs-selector-attr,.hljs-selector-class,.hljs-selector-id,.hljs-selector-pseudo,.hljs-title{color:#795da3}.hljs-addition{background-color:#eaffea;color:#55a532}.hljs-deletion{background-color:#ffecec;color:#bd2c00}.hljs-link{text-decoration:underline}.markdown-body{word-wrap:break-word;font-size:16px;line-height:1.5}.markdown-body:after,.markdown-body:before{content:"";display:table}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;line-height:1;margin-left:-20px;padding-right:4px}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-bottom:16px;margin-top:0}.markdown-body hr{background-color:#e7e7e7;border:0;height:.25em;margin:24px 0;padding:0}.markdown-body blockquote{border-left:.25em solid #ddd;color:#777;font-size:16px;padding:0 1em}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body kbd,.popover kbd{background-color:#fcfcfc;border:1px solid;border-color:#ccc #ccc #bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb;color:#555;display:inline-block;font-size:11px;line-height:10px;padding:3px 5px;vertical-align:middle}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{font-weight:600;line-height:1.25;margin-bottom:16px;margin-top:24px}.markdown-body h1 .octicon-link,.markdown-body h2 .octicon-link,.markdown-body h3 .octicon-link,.markdown-body h4 .octicon-link,.markdown-body h5 .octicon-link,.markdown-body h6 .octicon-link{color:#000;vertical-align:middle;visibility:hidden}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .octicon-link,.markdown-body h2:hover .anchor .octicon-link,.markdown-body h3:hover .anchor .octicon-link,.markdown-body h4:hover .anchor .octicon-link,.markdown-body h5:hover .anchor .octicon-link,.markdown-body h6:hover .anchor .octicon-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{border-bottom:1px solid #eee;padding-bottom:.3em}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{color:#777;font-size:.85em}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{list-style-type:none;padding:0}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-bottom:0;margin-top:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{padding-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{font-size:1em;font-style:italic;font-weight:700;margin-top:16px;padding:0}.markdown-body dl dd{margin-bottom:16px;padding:0 16px}.markdown-body table{display:block;overflow:auto;width:100%;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{border:1px solid #ddd;padding:6px 13px}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.markdown-body img{background-color:#fff;box-sizing:initial;max-width:100%}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{background-color:initial;max-width:none;vertical-align:text-top}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{border:1px solid #ddd;display:block;float:left;margin:13px 0 0;overflow:hidden;padding:7px;width:auto}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{clear:both;color:#333;display:block;padding:5px 0 0}.markdown-body span.align-center{clear:both;display:block;overflow:hidden}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{clear:both;display:block;overflow:hidden}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{background-color:#0000000a;border-radius:3px;font-size:85%;margin:0;padding:.2em 0}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{content:"\00a0";letter-spacing:-.2em}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{background:#0000;border:0;font-size:100%;margin:0;padding:0;white-space:pre;word-break:normal}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{background-color:#f7f7f7;border-radius:3px;font-size:85%;line-height:1.45;overflow:auto;padding:16px}.markdown-body pre code,.markdown-body pre tt{word-wrap:normal;background-color:initial;border:0;display:inline;line-height:inherit;margin:0;max-width:auto;overflow:visible;padding:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{font-size:12px;line-height:1;overflow:hidden;padding:5px;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{background:#fff;border:0;padding:10px 8px 9px;text-align:right}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{background:#f8f8f8;border-top:0;font-weight:700}.news .alert .markdown-body blockquote{border:0;padding:0 0 0 40px}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{cursor:default!important;float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle}.markdown-body{max-width:758px;overflow:visible!important;padding-bottom:40px;padding-top:40px;position:relative}.markdown-body .emoji{vertical-align:top}.markdown-body pre{border:inherit!important}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{border-right:3px solid #6ce26c!important;box-sizing:initial;color:#afafaf!important;cursor:default;display:inline-block;min-width:20px;padding:0 8px 0 0;position:relative;text-align:right;z-index:4}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-bottom:none;border-left:none;border-top:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-collapse:inherit!important;border-spacing:0}.markdown-body code[data-gist-id]{background:none;padding:0}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{margin-bottom:unset;overflow:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p:last-child{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{background-color:inherit;border-radius:0;overflow:visible;text-align:center;white-space:inherit}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{height:100%;max-width:100%}.markdown-body pre>code.wrap{word-wrap:break-word;white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap}.markdown-body .alert>p:last-child,.markdown-body .alert>ul:last-child{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body .mark,.markdown-body mark{background-color:#fff1a7}.vimeo,.youtube{background-color:#000;background-position:50%;background-repeat:no-repeat;background-size:contain;cursor:pointer;display:table;overflow:hidden;text-align:center}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{object-fit:contain;width:100%;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{height:100%;left:0;position:absolute;top:0;width:100%}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{color:#fff;height:auto;left:50%;opacity:.3;position:absolute;top:50%;transform:translate(-50%,-50%);transition:opacity .2s;width:auto;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{bottom:0;height:100%;left:0;position:absolute;right:0;top:0;width:100%}.figma{display:table;padding-bottom:56.25%;position:relative;width:100%}.figma iframe{border:1px solid #eee;bottom:0;height:100%;left:0;position:absolute;right:0;top:0;width:100%}.markmap-container{height:300px}.markmap-container>svg{height:100%;width:100%}.MJX_Assistive_MathML{display:none}#MathJax_Message{z-index:1000!important}.ui-infobar{color:#777;margin:25px auto -25px;max-width:760px;position:relative;z-index:2}.toc .invisable-node{list-style-type:none}.ui-toc{bottom:20px;position:fixed;z-index:998}.ui-toc.both-mode{margin-left:8px}.ui-toc.both-mode .ui-toc-label{border-bottom-left-radius:0;border-top-left-radius:0;height:40px;padding:10px 4px}.ui-toc-label{background-color:#e6e6e6;border:none;color:#868686;transition:opacity .2s}.ui-toc .open .ui-toc-label{color:#fff;opacity:1;transition:opacity .2s}.ui-toc-label:focus{background-color:#ccc;color:#000;opacity:.3}.ui-toc-label:hover{background-color:#ccc;opacity:1;transition:opacity .2s}.ui-toc-dropdown{margin-bottom:20px;margin-top:20px;max-height:70vh;max-width:45vw;overflow:auto;padding-left:10px;padding-right:10px;text-align:inherit;width:25vw}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{letter-spacing:.0029em;padding-right:0}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{color:#767676;display:block;font-size:13px;font-weight:500;padding:4px 20px}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{background-color:initial;border-left:1px solid #000;color:#000;padding-left:19px;text-decoration:none}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{border-left:none;border-right:1px solid #000;padding-right:19px}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{background-color:initial;border-left:2px solid #000;color:#000;font-weight:700;padding-left:18px}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{border-left:none;border-right:2px solid #000;padding-right:18px}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{font-size:12px;font-weight:400;padding-bottom:1px;padding-left:30px;padding-top:1px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{font-size:12px;font-weight:400;padding-bottom:1px;padding-left:40px;padding-top:1px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{font-weight:500;padding-left:28px}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{font-weight:500;padding-left:38px}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang^=ja] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang=zh-tw] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang=zh-cn] .markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html .markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html .markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html .markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Helvetica Neue,Helvetica,Roboto,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}html[lang^=ja] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ Ｐゴシック,sans-serif}html[lang=zh-tw] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html[lang=zh-cn] .ui-toc-dropdown{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}html .ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,ＭＳ Ｐゴシック,sans-serif}html .ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,微軟正黑UI,sans-serif}html .ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,微软雅黑UI,sans-serif}.ui-affix-toc{max-height:70vh;max-width:15vw;overflow:auto;position:fixed;top:0}.back-to-top,.expand-toggle,.go-to-bottom{color:#999;display:block;font-size:12px;font-weight:500;margin-left:10px;margin-top:10px;padding:4px 10px}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{background-position:50%;background-repeat:no-repeat;background-size:cover;border-radius:50%;display:block;height:20px;margin-bottom:2px;margin-right:5px;margin-top:2px;width:20px}.ui-user-icon.small{display:inline-block;height:18px;margin:0 0 .2em;vertical-align:middle;width:18px}.ui-infobar>small>span{line-height:22px}.ui-infobar>small .dropdown{display:inline-block}.ui-infobar>small .dropdown a:focus,.ui-infobar>small .dropdown a:hover{text-decoration:none}.ui-more-info{color:#888;cursor:pointer;vertical-align:middle}.ui-more-info .fa{font-size:16px}.ui-connectedGithub,.ui-published-note{color:#888}.ui-connectedGithub{line-height:23px;white-space:nowrap}.ui-connectedGithub a.file-path{color:#888;padding-left:22px;text-decoration:none}.ui-connectedGithub a.file-path:active,.ui-connectedGithub a.file-path:hover{color:#888;text-decoration:underline}.ui-connectedGithub .fa{font-size:20px}.ui-published-note .fa{font-size:20px;vertical-align:top}.unselectable{-webkit-user-select:none;-o-user-select:none;user-select:none}.selectable{-webkit-user-select:text;-o-user-select:text;user-select:text}.inline-spoiler-section{cursor:pointer}.inline-spoiler-section .spoiler-text{background-color:#333;border-radius:2px}.inline-spoiler-section .spoiler-text>*{opacity:0}.inline-spoiler-section .spoiler-img{filter:blur(10px)}.inline-spoiler-section.raw{background-color:#333;border-radius:2px}.inline-spoiler-section.raw>*{opacity:0}.inline-spoiler-section.unveil{cursor:auto}.inline-spoiler-section.unveil .spoiler-text{background-color:#3333331a}.inline-spoiler-section.unveil .spoiler-text>*{opacity:1}.inline-spoiler-section.unveil .spoiler-img{filter:none}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{color:#222;position:relative;z-index:1}.markdown-body.slides:before{background-color:currentColor;bottom:0;box-shadow:0 0 0 50vw;content:"";display:block;left:0;position:absolute;right:0;top:0;z-index:-1}.markdown-body.slides section[data-markdown]{background-color:#fff;margin-bottom:1.5em;position:relative;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{left:1em;max-height:100%;overflow:hidden;position:absolute;right:1em;top:50%;transform:translateY(-50%)}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{border:3px solid #777;content:"";height:1.5em;position:absolute;right:1em;top:-1.5em}.site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,sans-serif}html[lang^=ja] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif}html[lang=zh-tw] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] .site-ui-font{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}html[lang^=ja] body{font-family:Source Sans Pro,Helvetica,Arial,Hiragino Kaku Gothic Pro,ヒラギノ角ゴ Pro W3,Osaka,Meiryo,メイリオ,MS Gothic,ＭＳ ゴシック,sans-serif}html[lang=zh-tw] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang TC,Microsoft JhengHei,微軟正黑,sans-serif}html[lang=zh-cn] body{font-family:Source Sans Pro,Helvetica,Arial,PingFang SC,Microsoft YaHei,微软雅黑,sans-serif}abbr[title]{border-bottom:none;text-decoration:underline;-webkit-text-decoration:underline dotted;text-decoration:underline dotted}abbr[data-original-title],abbr[title]{cursor:help}body.modal-open{overflow-y:auto;padding-right:0!important}svg{text-shadow:none}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid comment-enabled" data-hard-breaks="false"><h1 id="Stage-II---Data-StoragePreparation-amp-EDA" data-id="Stage-II---Data-StoragePreparation-amp-EDA"><a class="anchor hidden-xs" href="#Stage-II---Data-StoragePreparation-amp-EDA" title="Stage-II---Data-StoragePreparation-amp-EDA"><span class="octicon octicon-link"></span></a><span>Stage II - Data Storage/Preparation &amp; EDA</span></h1><p><strong><span>Course:</span></strong><span> Big Data - IU S23</span><br>
+<strong><span>Author:</span></strong><span> Firas Jolha</span></p><h1 id="Dataset" data-id="Dataset"><a class="anchor hidden-xs" href="#Dataset" title="Dataset"><span class="octicon octicon-link"></span></a><span>Dataset</span></h1><ul>
+<li><a href="http://www.cems.uwe.ac.uk/~pchatter/resources/html/emp_dept_data+schema.html" target="_blank" rel="noopener"><span>Some emps and depts</span></a></li>
+</ul><h1 id="Agenda" data-id="Agenda"><a class="anchor hidden-xs" href="#Agenda" title="Agenda"><span class="octicon octicon-link"></span></a><span>Agenda</span></h1><p><span class="toc"><ul>
+<li><a href="#Stage-II---Data-StoragePreparation-amp-EDA" title="Stage II - Data Storage/Preparation &amp; EDA">Stage II - Data Storage/Preparation &amp; EDA</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Description" title="Description">Description</a></li>
+<li><a href="#Dataset-Description" title="Dataset Description">Dataset Description</a></li>
+<li><a href="#Preparation" title="Preparation">Preparation</a></li>
+<li><a href="#Build-Hive-Tables" title="Build Hive Tables">Build Hive Tables</a></li>
+<li><a href="#Hive-Optimizations" title="Hive Optimizations">Hive Optimizations</a><ul>
+<li><a href="#Partitioning-in-Hive" title="Partitioning in Hive">Partitioning in Hive</a><ul>
+<li><a href="#Create-a-Partitioned-Table-in-Hive" title="Create a Partitioned Table in Hive">Create a Partitioned Table in Hive</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Bucketing-in-Hive" title="Bucketing in Hive">Bucketing in Hive</a></li>
+<li><a href="#Apache-Tez" title="Apache Tez">Apache Tez</a></li>
+<li><a href="#Perform-Exploratory-Data-Analysis-EDA" title="Perform Exploratory Data Analysis (EDA)">Perform Exploratory Data Analysis (EDA)</a></li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</span></p><h1 id="Prerequisites" data-id="Prerequisites"><a class="anchor hidden-xs" href="#Prerequisites" title="Prerequisites"><span class="octicon octicon-link"></span></a><span>Prerequisites</span></h1><ul>
+<li><span>HDP 2.6.5 is installed</span></li>
+<li><span>Stage I is done</span>
+<ul>
+<li><span>The relational database is built.</span></li>
+<li><span>The database is imported to HDFS via Sqoop.</span></li>
+<li><span>The tables are stored in HDFS as Avro data files and compressed in Snappy.</span></li>
+<li><span>The schema of AVRO files are stored in HDFS.</span></li>
+</ul>
+</li>
+</ul><h1 id="Objectives" data-id="Objectives"><a class="anchor hidden-xs" href="#Objectives" title="Objectives"><span class="octicon octicon-link"></span></a><span>Objectives</span></h1><ul>
+<li><span>Create Hive tables</span></li>
+<li><span>Perform EDA</span></li>
+</ul><h1 id="Description" data-id="Description"><a class="anchor hidden-xs" href="#Description" title="Description"><span class="octicon octicon-link"></span></a><span>Description</span></h1><p><span>Apache Hive is a distributed, fault-tolerant data warehouse system that enables analytics at a massive scale. It is an Apache Hadoop ecosystem component developed by Facebook to query the data stored in Hadoop Distributed File System (HDFS). Here, HDFS is the data storage layer of Hadoop that at very high level divides the data into small blocks (default 128 MB) and stores these blocks on different nodes. It is also termed Data Warehousing framework of Hadoop and provides various analytical features, such as windowing and partitioning</span></p><p><span>Hive is built on top of Apache Hadoop. As a result, Hive is closely integrated with Hadoop, and is designed to work quickly on petabytes of data. What makes Hive unique is the ability to query large datasets, leveraging Apache Tez or MapReduce, with a SQL-like interface called HiveQL.</span></p><p><span>Traditional relational databases are designed for interactive queries on small to medium datasets and do not process huge datasets well. Hive instead uses batch processing so that it works quickly across a very large distributed database.</span></p><p><span>Hive transforms HiveQL queries into MapReduce or Tez jobs that run on Apache Hadoop’s distributed job scheduling framework, Yet Another Resource Negotiator (YARN). It queries data stored in a distributed storage solution, like the Hadoop Distributed File System (HDFS) or Amazon S3.</span></p><p><img src="https://i.imgur.com/MO4LLOM.png" alt="" loading="lazy"></p><p><span>Hive stores the metadata of the databases and tables in a </span><strong><span>metastore</span></strong><span>, which is a database (for instance, MySQL) or file backed store that enables easy data abstraction and discovery. Hive includes </span><strong><span>HCatalog</span></strong><span>, which is a table and storage management layer that reads data from the Hive metastore to facilitate seamless integration between Hive, and MapReduce. By using the metastore, HCatalog allows MapReduce to use the same data structures as Hive, so that the metadata doesn’t have to be redefined for each engine. Custom applications or third party integrations can use </span><strong><span>WebHCat</span></strong><span>, which is a RESTful API for HCatalog to access and reuse Hive metadata.</span></p><p><span>Data in Apache Hive can be categorized into Table, Partition, and Bucket. The table in Hive is logically made up of the data being stored. It is of two types such as an internal or managed table and external table.</span></p><p><span>In this stage, we will create external Hive tables for the PostgreSQL tables imported by Sqoop. Then, we will perform Exploratory Data Analysis using HiveQL.</span></p><h1 id="Dataset-Description" data-id="Dataset-Description"><a class="anchor hidden-xs" href="#Dataset-Description" title="Dataset-Description"><span class="octicon octicon-link"></span></a><span>Dataset Description</span></h1><p><span>The dataset is about the departments and employees in a company as well as their salary categories. It consists of two </span><code>.csv</code><span> files.</span></p><details>
+<p><span>The file </span><code>emps.csv</code><span> contains information about employees:</span></p>
+<ul>
+<li data-startline-back="81" data-endline-back="81"><span>EMPNO is a unique employee number; it is the primary key of the employee table.</span></li>
+<li data-startline-back="82" data-endline-back="82"><span>ENAME stores the employee’s name.</span></li>
+<li data-startline-back="83" data-endline-back="83"><span>The JOB attribute stores the name of the job the employee does.</span></li>
+<li data-startline-back="84" data-endline-back="84"><span>The MGR attribute contains the employee number of the employee who manages that employee. If the employee has no manager, then the MGR column for that employee is left set to null.</span></li>
+<li data-startline-back="85" data-endline-back="85"><span>The HIREDATE column stores the date on which the employee joined the company.</span></li>
+<li data-startline-back="86" data-endline-back="86"><span>The SAL column contains the details of employee salaries.</span></li>
+<li data-startline-back="87" data-endline-back="87"><span>The COMM attribute stores values of commission paid to employees. Not all employees receive commission, in which case the COMM field is set to null.</span></li>
+<li data-startline-back="88" data-endline-back="89"><span>The DEPTNO column stores the department number of the department in which each employee is based. This data item acts a foreign key, linking the employee details stored in the EMP table with the details of departments in which employees work, which are stored in the DEPT table.</span></li>
+</ul>
+<p><span>The file </span><code>depts.csv</code><span> contains information about departments:</span></p>
+<ul>
+<li data-startline-back="91" data-endline-back="91"><span>DEPTNO: The primary key containing the department numbers used to identify each department.</span></li>
+<li data-startline-back="92" data-endline-back="92"><span>DNAME: The name of each department.</span></li>
+<li data-startline-back="93" data-endline-back="94"><span>LOC: The location where each department is based.</span></li>
+</ul>
+<!-- The file `salgrade.csv` contains information about salary categories:
+- GRADE: A numeric identifier for the category of the salary.
+- LOSAL: The lowest salary in this category.
+- HISAL: The highest salary in this category.
+ -->
+<div class="alert alert-info">
+<p><span>I created these </span><code>csv</code><span> files from the tables provided in the link.</span></p>
+</div>
+</details><h1 id="Preparation" data-id="Preparation"><a class="anchor hidden-xs" href="#Preparation" title="Preparation"><span class="octicon octicon-link"></span></a><span>Preparation</span></h1><p><span>Before starting with Hive tables, make sure that you imported the PostgreSQL tables to HDFS (</span><code>/project</code><span> warehouse folder, for instance) as AVRO files and compressed using Snoppy HDFS codec. You also need to move the schemas </span><code>.avsc</code><span> to HDFS to a folder, for instance </span><code>/project/avsc</code><span>, as follows (assuming that </span><code>.avsc</code><span> files are in the current working directory in the local file system):</span></p><pre><code class="wrap powershell hljs">hdfs dfs <span class="hljs-literal">-put</span> *.avsc /project/avsc
+</code></pre><h1 id="Build-Hive-Tables" data-id="Build-Hive-Tables"><a class="anchor hidden-xs" href="#Build-Hive-Tables" title="Build-Hive-Tables"><span class="octicon octicon-link"></span></a><span>Build Hive Tables</span></h1><p><span>In this step, you need to write HiveQL statements for creating the Hive database (let’s call it  </span><code>projectdb</code><span>) and importing the Snappy-compressed </span><code>avro</code><span> data files. You can test the statements in an interactive mode but for project purposes, you need to write them in </span><code>.hql</code><span> file and then you execute the statements by passing the file via command </span><code>hive -f &lt;file.hql&gt;</code><span> which should replicate all the steps. Here, we will store the HiveQL statements in a file </span><code>db.hql</code><span>.</span></p><p><span>I will give here some of the basic steps to create the Hive database </span><code>projectdb</code><span> but you need to extend it for your project purposes.</span></p><ol>
+<li><span>Drop the databases if exist.</span></li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-keyword">DROP</span> DATABASE IF <span class="hljs-keyword">EXISTS</span> projectdb;
+</code></pre><div class="alert alert-danger">
+<p><span>If you got the following error</span></p>
+<pre><code class="wrap hljs">FAILED: Execution Error, return code 1 from org.apache.hadoop.hive.ql.exec.DDLTask. InvalidOperationException(message:Database projectdb is not empty. One or more tables exist.)
+</code></pre>
+<p><span>Then add CASCADE as follows:</span></p>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">DROP</span> DATABASE IF <span class="hljs-keyword">EXISTS</span> projectdb CASCADE;
+</code></pre>
+</div><ol start="2">
+<li><span>Create a database </span><code>projectdb</code></li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-keyword">CREATE</span> DATABASE projectdb;
+USE projectdb;
+</code></pre><div class="alert alert-info">
+<p><span>Since the data files are compressed in Snappy codec, we need to set some configurations for loading the data from HDFS as follows:</span></p>
+<pre><code class="sql hljs"><span class="hljs-keyword">SET</span> mapreduce.map.output.compress <span class="hljs-operator">=</span> <span class="hljs-literal">true</span>;
+<span class="hljs-keyword">SET</span> mapreduce.map.output.compress.codec <span class="hljs-operator">=</span> org.apache.hadoop.io.compress.SnappyCodec;
+</code></pre>
+</div><ol start="3">
+<li><span>Create tables </span><code>employees</code><span> and </span><code>departments</code></li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-comment">-- Create tables</span>
+
+<span class="hljs-comment">-- emps table</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> employees STORED <span class="hljs-keyword">AS</span> AVRO LOCATION <span class="hljs-string">'/project/emps'</span> TBLPROPERTIES (<span class="hljs-string">'avro.schema.url'</span><span class="hljs-operator">=</span><span class="hljs-string">'/project/avsc/emps.avsc'</span>);
+
+
+<span class="hljs-comment">-- dept table</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> departments STORED <span class="hljs-keyword">AS</span> AVRO LOCATION <span class="hljs-string">'/project/depts'</span> TBLPROPERTIES (<span class="hljs-string">'avro.schema.url'</span><span class="hljs-operator">=</span><span class="hljs-string">'/project/avsc/depts.avsc'</span>);
+
+</code></pre><ol start="4">
+<li><span>We can check that tables are created by running some </span><code>select</code><span> queries.</span></li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-comment">-- For checking the content of tables</span>
+<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> employees;
+<span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> departments;
+</code></pre><p><span>You can run the file </span><code>db.hql</code><span> via the command </span><code>hive -f</code><span> as follows:</span></p><pre><code class="wrap console hljs">hive <span class="hljs-operator">-</span>f db.hql
+</code></pre><p><span>The query results will be redirected to </span><code>hive_results.txt</code><span> file. You canuse the redirection operator to store the output in a file as follows:</span></p><pre><code class="wrap shell hljs">hive -f db.hql &gt; hive_results.txt
+</code></pre><p><img src="https://i.imgur.com/5Dltira.png" alt="" loading="lazy"></p><div class="alert alert-warning">
+<p><strong><span>Note:</span></strong><span> Do not forget, that the file </span><code>.hql</code><span> should not return errors when you run it for the second time, so you should clear/drop the objects before creating new database objects.</span></p>
+<!-- This is true for all scripts in the pipeline. -->
+</div><div class="alert alert-info">
+<p><strong><span>Info:</span></strong><span> If the ssh connection drops quickly, you can increase the interval of seconds to keep alive by passing the option </span><code>ServerAliveInterval</code><span> a value like 60 seconds. This option sets a timeout interval 60 seconds after which if no data has been received from the server, </span><code>ssh</code><span> will send a message through the encrypted channel to request a response from the server.</span></p>
+<pre><code class="wrap powershell hljs">ssh <span class="hljs-literal">-o</span> ServerAliveInterval=<span class="hljs-number">60</span> <span class="hljs-literal">-p</span> <span class="hljs-number">2222</span> root@localhost
+</code></pre>
+</div><h1 id="Hive-Optimizations" data-id="Hive-Optimizations"><a class="anchor hidden-xs" href="#Hive-Optimizations" title="Hive-Optimizations"><span class="octicon octicon-link"></span></a><span>Hive Optimizations</span></h1><p><span>Data in Apache Hive can be categorized into </span><strong><span>Table</span></strong><span>, </span><strong><span>Partition</span></strong><span>, and </span><strong><span>Bucket</span></strong><span>. The table in Hive is logically made up of the data being stored.</span></p><p><strong><span>Partitioning</span></strong><span> – Apache Hive organizes tables into </span><strong><span>partitions</span></strong><span> for grouping same type of data together based on a column or partition key. Each table in the hive can have one or more partition keys to identify a particular partition. Using partition we can </span><em><span>make it faster to run queries on slices of the data</span></em><span>.</span></p><p><strong><span>Bucketing</span></strong><span> – Hive Tables or partitions are subdivided into </span><strong><span>buckets</span></strong><span> based on the hash function of a column in the table to give extra structure to the data that may be used for </span><em><span>more efficient queries</span></em><span>.</span></p><h2 id="Partitioning-in-Hive" data-id="Partitioning-in-Hive"><a class="anchor hidden-xs" href="#Partitioning-in-Hive" title="Partitioning-in-Hive"><span class="octicon octicon-link"></span></a><span>Partitioning in Hive</span></h2><p><span>Partitioning in Hive is used to increase query performance. Hive is very good tool to perform queries on large datasets, especially datasets that require a scan of an entire table. Generally, users are aware of their data domain, and in most of cases they want to search for a particular type of data. For such cases, a simple query takes large time to return the result because it requires the </span><strong><span>scan of the entire dataset</span></strong><span>. The concept of partitioning can be used to reduce the cost of querying the data. Partitions are like horizontal slices of data that allows the large sets of data as more manageable chunks. Table partitioning means dividing the table data into some parts based on the unique values of particular columns (for example, city and country) and segregating the input data records into different files or directories.</span></p><p><span>Partitioning in Hive is done using the </span><strong><span>PARTITIONED BY</span></strong><span> clause in the create table statement of table. Table can have one or more partitions. A table can be partitioned on the basis of one or more columns. The columns on which partitioning is done cannot be included in the data of table. For example, you have the four fields id, name, age, and city, and you want to partition the data on the basis of the city field, then the city field will not be included in the columns of create table statement and will only be used in the PARTITIONED BY clause. You can still query the data in a normal way using where city=xyz. The result will be retrieved from the respective partition because data is stored in a different directory with the city name for each city.</span></p><p><span>There are two main types of table in Hive—</span><strong><span>Managed</span></strong><span> tables and </span><strong><span>External</span></strong><span> tables. Both tables support partitioning mechanism.</span></p><p><span>Partitioning can be done in one of the following two ways:</span></p><ul>
+<li><span>Static partitioning</span></li>
+<li><span>Dynamic partitioning</span></li>
+</ul><p><span>In static partitioning, you need to manually insert data in different partitions of a table. Let’s use a table</span>
+<span>partitioned on the departments of the company. For each department, you need to manually insert the data from the data source to a department partition in the partitioned table. So for 4 depts, you need to write the equivalent number of Hive queries to insert data in each partition.</span></p><p><span>By default, Hive does not allow dynamic partitioning. We need to enable it by setting the following</span>
+<span>properties on the CLI or in </span><code>hive-site.xml</code><span>.</span></p><pre><code class="wrap powershell hljs"><span class="hljs-built_in">SET</span> hive.exec.dynamic.partition = true;
+<span class="hljs-built_in">SET</span> hive.exec.dynamic.partition.mode = nonstrict;
+</code></pre><h3 id="Create-a-Partitioned-Table-in-Hive" data-id="Create-a-Partitioned-Table-in-Hive"><a class="anchor hidden-xs" href="#Create-a-Partitioned-Table-in-Hive" title="Create-a-Partitioned-Table-in-Hive"><span class="octicon octicon-link"></span></a><span>Create a Partitioned Table in Hive</span></h3><p><span>For example, we have a table </span><code>Employees</code><span> containing the employee information of some company like </span><code>empno, ename, job, deptno,</code><span>…etc. Now, if we want to perform partitioning on the basis of </span><code>deptno</code><span> column. Then the information of all the employees belonging to a particular department will be stored together in a separate partition. Physically, a partition in Hive is nothing but just a sub-directory in the table directory. For example, we have data for three departments in our </span><code>Employees</code><span> table – Accounting (deptno=10), Reseaerch (deptno=20), Operations (deptno=40) and Sales (deptno=30). Thus we will have four partitions in total for each of the departments as we can see clearly in diagram below.</span></p><p><img src="https://i.imgur.com/5HW3D7w.png" alt="" loading="lazy"></p><p><span>We can run the following statement to create the partitioned table.</span></p><pre><code class="wrap sql hljs"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> employees_part(empno <span class="hljs-type">int</span>, ename <span class="hljs-type">varchar</span>(<span class="hljs-number">50</span>), job <span class="hljs-type">varchar</span>(<span class="hljs-number">50</span>), mgr <span class="hljs-type">int</span>, hiredate <span class="hljs-type">date</span>, sal <span class="hljs-type">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>), comm <span class="hljs-type">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)) PARTITIONED <span class="hljs-keyword">BY</span> (deptno <span class="hljs-type">int</span>) STORED <span class="hljs-keyword">AS</span> AVRO LOCATION <span class="hljs-string">'/projectdata'</span> TBLPROPERTIES (<span class="hljs-string">'AVRO.COMPRESS'</span><span class="hljs-operator">=</span><span class="hljs-string">'SNAPPY'</span>);
+
+
+<span class="hljs-comment">-- insert some data </span>
+<span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> employees_part <span class="hljs-keyword">values</span> (<span class="hljs-number">7369</span>,<span class="hljs-string">'SMITH'</span>,<span class="hljs-string">'CLERK'</span>,<span class="hljs-number">7902</span>,<span class="hljs-string">'93/6/13'</span>,<span class="hljs-number">800</span>,<span class="hljs-number">0.00</span>,<span class="hljs-number">20</span>);
+</code></pre><p><span>When you run the previous </span><code>insert</code><span> statement, you will get the following error. This is due to the fact that dynamic partitioning is not active.</span></p><p><img src="https://i.imgur.com/YOKBAAF.png" alt="" loading="lazy"></p><p><span>But we can insert the data as follows:</span></p><pre><code class="wrap sql hljs"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> employees_part <span class="hljs-keyword">partition</span> (deptno<span class="hljs-operator">=</span><span class="hljs-number">20</span>) <span class="hljs-keyword">values</span> (<span class="hljs-number">7369</span>,<span class="hljs-string">'SMITH'</span>,<span class="hljs-string">'CLERK'</span>,<span class="hljs-number">7902</span>,<span class="hljs-string">'93/6/13'</span>,<span class="hljs-number">800</span>,<span class="hljs-number">0.00</span>);
+</code></pre><p><span>Once dynamic partitioning is enabled, we can create partitions for all unique values for any columns, say</span>
+<code>deptno</code><span> of the </span><code>employees_part</code><span> table, as follows:</span></p><pre><code class="wrap sql hljs"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> employees_part <span class="hljs-keyword">partition</span> (deptno) <span class="hljs-keyword">values</span> (<span class="hljs-number">7369</span>,<span class="hljs-string">'SMITH'</span>,<span class="hljs-string">'CLERK'</span>,<span class="hljs-number">7902</span>,<span class="hljs-string">'93/6/13'</span>,<span class="hljs-number">800</span>,<span class="hljs-number">0.00</span>,<span class="hljs-number">20</span>);
+</code></pre><p><span>We can insert the data from our unpartitioned table.</span></p><pre><code class="wrap sql hljs"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> employees_part <span class="hljs-keyword">partition</span> (deptno) <span class="hljs-keyword">SELECT</span> <span class="hljs-operator">*</span> <span class="hljs-keyword">FROM</span> employees;
+</code></pre><p><span>For each department we will have all the data regarding that department residing in a separate sub–directory under the table directory as follows:</span></p><ul>
+<li><span>…/employees_part/deptno=10</span></li>
+<li><span>…/employees_part/deptno=20</span></li>
+<li><span>…/employees_part/deptno=30</span></li>
+<li><span>…/employees_part/deptno=40</span></li>
+</ul><p><span>For instance, the queries regarding Sales employees would only have to look through the data present in the Sales partition (deptno=30).</span></p><p><span>Therefore from above example, we can conclude that partitioning is very useful. It reduces the query latency by scanning only relevant partitioned data instead of the whole data set.</span></p><h1 id="Bucketing-in-Hive" data-id="Bucketing-in-Hive"><a class="anchor hidden-xs" href="#Bucketing-in-Hive" title="Bucketing-in-Hive"><span class="octicon octicon-link"></span></a><span>Bucketing in Hive</span></h1><p><span>In the scenario where we query on a unique values column of a dataset, partitioning is not a good fit. If we go with a partition on a column with high unique values like </span><code>ID</code><span>, it would create a large number of small datasets in HDFS and partition entries in the metastore, thus increasing the load on NameNode and the metastore service. To optimize queries on such a dataset, we group the data into a particular number of buckets and the data is divided into the maximum number of </span><strong><span>buckets</span></strong><span>.</span></p><p><span>We can create buckets on </span><code>empno</code><span> column of </span><code>employees_part</code><span> as follows:</span></p><pre><code class="wrap sql hljs">
+<span class="hljs-keyword">SET</span> hive.enforce.bucketing<span class="hljs-operator">=</span><span class="hljs-literal">true</span>;
+
+
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> employees_part(
+    empno <span class="hljs-type">int</span>, 
+    ename <span class="hljs-type">varchar</span>(<span class="hljs-number">50</span>), 
+    job <span class="hljs-type">varchar</span>(<span class="hljs-number">50</span>), 
+    mgr <span class="hljs-type">int</span>, 
+    hiredate <span class="hljs-type">bigint</span>, 
+    sal <span class="hljs-type">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>), 
+    comm <span class="hljs-type">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)
+) 
+    PARTITIONED <span class="hljs-keyword">BY</span> (deptno <span class="hljs-type">int</span>) 
+    CLUSTERED <span class="hljs-keyword">BY</span> (empno) <span class="hljs-keyword">into</span> <span class="hljs-number">50</span> buckets
+    STORED <span class="hljs-keyword">AS</span> AVRO LOCATION <span class="hljs-string">'/projectdata'</span> 
+    TBLPROPERTIES (<span class="hljs-string">'AVRO.COMPRESS'</span><span class="hljs-operator">=</span><span class="hljs-string">'SNAPPY'</span>);
+</code></pre><p><span>Hive in Hortonworks Data Platform supports two engines for running HiveQL queries, and it can be changed from </span><em><span>Optimization configs</span></em><span> menu.</span>
+<img src="https://i.imgur.com/Udgdk5L.png" alt="" loading="lazy"></p><p><span>The default engine is Apache Tez but if it is not working for some reason, then you can use the traditional MapReduce.</span></p><h1 id="Apache-Tez" data-id="Apache-Tez"><a class="anchor hidden-xs" href="#Apache-Tez" title="Apache-Tez"><span class="octicon octicon-link"></span></a><span>Apache Tez</span></h1><p><strong><span>Tez</span></strong><span> is a new application framework built on Hadoop Yarn that can execute complex directed acyclic graphs of general data processing tasks. In many ways it can be thought of as a more flexible and powerful successor of the map-reduce framework.</span></p><p><img src="https://i.imgur.com/DwaGJd5.png" alt="" loading="lazy"></p><p><span>It generalizes map and reduce tasks by exposing interfaces for generic data processing tasks, which consist of a triplet of interfaces: input, output and processor. These tasks are the </span><strong><span>vertices</span></strong><span> in the execution graph. </span><strong><span>Edges</span></strong><span> (i.e.: data connections between tasks) are first class citizens in Tez and together with the input/output interfaces greatly increase the flexibility of how data is transferred between tasks.</span></p><p><span>Tez also greatly extends the possible ways of which individual tasks can be linked together; In fact any arbitrary DAG can be executed directly in Tez.</span></p><p><img src="https://i.imgur.com/g4W68Va.png" alt="" loading="lazy"></p><p><span>In Tez, a map-reduce job is basically a simple DAG consisting of a single map and reduce vertices connected by a “bipartite” edge (i.e.: the edge connects every map task to every reduce task). Map input and reduce outputs are HDFS inputs and outputs respectively. The map output class locally sorts and partitions the data by a certain key, while the reduce input class merge-sorts its data on the same key.</span></p><h1 id="Perform-Exploratory-Data-Analysis-EDA" data-id="Perform-Exploratory-Data-Analysis-EDA"><a class="anchor hidden-xs" href="#Perform-Exploratory-Data-Analysis-EDA" title="Perform-Exploratory-Data-Analysis-EDA"><span class="octicon octicon-link"></span></a><span>Perform Exploratory Data Analysis (EDA)</span></h1><p><strong><span>EDA</span></strong><span> is a data analytics process to understand the data in depth and learn the different data characteristics, often with visual means. This allows you to get a better feel of your data and find useful patterns in it.</span></p><p><span>We will use HiveQL to analyze the data. We need to provide insights about the data. Here I will give some examples:</span></p><ol>
+<li><span>Show the distribution of employees in departments.</span></li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-keyword">INSERT</span> OVERWRITE <span class="hljs-keyword">LOCAL</span> DIRECTORY <span class="hljs-string">'/root/q1'</span>
+<span class="hljs-type">ROW</span> FORMAT DELIMITED 
+FIELDS TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">','</span>
+<span class="hljs-keyword">SELECT</span> dname, <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>) 
+<span class="hljs-keyword">FROM</span> departments <span class="hljs-keyword">AS</span> d <span class="hljs-keyword">JOIN</span> employees <span class="hljs-keyword">AS</span> e
+<span class="hljs-keyword">ON</span> d.deptno <span class="hljs-operator">=</span> e.deptno
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> dname 
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> d.dname;
+</code></pre><div class="alert alert-warning">
+<p><span>After exporting results of each query, you need to merge the parts into a single file as follows:</span></p>
+<pre><code class="wrap powershell hljs"><span class="hljs-built_in">echo</span> <span class="hljs-string">"dname,emp_count"</span> &gt; output/q1.csv
+<span class="hljs-built_in">cat</span> /root/q1/* &gt;&gt; output/q1.csv
+</code></pre>
+<p><span>The first command will add only the column names and the second command will append the data.</span></p>
+</div><ol start="2">
+<li><span>Show the distribution of employees with salaries.</span></li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-keyword">INSERT</span> OVERWRITE <span class="hljs-keyword">LOCAL</span> DIRECTORY <span class="hljs-string">'/root/q2'</span> 
+<span class="hljs-type">ROW</span> FORMAT DELIMITED 
+FIELDS TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">','</span>
+<span class="hljs-keyword">SELECT</span> sal, ename, <span class="hljs-built_in">COUNT</span>(<span class="hljs-operator">*</span>)
+<span class="hljs-keyword">FROM</span> departments <span class="hljs-keyword">AS</span> d 
+<span class="hljs-keyword">JOIN</span> employees <span class="hljs-keyword">AS</span> e <span class="hljs-keyword">ON</span> d.deptno <span class="hljs-operator">=</span> e.deptno
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> sal;
+</code></pre><ol start="3">
+<li><span>Show the manager(s) who works in each department.</span></li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-comment">-- To export the result in csv-like file</span>
+<span class="hljs-keyword">INSERT</span> OVERWRITE <span class="hljs-keyword">LOCAL</span> DIRECTORY <span class="hljs-string">'/root/q3'</span> 
+<span class="hljs-type">ROW</span> FORMAT DELIMITED 
+FIELDS TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">','</span>
+<span class="hljs-keyword">WITH</span> mgrs <span class="hljs-keyword">AS</span> 
+(
+    <span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> e2.ename <span class="hljs-keyword">AS</span> mgr_name, e2.empno <span class="hljs-keyword">AS</span> mgr_no, e2.deptno <span class="hljs-keyword">AS</span> mgr_dept
+    <span class="hljs-keyword">FROM</span> employees <span class="hljs-keyword">AS</span> e1
+    <span class="hljs-keyword">JOIN</span> employees <span class="hljs-keyword">AS</span> e2
+    <span class="hljs-keyword">ON</span> e2.empno <span class="hljs-operator">=</span> e1.mgr
+    <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> e2.ename
+)
+<span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">DISTINCT</span> dname, mgrs.mgr_name <span class="hljs-keyword">AS</span> manager 
+<span class="hljs-keyword">FROM</span> departments <span class="hljs-keyword">AS</span> d 
+<span class="hljs-keyword">JOIN</span> employees <span class="hljs-keyword">AS</span> e <span class="hljs-keyword">ON</span> d.deptno <span class="hljs-operator">=</span> e.deptno
+<span class="hljs-keyword">JOIN</span> mgrs <span class="hljs-keyword">ON</span> mgrs.mgr_dept <span class="hljs-operator">=</span> d.deptno
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> dname;
+</code></pre><ol start="4">
+<li><span>Show distribution of employees with respect to hiredate.</span></li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-keyword">INSERT</span> OVERWRITE <span class="hljs-keyword">LOCAL</span> DIRECTORY <span class="hljs-string">'/root/q4'</span> 
+<span class="hljs-type">ROW</span> FORMAT DELIMITED 
+FIELDS TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">','</span>
+<span class="hljs-keyword">SELECT</span> <span class="hljs-keyword">year</span>(hiredate) <span class="hljs-keyword">AS</span> dt, <span class="hljs-built_in">COUNT</span>(empno) <span class="hljs-keyword">AS</span> count_empno
+<span class="hljs-keyword">FROM</span> employees
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> hiredate
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> dt;
+</code></pre><ol start="5">
+<li><span>Show the min, max, average salary of emplyees in each department.</span></li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-keyword">INSERT</span> OVERWRITE <span class="hljs-keyword">LOCAL</span> DIRECTORY <span class="hljs-string">'/root/q5'</span> 
+<span class="hljs-type">ROW</span> FORMAT DELIMITED 
+FIELDS TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">','</span>
+<span class="hljs-keyword">SELECT</span> dname, <span class="hljs-built_in">MIN</span>(sal), <span class="hljs-built_in">MAX</span>(sal), <span class="hljs-built_in">AVG</span>(sal)
+<span class="hljs-keyword">FROM</span> employees e
+<span class="hljs-keyword">JOIN</span> departments d <span class="hljs-keyword">ON</span> e.deptno <span class="hljs-operator">=</span> d.deptno
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> dname
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> dname;
+</code></pre><ol start="6">
+<li><span>Show the departments which has higher rates of commission.</span></li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-keyword">INSERT</span> OVERWRITE <span class="hljs-keyword">LOCAL</span> DIRECTORY <span class="hljs-string">'/root/q6'</span> 
+<span class="hljs-type">ROW</span> FORMAT DELIMITED 
+FIELDS TERMINATED <span class="hljs-keyword">BY</span> <span class="hljs-string">','</span>
+<span class="hljs-keyword">SELECT</span> dname, <span class="hljs-built_in">SUM</span>(comm) <span class="hljs-keyword">AS</span> total_comm
+<span class="hljs-keyword">FROM</span> employees e
+<span class="hljs-keyword">JOIN</span> departments d <span class="hljs-keyword">ON</span> (e.deptno <span class="hljs-operator">=</span> d.deptno)
+<span class="hljs-keyword">WHERE</span> comm <span class="hljs-keyword">IS</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">NULL</span>
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> dname
+<span class="hljs-keyword">HAVING</span> total_comm <span class="hljs-operator">&gt;</span> <span class="hljs-number">0.0</span>
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> total_comm <span class="hljs-keyword">DESC</span>;
+</code></pre><h1 id="References" data-id="References"><a class="anchor hidden-xs" href="#References" title="References"><span class="octicon octicon-link"></span></a><span>References</span></h1><ul>
+<li><a href="https://www.cs.uct.ac.za/mit_notes/database/htmls/chp03.html" target="_blank" rel="noopener"><span>toy-dataset</span></a></li>
+<li><a href="https://www.postgresql.org/docs/current/sql-copy.html" target="_blank" rel="noopener"><span>PostgreSQL documentation</span></a></li>
+<li><a href="https://cwiki.apache.org/confluence/display/Hive/Home" target="_blank" rel="noopener"><span>Hive documentation</span></a></li>
+<li><a href="https://hortonworks.com/wp-content/uploads/2013/05/hql_cheat_sheet.pdf" target="_blank" rel="noopener"><span>HiveQL Cheat Sheet</span></a></li>
+<li><a href="https://hashdork.com/apache-hive-tutorial/" target="_blank" rel="noopener"><span>https://hashdork.com/apache-hive-tutorial/</span></a></li>
+</ul></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                
+                
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;" null null>
+        
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.1.1/jquery.min.js" integrity="sha256-hVVnYaiADRTO2PzUGmuLJr8BLUSjGIZsDYGmIJLv2b8=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.3.7/js/bootstrap.min.js" integrity="sha256-U5ZEeKfGNOja007MMD3YBI0A3OSZOQbeG6z2f2Y0hu8=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
