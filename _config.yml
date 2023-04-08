@@ -1,4 +1,6 @@
 # Theme of the website
-theme: jukyll-theme-modernist
+theme: jukyll-theme-cayman
+
+# Title of the website
 title: Big Data Course at IU 2023
 
