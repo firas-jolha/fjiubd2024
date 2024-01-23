@@ -1,0 +1,594 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Lab 1 - Installing HDP Sandbox - CodiMD
+    </title>
+    <link rel="icon" type="image/png" href="http://localhost:3000/favicon.png">
+    <link rel="apple-touch-icon" href="http://localhost:3000/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha256-H0KfTigpUV+0/5tn2HXC0CPwhhDhWgSawJdnFd0CGCo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fork-awesome/1.1.3/css/fork-awesome.min.css" integrity="sha256-ZhApazu+kejqTYhMF+1DzNKjIzP7KXu6AzyXcC1gMus=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github-gist.min.css" integrity="sha256-tAflq+ymku3Khs+I/WcAneIlafYgDiOQ9stIHH985Wo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,300italic,300|Source+Serif+Pro|Source+Code+Pro:400,300,500&subset=latin,latin-ext);.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{padding:0 1em;color:#777;border-left:.25em solid #ddd}.night .markdown-body blockquote{color:#bcbcbc}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.night .markdown-body h1,.night .markdown-body h2,.night .markdown-body h3,.night .markdown-body h4,.night .markdown-body h5,.night .markdown-body h6{color:#ddd}.markdown-body h1 .fa-link,.markdown-body h2 .fa-link,.markdown-body h3 .fa-link,.markdown-body h4 .fa-link,.markdown-body h5 .fa-link,.markdown-body h6 .fa-link{color:#000;vertical-align:middle;visibility:hidden;font-size:16px}.night .markdown-body h1 .fa-link,.night .markdown-body h2 .fa-link,.night .markdown-body h3 .fa-link,.night .markdown-body h4 .fa-link,.night .markdown-body h5 .fa-link,.night .markdown-body h6 .fa-link{color:#fff}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .fa-link,.markdown-body h2:hover .anchor .fa-link,.markdown-body h3:hover .anchor .fa-link,.markdown-body h4:hover .anchor .fa-link,.markdown-body h5:hover .anchor .fa-link,.markdown-body h6:hover .anchor .fa-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.night .markdown-body table tr{background-color:#5f5f5f}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.night .markdown-body table tr:nth-child(2n){background-color:#4f4f4f}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.night .markdown-body code,.night .markdown-body tt{color:#eee;background-color:hsla(0,0%,90.2%,.36)}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\A0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.markdown-body kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid;border-color:#ccc #ccc #bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body pre{border:inherit!important}.night .markdown-body pre{filter:invert(100%)}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-webkit-inline-flex;display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.night .markdown-body .gist table tr:nth-child(2n){background-color:#ddd}.markdown-body code[data-gist-id]{background:none;padding:0;filter:invert(100%)}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.geo,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.night .markdown-body pre.graphviz .graph>polygon{fill:#333}.night .markdown-body pre.mermaid .sectionTitle,.night .markdown-body pre.mermaid .titleText,.night .markdown-body pre.mermaid text{fill:#fff}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{max-width:100%;height:100%}.night .markdown-body .abc path{fill:#eee}.night .markdown-body .abc path.note_selected{fill:##4DD0E1}.night tspan{fill:#fefefe}.night pre rect{fill:transparent}.night pre.flow-chart path,.night pre.flow-chart rect{stroke:#fff}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body img{background-color:transparent}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;-webkit-transition:opacity .2s;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;-webkit-transition:opacity .2s;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.geo-map{width:100%;height:250px}.markmap-container{height:300px}.markmap-container>svg{width:100%;height:100%}.MJX_Assistive_MathML{display:none}.ui-infobar{position:relative;z-index:2;max-width:758px;margin-top:25px;margin-bottom:-25px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:10000}.ui-toc-label{opacity:.9;background-color:#ccc;border:none}.ui-toc-label,.ui-toc .open .ui-toc-label{-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#5f5f5f}.ui-toc-label:focus{opacity:1;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.night .ui-toc-dropdown .nav>li>a:focus,.night .ui-toc-dropdown .nav>li>a:hover{color:#fff;border-left-color:#fff}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.night .ui-toc-dropdown .nav>.active:focus>a,.night .ui-toc-dropdown .nav>.active:hover>a,.night .ui-toc-dropdown .nav>.active>a{color:#fff;border-left:2px solid #fff}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.night .ui-toc-dropdown .nav>li>a{color:#aaa}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:50px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a{padding-right:50px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:60px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a{padding-right:60px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:hover{padding-left:49px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:hover{padding-right:49px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-left:59px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-right:59px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>a{padding-left:48px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:48px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active>a{padding-left:58px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:58px}.markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,Hiragino Kaku Gothic Pro,"\30D2\30E9\30AE\30CE\89D2\30B4   Pro W3",Osaka,Meiryo,"\30E1\30A4\30EA\30AA",MS Gothic,"\FF2D\FF33   \30B4\30B7\30C3\30AF",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,"\FF2D\FF33   \FF30\30B4\30B7\30C3\30AF",sans-serif}.markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang TC,Microsoft JhengHei,"\5FAE\8EDF\6B63\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,"\5FAE\8EDF\6B63\9ED1UI",sans-serif}.markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang SC,Microsoft YaHei,"\5FAE\8F6F\96C5\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,"\5FAE\8F6F\96C5\9ED1UI",sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:rgba(0,0,0,.85)}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:contain}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}small span{line-height:22px}small .dropdown{display:inline-block}small .dropdown a:focus,small .dropdown a:hover{text-decoration:none}.unselectable{-moz-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-o-user-select:none;user-select:none}.night .navbar{background:#333;border-bottom-color:#333;color:#eee}.night .navbar a{color:#eee}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}.focus,:focus{outline:none!important}::-moz-focus-inner{border:0!important}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid" lang="en"><h1 id="Lab-1---Installing-HDP-Sandbox"><a class="anchor hidden-xs" href="#Lab-1---Installing-HDP-Sandbox" title="Lab-1---Installing-HDP-Sandbox"><i class="fa fa-link"></i></a>Lab 1 - Installing HDP Sandbox</h1><p><strong>Course:</strong> Big Data - IU S24<br>
+<strong>Author:</strong> Firas Jolha</p><h1 id="Agenda"><a class="anchor hidden-xs" href="#Agenda" title="Agenda"><i class="fa fa-link"></i></a>Agenda</h1><p></p><div class="toc"><ul>
+<li><a href="#Lab-1---Installing-HDP-Sandbox" title="Lab 1 - Installing HDP Sandbox">Lab 1 - Installing HDP Sandbox</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li><a href="#Hardware-requirements" title="Hardware requirements">Hardware requirements</a></li>
+<li><a href="#Installing-Hortonworks-Sandbox" title="Installing Hortonworks Sandbox">Installing Hortonworks Sandbox</a><ul>
+<li><a href="#A-Using-a-Hypervisor" title="A. Using a Hypervisor">A. Using a Hypervisor</a><ul>
+<li><a href="#1-Installing-a-Hypervisor" title="1. Installing a Hypervisor">1. Installing a Hypervisor</a></li>
+<li><a href="#2-Installing-HDP-Sandbox" title="2. Installing HDP Sandbox">2. Installing HDP Sandbox</a></li>
+<li><a href="#21-Downloading-the-Sandbox" title="2.1. Downloading the Sandbox">2.1. Downloading the Sandbox</a></li>
+<li><a href="#22-Installing-the-Sandbox" title="2.2. Installing the Sandbox">2.2. Installing the Sandbox</a></li>
+<li><a href="#23-Running-the-VM" title="2.3. Running the VM">2.3. Running the VM</a></li>
+</ul>
+</li>
+<li><a href="#B-Using-Docker" title="B. Using Docker">B. Using Docker</a><ul>
+<li><a href="#1-Installing-Docker-Desktop-on-Windows" title="1. Installing Docker Desktop on Windows">1. Installing Docker Desktop on Windows</a></li>
+<li><a href="#2-Installing-HDP-Sandbox1" title="2. Installing HDP Sandbox">2. Installing HDP Sandbox</a></li>
+</ul>
+</li>
+<li><a href="#Configuring-the-resources-for-Docker" title="Configuring the resources for Docker">Configuring the resources for Docker</a></li>
+<li><a href="#StoppingRestarting-the-cluster" title="Stopping/Restarting the cluster">Stopping/Restarting the cluster</a></li>
+</ul>
+</li>
+<li><a href="#Access-HDP-Sandbox-cluster" title="Access HDP Sandbox cluster">Access HDP Sandbox cluster</a><ul>
+<li><a href="#Access-via-SSH" title="Access via SSH">Access via SSH</a></li>
+</ul>
+</li>
+<li><a href="#Access-HDFS" title="Access HDFS">Access HDFS</a></li>
+<li><a href="#Transfer-data-between-HDFS-and-local-file-systems" title="Transfer data between HDFS and local file systems">Transfer data between HDFS and local file systems</a><ul>
+<li><a href="#Transfer-data-into-and-out-of-the-cluster-node" title="Transfer data into and out of the cluster node">Transfer data into and out of the cluster node</a></li>
+<li><a href="#Transfer-data-into-and-out-of-HDFS" title="Transfer data into and out of HDFS">Transfer data into and out of HDFS</a></li>
+</ul>
+</li>
+<li><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
+<li><a href="#Common-issues" title="Common issues">Common issues</a></li>
+<li><a href="#Self-check-questions" title="Self-check questions">Self-check questions</a></li>
+<li><a href="#Appendix" title="Appendix">Appendix</a><ul>
+<li><a href="#Sandbox-Version" title="Sandbox Version">Sandbox Version</a></li>
+<li><a href="#Ambari-Roles" title="Ambari Roles">Ambari Roles</a></li>
+</ul>
+</li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><p></p><h1 id="Prerequisites"><a class="anchor hidden-xs" href="#Prerequisites" title="Prerequisites"><i class="fa fa-link"></i></a>Prerequisites</h1><ul>
+<li>Familiarity with terminals, shell commands and fundamental knowledge in operating Systems (Linux)</li>
+<li>Basic knowledge in virtualization and managing virtual machines</li>
+<li>Basic knowledge in containerization and dealing with Docker images and containers</li>
+<li>Fundamental knowledge in Relational databases and DBMS</li>
+<li>Familiarity with PostgreSQL server</li>
+</ul><h1 id="Objectives"><a class="anchor hidden-xs" href="#Objectives" title="Objectives"><i class="fa fa-link"></i></a>Objectives</h1><ul>
+<li>Install a hypervisor or VM monitor such as <code>VirtualBox</code></li>
+<li>Install <code>Hortonworks Data Platform</code></li>
+<li>Access <code>Hortonworks Data Platform</code> via <code>ssh</code></li>
+<li>Access <code>HDFS</code> and learn how to transfer files</li>
+<li>Install and access <code>PostgreSQL</code> database server</li>
+</ul><h1 id="Introduction"><a class="anchor hidden-xs" href="#Introduction" title="Introduction"><i class="fa fa-link"></i></a>Introduction</h1><p>Every business is now a data business. Data is the organizations’ future and most valuable asset. The <code>Hortonworks Data Platform (HDP)</code> is a security-rich, enterprise-ready open-source <code>Hadoop</code> distribution based on a centralized architecture (YARN). <code>Hortonworks Sandbox</code> can be run as a Docker container installed on a virtual machine. <a href="https://docs.cloudera.com/HDPDocuments/HDP2/HDP-2.5.0/index.html" target="_blank" rel="noopener">HDP</a> is a complete system to handle the processing and storage of big data. It is an open architecture used to store and process complex and large-scale data. It is composed of numerous Apache Software Foundation (ASF) projects including Apache Hadoop and is built specifically to meet enterprise demands. Hortonworks was a standalone company untill 2019 when it is merged to Cloudera and now Hortonworks is a subsidiary for Cloudera, Inc.</p><center>
+<img src="https://i.imgur.com/Nel8wxT.png" width="300">
+<img src="https://i.imgur.com/d8DlPRE.png" width="300">
+<p>Hortonworks is merged to Cloudera in 2019</p>
+</center><p>At the beginning of this course, we are aiming to remind you with relational databases before dealing with big data. In practice, we will use the relational database management system PostgreSQL. Fortunately, <em>HDP</em> comes with a pre-installed PostgreSQL database server.</p><h1 id="Hardware-requirements"><a class="anchor hidden-xs" href="#Hardware-requirements" title="Hardware-requirements"><i class="fa fa-link"></i></a>Hardware requirements</h1><ul>
+<li><strong>Memory</strong>  dedicated to the cluster (Minimum: 8 GiB, <strong>Recommended: 10+ GiB</strong>). More is better.</li>
+<li><strong>CPU</strong> (Minimum: 4 Cores, <strong>Recommended: 6+ Cores</strong>)
+<ul>
+<li>Virtualization should be enabled
+<ul>
+<li>(<a href="https://www.thewindowsclub.com/check-intel-amd-processor-supports-hyper-v" target="_blank" rel="noopener">Check Virtualization on Windows</a>, On Linux: <code>lscpu</code>). Sometimes it is disabled in BIOS.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li><strong>Storage</strong>
+<ul>
+<li>25-35 GiB
+<ul>
+<li>for HDP 2.5.0</li>
+</ul>
+</li>
+<li>65-75 GiB
+<ul>
+<li>for HDP 2.6.5</li>
+</ul>
+</li>
+<li>80-100 GiB
+<ul>
+<li>for HDP 3.0.1</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><div class="alert alert-info">
+<p>HDP 2.5.0 is based on CentOS 6.8 which is EOL by 2021 and updating the packages via <code>yum</code> is kinda not possible. We recommend to install HDP 2.6.5 unless you have less resources.</p>
+</div><h1 id="Installing-Hortonworks-Sandbox"><a class="anchor hidden-xs" href="#Installing-Hortonworks-Sandbox" title="Installing-Hortonworks-Sandbox"><i class="fa fa-link"></i></a>Installing Hortonworks Sandbox</h1><p>There are two common ways to install HDP Sandbox on your PC, either by using a hypervisor such as <em>VirtualBox</em> which will pull the Docker image and run a container for your cluster or by directly using Docker where you need to manage your resources via <code>docker</code> command line <a href="https://docs.docker.com/config/containers/resource_constraints/" target="_blank" rel="noopener">options</a> in Linux or you can use WSL backend in Windows where you can configure resources via <code>.wslconfig</code> file.</p><h2 id="A-Using-a-Hypervisor"><a class="anchor hidden-xs" href="#A-Using-a-Hypervisor" title="A-Using-a-Hypervisor"><i class="fa fa-link"></i></a>A. Using a Hypervisor</h2><p>If you are not familiar with Docker, you can follow this approach where configuring the cluster resources can be done via the hypervisor GUI. If you have less resources, then we recommend using Docker, so you do not need to consume resources for running the guest virtual machine.</p><div class="alert alert-info">
+<p>In this approach, you will run a virtual machine which in turn will run your cluster container, so the operating system of the virtual machine will be different from the operating system of the container (HDP Sandbox cluster). You can notice that by checking the content of <code>/home</code> directory or the version of the operating system <code>cat /etc/redhat-release</code>.</p>
+</div><h3 id="1-Installing-a-Hypervisor"><a class="anchor hidden-xs" href="#1-Installing-a-Hypervisor" title="1-Installing-a-Hypervisor"><i class="fa fa-link"></i></a>1. Installing a Hypervisor</h3><p>We recommend <em>VirtualBox</em> as a hypervisor since it is supported for most common operating systems (Linux, Windows, and macOS). Please, follow the attached link in the following list to download your preferred hypervisor.</p><ul>
+<li><a href="https://www.virtualbox.org" target="_blank" rel="noopener">Oracle VM VirtualBox</a> <strong>(Recommended)</strong></li>
+<li><a href="https://www.vmware.com/products/workstation-player.html" target="_blank" rel="noopener">VMware Workstation Player</a> (Only for Linux and Windows)</li>
+<li><a href="https://www.vmware.com/products/fusion.html" target="_blank" rel="noopener">VMware Fusion for mac</a> (Only for macOS)</li>
+</ul><p>For installation instructions, you can use Google but I share here a <a href="https://nerdschalk.com/how-to-install-and-use-virtualbox-on-windows-11/" target="_blank" rel="noopener">tutorial</a> to install <em>VirtualBox</em> on <em>Windows 11</em>. If you have an old version of the software, we recommend to update it in order to avoid any issues in installing the virtual machines. In my PC, I installed VirtualBox 7.0.4 in January 2023.</p><h3 id="2-Installing-HDP-Sandbox"><a class="anchor hidden-xs" href="#2-Installing-HDP-Sandbox" title="2-Installing-HDP-Sandbox"><i class="fa fa-link"></i></a>2. Installing HDP Sandbox</h3><p>Hortonworks Data Platform (HDP) is a straightforward, pre-configured, learning environment that contains the latest developments from Apache Hadoop. The Sandbox comes packaged in a virtual environment that can run in the cloud or on your personal machine. The Sandbox allows you to learn and explore HDP on your own.</p><h3 id="21-Downloading-the-Sandbox"><a class="anchor hidden-xs" href="#21-Downloading-the-Sandbox" title="21-Downloading-the-Sandbox"><i class="fa fa-link"></i></a>2.1. Downloading the Sandbox</h3><p>You can find the download links of the Sandbox in <em>.ova</em> format with respect to the chosen hypervisor. If you are using <strong>VirtualBox</strong>, then download from <a href="https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.6.5/HDP_2.6.5_virtualbox_180626.ova" target="_blank" rel="noopener">here</a>. For <strong>VMware</strong> users, the download link is <a href="https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.6.5/HDP_2.6.5_vmware_180622.ov" target="_blank" rel="noopener">here</a>. You can also download them from <a href="https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html" target="_blank" rel="noopener">the official website</a> but it needs an account on Cloudera website. I share below the download links for all available versions of HDP Sandbox.</p><div class="alert alert-info">
+<p>The download links of HDP Sandbox on VirtualBox:</p>
+<ul>
+<li>HDP 2.5.0 (<a href="https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.5.0/HDP_2.5_virtualbox.ova" target="_blank" rel="noopener">https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.5.0/HDP_2.5_virtualbox.ova</a>)</li>
+<li><strong>HDP 2.6.5</strong> (<a href="https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.6.5/HDP_2.6.5_virtualbox_180626.ova" target="_blank" rel="noopener">https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.6.5/HDP_2.6.5_virtualbox_180626.ova</a>)</li>
+<li>HDP 3.0.1 (<a href="https://archive.cloudera.com/hwx-sandbox/hdp/hdp-3.0.1/HDP_3.0.1_virtualbox_181205.ova" target="_blank" rel="noopener">https://archive.cloudera.com/hwx-sandbox/hdp/hdp-3.0.1/HDP_3.0.1_virtualbox_181205.ova</a>)</li>
+</ul>
+</div><div class="alert alert-info">
+<p>The download links of HDP Sandbox on VMware:</p>
+<ul>
+<li>HDP 2.5.0 (<a href="https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.5.0/HDP_2.5_vmware.ova" target="_blank" rel="noopener">https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.5.0/HDP_2.5_vmware.ova</a>)</li>
+<li><strong>HDP 2.6.5</strong> (<a href="https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.6.5/HDP_2.6.5_vmware_180622.ova" target="_blank" rel="noopener">https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.6.5/HDP_2.6.5_vmware_180622.ova</a>)</li>
+<li>HDP 3.0.1 (<a href="https://archive.cloudera.com/hwx-sandbox/hdp/hdp-3.0.1/HDP_3.0.1_vmware_181205.ova" target="_blank" rel="noopener">https://archive.cloudera.com/hwx-sandbox/hdp/hdp-3.0.1/HDP_3.0.1_vmware_181205.ova</a>)</li>
+</ul>
+</div><h3 id="22-Installing-the-Sandbox"><a class="anchor hidden-xs" href="#22-Installing-the-Sandbox" title="22-Installing-the-Sandbox"><i class="fa fa-link"></i></a>2.2. Installing the Sandbox</h3><p>I will show here the steps to install the HDP Sandbox on VirtualBox. First of all, you need to be sure that you have installed VirtualBox and it is ready to create VMs.</p><center>
+<img src="https://i.imgur.com/wGAiLxE.png" width="600">
+<p>Oracle VM VirtualBox</p>
+</center><p>Select <code>File</code> from the top toolbar then choose <code>Import Appliance...</code> from the drop-down list or press <code>Ctrl+I</code>. The following window appears which allows you to specify the file where to import the virtual appliance from. Here you need to select the path of the virtual appliance. The virtual appliance has the extension <code>.ova</code>.</p><center>
+<img src="https://i.imgur.com/ITHlQRW.png" width="600">
+<p>Import Appliance window</p>
+</center><p>As shown in the figure below, select the path of the file <code>.ovf</code> then press Next.</p><center>
+<img src="https://i.imgur.com/Khd6R0S.png" width="600">
+<p>Import Appliance window</p>
+</center><p>In the next window, you may need to change some settings. Make sure that you set the CPU cores to 4 and the RAM size to 8192 MB.</p><center>
+<img src="https://i.imgur.com/gdD7Xlg.png" width="600">
+<p>Appliance settings window</p>
+</center><p>And wait for the appliance to be imported as shown in the figure below.</p><center>
+<img src="https://i.imgur.com/IhsRhH4.png" width="600">
+<p>Progress of importing the virtual appliance</p>
+</center><p>If you got a value 0 for the <code>Base Memory</code> after importing the appliance (a bug in VirtualBox), please update the value as explained above and start the virtual machine.</p><h3 id="23-Running-the-VM"><a class="anchor hidden-xs" href="#23-Running-the-VM" title="23-Running-the-VM"><i class="fa fa-link"></i></a>2.3. Running the VM</h3><p>The first boot of HDP Sandbox takes a lot of time, please take a break and wait till it finishes. Actually, during this time, the virtual machine is building the Docker image and then it starts to run a container for your cluster where you can access it from the host machine.</p><center>
+<img src="https://i.imgur.com/kWEru1e.png" width="600">
+<p>Booting HDP Sandbox</p>
+</center><p>After finishing the extraction process, the system will run as shown below.</p><center>
+<img src="https://i.imgur.com/xfD2P9V.png" width="600">
+<p>Running HDP Sandbox</p>
+</center><p>After the boot operation is done, you will see the following screen where it gives the address to access the splash webpage of the platform at <a href="http://loaclhost:1080" target="_blank" rel="noopener">http://loaclhost:1080</a> or <a href="http://127.0.0.1:1080" target="_blank" rel="noopener">http://127.0.0.1:1080</a> for HDP 2.6.5.</p><center>
+<img src="https://i.imgur.com/gpslFzA.png" width="600">
+<p>HDP Sandbox 2.6.5</p>
+</center><p>Now, you have finished installation and are ready to access the cluster.</p><h2 id="B-Using-Docker"><a class="anchor hidden-xs" href="#B-Using-Docker" title="B-Using-Docker"><i class="fa fa-link"></i></a>B. Using Docker</h2><p>Here I will explain how you can install HDP Sandbox using Docker in Windows <em>11</em>. For Linux users, installing Docker can be done via CLI and you can follow <a href="https://docs.docker.com/engine/install/ubuntu/" target="_blank" rel="noopener">this tutorial</a>.</p><h3 id="1-Installing-Docker-Desktop-on-Windows"><a class="anchor hidden-xs" href="#1-Installing-Docker-Desktop-on-Windows" title="1-Installing-Docker-Desktop-on-Windows"><i class="fa fa-link"></i></a>1. Installing Docker Desktop on Windows</h3><p>You can download Docker Desktop and install it by following the instructions in the <a href="https://docs.docker.com/desktop/install/windows-install/" target="_blank" rel="noopener">official website</a>. The installation instructions are easy and you can follow this <a href="https://docs.docker.com/desktop/install/windows-install/#install-docker-desktop-on-windows" target="_blank" rel="noopener">tutorial</a>.</p><center>
+<img src="https://i.imgur.com/8F6Rpxc.png" width="600">
+<p>Docker Desktop</p>
+</center><p>Docker Desktop allows you to manage images and containers via GUI. It also allows you to run the cluster without the need to use CLI.</p><h3 id="2-Installing-HDP-Sandbox1"><a class="anchor hidden-xs" href="#2-Installing-HDP-Sandbox1" title="2-Installing-HDP-Sandbox1"><i class="fa fa-link"></i></a>2. Installing HDP Sandbox</h3><p>There are only two versions of HDP Sandbox on Docker Hub where <strong>HDP version 2.6.5</strong> is what we need. Firstly, you need to download the installation scripts from Cloudera website:</p><ul>
+<li><a href="https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.6.5/HDP_2.6.5_deploy-scripts_180624d542a25.zip" target="_blank" rel="noopener">HDP 2.6.5</a></li>
+<li><a href="https://archive.cloudera.com/hwx-sandbox/hdp/hdp-3.0.1/HDP_3.0.1_docker-deploy-scripts_18120587fc7fb.zip" target="_blank" rel="noopener">HDP 3.0.1</a></li>
+</ul><p>The zip folder mainly contains <code>.sh</code> scripts which includes instructions to pull the HDP Sandbox image from Docker Hub and run the containers for your cluster.</p><center>
+<img src="https://i.imgur.com/RUKLdog.png" width="600">
+<p>HDP Sandbox on Docker</p>
+</center><p>For Linux users, it will be straightforward to run <code>.sh</code> scripts whereas for Windows <em>10/11</em> users you can use <code>C://Windows/System32/bash.exe</code> program. If you have an older version of Windows then you can install <a href="https://gitforwindows.org" target="_blank" rel="noopener">Git BASH</a> to run <code>.sh</code> scripts.</p><p>We need to run only the script <code>docker-deploy-hdp265.sh</code> from <code>bash</code> shell as follows:</p><pre><code class="sh hljs">$ bash ./docker-deploy-hdp265<span class="hljs-selector-class">.sh</span>
+</code></pre><center>
+<img src="https://i.imgur.com/5VPcE0L.png" width="600">
+<p>Pulling HDP Sandbox 2.6.5 image from Docker Hub</p>
+</center><p>Running the installation script will take a lot of time since it will pull <em>15 GiB</em> (HDP 2.6.5) from Docker Hub, so take a break. If you cannot see the progress of the download, then you can open another <em>terminal</em> and run the same instruction as follows:</p><pre><code class="sh hljs">docker pull hortonworks/sandbox-hdp:<span class="hljs-number">2.6</span><span class="hljs-number">.5</span>
+</code></pre><p>After the installation is successfully done, you will see two images on Docker Desktop and also two running containers.</p><center>
+<img src="https://i.imgur.com/wwWS6Tf.png" width="600">
+<p>HDP Sandbox images on Docker Desktop</p>
+</center><div class="alert alert-success">
+<p>The HDP Sandbox cluster is now running on your PC <img class="emoji" alt=":smiley:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/smiley.png">.</p>
+</div><p>You do these steps only for the first time then you can stop/restart the cluster from Docker Desktop.</p><h2 id="Configuring-the-resources-for-Docker"><a class="anchor hidden-xs" href="#Configuring-the-resources-for-Docker" title="Configuring-the-resources-for-Docker"><i class="fa fa-link"></i></a>Configuring the resources for Docker</h2><p>Limiting the resources of the containers is important to avoid freezing the host system due to the lack of memory. The default behavior of Docker engine is to give the containers as much resources as they request. Linux users can use command line options whereas Windows users can use configuration of WSL backend (which is installed by default in Windows <em>10/11</em>) or Hyper-V backend. Here I will explain how you can configure the resources of the containers if you use WSL backend in Windows.</p><p>You need to download <code>.wslconfig</code> <a href="https://gist.github.com/firas-jolha/097d188a9b25179f9906d67fbf652d5c" target="_blank" rel="noopener">file</a> or build a new one with the same structure as follows:</p><pre><code class="yaml hljs"><span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> This should be stored in %UserProfile% folder which is your home folder c:/Users/&lt;Username&gt; in Windows</span>
+<span class="hljs-comment"># Settings apply across all Linux distros running on WSL 2</span>
+<span class="hljs-string">[wsl2]</span>
+<span class="hljs-comment"># Limits VM memory to use no more than 4 GB, this can be set as whole numbers using GB or MB</span>
+<span class="hljs-string">memory=4GB</span>
+<span class="hljs-comment"># Sets the VM to use four virtual processors</span>
+<span class="hljs-string">processors=4</span>
+<span class="hljs-comment"># Sets amount of swap storage space to 0, default is 25% of available RAM</span>
+<span class="hljs-string">swap=0</span>
+</code></pre><div class="alert alert-warning">
+<p>After every update of <code>.wslconfig</code> file, you need to shutdown <code>WSL</code>, wait for some seconds then restart Desktop Docker. After that, you can start the containers to run the cluster. You can shutdown <code>WSL</code> as:</p>
+<pre><code class="sh hljs">wsl <span class="hljs-comment">--shutdown</span>
+</code></pre>
+</div><p>More info about WSL configuration can be found <a href="https://learn.microsoft.com/en-us/windows/wsl/wsl-config" target="_blank" rel="noopener">here</a>.</p><h2 id="StoppingRestarting-the-cluster"><a class="anchor hidden-xs" href="#StoppingRestarting-the-cluster" title="StoppingRestarting-the-cluster"><i class="fa fa-link"></i></a>Stopping/Restarting the cluster</h2><p>You can stop the cluster by turning off the virtual machine in case you are using a hypervisor. For Docker users, you only need to stop the containers <code>sandbox-hdp</code> and <code>sandbox-proxy</code>. Meanwhile, you can start the cluster in Docker Desktop by running the containers <code>sandbox-hdp</code> and <code>sandbox-proxy</code> whereas you just need to start the virtual machine in case you are using a hypervisor.</p><div class="alert alert-danger">
+<p><strong>Important:</strong> Do <strong>not</strong> delete the containers in Docker Desktop, otherwise the persisted data will be gone and you need to reinstall the cluster using installation scripts.</p>
+<!-- Indeed, you can create multiple containers from a single Docker image for testing purposes. -->
+</div><h1 id="Access-HDP-Sandbox-cluster"><a class="anchor hidden-xs" href="#Access-HDP-Sandbox-cluster" title="Access-HDP-Sandbox-cluster"><i class="fa fa-link"></i></a>Access HDP Sandbox cluster</h1><p>Either you followed the first approach or the second one in cluster installation, you would end up here. The installed HDP  Sandbox cluster is a single node implementation of HDP. It is packaged as a virtual machine to make evaluation and experimentation with HDP fast and easy. You can access the splash webpage of the cluster via <a href="http://localhost:1080" target="_blank" rel="noopener">http://localhost:1080</a> for HDP 2.6.5 and <a href="http://localhost:8888" target="_blank" rel="noopener">http://localhost:8888</a> for HDP 2.5.0.</p><center>
+<img src="https://i.imgur.com/9RFzfpO.png" width="600">
+<p>HDP Sandbox splash webpage</p>
+</center><p>The button <em>Quick Links</em> will transfer you to the page of links where you can access some services of the cluster.</p><center>
+<img src="https://i.imgur.com/8mOrZrX.png" width="600">
+<p>HDP Sandbox quick links webpage</p>
+</center><p>In order to see all services of the cluster, you need to access <em>Ambari</em> service at <a href="http://localhost:8080" target="_blank" rel="noopener">http://localhost:8080</a> where you can monitor and manage all services.</p><center>
+<img src="https://i.imgur.com/xsWhlVR.png" width="600">
+<p>Ambari login page</p>
+</center><p>You need to log in in order to access this service. You can use the credentials of the user <code>maria_dev/maria_dev</code> as (username/passowrd). HDP Sandbox comes with 4 default users with different roles in the cluster and there is also Ambari Admin who can manage the other users in the cluster.</p><center>
+<img src="https://i.imgur.com/2JEYSJd.png" width="600">
+<p>Ambari homepage</p>
+</center><p>As you can see in Ambari homepage, most services are showing alerts since they did not start so far or due to some problems. You need to wait till services start then you can access them. If you have set less resources than required then it is probably that most services cannot be run, so you can stop the services which are not needed to let the required services run.</p><div class="alert alert-warning">
+<p>Note: You can reset the password of Ambari Admin by running the command <code>ambari-admin-password-reset</code> via <code>ssh</code> as follows:</p>
+<pre><code class="sh hljs">[root@sandbox-hdp ~]# ambari-<span class="hljs-keyword">admin</span>-<span class="hljs-keyword">password</span>-<span class="hljs-keyword">reset</span>
+</code></pre>
+<!-- ![]() -->
+<center>
+<img src="https://i.imgur.com/sz0KH33.png" width="600">
+<p>Resetting Ambari Admin credentials</p>
+</center>
+</div><center>
+<img src="https://i.imgur.com/DpuMnVB.png" width="800">
+<p>Overview of HDP services</p>
+</center><h2 id="Access-via-SSH"><a class="anchor hidden-xs" href="#Access-via-SSH" title="Access-via-SSH"><i class="fa fa-link"></i></a>Access via SSH</h2><p>You can access the cluster via shell web client or called <code>shell-in-a-box</code> by following the address <a href="http://localhost:4200" target="_blank" rel="noopener">http://localhost:4200</a> in your browser.</p><p>For the very first time, the default credentials are <code>root/hadoop</code> and you will be asked to reset the password. You need to set a strong password to pass the password-reset step. For example, I use the password <code>hdpIU2023</code>.</p><center>
+<img src="https://i.imgur.com/CzJCiNQ.png" width="600">
+<p>Web Shell client for HDP Sandbox </p>
+</center><p>You can also access the cluster via <code>ssh</code> command on your preferred terminal. You need to <code>ssh</code> on the port <strong>2222</strong> as root user:</p><pre><code class="sh hljs">ssh <span class="hljs-symbol">root@</span>localhost -p <span class="hljs-number">2222</span>
+</code></pre><h1 id="Access-HDFS"><a class="anchor hidden-xs" href="#Access-HDFS" title="Access-HDFS"><i class="fa fa-link"></i></a>Access HDFS</h1><p>You can access HDFS files by selecting <code>Files view</code> in Ambari homepage.</p><center>
+<img src="https://i.imgur.com/AuB9pbo.png" width="600">
+<p>Ambari - Files View</p>
+</center><p>You can see in the following screen the contents of HDFS on the cluster. The page allows you to upload and download files/folders from/to local file system and HDFS.</p><center>
+<img src="https://i.imgur.com/DlMQDdh.png" width="600">
+<p>HDFS on HDP Sandbox cluster</p>
+</center><div class="alert alert-info">
+<p>You can also access HDFS via CLI using the command <code>hdfs dfs</code>. For example, to list the content of the root directory <code>/</code> in HDFS, you can write as follows:</p>
+<pre><code class="sh hljs">[root<span class="hljs-symbol">@sandbox</span>-hdp ~]<span class="hljs-meta"># hdfs dfs -ls /</span>
+</code></pre>
+</div><h1 id="Transfer-data-between-HDFS-and-local-file-systems"><a class="anchor hidden-xs" href="#Transfer-data-between-HDFS-and-local-file-systems" title="Transfer-data-between-HDFS-and-local-file-systems"><i class="fa fa-link"></i></a>Transfer data between HDFS and local file systems</h1><p>The single node of the cluster is running on CentOS which has <em>ext4</em> local file system whereas the distributed data in the cluster is stored in HDFS. You also have a local file system on the host machine. We have multiple file systems among whom data may need to be transferred. For example, in order to process the data in the cluster, you need to store it in HDFS.</p><h2 id="Transfer-data-into-and-out-of-the-cluster-node"><a class="anchor hidden-xs" href="#Transfer-data-into-and-out-of-the-cluster-node" title="Transfer-data-into-and-out-of-the-cluster-node"><i class="fa fa-link"></i></a>Transfer data into and out of the cluster node</h2><p>You can move data from the local file system in the host machine to the local file system of the cluster node by using command <code>docker cp</code>. As an example, to move the file <code>C:\Users\Admin\Desktop\hello.txt</code> on Windows to the root directory <code>/</code> of the node, we run the following command on the host machine:</p><pre><code class="sh hljs">docker cp "C:<span class="hljs-symbol">\U</span>sers<span class="hljs-symbol">\A</span>dmin<span class="hljs-symbol">\D</span>esktop<span class="hljs-symbol">\h</span>ello.txt"  "sandbox-hdp:/"
+</code></pre><div class="alert alert-info">
+<p><code>sandbox-hdp</code> is the container name/id.</p>
+</div><p>In the same way, you can move the file <code>/hello2.txt</code> from the local file system of the node to the local file system of the host machine as follows (run the command on the host machine):</p><pre><code class="sh hljs"><span class="hljs-symbol">docker</span> <span class="hljs-meta">cp</span> <span class="hljs-string">"sandbox-hdp:/hello2.txt"</span> <span class="hljs-string">"C:\Users\Admin\Desktop"</span>
+</code></pre><div class="alert alert-warning">
+<p>Make sure that the containers of the cluster are running before running the commands.</p>
+</div><div class="alert alert-info">
+<p>If you are using a hypervisor for running the cluster, then you should run these commands in the virtual machine which runs the cluster but make sure that Docker engine is installed and <code>docker</code> command exists.</p>
+</div><h2 id="Transfer-data-into-and-out-of-HDFS"><a class="anchor hidden-xs" href="#Transfer-data-into-and-out-of-HDFS" title="Transfer-data-into-and-out-of-HDFS"><i class="fa fa-link"></i></a>Transfer data into and out of HDFS</h2><p>You can move data between the local file system of the host machine and HDFS via Ambari service as explained in section <a href="#Access-HDFS">Access HDFS</a>.</p><p>To move data from HDFS to the local file system of the cluster node, you can use <code>HDFS dfs</code> command with appropriate options. The table below shows usage of some options.</p><p><img src="https://i.imgur.com/OfzCZP2.png" alt="" class="md-image md-image"></p><h1 id="Access-PostgreSQL-server"><a class="anchor hidden-xs" href="#Access-PostgreSQL-server" title="Access-PostgreSQL-server"><i class="fa fa-link"></i></a>Access PostgreSQL server</h1><p>In fact, HDP Sandbox comes with a pre-installed PostgreSQL server so you do not to install any additional software to use PostgreSQL. You can access it via <code>ssh</code> as <code>postgres</code> user:</p><pre><code class="sh hljs">[root<span class="hljs-symbol">@sandbox</span>-hdp ~]<span class="hljs-meta">#  su postgres</span>
+[root<span class="hljs-symbol">@sandbox</span>-hdp ~]<span class="hljs-meta">#  psql</span>
+</code></pre><p>This will open a CLI to interact with PostgreSQL. You can access the databases using <code>\c</code> command and the tables via <code>\dt</code> command. For example, you can access the database <code>ambari</code> (a default database on HDP Sandbox) by running the following command in postgreSQL CLI.</p><pre><code class="sh hljs"><span class="hljs-attribute">postgres</span>=# \c ambari
+You are now connected <span class="hljs-keyword">to</span> database <span class="hljs-string">"ambari"</span> as<span class="hljs-built_in"> user </span><span class="hljs-string">"postgres"</span>.
+</code></pre><p>You can read this <a href="https://quickref.me/postgres" target="_blank" rel="noopener">cheat sheet</a> to refresh your knowledge in PostgreSQL which is <strong>required for the next lab.</strong></p><h1 id="Common-issues"><a class="anchor hidden-xs" href="#Common-issues" title="Common-issues"><i class="fa fa-link"></i></a>Common issues</h1><ul>
+<li><code>Docker</code> does not read the parameters in <code>.wslconfig</code> file on Windows.
+<ul>
+<li>Possible reasons:
+<ul>
+<li>The file is sensitive to white spaces and character cases. If the file has some issues in some lines then WSL backend of Docker Desktop will ignore the file.</li>
+</ul>
+</li>
+<li>Possible solutions:
+<ul>
+<li>Make sure that your file follows the structure that I specified <a href="https://gist.github.com/firas-jolha/097d188a9b25179f9906d67fbf652d5c" target="_blank" rel="noopener">here</a> and change only values according to your limited resources.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><ul>
+<li>
+<p>The virtual machine does not boot up.</p>
+<ul>
+<li>Possible reasons:
+<ul>
+<li>You set less resources than minimum for the CPU or the RAM.</li>
+</ul>
+</li>
+<li>Possible solutions:
+<ul>
+<li>Increase the number of cores for CPU and/or increase the allocated RAM.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>When you try to access the database by running the command <code>psql -U postgres</code> as <code>[root@sandbox-hdp data]# psql -U postgres</code>. You may get the following error:</p>
+<blockquote>
+<p>psql: FATAL:  Peer authentication failed for user “postgres”</p>
+</blockquote>
+<ul>
+<li>Possible reasons:
+<ul>
+<li>The database is configured to allow access only through the credentials of the user.</li>
+</ul>
+</li>
+<li>Possible solutions:
+<ul>
+<li>You can change this configuration to allow all users to access the database without the need to enter credentials. Add the line <code>local all all trust</code> at the beginning of the file <code>/var/lib/pgsql/data/pg_hba.conf</code> then restart PostgreSQL service by running the command <code>systemctl restart postgresql</code> as root user.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><div class="alert alert-warning">
+<p><strong>NB:</strong> If you have other issues, please contact the TA.</p>
+</div><h1 id="Self-check-questions"><a class="anchor hidden-xs" href="#Self-check-questions" title="Self-check-questions"><i class="fa fa-link"></i></a>Self-check questions</h1><ol>
+<li>What are the key components of Hadoop core?</li>
+<li>What is <code>Apache Ambari</code>?</li>
+<li>How can we import a virtual appliance in VirtualBox?</li>
+<li>How can we set the password of <code>Ambari Admin</code>?</li>
+<li>What is the version of Hadoop distribution in the installed cluster?</li>
+<li>What services does HDP provide?</li>
+<li>How can you upload a file from local file system to HDFS?</li>
+<li>How can you download a file from HDFS to the local file system?</li>
+<li>How can you access the cluster via <code>ssh</code>?</li>
+<li>How can we access the cluster via <em>shell-in-a-box</em>?</li>
+<li>How can we access the database <code>ambari</code> in PostgreSQL server?</li>
+<li>What are the default credentials of <code>root</code> user in the cluster?</li>
+<li>How to transfer files from the host machine to the cluster node?</li>
+</ol><h1 id="Appendix"><a class="anchor hidden-xs" href="#Appendix" title="Appendix"><i class="fa fa-link"></i></a>Appendix</h1><h2 id="Sandbox-Version"><a class="anchor hidden-xs" href="#Sandbox-Version" title="Sandbox-Version"><i class="fa fa-link"></i></a>Sandbox Version</h2><p>To find information about the cluster Sandbox, execute the following command on the cluster container:</p><pre><code class="sh hljs"><span class="hljs-keyword">sandbox</span>-<span class="hljs-keyword">version</span>
+</code></pre><h2 id="Ambari-Roles"><a class="anchor hidden-xs" href="#Ambari-Roles" title="Ambari-Roles"><i class="fa fa-link"></i></a>Ambari Roles</h2><p>Ambari 2.4 introduced the notion of Role-Based Access Control(RBAC) for the Ambari web interface. Ambari now includes additional cluster operation roles providing more granular division of control of the Ambari Dashboard and the various Ambari Views. Only the admin id has access to view or change these roles. You can learn more about the roles from <a href="https://www.cloudera.com/tutorials/learning-the-ropes-of-the-hdp-sandbox.html#login-credentials" target="_blank" rel="noopener">here</a>.</p><h1 id="References"><a class="anchor hidden-xs" href="#References" title="References"><i class="fa fa-link"></i></a>References</h1><p><a href="https://www.cloudera.com/tutorials/learning-the-ropes-of-the-hdp-sandbox.html" target="_blank" rel="noopener">Learning the Ropes of the HDP Sandbox</a><br>
+<a href="https://www.cloudera.com/tutorials/getting-started-with-hdp-sandbox/1.html" target="_blank" rel="noopener">Getting Started with HDP Sandbox</a><br>
+<a href="https://en.wikipedia.org/wiki/Hortonworks" target="_blank" rel="noopener">Hortonworks - Wikipedia</a><br>
+<a href="https://www.ibm.com/downloads/cas/DKWR4KZB" target="_blank" rel="noopener">IBM Analytics - Data Sheet</a><br>
+<a href="https://www.postgresql.org" target="_blank" rel="noopener">PostgreSQL: The World’s Most Advanced Open Source Relational Database</a><br>
+<a href="https://gdancik.github.io/CSC-343/data/notes/HDFS.pdf" target="_blank" rel="noopener">Moving data in HDFS</a><br>
+<a href="https://images.linoxide.com/hadoop-hdfs-commands-cheatsheet.pdf" target="_blank" rel="noopener">Hadoop HDFS Command Cheatsheet</a></p></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#Lab-1---Installing-HDP-Sandbox" title="Lab 1 - Installing HDP Sandbox">Lab 1 - Installing HDP Sandbox</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li><a href="#Hardware-requirements" title="Hardware requirements">Hardware requirements</a></li>
+<li><a href="#Installing-Hortonworks-Sandbox" title="Installing Hortonworks Sandbox">Installing Hortonworks Sandbox</a><ul class="nav">
+<li><a href="#A-Using-a-Hypervisor" title="A. Using a Hypervisor">A. Using a Hypervisor</a><ul class="nav">
+<li><a href="#1-Installing-a-Hypervisor" title="1. Installing a Hypervisor">1. Installing a Hypervisor</a></li>
+<li><a href="#2-Installing-HDP-Sandbox" title="2. Installing HDP Sandbox">2. Installing HDP Sandbox</a></li>
+<li><a href="#21-Downloading-the-Sandbox" title="2.1. Downloading the Sandbox">2.1. Downloading the Sandbox</a></li>
+<li><a href="#22-Installing-the-Sandbox" title="2.2. Installing the Sandbox">2.2. Installing the Sandbox</a></li>
+<li><a href="#23-Running-the-VM" title="2.3. Running the VM">2.3. Running the VM</a></li>
+</ul>
+</li>
+<li><a href="#B-Using-Docker" title="B. Using Docker">B. Using Docker</a><ul class="nav">
+<li><a href="#1-Installing-Docker-Desktop-on-Windows" title="1. Installing Docker Desktop on Windows">1. Installing Docker Desktop on Windows</a></li>
+<li><a href="#2-Installing-HDP-Sandbox1" title="2. Installing HDP Sandbox">2. Installing HDP Sandbox</a></li>
+</ul>
+</li>
+<li><a href="#Configuring-the-resources-for-Docker" title="Configuring the resources for Docker">Configuring the resources for Docker</a></li>
+<li><a href="#StoppingRestarting-the-cluster" title="Stopping/Restarting the cluster">Stopping/Restarting the cluster</a></li>
+</ul>
+</li>
+<li><a href="#Access-HDP-Sandbox-cluster" title="Access HDP Sandbox cluster">Access HDP Sandbox cluster</a><ul class="nav">
+<li><a href="#Access-via-SSH" title="Access via SSH">Access via SSH</a></li>
+</ul>
+</li>
+<li><a href="#Access-HDFS" title="Access HDFS">Access HDFS</a></li>
+<li><a href="#Transfer-data-between-HDFS-and-local-file-systems" title="Transfer data between HDFS and local file systems">Transfer data between HDFS and local file systems</a><ul class="nav">
+<li><a href="#Transfer-data-into-and-out-of-the-cluster-node" title="Transfer data into and out of the cluster node">Transfer data into and out of the cluster node</a></li>
+<li><a href="#Transfer-data-into-and-out-of-HDFS" title="Transfer data into and out of HDFS">Transfer data into and out of HDFS</a></li>
+</ul>
+</li>
+<li><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
+<li><a href="#Common-issues" title="Common issues">Common issues</a></li>
+<li><a href="#Self-check-questions" title="Self-check questions">Self-check questions</a></li>
+<li><a href="#Appendix" title="Appendix">Appendix</a><ul class="nav">
+<li><a href="#Sandbox-Version" title="Sandbox Version">Sandbox Version</a></li>
+<li><a href="#Ambari-Roles" title="Ambari Roles">Ambari Roles</a></li>
+</ul>
+</li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#Lab-1---Installing-HDP-Sandbox" title="Lab 1 - Installing HDP Sandbox">Lab 1 - Installing HDP Sandbox</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li><a href="#Hardware-requirements" title="Hardware requirements">Hardware requirements</a></li>
+<li><a href="#Installing-Hortonworks-Sandbox" title="Installing Hortonworks Sandbox">Installing Hortonworks Sandbox</a><ul class="nav">
+<li><a href="#A-Using-a-Hypervisor" title="A. Using a Hypervisor">A. Using a Hypervisor</a><ul class="nav">
+<li><a href="#1-Installing-a-Hypervisor" title="1. Installing a Hypervisor">1. Installing a Hypervisor</a></li>
+<li><a href="#2-Installing-HDP-Sandbox" title="2. Installing HDP Sandbox">2. Installing HDP Sandbox</a></li>
+<li><a href="#21-Downloading-the-Sandbox" title="2.1. Downloading the Sandbox">2.1. Downloading the Sandbox</a></li>
+<li><a href="#22-Installing-the-Sandbox" title="2.2. Installing the Sandbox">2.2. Installing the Sandbox</a></li>
+<li><a href="#23-Running-the-VM" title="2.3. Running the VM">2.3. Running the VM</a></li>
+</ul>
+</li>
+<li><a href="#B-Using-Docker" title="B. Using Docker">B. Using Docker</a><ul class="nav">
+<li><a href="#1-Installing-Docker-Desktop-on-Windows" title="1. Installing Docker Desktop on Windows">1. Installing Docker Desktop on Windows</a></li>
+<li><a href="#2-Installing-HDP-Sandbox1" title="2. Installing HDP Sandbox">2. Installing HDP Sandbox</a></li>
+</ul>
+</li>
+<li><a href="#Configuring-the-resources-for-Docker" title="Configuring the resources for Docker">Configuring the resources for Docker</a></li>
+<li><a href="#StoppingRestarting-the-cluster" title="Stopping/Restarting the cluster">Stopping/Restarting the cluster</a></li>
+</ul>
+</li>
+<li><a href="#Access-HDP-Sandbox-cluster" title="Access HDP Sandbox cluster">Access HDP Sandbox cluster</a><ul class="nav">
+<li><a href="#Access-via-SSH" title="Access via SSH">Access via SSH</a></li>
+</ul>
+</li>
+<li><a href="#Access-HDFS" title="Access HDFS">Access HDFS</a></li>
+<li><a href="#Transfer-data-between-HDFS-and-local-file-systems" title="Transfer data between HDFS and local file systems">Transfer data between HDFS and local file systems</a><ul class="nav">
+<li><a href="#Transfer-data-into-and-out-of-the-cluster-node" title="Transfer data into and out of the cluster node">Transfer data into and out of the cluster node</a></li>
+<li><a href="#Transfer-data-into-and-out-of-HDFS" title="Transfer data into and out of HDFS">Transfer data into and out of HDFS</a></li>
+</ul>
+</li>
+<li><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
+<li><a href="#Common-issues" title="Common issues">Common issues</a></li>
+<li><a href="#Self-check-questions" title="Self-check questions">Self-check questions</a></li>
+<li><a href="#Appendix" title="Appendix">Appendix</a><ul class="nav">
+<li><a href="#Sandbox-Version" title="Sandbox Version">Sandbox Version</a></li>
+<li><a href="#Ambari-Roles" title="Ambari Roles">Ambari Roles</a></li>
+</ul>
+</li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha256-kJrlY+s09+QoWjpkOrXXwhxeaoDz9FW5SaxF8I0DibQ=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
