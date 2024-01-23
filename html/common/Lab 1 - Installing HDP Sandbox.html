@@ -134,7 +134,7 @@
 <li><a href="https://www.virtualbox.org" target="_blank" rel="noopener">Oracle VM VirtualBox</a> <strong>(Recommended)</strong></li>
 <li><a href="https://www.vmware.com/products/workstation-player.html" target="_blank" rel="noopener">VMware Workstation Player</a> (Only for Linux and Windows)</li>
 <li><a href="https://www.vmware.com/products/fusion.html" target="_blank" rel="noopener">VMware Fusion for mac</a> (Only for macOS)</li>
-</ul><p>For installation instructions, you can use Google but I share here a <a href="https://nerdschalk.com/how-to-install-and-use-virtualbox-on-windows-11/" target="_blank" rel="noopener">tutorial</a> to install <em>VirtualBox</em> on <em>Windows 11</em>. If you have an old version of the software, we recommend to update it in order to avoid any issues in installing the virtual machines. In my PC, I installed VirtualBox 7.0.4 in January 2023.</p><h3 id="2-Installing-HDP-Sandbox"><a class="anchor hidden-xs" href="#2-Installing-HDP-Sandbox" title="2-Installing-HDP-Sandbox"><i class="fa fa-link"></i></a>2. Installing HDP Sandbox</h3><p>Hortonworks Data Platform (HDP) is a straightforward, pre-configured, learning environment that contains the latest developments from Apache Hadoop. The Sandbox comes packaged in a virtual environment that can run in the cloud or on your personal machine. The Sandbox allows you to learn and explore HDP on your own.</p><h3 id="21-Downloading-the-Sandbox"><a class="anchor hidden-xs" href="#21-Downloading-the-Sandbox" title="21-Downloading-the-Sandbox"><i class="fa fa-link"></i></a>2.1. Downloading the Sandbox</h3><p>You can find the download links of the Sandbox in <em>.ova</em> format with respect to the chosen hypervisor. If you are using <strong>VirtualBox</strong>, then download from <a href="https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.6.5/HDP_2.6.5_virtualbox_180626.ova" target="_blank" rel="noopener">here</a>. For <strong>VMware</strong> users, the download link is <a href="https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.6.5/HDP_2.6.5_vmware_180622.ov" target="_blank" rel="noopener">here</a>. You can also download them from <a href="https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html" target="_blank" rel="noopener">the official website</a> but it needs an account on Cloudera website. I share below the download links for all available versions of HDP Sandbox.</p><div class="alert alert-info">
+</ul><p>For installation instructions, you can use Google but I share here a <a href="https://nerdschalk.com/how-to-install-and-use-virtualbox-on-windows-11/" target="_blank" rel="noopener">tutorial</a> to install <em>VirtualBox</em> on <em>Windows 11</em>. If you have an old version of the software, we recommend to update it in order to avoid any issues in installing the virtual machines. In my PC, I installed VirtualBox 7.0.4 in January 2024.</p><h3 id="2-Installing-HDP-Sandbox"><a class="anchor hidden-xs" href="#2-Installing-HDP-Sandbox" title="2-Installing-HDP-Sandbox"><i class="fa fa-link"></i></a>2. Installing HDP Sandbox</h3><p>Hortonworks Data Platform (HDP) is a straightforward, pre-configured, learning environment that contains the latest developments from Apache Hadoop. The Sandbox comes packaged in a virtual environment that can run in the cloud or on your personal machine. The Sandbox allows you to learn and explore HDP on your own.</p><h3 id="21-Downloading-the-Sandbox"><a class="anchor hidden-xs" href="#21-Downloading-the-Sandbox" title="21-Downloading-the-Sandbox"><i class="fa fa-link"></i></a>2.1. Downloading the Sandbox</h3><p>You can find the download links of the Sandbox in <em>.ova</em> format with respect to the chosen hypervisor. If you are using <strong>VirtualBox</strong>, then download from <a href="https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.6.5/HDP_2.6.5_virtualbox_180626.ova" target="_blank" rel="noopener">here</a>. For <strong>VMware</strong> users, the download link is <a href="https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.6.5/HDP_2.6.5_vmware_180622.ov" target="_blank" rel="noopener">here</a>. You can also download them from <a href="https://www.cloudera.com/downloads/hortonworks-sandbox/hdp.html" target="_blank" rel="noopener">the official website</a> but it needs an account on Cloudera website. I share below the download links for all available versions of HDP Sandbox.</p><div class="alert alert-info">
 <p>The download links of HDP Sandbox on VirtualBox:</p>
 <ul>
 <li>HDP 2.5.0 (<a href="https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.5.0/HDP_2.5_virtualbox.ova" target="_blank" rel="noopener">https://archive.cloudera.com/hwx-sandbox/hdp/hdp-2.5.0/HDP_2.5_virtualbox.ova</a>)</li>
@@ -231,7 +231,7 @@
 </div><center>
 <img src="https://i.imgur.com/DpuMnVB.png" width="800">
 <p>Overview of HDP services</p>
-</center><h2 id="Access-via-SSH"><a class="anchor hidden-xs" href="#Access-via-SSH" title="Access-via-SSH"><i class="fa fa-link"></i></a>Access via SSH</h2><p>You can access the cluster via shell web client or called <code>shell-in-a-box</code> by following the address <a href="http://localhost:4200" target="_blank" rel="noopener">http://localhost:4200</a> in your browser.</p><p>For the very first time, the default credentials are <code>root/hadoop</code> and you will be asked to reset the password. You need to set a strong password to pass the password-reset step. For example, I use the password <code>hdpIU2023</code>.</p><center>
+</center><h2 id="Access-via-SSH"><a class="anchor hidden-xs" href="#Access-via-SSH" title="Access-via-SSH"><i class="fa fa-link"></i></a>Access via SSH</h2><p>You can access the cluster via shell web client or called <code>shell-in-a-box</code> by following the address <a href="http://localhost:4200" target="_blank" rel="noopener">http://localhost:4200</a> in your browser.</p><p>For the very first time, the default credentials are <code>root/hadoop</code> and you will be asked to reset the password. You need to set a strong password to pass the password-reset step. For example, I use the password <code>hdpIU2024</code>.</p><center>
 <img src="https://i.imgur.com/CzJCiNQ.png" width="600">
 <p>Web Shell client for HDP Sandbox </p>
 </center><p>You can also access the cluster via <code>ssh</code> command on your preferred terminal. You need to <code>ssh</code> on the port <strong>2222</strong> as root user:</p><pre><code class="sh hljs">ssh <span class="hljs-symbol">root@</span>localhost -p <span class="hljs-number">2222</span>
@@ -337,7 +337,7 @@ You are now connected <span class="hljs-keyword">to</span> database <span class=
             </a>
             <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
                 <div class="toc"><ul class="nav">
-<li class=""><a href="#Lab-1---Installing-HDP-Sandbox" title="Lab 1 - Installing HDP Sandbox">Lab 1 - Installing HDP Sandbox</a></li>
+<li><a href="#Lab-1---Installing-HDP-Sandbox" title="Lab 1 - Installing HDP Sandbox">Lab 1 - Installing HDP Sandbox</a></li>
 <li><a href="#Agenda" title="Agenda">Agenda</a></li>
 <li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
 <li><a href="#Objectives" title="Objectives">Objectives</a></li>
@@ -361,7 +361,7 @@ You are now connected <span class="hljs-keyword">to</span> database <span class=
 <li><a href="#StoppingRestarting-the-cluster" title="Stopping/Restarting the cluster">Stopping/Restarting the cluster</a></li>
 </ul>
 </li>
-<li><a href="#Access-HDP-Sandbox-cluster" title="Access HDP Sandbox cluster">Access HDP Sandbox cluster</a><ul class="nav">
+<li class=""><a href="#Access-HDP-Sandbox-cluster" title="Access HDP Sandbox cluster">Access HDP Sandbox cluster</a><ul class="nav">
 <li><a href="#Access-via-SSH" title="Access via SSH">Access via SSH</a></li>
 </ul>
 </li>
@@ -392,7 +392,7 @@ You are now connected <span class="hljs-keyword">to</span> database <span class=
     </div>
     <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
         <div class="toc"><ul class="nav">
-<li class=""><a href="#Lab-1---Installing-HDP-Sandbox" title="Lab 1 - Installing HDP Sandbox">Lab 1 - Installing HDP Sandbox</a></li>
+<li><a href="#Lab-1---Installing-HDP-Sandbox" title="Lab 1 - Installing HDP Sandbox">Lab 1 - Installing HDP Sandbox</a></li>
 <li><a href="#Agenda" title="Agenda">Agenda</a></li>
 <li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
 <li><a href="#Objectives" title="Objectives">Objectives</a></li>
@@ -416,7 +416,7 @@ You are now connected <span class="hljs-keyword">to</span> database <span class=
 <li><a href="#StoppingRestarting-the-cluster" title="Stopping/Restarting the cluster">Stopping/Restarting the cluster</a></li>
 </ul>
 </li>
-<li><a href="#Access-HDP-Sandbox-cluster" title="Access HDP Sandbox cluster">Access HDP Sandbox cluster</a><ul class="nav">
+<li class=""><a href="#Access-HDP-Sandbox-cluster" title="Access HDP Sandbox cluster">Access HDP Sandbox cluster</a><ul class="nav">
 <li><a href="#Access-via-SSH" title="Access via SSH">Access via SSH</a></li>
 </ul>
 </li>
