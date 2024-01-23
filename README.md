@@ -8,6 +8,6 @@ The materials are split into three parts. There are materials for labs, project 
 
 ## Labs
 
-### \[Lab 1 - Installing HDP Sandbox\](html/introtobigdata/Lab 1 - Installing HDP Sandbox.html)
+### [Lab 1 - Installing HDP Sandbox](html/common/Lab 1 - Installing HDP Sandbox.html)
 
 ## Assignments
