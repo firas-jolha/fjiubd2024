@@ -70,7 +70,6 @@
 <li><a href="#Transfer-data-into-and-out-of-HDFS" title="Transfer data into and out of HDFS">Transfer data into and out of HDFS</a></li>
 </ul>
 </li>
-<li><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
 <li><a href="#Common-issues" title="Common issues">Common issues</a></li>
 <li><a href="#Self-check-questions" title="Self-check questions">Self-check questions</a></li>
 <li><a href="#Appendix" title="Appendix">Appendix</a><ul>
@@ -84,20 +83,17 @@
 <li>Familiarity with terminals, shell commands and fundamental knowledge in operating Systems (Linux)</li>
 <li>Basic knowledge in virtualization and managing virtual machines</li>
 <li>Basic knowledge in containerization and dealing with Docker images and containers</li>
-<li>Fundamental knowledge in Relational databases and DBMS</li>
-<li>Familiarity with PostgreSQL server</li>
 </ul><h1 id="Objectives"><a class="anchor hidden-xs" href="#Objectives" title="Objectives"><i class="fa fa-link"></i></a>Objectives</h1><ul>
 <li>Install a hypervisor or VM monitor such as <code>VirtualBox</code></li>
 <li>Install <code>Hortonworks Data Platform</code></li>
 <li>Access <code>Hortonworks Data Platform</code> via <code>ssh</code></li>
 <li>Access <code>HDFS</code> and learn how to transfer files</li>
-<li>Install and access <code>PostgreSQL</code> database server</li>
-</ul><h1 id="Introduction"><a class="anchor hidden-xs" href="#Introduction" title="Introduction"><i class="fa fa-link"></i></a>Introduction</h1><p>Every business is now a data business. Data is the organizations’ future and most valuable asset. The <code>Hortonworks Data Platform (HDP)</code> is a security-rich, enterprise-ready open-source <code>Hadoop</code> distribution based on a centralized architecture (YARN). <code>Hortonworks Sandbox</code> can be run as a Docker container installed on a virtual machine. <a href="https://docs.cloudera.com/HDPDocuments/HDP2/HDP-2.5.0/index.html" target="_blank" rel="noopener">HDP</a> is a complete system to handle the processing and storage of big data. It is an open architecture used to store and process complex and large-scale data. It is composed of numerous Apache Software Foundation (ASF) projects including Apache Hadoop and is built specifically to meet enterprise demands. Hortonworks was a standalone company untill 2019 when it is merged to Cloudera and now Hortonworks is a subsidiary for Cloudera, Inc.</p><center>
+</ul><h1 id="Introduction"><a class="anchor hidden-xs" href="#Introduction" title="Introduction"><i class="fa fa-link"></i></a>Introduction</h1><p>Every business is now a data business. Data is the organizations’ future and most valuable asset. The <code>Hortonworks Data Platform (HDP)</code> is a security-rich, enterprise-ready open-source <code>Hadoop</code> distribution based on a centralized architecture (YARN). <code>Hortonworks Sandbox</code> is a single-node cluster and can be run as a Docker container installed on a virtual machine. <a href="https://docs.cloudera.com/HDPDocuments/HDP2/HDP-2.5.0/index.html" target="_blank" rel="noopener">HDP</a> is a complete system to handle the processing and storage of big data. It is an open architecture used to store and process complex and large-scale data. It is composed of numerous Apache Software Foundation (ASF) projects including Apache Hadoop and is built specifically to meet enterprise demands. Hortonworks was a standalone company untill 2019 when it is merged to Cloudera and now Hortonworks is a subsidiary for Cloudera, Inc.</p><center>
 <img src="https://i.imgur.com/Nel8wxT.png" width="300">
 <img src="https://i.imgur.com/d8DlPRE.png" width="300">
 <p>Hortonworks is merged to Cloudera in 2019</p>
 </center><p>At the beginning of this course, we are aiming to remind you with relational databases before dealing with big data. In practice, we will use the relational database management system PostgreSQL. Fortunately, <em>HDP</em> comes with a pre-installed PostgreSQL database server.</p><h1 id="Hardware-requirements"><a class="anchor hidden-xs" href="#Hardware-requirements" title="Hardware-requirements"><i class="fa fa-link"></i></a>Hardware requirements</h1><ul>
-<li><strong>Memory</strong>  dedicated to the cluster (Minimum: 8 GiB, <strong>Recommended: 10+ GiB</strong>). More is better.</li>
+<li><strong>Memory</strong>  dedicated to the cluster (Minimum: 4 GiB, <strong>Recommended: 8+ GiB</strong>). More is better.</li>
 <li><strong>CPU</strong> (Minimum: 4 Cores, <strong>Recommended: 6+ Cores</strong>)
 <ul>
 <li>Virtualization should be enabled
@@ -128,7 +124,25 @@
 </li>
 </ul><div class="alert alert-info">
 <p>HDP 2.5.0 is based on CentOS 6.8 which is EOL by 2021 and updating the packages via <code>yum</code> is kinda not possible. We recommend to install HDP 2.6.5 unless you have less resources.</p>
-</div><h1 id="Installing-Hortonworks-Sandbox"><a class="anchor hidden-xs" href="#Installing-Hortonworks-Sandbox" title="Installing-Hortonworks-Sandbox"><i class="fa fa-link"></i></a>Installing Hortonworks Sandbox</h1><p>There are two common ways to install HDP Sandbox on your PC, either by using a hypervisor such as <em>VirtualBox</em> which will pull the Docker image and run a container for your cluster or by directly using Docker where you need to manage your resources via <code>docker</code> command line <a href="https://docs.docker.com/config/containers/resource_constraints/" target="_blank" rel="noopener">options</a> in Linux or you can use WSL backend in Windows where you can configure resources via <code>.wslconfig</code> file.</p><h2 id="A-Using-a-Hypervisor"><a class="anchor hidden-xs" href="#A-Using-a-Hypervisor" title="A-Using-a-Hypervisor"><i class="fa fa-link"></i></a>A. Using a Hypervisor</h2><p>If you are not familiar with Docker, you can follow this approach where configuring the cluster resources can be done via the hypervisor GUI. If you have less resources, then we recommend using Docker, so you do not need to consume resources for running the guest virtual machine.</p><div class="alert alert-info">
+</div><div class="alert alert-success">
+<p><strong>Exercises</strong></p>
+<p><strong>Note:</strong> Take only full-screen and high quality pictures.</p>
+<ol>
+<li>Prepare a report <code>week1</code> with the results of this lab. Create a new Google document with the <a href="https://docs.google.com/document/d/1PkaJQT9n7S9NV2WufyIrtDSkGkJxur6sBdnyg07VDxw/edit?usp=sharing" target="_blank" rel="noopener">following format</a>.</li>
+<li><strong>[50 points]</strong> Install HDP on your machine. Take a full screenshot of Ambari dashboard and put it in the report.</li>
+<li><strong>[5 points]</strong> Access HDFS. Screenshot the content of the root folder in HDFS and attach it to the report.</li>
+<li><strong>[5 points]</strong> Download the data file from <a href="https://raw.githubusercontent.com/minsuk-heo/BigData/master/ch06/populationbycountry19802010millions.csv" target="_blank" rel="noopener">here</a>. Add it to HDFS root folder (/) via Ambari Files View and take a screenshot of the content of the HDFS root folder and attach it to the report. Delete the file from HDFS.</li>
+<li><strong>[15 points]</strong> Send the same data file from the local machine (where you boot up) to HDFS root folder (/) via <code>scp</code> or <code>docker cp</code>. Take a screenshot of the command and the output and add it to the report.</li>
+<li><strong>[15 points]</strong> Access the shell of the cluster node via port <code>2222</code> in the terminal or <code>4200</code> in the browser and create a folder <code>data</code> in HDFS root folder (/). Move the file to the folder <code>data</code>. Send a copy of the folder to the local machine. Take screenshots of the commands and the output and add them to the report.</li>
+<li><strong>[5 points]</strong> Reset the password of Ambari-Admin and access to Ambari as an admin. Display the roles of the users in the cluster. Screenshot and add it to the report.</li>
+<li><strong>[5 points]</strong> Create a new user with your name and give it cluster manager (admin) role. Access it, screenshot and add to the report. You can check the roles of HDP from <a href="https://docs.cloudera.com/HDPDocuments/Ambari-2.5.1.0/bk_ambari-administration/content/cluster_roles.html" target="_blank" rel="noopener">here</a>.</li>
+<li>Submit the report <code>week1</code> to Moodle before the deadline. Check the deadline on Moodle. The deadline is generally before the first lab in the next week.</li>
+</ol>
+</div><h1 id="Installing-Hortonworks-Sandbox"><a class="anchor hidden-xs" href="#Installing-Hortonworks-Sandbox" title="Installing-Hortonworks-Sandbox"><i class="fa fa-link"></i></a>Installing Hortonworks Sandbox</h1><p>There are two common ways to install HDP Sandbox on your PC, either by using a hypervisor such as <em>VirtualBox</em> which will pull the Docker image and run a container for your cluster or by directly using Docker where you need to manage your resources via <code>docker</code> command line <a href="https://docs.docker.com/config/containers/resource_constraints/" target="_blank" rel="noopener">options</a> in Linux or you can use WSL backend in Windows where you can configure resources via <code>.wslconfig</code> file.</p><div class="alert alert-danger">
+<p><strong>Note:</strong> For M1- and M2-based MacOS users, please install CentOS 7.5 or Ubuntu 18.04. Then follow the approach <strong>B. using Docker</strong> where you need to install Docker on the virtual machine and run cluster containers.</p>
+<p><img src="https://i.imgur.com/DuC1BqZ.png" alt="" class="md-image md-image"><br>
+A motivating success story <img class="emoji" alt=":face_with_cowboy_hat:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/face_with_cowboy_hat.png"></p>
+</div><h2 id="A-Using-a-Hypervisor"><a class="anchor hidden-xs" href="#A-Using-a-Hypervisor" title="A-Using-a-Hypervisor"><i class="fa fa-link"></i></a>A. Using a Hypervisor</h2><p>If you are not familiar with Docker, you can follow this approach where configuring the cluster resources can be done via the hypervisor GUI. If you have less resources, then we recommend using Docker, so you do not need to consume resources for running the guest virtual machine.</p><div class="alert alert-info">
 <p>In this approach, you will run a virtual machine which in turn will run your cluster container, so the operating system of the virtual machine will be different from the operating system of the container (HDP Sandbox cluster). You can notice that by checking the content of <code>/home</code> directory or the version of the operating system <code>cat /etc/redhat-release</code>.</p>
 </div><h3 id="1-Installing-a-Hypervisor"><a class="anchor hidden-xs" href="#1-Installing-a-Hypervisor" title="1-Installing-a-Hypervisor"><i class="fa fa-link"></i></a>1. Installing a Hypervisor</h3><p>We recommend <em>VirtualBox</em> as a hypervisor since it is supported for most common operating systems (Linux, Windows, and macOS). Please, follow the attached link in the following list to download your preferred hypervisor.</p><ul>
 <li><a href="https://www.virtualbox.org" target="_blank" rel="noopener">Oracle VM VirtualBox</a> <strong>(Recommended)</strong></li>
@@ -191,7 +205,7 @@
 <p>HDP Sandbox images on Docker Desktop</p>
 </center><div class="alert alert-success">
 <p>The HDP Sandbox cluster is now running on your PC <img class="emoji" alt=":smiley:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/smiley.png">.</p>
-</div><p>You do these steps only for the first time then you can stop/restart the cluster from Docker Desktop.</p><h2 id="Configuring-the-resources-for-Docker"><a class="anchor hidden-xs" href="#Configuring-the-resources-for-Docker" title="Configuring-the-resources-for-Docker"><i class="fa fa-link"></i></a>Configuring the resources for Docker</h2><p>Limiting the resources of the containers is important to avoid freezing the host system due to the lack of memory. The default behavior of Docker engine is to give the containers as much resources as they request. Linux users can use command line options whereas Windows users can use configuration of WSL backend (which is installed by default in Windows <em>10/11</em>) or Hyper-V backend. Here I will explain how you can configure the resources of the containers if you use WSL backend in Windows.</p><p>You need to download <code>.wslconfig</code> <a href="https://gist.github.com/firas-jolha/097d188a9b25179f9906d67fbf652d5c" target="_blank" rel="noopener">file</a> or build a new one with the same structure as follows:</p><pre><code class="yaml hljs"><span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> This should be stored in %UserProfile% folder which is your home folder c:/Users/&lt;Username&gt; in Windows</span>
+</div><p>You do these steps only for the first time then you can stop/restart the cluster from Docker Desktop.</p><h2 id="Configuring-the-resources-for-Docker"><a class="anchor hidden-xs" href="#Configuring-the-resources-for-Docker" title="Configuring-the-resources-for-Docker"><i class="fa fa-link"></i></a>Configuring the resources for Docker</h2><p>Limiting the resources of the containers is important to avoid freezing the host system due to the lack of memory. The default behavior of Docker engine is to give the containers as much resources as they request. Linux users can use command line options whereas Windows users can use configuration of WSL backend (which is installed by default in Windows <em>10/11</em> but do not forget that you need to install a Linux distribution such as Ubuntu, see tutorial <a href="https://pureinfotech.com/install-windows-subsystem-linux-2-windows-10/" target="_blank" rel="noopener">here</a>) or Hyper-V backend. Here I will explain how you can configure the resources of the containers if you use WSL backend in Windows.</p><p>You need to download <code>.wslconfig</code> <a href="https://gist.github.com/firas-jolha/097d188a9b25179f9906d67fbf652d5c" target="_blank" rel="noopener">file</a> or build a new one with the same structure as follows:</p><pre><code class="yaml hljs"><span class="hljs-comment"># <span class="hljs-doctag">NOTE:</span> This should be stored in %UserProfile% folder which is your home folder c:/Users/&lt;Username&gt; in Windows</span>
 <span class="hljs-comment"># Settings apply across all Linux distros running on WSL 2</span>
 <span class="hljs-string">[wsl2]</span>
 <span class="hljs-comment"># Limits VM memory to use no more than 4 GB, this can be set as whole numbers using GB or MB</span>
@@ -252,12 +266,14 @@
 </code></pre><div class="alert alert-warning">
 <p>Make sure that the containers of the cluster are running before running the commands.</p>
 </div><div class="alert alert-info">
-<p>If you are using a hypervisor for running the cluster, then you should run these commands in the virtual machine which runs the cluster but make sure that Docker engine is installed and <code>docker</code> command exists.</p>
-</div><h2 id="Transfer-data-into-and-out-of-HDFS"><a class="anchor hidden-xs" href="#Transfer-data-into-and-out-of-HDFS" title="Transfer-data-into-and-out-of-HDFS"><i class="fa fa-link"></i></a>Transfer data into and out of HDFS</h2><p>You can move data between the local file system of the host machine and HDFS via Ambari service as explained in section <a href="#Access-HDFS">Access HDFS</a>.</p><p>To move data from HDFS to the local file system of the cluster node, you can use <code>HDFS dfs</code> command with appropriate options. The table below shows usage of some options.</p><p><img src="https://i.imgur.com/OfzCZP2.png" alt="" class="md-image md-image"></p><h1 id="Access-PostgreSQL-server"><a class="anchor hidden-xs" href="#Access-PostgreSQL-server" title="Access-PostgreSQL-server"><i class="fa fa-link"></i></a>Access PostgreSQL server</h1><p>In fact, HDP Sandbox comes with a pre-installed PostgreSQL server so you do not to install any additional software to use PostgreSQL. You can access it via <code>ssh</code> as <code>postgres</code> user:</p><pre><code class="sh hljs">[root<span class="hljs-symbol">@sandbox</span>-hdp ~]<span class="hljs-meta">#  su postgres</span>
-[root<span class="hljs-symbol">@sandbox</span>-hdp ~]<span class="hljs-meta">#  psql</span>
-</code></pre><p>This will open a CLI to interact with PostgreSQL. You can access the databases using <code>\c</code> command and the tables via <code>\dt</code> command. For example, you can access the database <code>ambari</code> (a default database on HDP Sandbox) by running the following command in postgreSQL CLI.</p><pre><code class="sh hljs"><span class="hljs-attribute">postgres</span>=# \c ambari
-You are now connected <span class="hljs-keyword">to</span> database <span class="hljs-string">"ambari"</span> as<span class="hljs-built_in"> user </span><span class="hljs-string">"postgres"</span>.
-</code></pre><p>You can read this <a href="https://quickref.me/postgres" target="_blank" rel="noopener">cheat sheet</a> to refresh your knowledge in PostgreSQL which is <strong>required for the next lab.</strong></p><h1 id="Common-issues"><a class="anchor hidden-xs" href="#Common-issues" title="Common-issues"><i class="fa fa-link"></i></a>Common issues</h1><ul>
+<p>Info: If you installed HDP using a hypervisor, then you can use the command <code>scp</code> to immediately copy files from the source machine (where you are running the command) to the local file system of the cluster node.<br>
+For instance, to transfer the files in <em>data</em> folder from the host machine to the folder <code>/data</code> in the cluster node, we run the following command on the terminal.</p>
+<pre><code class="sh hljs">scp -P <span class="hljs-number">2222</span> data/* root<span class="hljs-variable">@localhost</span><span class="hljs-symbol">:/data</span>
+</code></pre>
+<p>Note: If you got issues as shown in the figure below, then you need to open the file <code>%USERPROFILE%/.ssh/known_hosts</code> and remove the previous keys for that port (You can empty the file if all keys are not important).<br>
+<img src="https://i.imgur.com/fKe5BNZ.png" alt="" class="md-image md-image"></p>
+<p><code>scp</code> will create a new key and exchange it with the cluster node.</p>
+</div><h2 id="Transfer-data-into-and-out-of-HDFS"><a class="anchor hidden-xs" href="#Transfer-data-into-and-out-of-HDFS" title="Transfer-data-into-and-out-of-HDFS"><i class="fa fa-link"></i></a>Transfer data into and out of HDFS</h2><p>You can move data between the local file system of the host machine and HDFS via Ambari service as explained in section <a href="#Access-HDFS">Access HDFS</a>.</p><p>To move data from HDFS to the local file system of the cluster node, you can use <code>hdfs dfs</code> command with appropriate options. The table below shows usage of some options.</p><p><img src="https://i.imgur.com/OfzCZP2.png" alt="" class="md-image md-image"></p><h1 id="Common-issues"><a class="anchor hidden-xs" href="#Common-issues" title="Common-issues"><i class="fa fa-link"></i></a>Common issues</h1><ul>
 <li><code>Docker</code> does not read the parameters in <code>.wslconfig</code> file on Windows.
 <ul>
 <li>Possible reasons:
@@ -329,7 +345,8 @@ You are now connected <span class="hljs-keyword">to</span> database <span class=
 <a href="https://www.ibm.com/downloads/cas/DKWR4KZB" target="_blank" rel="noopener">IBM Analytics - Data Sheet</a><br>
 <a href="https://www.postgresql.org" target="_blank" rel="noopener">PostgreSQL: The World’s Most Advanced Open Source Relational Database</a><br>
 <a href="https://gdancik.github.io/CSC-343/data/notes/HDFS.pdf" target="_blank" rel="noopener">Moving data in HDFS</a><br>
-<a href="https://images.linoxide.com/hadoop-hdfs-commands-cheatsheet.pdf" target="_blank" rel="noopener">Hadoop HDFS Command Cheatsheet</a></p></div>
+<a href="https://hadoop.apache.org/docs/r2.4.1/hadoop-project-dist/hadoop-common/FileSystemShell.html" target="_blank" rel="noopener">Hadoop HDFS Command Cheatsheet</a><br>
+<a href="https://docs.cloudera.com/HDPDocuments/Ambari-2.5.1.0/bk_ambari-administration/content/cluster_roles.html" target="_blank" rel="noopener">HDP Cluster Roles</a></p></div>
     <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
         <div class="pull-right dropdown">
             <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
@@ -361,7 +378,7 @@ You are now connected <span class="hljs-keyword">to</span> database <span class=
 <li><a href="#StoppingRestarting-the-cluster" title="Stopping/Restarting the cluster">Stopping/Restarting the cluster</a></li>
 </ul>
 </li>
-<li class=""><a href="#Access-HDP-Sandbox-cluster" title="Access HDP Sandbox cluster">Access HDP Sandbox cluster</a><ul class="nav">
+<li><a href="#Access-HDP-Sandbox-cluster" title="Access HDP Sandbox cluster">Access HDP Sandbox cluster</a><ul class="nav">
 <li><a href="#Access-via-SSH" title="Access via SSH">Access via SSH</a></li>
 </ul>
 </li>
@@ -371,11 +388,10 @@ You are now connected <span class="hljs-keyword">to</span> database <span class=
 <li><a href="#Transfer-data-into-and-out-of-HDFS" title="Transfer data into and out of HDFS">Transfer data into and out of HDFS</a></li>
 </ul>
 </li>
-<li><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
 <li><a href="#Common-issues" title="Common issues">Common issues</a></li>
 <li><a href="#Self-check-questions" title="Self-check questions">Self-check questions</a></li>
-<li><a href="#Appendix" title="Appendix">Appendix</a><ul class="nav">
-<li><a href="#Sandbox-Version" title="Sandbox Version">Sandbox Version</a></li>
+<li class=""><a href="#Appendix" title="Appendix">Appendix</a><ul class="nav">
+<li class=""><a href="#Sandbox-Version" title="Sandbox Version">Sandbox Version</a></li>
 <li><a href="#Ambari-Roles" title="Ambari Roles">Ambari Roles</a></li>
 </ul>
 </li>
@@ -416,7 +432,7 @@ You are now connected <span class="hljs-keyword">to</span> database <span class=
 <li><a href="#StoppingRestarting-the-cluster" title="Stopping/Restarting the cluster">Stopping/Restarting the cluster</a></li>
 </ul>
 </li>
-<li class=""><a href="#Access-HDP-Sandbox-cluster" title="Access HDP Sandbox cluster">Access HDP Sandbox cluster</a><ul class="nav">
+<li><a href="#Access-HDP-Sandbox-cluster" title="Access HDP Sandbox cluster">Access HDP Sandbox cluster</a><ul class="nav">
 <li><a href="#Access-via-SSH" title="Access via SSH">Access via SSH</a></li>
 </ul>
 </li>
@@ -426,11 +442,10 @@ You are now connected <span class="hljs-keyword">to</span> database <span class=
 <li><a href="#Transfer-data-into-and-out-of-HDFS" title="Transfer data into and out of HDFS">Transfer data into and out of HDFS</a></li>
 </ul>
 </li>
-<li><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
 <li><a href="#Common-issues" title="Common issues">Common issues</a></li>
 <li><a href="#Self-check-questions" title="Self-check questions">Self-check questions</a></li>
-<li><a href="#Appendix" title="Appendix">Appendix</a><ul class="nav">
-<li><a href="#Sandbox-Version" title="Sandbox Version">Sandbox Version</a></li>
+<li class=""><a href="#Appendix" title="Appendix">Appendix</a><ul class="nav">
+<li class=""><a href="#Sandbox-Version" title="Sandbox Version">Sandbox Version</a></li>
 <li><a href="#Ambari-Roles" title="Ambari Roles">Ambari Roles</a></li>
 </ul>
 </li>
