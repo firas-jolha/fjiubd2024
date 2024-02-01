@@ -77,6 +77,7 @@ details.menu {
 </li>
 </ul>
 </li>
+<li><a href="#Common-issues" title="Common issues">Common issues</a></li>
 <li><a href="#References" title="References">References</a></li>
 </ul>
 </div><p></p><h1 id="Prerequisites"><a class="anchor hidden-xs" href="#Prerequisites" title="Prerequisites"><i class="fa fa-link"></i></a>Prerequisites</h1><ul>
@@ -93,7 +94,7 @@ details.menu {
 </p>
 </center><p>A <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" target="_blank" rel="noopener">pandas DataFrame</a> is a 2-dimensional data structure that can store data of different types (including characters, integers, floating point values, categorical data and more) in columns. It is similar to a spreadsheet or a SQL table. You can create a dataframe as follows:</p><pre><code class="python hljs">df = pd.DataFrame({ <span class="hljs-string">"Name"</span>: [<span class="hljs-string">"Braund, Mr. Owen Harris"</span>, <span class="hljs-string">"Allen, Mr. William Henry"</span>, <span class="hljs-string">"Bonnell, Miss. Elizabeth"</span>], <span class="hljs-string">"Age"</span>: [<span class="hljs-number">22</span>, <span class="hljs-number">35</span>, <span class="hljs-number">58</span>], <span class="hljs-string">"Gender"</span>: [<span class="hljs-string">"male"</span>, <span class="hljs-string">"male"</span>, <span class="hljs-string">"female"</span>]})
 </code></pre><center>
-<img src="/uploads/3918b5ae558998ff965b21100.png" width="340">
+<img src="https://i.imgur.com/djAp1y2.png" width="340">
 <p>df 
 </p>
 </center><center>
@@ -433,7 +434,25 @@ SELECT AVG()
 23. Delete all teams who has only 1 member.<br>
 24. Delete all items whose price is 20 or more.<br>
 25. Delete all ads from <code>computers</code> category and purchased by one player or less.</p>
-</div><h1 id="References"><a class="anchor hidden-xs" href="#References" title="References"><i class="fa fa-link"></i></a>References</h1><ul>
+</div><h1 id="Common-issues"><a class="anchor hidden-xs" href="#Common-issues" title="Common-issues"><i class="fa fa-link"></i></a>Common issues</h1><ul>
+<li>When you try to access the database by running the command <code>psql -U postgres</code> as <code>[root@sandbox-hdp data]# psql -U postgres</code>. You may get the following error:
+<blockquote>
+<p>psql: FATAL:  Peer authentication failed for user “postgres”</p>
+</blockquote>
+<ul>
+<li>Possible reasons:
+<ul>
+<li>The database is configured to allow access only through the credentials of the user.</li>
+</ul>
+</li>
+<li>Possible solutions:
+<ul>
+<li>You can change this configuration to allow all users to access the database without the need to enter credentials. Add the line <code>local all all trust</code> at the beginning of the file <code>/var/lib/pgsql/data/pg_hba.conf</code> then restart PostgreSQL service by running the command <code>systemctl restart postgresql</code> as root user.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><h1 id="References"><a class="anchor hidden-xs" href="#References" title="References"><i class="fa fa-link"></i></a>References</h1><ul>
 <li><a href="https://pandas.pydata.org/docs/index.html" target="_blank" rel="noopener">Pandas documentation</a></li>
 <li><a href="https://eagronin.github.io/capstone-acquire/" target="_blank" rel="noopener">Catch the Pink Flamingo game description</a></li>
 <li><a href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_sql.html" target="_blank" rel="noopener">Comparison with SQL</a></li>
@@ -445,36 +464,37 @@ SELECT AVG()
             </a>
             <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
                 <div class="toc"><ul class="nav">
-<li class=""><a href="#Lab-2---Data-Retrieval-with-SQL" title="Lab 2 - Data Retrieval with SQL">Lab 2 - Data Retrieval with SQL</a><ul class="nav">
-<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Lab-2---Data-Retrieval-with-SQL" title="Lab 2 - Data Retrieval with SQL">Lab 2 - Data Retrieval with SQL</a><ul class="nav">
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
 </ul>
 </li>
-<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
-<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
-<li class=""><a href="#Objectives" title="Objectives">Objectives</a></li>
-<li class=""><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Introduction" title="Introduction">Introduction</a></li>
 <li class=""><a href="#Pandas-DataFrame" title="Pandas DataFrame">Pandas DataFrame</a><ul class="nav">
-<li class=""><a href="#Installing-pandas-package" title="Installing pandas package">Installing pandas package</a></li>
-<li class=""><a href="#Installing-python-interpreter-on-Zeppelin" title="Installing python interpreter on Zeppelin">Installing python interpreter on Zeppelin</a></li>
+<li><a href="#Installing-pandas-package" title="Installing pandas package">Installing pandas package</a></li>
+<li><a href="#Installing-python-interpreter-on-Zeppelin" title="Installing python interpreter on Zeppelin">Installing python interpreter on Zeppelin</a></li>
 </ul>
 </li>
-<li class=""><a href="#Game-Description" title="Game Description">Game Description</a></li>
-<li class=""><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
-<li class=""><a href="#PostgreSQL-Meta-commands" title="PostgreSQL Meta-commands">PostgreSQL Meta-commands</a></li>
-<li class=""><a href="#Build-the-Database" title="Build the Database">Build the Database</a></li>
-<li class=""><a href="#Reading-Data" title="Reading Data">Reading Data</a></li>
-<li class=""><a href="#Operations-on-Data" title="Operations on Data">Operations on Data</a><ul class="nav">
+<li><a href="#Game-Description" title="Game Description">Game Description</a></li>
+<li><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
+<li><a href="#PostgreSQL-Meta-commands" title="PostgreSQL Meta-commands">PostgreSQL Meta-commands</a></li>
+<li><a href="#Build-the-Database" title="Build the Database">Build the Database</a></li>
+<li><a href="#Reading-Data" title="Reading Data">Reading Data</a></li>
+<li><a href="#Operations-on-Data" title="Operations on Data">Operations on Data</a><ul class="nav">
 <li class="invisable-node"><ul class="nav">
-<li class=""><a href="#SELECT-operation" title="SELECT operation">SELECT operation</a></li>
-<li class=""><a href="#WHERE-operation" title="WHERE operation">WHERE operation</a></li>
-<li class=""><a href="#GROUP-BY-operation" title="GROUP BY operation">GROUP BY operation</a></li>
-<li class=""><a href="#JOIN-operation" title="JOIN operation">JOIN operation</a></li>
-<li class=""><a href="#LIMIT-operation" title="LIMIT operation">LIMIT operation</a></li>
-<li class=""><a href="#UPDATEDELETE-operation" title="UPDATE/DELETE operation">UPDATE/DELETE operation</a></li>
+<li><a href="#SELECT-operation" title="SELECT operation">SELECT operation</a></li>
+<li><a href="#WHERE-operation" title="WHERE operation">WHERE operation</a></li>
+<li><a href="#GROUP-BY-operation" title="GROUP BY operation">GROUP BY operation</a></li>
+<li><a href="#JOIN-operation" title="JOIN operation">JOIN operation</a></li>
+<li><a href="#LIMIT-operation" title="LIMIT operation">LIMIT operation</a></li>
+<li><a href="#UPDATEDELETE-operation" title="UPDATE/DELETE operation">UPDATE/DELETE operation</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li><a href="#Common-issues" title="Common issues">Common issues</a></li>
 <li><a href="#References" title="References">References</a></li>
 </ul>
 </div><div class="toc-menu" style="">
@@ -488,36 +508,37 @@ SELECT AVG()
     </div>
     <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
         <div class="toc"><ul class="nav">
-<li class=""><a href="#Lab-2---Data-Retrieval-with-SQL" title="Lab 2 - Data Retrieval with SQL">Lab 2 - Data Retrieval with SQL</a><ul class="nav">
-<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Lab-2---Data-Retrieval-with-SQL" title="Lab 2 - Data Retrieval with SQL">Lab 2 - Data Retrieval with SQL</a><ul class="nav">
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
 </ul>
 </li>
-<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
-<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
-<li class=""><a href="#Objectives" title="Objectives">Objectives</a></li>
-<li class=""><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Introduction" title="Introduction">Introduction</a></li>
 <li class=""><a href="#Pandas-DataFrame" title="Pandas DataFrame">Pandas DataFrame</a><ul class="nav">
-<li class=""><a href="#Installing-pandas-package" title="Installing pandas package">Installing pandas package</a></li>
-<li class=""><a href="#Installing-python-interpreter-on-Zeppelin" title="Installing python interpreter on Zeppelin">Installing python interpreter on Zeppelin</a></li>
+<li><a href="#Installing-pandas-package" title="Installing pandas package">Installing pandas package</a></li>
+<li><a href="#Installing-python-interpreter-on-Zeppelin" title="Installing python interpreter on Zeppelin">Installing python interpreter on Zeppelin</a></li>
 </ul>
 </li>
-<li class=""><a href="#Game-Description" title="Game Description">Game Description</a></li>
-<li class=""><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
-<li class=""><a href="#PostgreSQL-Meta-commands" title="PostgreSQL Meta-commands">PostgreSQL Meta-commands</a></li>
-<li class=""><a href="#Build-the-Database" title="Build the Database">Build the Database</a></li>
-<li class=""><a href="#Reading-Data" title="Reading Data">Reading Data</a></li>
-<li class=""><a href="#Operations-on-Data" title="Operations on Data">Operations on Data</a><ul class="nav">
+<li><a href="#Game-Description" title="Game Description">Game Description</a></li>
+<li><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
+<li><a href="#PostgreSQL-Meta-commands" title="PostgreSQL Meta-commands">PostgreSQL Meta-commands</a></li>
+<li><a href="#Build-the-Database" title="Build the Database">Build the Database</a></li>
+<li><a href="#Reading-Data" title="Reading Data">Reading Data</a></li>
+<li><a href="#Operations-on-Data" title="Operations on Data">Operations on Data</a><ul class="nav">
 <li class="invisable-node"><ul class="nav">
-<li class=""><a href="#SELECT-operation" title="SELECT operation">SELECT operation</a></li>
-<li class=""><a href="#WHERE-operation" title="WHERE operation">WHERE operation</a></li>
-<li class=""><a href="#GROUP-BY-operation" title="GROUP BY operation">GROUP BY operation</a></li>
-<li class=""><a href="#JOIN-operation" title="JOIN operation">JOIN operation</a></li>
-<li class=""><a href="#LIMIT-operation" title="LIMIT operation">LIMIT operation</a></li>
-<li class=""><a href="#UPDATEDELETE-operation" title="UPDATE/DELETE operation">UPDATE/DELETE operation</a></li>
+<li><a href="#SELECT-operation" title="SELECT operation">SELECT operation</a></li>
+<li><a href="#WHERE-operation" title="WHERE operation">WHERE operation</a></li>
+<li><a href="#GROUP-BY-operation" title="GROUP BY operation">GROUP BY operation</a></li>
+<li><a href="#JOIN-operation" title="JOIN operation">JOIN operation</a></li>
+<li><a href="#LIMIT-operation" title="LIMIT operation">LIMIT operation</a></li>
+<li><a href="#UPDATEDELETE-operation" title="UPDATE/DELETE operation">UPDATE/DELETE operation</a></li>
 </ul>
 </li>
 </ul>
 </li>
+<li><a href="#Common-issues" title="Common issues">Common issues</a></li>
 <li><a href="#References" title="References">References</a></li>
 </ul>
 </div><div class="toc-menu" style="">
