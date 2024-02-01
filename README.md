@@ -10,4 +10,8 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Lab 1 - Installing HDP Sandbox](html/common/Lab 1 - Installing HDP Sandbox.html)
 
+### [Lab 2 - Data Retrieval with SQL](html/common/Lab 2 - Data Retrieval with SQL.html)
+
 ## Assignments
+
+### [Assignment 2 - Data Retrieval with SQL](html/common/Assignment 2 - Data Retrieval with SQL.html)

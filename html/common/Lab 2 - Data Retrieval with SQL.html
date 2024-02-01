@@ -1,0 +1,675 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Lab 2 - Data Retrieval with SQL - CodiMD
+    </title>
+    <link rel="icon" type="image/png" href="http://localhost:3000/favicon.png">
+    <link rel="apple-touch-icon" href="http://localhost:3000/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha256-H0KfTigpUV+0/5tn2HXC0CPwhhDhWgSawJdnFd0CGCo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fork-awesome/1.1.3/css/fork-awesome.min.css" integrity="sha256-ZhApazu+kejqTYhMF+1DzNKjIzP7KXu6AzyXcC1gMus=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github-gist.min.css" integrity="sha256-tAflq+ymku3Khs+I/WcAneIlafYgDiOQ9stIHH985Wo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,300italic,300|Source+Serif+Pro|Source+Code+Pro:400,300,500&subset=latin,latin-ext);.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{padding:0 1em;color:#777;border-left:.25em solid #ddd}.night .markdown-body blockquote{color:#bcbcbc}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.night .markdown-body h1,.night .markdown-body h2,.night .markdown-body h3,.night .markdown-body h4,.night .markdown-body h5,.night .markdown-body h6{color:#ddd}.markdown-body h1 .fa-link,.markdown-body h2 .fa-link,.markdown-body h3 .fa-link,.markdown-body h4 .fa-link,.markdown-body h5 .fa-link,.markdown-body h6 .fa-link{color:#000;vertical-align:middle;visibility:hidden;font-size:16px}.night .markdown-body h1 .fa-link,.night .markdown-body h2 .fa-link,.night .markdown-body h3 .fa-link,.night .markdown-body h4 .fa-link,.night .markdown-body h5 .fa-link,.night .markdown-body h6 .fa-link{color:#fff}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .fa-link,.markdown-body h2:hover .anchor .fa-link,.markdown-body h3:hover .anchor .fa-link,.markdown-body h4:hover .anchor .fa-link,.markdown-body h5:hover .anchor .fa-link,.markdown-body h6:hover .anchor .fa-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.night .markdown-body table tr{background-color:#5f5f5f}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.night .markdown-body table tr:nth-child(2n){background-color:#4f4f4f}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.night .markdown-body code,.night .markdown-body tt{color:#eee;background-color:hsla(0,0%,90.2%,.36)}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\A0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.markdown-body kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid;border-color:#ccc #ccc #bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body pre{border:inherit!important}.night .markdown-body pre{filter:invert(100%)}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-webkit-inline-flex;display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.night .markdown-body .gist table tr:nth-child(2n){background-color:#ddd}.markdown-body code[data-gist-id]{background:none;padding:0;filter:invert(100%)}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.geo,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.night .markdown-body pre.graphviz .graph>polygon{fill:#333}.night .markdown-body pre.mermaid .sectionTitle,.night .markdown-body pre.mermaid .titleText,.night .markdown-body pre.mermaid text{fill:#fff}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{max-width:100%;height:100%}.night .markdown-body .abc path{fill:#eee}.night .markdown-body .abc path.note_selected{fill:##4DD0E1}.night tspan{fill:#fefefe}.night pre rect{fill:transparent}.night pre.flow-chart path,.night pre.flow-chart rect{stroke:#fff}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body img{background-color:transparent}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;-webkit-transition:opacity .2s;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;-webkit-transition:opacity .2s;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.geo-map{width:100%;height:250px}.markmap-container{height:300px}.markmap-container>svg{width:100%;height:100%}.MJX_Assistive_MathML{display:none}.ui-infobar{position:relative;z-index:2;max-width:758px;margin-top:25px;margin-bottom:-25px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:10000}.ui-toc-label{opacity:.9;background-color:#ccc;border:none}.ui-toc-label,.ui-toc .open .ui-toc-label{-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#5f5f5f}.ui-toc-label:focus{opacity:1;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.night .ui-toc-dropdown .nav>li>a:focus,.night .ui-toc-dropdown .nav>li>a:hover{color:#fff;border-left-color:#fff}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.night .ui-toc-dropdown .nav>.active:focus>a,.night .ui-toc-dropdown .nav>.active:hover>a,.night .ui-toc-dropdown .nav>.active>a{color:#fff;border-left:2px solid #fff}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.night .ui-toc-dropdown .nav>li>a{color:#aaa}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:50px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a{padding-right:50px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:60px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a{padding-right:60px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:hover{padding-left:49px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:hover{padding-right:49px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-left:59px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-right:59px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>a{padding-left:48px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:48px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active>a{padding-left:58px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:58px}.markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,Hiragino Kaku Gothic Pro,"\30D2\30E9\30AE\30CE\89D2\30B4   Pro W3",Osaka,Meiryo,"\30E1\30A4\30EA\30AA",MS Gothic,"\FF2D\FF33   \30B4\30B7\30C3\30AF",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,"\FF2D\FF33   \FF30\30B4\30B7\30C3\30AF",sans-serif}.markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang TC,Microsoft JhengHei,"\5FAE\8EDF\6B63\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,"\5FAE\8EDF\6B63\9ED1UI",sans-serif}.markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang SC,Microsoft YaHei,"\5FAE\8F6F\96C5\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,"\5FAE\8F6F\96C5\9ED1UI",sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:rgba(0,0,0,.85)}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:contain}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}small span{line-height:22px}small .dropdown{display:inline-block}small .dropdown a:focus,small .dropdown a:hover{text-decoration:none}.unselectable{-moz-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-o-user-select:none;user-select:none}.night .navbar{background:#333;border-bottom-color:#333;color:#eee}.night .navbar a{color:#eee}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}.focus,:focus{outline:none!important}::-moz-focus-inner{border:0!important}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid" lang="en"><h1 id="Lab-2---Data-Retrieval-with-SQL"><a class="anchor hidden-xs" href="#Lab-2---Data-Retrieval-with-SQL" title="Lab-2---Data-Retrieval-with-SQL"><i class="fa fa-link"></i></a>Lab 2 - Data Retrieval with SQL</h1><p><strong>Course:</strong> Big Data - IU S24<br>
+<strong>Author:</strong> Firas Jolha</p><style>
+details.menu {
+    padding-right: 0; 
+}
+</style><h2 id="Dataset"><a class="anchor hidden-xs" href="#Dataset" title="Dataset"><i class="fa fa-link"></i></a>Dataset</h2><ul>
+<li>flamingo_dataset
+<ul>
+<li><a href="https://github.com/esther3587/Catch-Pink-Flamingo-Game/raw/master/big_data_capstone_datasets_and_scripts/flamingo-data.zip" target="_blank" rel="noopener">original</a></li>
+<li><a href="https://bit.ly/3YfcnK4" target="_blank" rel="noopener">preprocessed</a></li>
+</ul>
+</li>
+</ul><h1 id="Agenda"><a class="anchor hidden-xs" href="#Agenda" title="Agenda"><i class="fa fa-link"></i></a>Agenda</h1><p></p><div class="toc"><ul>
+<li><a href="#Lab-2---Data-Retrieval-with-SQL" title="Lab 2 - Data Retrieval with SQL">Lab 2 - Data Retrieval with SQL</a><ul>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+</ul>
+</li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li><a href="#Pandas-DataFrame" title="Pandas DataFrame">Pandas DataFrame</a><ul>
+<li><a href="#Installing-pandas-package" title="Installing pandas package">Installing pandas package</a></li>
+<li><a href="#Installing-python-interpreter-on-Zeppelin" title="Installing python interpreter on Zeppelin">Installing python interpreter on Zeppelin</a></li>
+</ul>
+</li>
+<li><a href="#Game-Description" title="Game Description">Game Description</a></li>
+<li><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
+<li><a href="#PostgreSQL-Meta-commands" title="PostgreSQL Meta-commands">PostgreSQL Meta-commands</a></li>
+<li><a href="#Build-the-Database" title="Build the Database">Build the Database</a><ul>
+<li><a href="#Reading-Data" title="Reading Data">Reading Data</a></li>
+<li><a href="#Operations-on-Data" title="Operations on Data">Operations on Data</a><ul>
+<li><a href="#SELECT-operation" title="SELECT operation">SELECT operation</a></li>
+<li><a href="#WHERE-operation" title="WHERE operation">WHERE operation</a></li>
+<li><a href="#GROUP-BY-operation" title="GROUP BY operation">GROUP BY operation</a></li>
+<li><a href="#JOIN-operation" title="JOIN operation">JOIN operation</a></li>
+<li><a href="#LIMIT-operation" title="LIMIT operation">LIMIT operation</a></li>
+<li><a href="#UPDATEDELETE-operation" title="UPDATE/DELETE operation">UPDATE/DELETE operation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><p></p><h1 id="Prerequisites"><a class="anchor hidden-xs" href="#Prerequisites" title="Prerequisites"><i class="fa fa-link"></i></a>Prerequisites</h1><ul>
+<li>Installed Hortonworks Data Platform (HDP) Sandbox</li>
+</ul><h1 id="Objectives"><a class="anchor hidden-xs" href="#Objectives" title="Objectives"><i class="fa fa-link"></i></a>Objectives</h1><ul>
+<li>Install python interpreter on Zeppelin Notebook</li>
+<li>Practice on pandas DataFrame API</li>
+<li>Read and analyse data using pandas DataFrame API</li>
+<li>Access <code>PostgreSQL</code> database server installed on HDP</li>
+<li>Perform CRUD operations on a relational database</li>
+</ul><h1 id="Introduction"><a class="anchor hidden-xs" href="#Introduction" title="Introduction"><i class="fa fa-link"></i></a>Introduction</h1><p>The data in relational databases are typically structured where you need to define the schema of relations between database entities and the required constraints. You can store the data in relational databases according to the schema and the defined constraints. This kind of databases is not helpful for storing semistructured data (emails, xml, json, …etc) and unstructured data (e.g. Word, pdf, html, …etc). You can operate on structured data stored in relational databases using SQL whereas semistructured data need more flexible tools. In this lab, we will use one of the most common data analysis packages in Python, called pandas to retrieve and analyze the data. We will also introduce an analogy between SQL and pandas for data retrieval.</p><h1 id="Pandas-DataFrame"><a class="anchor hidden-xs" href="#Pandas-DataFrame" title="Pandas-DataFrame"><i class="fa fa-link"></i></a>Pandas DataFrame</h1><p>Pandas is an open-source Python library that is extensively used for data analysis and manipulation.</p><center>
+<img src="https://i.imgur.com/XpIJLBx.png" width="300">
+<p>pandas DataFrame
+</p>
+</center><p>A <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.html#pandas.DataFrame" target="_blank" rel="noopener">pandas DataFrame</a> is a 2-dimensional data structure that can store data of different types (including characters, integers, floating point values, categorical data and more) in columns. It is similar to a spreadsheet or a SQL table. You can create a dataframe as follows:</p><pre><code class="python hljs">df = pd.DataFrame({ <span class="hljs-string">"Name"</span>: [<span class="hljs-string">"Braund, Mr. Owen Harris"</span>, <span class="hljs-string">"Allen, Mr. William Henry"</span>, <span class="hljs-string">"Bonnell, Miss. Elizabeth"</span>], <span class="hljs-string">"Age"</span>: [<span class="hljs-number">22</span>, <span class="hljs-number">35</span>, <span class="hljs-number">58</span>], <span class="hljs-string">"Gender"</span>: [<span class="hljs-string">"male"</span>, <span class="hljs-string">"male"</span>, <span class="hljs-string">"female"</span>]})
+</code></pre><center>
+<img src="/uploads/3918b5ae558998ff965b21100.png" width="340">
+<p>df 
+</p>
+</center><center>
+<img src="https://i.imgur.com/uTh6hfI.png" width="140">
+<p>Each column in a DataFrame is a Series
+</p>
+</center><p>A <a href="https://pandas.pydata.org/docs/reference/api/pandas.Series.html#pandas.Series" target="_blank" rel="noopener">pandas Series</a> has no column labels, as it is just a single column of a DataFrame. A Series does have row labels. Series is a one-dimensional labeled array capable of holding any data type (integers, strings, floating point numbers, Python objects, etc.). The axis labels are collectively referred to as the index. You can create a <code>Series</code> from scratch as follows:</p><pre><code class="python hljs">ages = pd.Series([<span class="hljs-number">22</span>, <span class="hljs-number">35</span>, <span class="hljs-number">58</span>], name=<span class="hljs-string">"Age"</span>)
+</code></pre><p>Many pandas operations return a DataFrame or a Series. The <code>describe()</code> method is an example of a pandas operation returning some basic statistics of the numerical data. You can learn more about data structures in pandas from <a href="https://pandas.pydata.org/docs/user_guide/dsintro.html#dsintro" target="_blank" rel="noopener">here</a>.</p><p>Here, we will show an analogy between pandas library and SQL. We will use the dataset of the game <strong>“catch the pink flamingo”</strong>.</p><h2 id="Installing-pandas-package"><a class="anchor hidden-xs" href="#Installing-pandas-package" title="Installing-pandas-package"><i class="fa fa-link"></i></a>Installing pandas package</h2><p>The cluster node in HDP Sandbox does not have pandas package installed, so you need to install it using pip. The Python version in the sandbox is 2.7, and pip 20.3.4 need to be installed using <code>easy_install</code> script or any other methods. After that, you need to install the pandas package version 0.24.2.</p><div class="alert alert-info">
+<p>Search for a tutorial on your preferred search engine <img class="emoji" alt=":slightly_smiling_face:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/slightly_smiling_face.png"></p>
+</div><div class="alert alert-warning">
+<p>Do not update the Python version in the sandbox, otherwise some services will not work.</p>
+</div><details><summary>simple steps to install pip and pandas without using <code>yum</code> package manager.</summary>
+<pre><code class="sh hljs"><span class="hljs-string">wget </span><span class="hljs-string">https:</span>//<span class="hljs-string">bootstrap.</span><span class="hljs-string">pypa.</span><span class="hljs-string">io/</span><span class="hljs-string">pip/</span>2.7/<span class="hljs-built_in">get-pip.py</span>
+<span class="hljs-string">python </span><span class="hljs-built_in">get-pip.py</span>
+<span class="hljs-string">pip </span><span class="hljs-string">install </span><span class="hljs-string">pandas=</span>=0.<span class="hljs-string">24.</span>2
+</code></pre>
+</details><h2 id="Installing-python-interpreter-on-Zeppelin"><a class="anchor hidden-xs" href="#Installing-python-interpreter-on-Zeppelin" title="Installing-python-interpreter-on-Zeppelin"><i class="fa fa-link"></i></a>Installing python interpreter on Zeppelin</h2><p><a href="https://zeppelin.apache.org" target="_blank" rel="noopener">Apache Zeppelin</a> is a web-based notebook that enables data-driven, interactive data analytics and collaborative documents with SQL, Scala, Python, R and more.</p><p>You can check this <a href="https://zeppelin.apache.org/docs/0.8.0/usage/interpreter/installation.html#3rd-party-interpreters" target="_blank" rel="noopener">tutorial</a> to see how you can add an interpreter to Zeppelin. You need to run the script <code>/usr/hdp/2.6.5.0-292/zeppelin/bin/install-interpreter.sh</code> and specify the name of the interpreter as an argument to the option <code>--name</code>. For Python, you need to pass <code>python</code> as follows:</p><pre><code class="vim hljs">/usr/hdp/<span class="hljs-number">2.6</span>.<span class="hljs-number">5.0</span>-<span class="hljs-number">292</span>/zeppelin/bin/install-interpreter.<span class="hljs-keyword">sh</span> --name <span class="hljs-keyword">python</span>
+</code></pre><div class="alert alert-danger">
+<p><strong>Note:</strong> Before you run the script, you need to add the line:<br>
+<code>export ZEPPELIN_INTERPRETER_DEP_MVNREPO="https://repo1.maven.org/maven2"</code><br>
+at the beginning of the file <code>/usr/hdp/2.6.5.0-292/zeppelin/conf/zeppelin-env.sh</code> or <code>/usr/hdp/current/zeppelin-server/conf/zeppelin-env.sh</code></p>
+<!-- as follows:
+`sed -i '1iexport ZEPPELIN_INTERPRETER_DEP_MVNREPO="https://repo1.maven.org/maven2"' /usr/hdp/2.6.5.0-292/zeppelin/conf
+/zeppelin-env.sh`
+ -->
+<!-- This is due to the fact, that Zeppeling is not supported nowadays. -->
+<p><img src="https://i.imgur.com/LlqtYG9.png" alt="" class="md-image md-image"></p>
+</div><p>Then run the script passing <code>python</code> as the interpreter.<br>
+<img src="https://i.imgur.com/Q6Gd0ER.png" alt="" class="md-image md-image"></p><p>After that, restart Zepplin from Ambari dashboard. You can access Zeppelin Notebook via the link <a href="http://localhost:9995" target="_blank" rel="noopener">http://localhost:9995</a> on your local machine.</p><p><img src="https://i.imgur.com/NUkzqJM.png" alt="" class="md-image md-image"></p><p>You can add interpreters to Zeppelin by navigating to interpeters window. Press <code>create</code>, select <code>python</code>, and add a name <code>python2</code> for the interpreter instance as shown below.</p><p><img src="https://i.imgur.com/0cfhKDX.png" alt="" class="md-image md-image"></p><hr><p><img src="https://i.imgur.com/Vepj5TY.png" alt="" class="md-image md-image"></p><p>Create a new note and select python2 as shown below.<br>
+<img src="https://i.imgur.com/RGiT4sE.png" alt="" class="md-image md-image"></p><p>This will create a new notebook where the default interpreter is <code>python2</code> but indeed you can run cells using other interpreters by specifying the interpreter at the beginning of the cell such as <code>%sh</code> to run shell commands.</p><h1 id="Game-Description"><a class="anchor hidden-xs" href="#Game-Description" title="Game-Description"><i class="fa fa-link"></i></a>Game Description</h1><ul>
+<li>Let’s imagine now that you are part of a company called, <strong>Eglence Inc</strong>.</li>
+<li>One of the products of Eglence Inc. is a highly popular mobile game called “<strong>Catch The Pink Flamingo</strong>”. The <em><u>objective</u></em> of the game is to catch as many Pink Flamingos as possible by following the missions provided by real-time prompts in the game and cover the map provided for each level. The levels get more complicated in mission speed and map complexity as the users move from level to level.</li>
+<li>It’s a <strong>multi-user game</strong> where the players have to catch Pink Flamingos that randomly pop up on a gridded world map based on missions that change in real-time. For the player or team to move to the next complexity level, they need to have at least one point in every map grid cell, i.e., cover the whole world map. An <u>example mission</u> would be “Catch the Flamingos on land with stars on their belly” in which the player should only click on flamingos that match the mission criteria, in this case, stars and being on land. If the player tags any other flamingo on the map, he/she or his/her team gets a negative point (-1) on that map location.</li>
+<li>After the initial <strong>sign up</strong>, a player (user) is asked to play the <em><u>Level 1</u></em> individually without joining any team. This is where the user gets trained as a player and starts building a game history. Level 1 is an easy entry to the game composed of only 64 (8x8) grid cells and longer, more obvious, fun missions. Upon completion of Level 1, the player gets asked if she/he wants to join any team or form a team and will continue the rest of the time as a team player even if that means the user is a 1-person team of her/his own.</li>
+<li>At the beginning of each level, the game creates a brand new map with more cells than the level before. The complexity of the missions also increases. The missions change more frequently as the levels increase.</li>
+<li>The players keep in touch via <strong>chat boards</strong> assigned to the teams and also via social media, e.g., Twitter.</li>
+</ul><p>There are some things to consider while designing an information system for this game:</p><ul>
+<li><strong>Ranking of Users:</strong> Each user will be ranked individually by the speed and accuracy of their click to completion. The rankings get tracked in real-time and can be viewed both via the mobile app and the website for the game. In addition to score, speed and accuracy based ranking, the other players can see what parts of the map the user has the most points for. The players are also categorized based on their history as “rising star”, “veteran”, “coach”, “social butterfly” and “hot flamingo”. These refer to the qualities of players in addition to the game statistics.</li>
+<li><strong>Ranking of Teams:</strong> The teams are ranked publicly. There is a maximum of 30 members in a team and a minimum of 1 member. The players “ask” to join a team and get voted in when 80% of the team members allow. A team may choose to “recruit” if they think a player can contribute or “outvote” a player if a player is not contributing. The players are also allowed to change their teams and bring all their points along. The competition is built on “point-based economy” and it is encouraged by the game providers. When all players leave a team, the team automatically gets removed from public and archived by Eglence Inc.</li>
+<li><strong>In-game Purchases:</strong> Users are allowed in game purchases including binoculars to spot the mission specific flamingos, special flamingos that count for more than one grid point, ice blocks to freeze a mission for 20 seconds when needed, and trading cards to transfer the  extra points from some grid cells to the ones without any points.</li>
+<li><strong>Game Completion:</strong> The game never ends, meaning that there will always be a more complicated next level. A challenge for Eglence Inc. is to keep the game interesting and engaging for players who have been around for a long time. They make use of big data analytics to make sure the veteran players are still around.</li>
+</ul><center>
+<img src="https://i.imgur.com/sGWiuF4.png" width="900">
+<p>ER-diagram
+</p>
+</center><details><summary>Actual ER-diagram</summary>
+<!-- <center>
+<img src="https://i.imgur.com/5ZWY7Fd.png" width="900" />
+<p>Actual ER-diagram
+</p>
+</center> -->
+<!-- ![]() -->
+<center>
+<img src="https://i.imgur.com/Lz1y7Je.png" width="900">
+<p>Actual ER-diagram
+</p>
+</center>
+<!-- <center>
+<img src="https://i.imgur.com/Kg0xcK8.png" width="900" />
+<p>Actual ER-diagram
+</p>
+</center>
+ -->
+<!-- <center>
+<img src="https://i.imgur.com/sG9YivQ.jpg" width="900" />
+<p>Actual ER-diagram
+</p>
+</center> -->
+</details><br><p>The ER diagram consists of 8 tables corresponding to 8 csv files. You can download the required dataset for this lab from <a href="https://github.com/esther3587/Catch-Pink-Flamingo-Game/raw/master/big_data_capstone_datasets_and_scripts/flamingo-data.zip" target="_blank" rel="noopener">here</a>. We present in the table below the description of the dataset files.</p><p><img src="https://i.imgur.com/wMoZsFY.png" alt="" class="md-image md-image"><br>
+<img src="https://i.imgur.com/1pZePia.png" alt="" class="md-image md-image"><br>
+<img src="https://i.imgur.com/jWZMQP7.png" alt="" class="md-image md-image"><br>
+<img src="https://i.imgur.com/VHvGCvo.png" alt="" class="md-image md-image"><br>
+<img src="https://i.imgur.com/rqyn0VL.png" alt="" class="md-image md-image"><br>
+<img src="https://i.imgur.com/RonrrnZ.png" alt="" class="md-image md-image"></p><div class="alert alert-danger">
+<p><strong>Note:</strong> The original dataset is only a sample and not complete. To preserve the relationships between the tables, you need to import only the samples which staisfy these relationships and drop others. I did it for you and you can download the preprocessed dataset from <a href="https://drive.google.com/file/d/14sbczhl8pW2zdDDq5JQKOhuKuxNOgCxR/view" target="_blank" rel="noopener">here</a>.</p>
+</div><h1 id="Access-PostgreSQL-server"><a class="anchor hidden-xs" href="#Access-PostgreSQL-server" title="Access-PostgreSQL-server"><i class="fa fa-link"></i></a>Access PostgreSQL server</h1><p>In fact, HDP Sandbox comes with a pre-installed PostgreSQL server so you do not to install any additional software to use PostgreSQL. You can access it via <code>psql</code> as <code>postgres</code> user:</p><pre><code class="sh hljs">[root<span class="hljs-symbol">@sandbox</span>-hdp ~]<span class="hljs-meta">#  psql -U postgres</span>
+</code></pre><p>This will open a CLI to interact with PostgreSQL. You can access the databases using <code>\c</code> command and the tables via <code>\dt</code> command. For example, you can access the database <code>ambari</code> (a default database on HDP Sandbox) by running the following command in postgreSQL CLI.</p><pre><code class="sh hljs"><span class="hljs-attribute">postgres</span>=# \c ambari
+You are now connected <span class="hljs-keyword">to</span> database <span class="hljs-string">"ambari"</span> as<span class="hljs-built_in"> user </span><span class="hljs-string">"postgres"</span>.
+</code></pre><div class="alert alert-info">
+<p>The version of PostgreSQL in HDP 2.6.5 is 9.2.23 as shown below. So you should read the documentation for this version of PostgreSQL.<br>
+<img src="https://i.imgur.com/5pVBcTu.png" alt="" class="md-image md-image"></p>
+</div><h1 id="PostgreSQL-Meta-commands"><a class="anchor hidden-xs" href="#PostgreSQL-Meta-commands" title="PostgreSQL-Meta-commands"><i class="fa fa-link"></i></a>PostgreSQL Meta-commands</h1><p>Anything you enter in psql that begins with an unquoted backslash is a psql meta-command that is processed by psql itself. These commands make psql more useful for administration or scripting. Meta-commands are often called slash or backslash commands.</p><ul>
+<li>Switch connection to a new database <code>dbname</code> as a user <code>username</code></li>
+</ul><pre><code class="sql hljs">\c &lt;dbname&gt; &lt;username&gt;
+</code></pre><ul>
+<li>List available databases</li>
+</ul><pre><code class="sql hljs">\l
+</code></pre><ul>
+<li>List available tables</li>
+</ul><pre><code class="sql hljs">\dt
+</code></pre><ul>
+<li>Describe a table <code>&lt;table_name&gt;</code></li>
+</ul><pre><code class="sql hljs">\d &lt;table_name&gt;
+</code></pre><ul>
+<li>Execute psql commands from a file <code>&lt;file.sql&gt;</code></li>
+</ul><pre><code class="sql hljs">\i &lt;file.sql&gt;
+</code></pre><ul>
+<li>Get help on psql commands</li>
+</ul><pre><code class="sql hljs">\?
+\h <span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span>
+</code></pre><ul>
+<li>Turn on query execution time</li>
+</ul><pre><code class="sql hljs">\timing
+</code></pre><div class="alert alert-info">
+<p>You use the same command <code>\timing</code> to turn it off.</p>
+</div><ul>
+<li>Quit psql</li>
+</ul><pre><code class="sql hljs">\q
+</code></pre><div class="alert alert-info">
+<p>You can run the shell commands in psql CLI via <code>\! </code>. For instance, to print the current working directory, we write:</p>
+<pre><code class="wrap powershell hljs">\! pwd
+</code></pre>
+</div><h1 id="Build-the-Database"><a class="anchor hidden-xs" href="#Build-the-Database" title="Build-the-Database"><i class="fa fa-link"></i></a>Build the Database</h1><div class="alert alert-warning">
+<p>Note: Explore the dataset using any data analysis tool (Python+Pandas, Excel, Google Sheet, …etc) you have before building the database.</p>
+<p>Another note: You do not need to create a new role/user. Just use the current role <code>postgres</code>.</p>
+</div><p>The dataset consists of csv files and need to be imported into PostgreSQL tables.</p><p>To copy the data from csv files into the table, you need to use Postgres <code>COPY</code> method for data-loading. Postgres’s COPY comes in two separate variants, COPY and \COPY: COPY is server based, \COPY is client based. COPY will be run by the PostgreSQL backend (user “postgres”). The backend user requires permissions to read &amp; write to the data file in order to copy from/to it. You need to use an absolute pathname with COPY. \COPY on the other hand, runs under the current $USER, and with that users environment and \COPY can handle relative pathnames. The psql \COPY is accordingly much easier to use if it handles what you need. So, you can use the meta-command <code>\COPY</code> to import the data from csv files into PostgreSQL tables but you need to make sure that the primary keys and foreign keys are set according to the given ER diagram. You can learn more about ER diagrams from <a href="https://www.lucidchart.com/pages/ER-diagram-symbols-and-meaning" target="_blank" rel="noopener">here</a>.</p><div class="alert alert-warning">
+<p>Notice that you need to create tables before importing their data from files. You can detect the datatype of the column from its values.</p>
+</div><div class="alert alert-info">
+<p>Info: You can use the command <code>scp</code> to immediately copy files from the host machine to the local file system of the cluster node.<br>
+For instance, to transfer the dataset files in <em>flamingo-data</em> folder from the host machine to the folder <code>/data</code> in the cluster node, we run the following command on the terminal.</p>
+<pre><code class="sh hljs">scp -P <span class="hljs-number">2222</span> flamingo-data/* root<span class="hljs-variable">@localhost</span><span class="hljs-symbol">:/data</span>
+</code></pre>
+<p>Note: If you got issues as shown in the figure below, then you need to open the file <code>%USERPROFILE%/.ssh/known_hosts</code> and remove the previous keys (You can empty the file if all keys are not important).<br>
+<img src="https://i.imgur.com/fKe5BNZ.png" alt="" class="md-image md-image"></p>
+<p><code>scp</code> will create a new key and exchange it with the cluster node.</p>
+</div><div class="alert alert-success">
+<h3 id="Exercises"><a class="anchor hidden-xs" href="#Exercises" title="Exercises"><i class="fa fa-link"></i></a>Exercises</h3>
+<ol>
+<li>Create a database called <code>flamingodb</code>.</li>
+</ol>
+<pre><code class="sql hljs"><span class="hljs-comment">-- Create Database</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> flamingodb; 
+</code></pre>
+<ol start="2">
+<li>Access the database <code>flamingodb</code>.</li>
+</ol>
+<pre><code class="sql hljs"><span class="hljs-comment">-- Switch to the Database</span>
+\c flamingodb; 
+</code></pre>
+<p>The prompt will be like <code>flamingodb=#</code> which indicates that you switched to the database “flamingodb”.<br>
+3. Import the file <code>users.csv</code> into <code>users</code> table and ensure that you set <code>userid</code> as the primary key in the table.<br>
+<em><strong>Sample solution:</strong></em><br>
+A. Create the table <code>users</code>:</p>
+<pre><code class="sql hljs"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> <span class="hljs-keyword">users</span>(
+<span class="hljs-built_in">timestamp</span> <span class="hljs-built_in">TIMESTAMP</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+userid <span class="hljs-built_in">NUMERIC</span> PRIMARY <span class="hljs-keyword">KEY</span>,
+nick <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+twitter <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">50</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+dob <span class="hljs-built_in">DATE</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+country <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">2</span>) <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>);
+</code></pre>
+<p><em>NOTICE:  CREATE TABLE / PRIMARY KEY will create implicit index “users_pkey” for table “users”<br>
+CREATE TABLE</em></p>
+<p>B. Import the data from the csv file. Here we used options <code>csv</code> to indicate the format of the file and <code>header</code> to determine that the csv file has a header.</p>
+<pre><code class="sh hljs">\<span class="hljs-keyword">COPY</span> users <span class="hljs-keyword">from</span> <span class="hljs-string">'/data/users.csv'</span> <span class="hljs-keyword">WITH</span> <span class="hljs-keyword">DELIMITER</span> <span class="hljs-string">','</span> csv <span class="hljs-keyword">header</span>;
+</code></pre>
+<ol start="4">
+<li>Import the file <code>team.csv</code> into <code>team</code> table and ensure that you set <code>teamid</code> as the primary key in the table.</li>
+</ol>
+<pre><code class="sql hljs"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> team(
+teamid <span class="hljs-built_in">INT</span> PRIMARY <span class="hljs-keyword">KEY</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+<span class="hljs-keyword">name</span> <span class="hljs-built_in">VARCHAR</span>(<span class="hljs-number">50</span>),
+teamCreationTime <span class="hljs-built_in">timestamp</span>,
+teamEndTime <span class="hljs-built_in">TIMESTAMP</span>,
+strength <span class="hljs-built_in">real</span>,
+currentLevel <span class="hljs-built_in">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+);
+</code></pre>
+<ol start="5">
+<li>Import the file <code>level-events.csv</code> into <code>levelevents</code> table and ensure that you set <code>eventid</code> as the primary key and <code>teamid</code> as the foreign key in the table from the table <code>team</code>.</li>
+</ol>
+<pre><code class="sql hljs"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> levelevents(
+eventid <span class="hljs-built_in">INT</span> PRIMARY <span class="hljs-keyword">KEY</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>,
+_timestamp <span class="hljs-built_in">timestamp</span>,
+teamLevel <span class="hljs-built_in">INT</span>,
+eventType <span class="hljs-built_in">CHAR</span>(<span class="hljs-number">5</span>),
+teamid <span class="hljs-built_in">INT</span> <span class="hljs-keyword">NOT</span> <span class="hljs-literal">NULL</span>
+);
+
+<span class="hljs-comment">-- add constrains</span>
+<span class="hljs-keyword">ALTER</span> <span class="hljs-keyword">TABLE</span> levelevents
+<span class="hljs-keyword">ADD</span> <span class="hljs-keyword">CONSTRAINT</span> fk_team_teamid_levelevents
+<span class="hljs-keyword">FOREIGN</span> <span class="hljs-keyword">KEY</span> (teamid)
+<span class="hljs-keyword">REFERENCES</span> team (teamid);
+
+<span class="hljs-comment">-- ALTER TABLE levelevents</span>
+<span class="hljs-comment">-- ALTER COLUMN eventid type INT </span>
+<span class="hljs-comment">-- USING cast(extract(epoch from current_timestamp) as integer);</span>
+
+
+<span class="hljs-comment">-- ALTER TABLE levelevents</span>
+<span class="hljs-comment">-- DROP COLUMN eventid;</span>
+
+<span class="hljs-comment">-- ALTER TABLE levelevents</span>
+<span class="hljs-comment">-- ALTER COLUMN eventid</span>
+<span class="hljs-comment">-- TYPE timestamp without time zone;</span>
+
+</code></pre>
+<pre><code class="sh hljs">\<span class="hljs-keyword">COPY</span> levelevents(_timestamp,  eventid, teamid,teamlevel,eventtype) <span class="hljs-keyword">from</span> /data/<span class="hljs-keyword">level</span>-events2.csv csv <span class="hljs-keyword">header</span>;
+</code></pre>
+<ol start="6">
+<li>In the same way, import all other files into the database <code>flamingodb</code>.</li>
+</ol>
+</div><h2 id="Reading-Data"><a class="anchor hidden-xs" href="#Reading-Data" title="Reading-Data"><i class="fa fa-link"></i></a>Reading Data</h2><p>The pandas I/O API provides read/write for several file formats. You can check the full list of file formats from <a href="https://pandas.pydata.org/docs/user_guide/io.html" target="_blank" rel="noopener">here</a>. You can read data from csv files via <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas.read_csv" target="_blank" rel="noopener"><code>pd.read_csv</code></a> method and write to csv files using <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html#pandas.DataFrame.to_csv" target="_blank" rel="noopener"><code>pd.to_csv</code></a> method. For example, you can easily read the data from the file <code>users.csv</code> as follows:</p><pre><code class="python hljs">users = pd.read_csv(<span class="hljs-string">'/data/users.csv'</span>)
+</code></pre><h2 id="Operations-on-Data"><a class="anchor hidden-xs" href="#Operations-on-Data" title="Operations-on-Data"><i class="fa fa-link"></i></a>Operations on Data</h2><p>Most pandas operations return copies of the Series/DataFrame. To make the changes “stick”, you’ll need to either assign to a new variable:</p><pre><code class="python hljs">sorted_df = df.sort_values(<span class="hljs-string">"col1"</span>)
+</code></pre><p>or overwrite the original one:</p><pre><code class="python hljs">df = df.sort_values(<span class="hljs-string">"col1"</span>)
+</code></pre><p>You will see an <code>inplace=True</code> keyword for some methods but its usage <a href="https://pandas.pydata.org/docs/user_guide/indexing.html#indexing-view-versus-copy" target="_blank" rel="noopener">is discouraged</a>.</p><h3 id="SELECT-operation"><a class="anchor hidden-xs" href="#SELECT-operation" title="SELECT-operation"><i class="fa fa-link"></i></a>SELECT operation</h3><p>In SQL, selection is done using a comma-separated list of columns you’d like to select (or a <code>*</code> to select all columns). For example,  We can retreive the player nickname, dob and country via SQL:</p><pre><code class="sql hljs">1. <span class="hljs-keyword">SELECT</span> nick, dob, country 
+   <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">users</span>;
+</code></pre><p>With pandas, column selection is done by passing a list of column names to your DataFrame:</p><pre><code class="python hljs"><span class="hljs-number">1.</span> users[[<span class="hljs-string">'nick'</span>, <span class="hljs-string">'dob'</span>, <span class="hljs-string">'country'</span>]]
+</code></pre><p>In SQL, you can add a calculated column. For example, we can retrieve all information and the percentage of strength of the teams:</p><pre><code class="sql hljs">2.  <span class="hljs-keyword">SELECT</span> *, strength*<span class="hljs-number">100</span> <span class="hljs-keyword">as</span> strength_100
+    <span class="hljs-keyword">FROM</span> team 
+    <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> strength_100 <span class="hljs-keyword">DESC</span>;
+</code></pre><p>With pandas, you can use the <code>DataFrame.assign()</code> method of a DataFrame to append a new column:</p><pre><code class="python hljs"><span class="hljs-number">2.</span> team.assign(strength_100=team[<span class="hljs-string">"strength"</span>]*<span class="hljs-number">100</span>)
+</code></pre><div class="alert alert-success">
+<p><strong>Exercises</strong></p>
+<ol>
+<li>Calculate the average price of the items and add the new column <code>avg_price</code> to the dataframe.</li>
+</ol>
+<!-- <details style="margin-top: -10px;margin-bottom: 15px">
+<summary>Details</summary>
+<code>
+SELECT AVG(price) avg_price FROM buyclicks;
+</code>
+
+<code>
+buyclicks['avg_price']=
+</code>
+</details> -->
+<ol start="2">
+<li>Calculate the average age of the players and add the new column <code>age</code> to the dataframe.</li>
+</ol>
+<!-- 
+<details style="margin-top: -10px;margin-bottom: 15px">
+<summary>Details</summary>
+```sql
+SELECT AVG()
+```
+</details> -->
+</div><h3 id="WHERE-operation"><a class="anchor hidden-xs" href="#WHERE-operation" title="WHERE-operation"><i class="fa fa-link"></i></a>WHERE operation</h3><p>Filtering in SQL is done via a WHERE clause. We can retrieve the information of players whose country code is <code>BR</code>.</p><pre><code class="sql hljs">3. <span class="hljs-keyword">SELECT</span> *
+   <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">users</span>
+   <span class="hljs-keyword">WHERE</span> country = <span class="hljs-string">'BR'</span>;
+</code></pre><div class="alert alert-danger">
+<p><strong>Note:</strong> In PostgreSQL, double quotes are used to indicate identifiers within the database, which are objects like tables, column names, and roles. In contrast, single quotes are used to indicate string literals.</p>
+</div><p>DataFrames can be filtered in multiple ways; the most intuitive of which is using boolean indexing.</p><pre><code class="python hljs"><span class="hljs-number">3.</span> users[users[<span class="hljs-string">'country'</span>]==<span class="hljs-string">'BR'</span>]
+</code></pre><p>The above statement is simply passing a <code>Series</code> of <code>True/False</code> objects to the DataFrame, returning all rows with <code>True</code>. The dataframe <code>users['country']=='BR'</code> consists of boolean values. Using boolean indexing <code>users[users['country']=='BR']</code> will return the rows whose values are <code>True</code> in the series <code>users['country']=='BR'</code>.</p><p>Just like SQL’s <code>OR</code> and <code>AND</code>, multiple conditions can be passed to a DataFrame using <code>|</code> (<code>OR</code>) and <code>&amp;</code> (<code>AND</code>). For example, we can retrieve the players whose country code is <code>RU</code> and born before 1990.</p><pre><code class="sql hljs">4. <span class="hljs-keyword">SELECT</span> *
+   <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">users</span>
+   <span class="hljs-keyword">WHERE</span> country = <span class="hljs-string">'RU'</span> <span class="hljs-keyword">AND</span> dob &lt; <span class="hljs-string">'1990-01-01'</span>;
+</code></pre><p>In pandas, we can use boolean indexing.</p><pre><code class="python hljs"><span class="hljs-number">4.</span> users[(users[<span class="hljs-string">"country"</span>] == <span class="hljs-string">"RU"</span>) &amp; (users[<span class="hljs-string">"dob"</span>] &lt; <span class="hljs-string">'1990-01-01'</span>)]
+</code></pre><div class="alert alert-info">
+<p>NULL checking is done in pandas using the <code>notna()</code> and <code>isna()</code> methods whereas we use <code>IS NULL</code> and <code>IS NOT NULL</code> in SQL.</p>
+</div><div class="alert alert-success">
+<p><strong>Exercises on pandas DataFrame</strong></p>
+<ol start="3">
+<li>Who are the teams whose strength is more than 80% and length of the name is less than 8 chars?</li>
+<li>What gameclicks are hit by teams whose level is more than or equal to 5?</li>
+<li>Which ads whose category is “computers”?</li>
+<li>Which items whose price is more than 5 and purchased by different players?</li>
+</ol>
+</div><h3 id="GROUP-BY-operation"><a class="anchor hidden-xs" href="#GROUP-BY-operation" title="GROUP-BY-operation"><i class="fa fa-link"></i></a>GROUP BY operation</h3><p>In pandas, SQL’s <code>GROUP BY</code> operations are performed using the similarly named <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.groupby.html#pandas.DataFrame.groupby" target="_blank" rel="noopener"><code>groupby()</code></a> method. <code>groupby()</code> typically refers to a process where we’d like to split a dataset into groups, apply some function (typically aggregation), and then combine the groups together. For example, we can retrieve the number of players grouped by country code:</p><pre><code class="sql hljs">5. <span class="hljs-keyword">SELECT</span> country, <span class="hljs-keyword">count</span>(*)
+   <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">users</span>
+   <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> country;
+</code></pre><p>The pandas equivalent would be:</p><pre><code class="python hljs"><span class="hljs-number">5.</span> users.groupby(<span class="hljs-string">"country"</span>).size()
+</code></pre><div class="alert alert-warning">
+<p>Notice that in the pandas code we used <code>size()</code> and not <code>count()</code>. This is because <code>count()</code> applies the function to each column, returning the number of <code>NOT NULL</code> records within each. Try running <code>users.groupby("country").count()</code>.</p>
+</div><p>Multiple functions can also be applied at once. For instance, say we’d like to see how the team strength differs by the teamCreationTime - <code>agg()</code> allows you to pass a dictionary to your grouped DataFrame, indicating which functions to apply to specific columns.</p><pre><code class="sql hljs">6. <span class="hljs-keyword">SELECT</span> teamcreationtime, <span class="hljs-keyword">AVG</span>(strength), <span class="hljs-keyword">COUNT</span>(*)
+   <span class="hljs-keyword">FROM</span> team
+   <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> teamcreationtime;
+</code></pre><p>The pandas equivalent would be:</p><pre><code class="python hljs"><span class="hljs-number">6.</span> team.groupby(<span class="hljs-string">"teamCreationTime"</span>).agg({<span class="hljs-string">"strength"</span>: np.mean, <span class="hljs-string">"teamCreationTime"</span>: np.size})
+</code></pre><p>Grouping by more than one column is done by passing a list of columns to the <code>groupby()</code> method. For example, we can retrieve the number of user sessions for each user on each platform.</p><pre><code class="sql hljs">7. <span class="hljs-keyword">SELECT</span> userid, platformtype, <span class="hljs-keyword">COUNT</span>(*)
+   <span class="hljs-keyword">FROM</span> usersessions
+   <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> userid, platformtype;
+</code></pre><p>The pandas equivalent would be:</p><pre><code class="python hljs"><span class="hljs-number">7.</span> usersessions.groupby([<span class="hljs-string">"userid"</span>, <span class="hljs-string">"platformtype"</span>]).agg({<span class="hljs-string">"usersessionid"</span>: [np.size]})
+</code></pre><div class="alert alert-success">
+<p><strong>Exercises on pandas DataFrame</strong></p>
+<ol start="7">
+<li>What is the average team level and number of players for each platform?</li>
+<li>How many ads are there for each category?</li>
+<li>How many teams watched each ad category?</li>
+<li>How many hit click for each player per team?</li>
+<li>What is the average price of items purchased by each team?</li>
+<li>What is the average price of items purchased by each team member?</li>
+<li>What is the number of items puchased by each team?</li>
+<li>What is the number of items puchased by each team member?</li>
+</ol>
+</div><h3 id="JOIN-operation"><a class="anchor hidden-xs" href="#JOIN-operation" title="JOIN-operation"><i class="fa fa-link"></i></a>JOIN operation</h3><p>In pandas, <code>JOIN</code>s can be performed with <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.join.html#pandas.DataFrame.join" target="_blank" rel="noopener"><code>join()</code></a> or <a href="https://pandas.pydata.org/docs/reference/api/pandas.merge.html#pandas.merge" target="_blank" rel="noopener"><code>merge()</code></a>. By default, <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.join.html#pandas.DataFrame.join" target="_blank" rel="noopener"><code>join()</code></a> will join the DataFrames on their indices. Each method has parameters allowing you to specify the type of join to perform (<code>LEFT</code>, <code>RIGHT</code>, <code>INNER</code>, <code>FULL</code>) or the columns to join on (column names or indices).</p><div class="alert alert-warning">
+<p>If both key columns contain rows where the key is a null value, those rows will be matched against each other. This is different from usual SQL join behaviour and can lead to unexpected results.</p>
+</div><h4 id="INNER-JOIN-Natural-Join"><a class="anchor hidden-xs" href="#INNER-JOIN-Natural-Join" title="INNER-JOIN-Natural-Join"><i class="fa fa-link"></i></a>INNER JOIN (Natural Join)</h4><p>For example, we can retrieve all user info and item info by performing inner join between buyclicks and users tables (retrieves only users who purhcased items).</p><pre><code class="sql hljs">8. <span class="hljs-keyword">SELECT</span> *
+   <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">users</span>
+   <span class="hljs-keyword">INNER</span> <span class="hljs-keyword">JOIN</span> buyclick
+       <span class="hljs-keyword">ON</span> users.userid = buyclicks.userid;
+</code></pre><p>Similarly in pandas:</p><pre><code class="python hljs"><span class="hljs-number">8.</span> pd.merge(users, buyclicks, on=<span class="hljs-string">"userId"</span>) <span class="hljs-comment"># pd.merge performs inner join be default</span>
+</code></pre><p><code>pd.merge()</code> also offers parameters for cases when you’d like to join one DataFrame’s column with another DataFrame’s index.</p><pre><code class="sql hljs">8. indexed_users = users.set_index("userid")
+   pd.merge(users, buyclicks, left_on="userId", right_index=True)
+   <span class="hljs-comment"># Here we are joining the dataframes based on the column "userId" for the left dataframe "users" and the index for the right dataframe "buyclicks".</span>
+</code></pre><h4 id="LEFT-OUTER-JOIN"><a class="anchor hidden-xs" href="#LEFT-OUTER-JOIN" title="LEFT-OUTER-JOIN"><i class="fa fa-link"></i></a>LEFT OUTER JOIN</h4><p>For example, we can retrieve the user info and item info by performing left outer join between buyclicks and users tables (retrieves all users who purhcased items or did not).</p><pre><code class="sql hljs">9. <span class="hljs-keyword">SELECT</span> *
+   <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">users</span>
+   <span class="hljs-keyword">LEFT</span> <span class="hljs-keyword">OUTER</span> <span class="hljs-keyword">JOIN</span> buyclicks
+       <span class="hljs-keyword">ON</span> users.userid = buyclicks.userid;
+</code></pre><p>In pandas, we use the argument “how” of the method <code>pd.merge</code>:</p><pre><code class="python hljs"><span class="hljs-number">9.</span> pd.merge(users, buyclicks, on=<span class="hljs-string">"userId"</span>, how=<span class="hljs-string">"left"</span>)
+</code></pre><h4 id="RIGHT-OUTER-JOIN"><a class="anchor hidden-xs" href="#RIGHT-OUTER-JOIN" title="RIGHT-OUTER-JOIN"><i class="fa fa-link"></i></a>RIGHT OUTER JOIN</h4><p>For example, we can retrieve the user info and item info by performing right outer join between buyclicks and users tables (retrieves all items whether purchased by users or not).</p><pre><code class="sql hljs">10. <span class="hljs-keyword">SELECT</span> *
+   <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">users</span>
+   <span class="hljs-keyword">RIGHT</span> <span class="hljs-keyword">OUTER</span> <span class="hljs-keyword">JOIN</span> buyclicks
+       <span class="hljs-keyword">ON</span> users.userid = buyclicks.userid;
+</code></pre><p>In pandas, we use the argument “how” of the method <code>pd.merge</code>:</p><pre><code class="python hljs"><span class="hljs-number">10.</span> pd.merge(users, buyclicks, on=<span class="hljs-string">"userId"</span>, how=<span class="hljs-string">"right"</span>)
+</code></pre><h4 id="FULL-OUTER-JOIN"><a class="anchor hidden-xs" href="#FULL-OUTER-JOIN" title="FULL-OUTER-JOIN"><i class="fa fa-link"></i></a>FULL OUTER JOIN</h4><p>For example, we can retrieve the user info and item info by performing full outer join between buyclicks and users tables (retrieves all items whether purchased by users or not and all users who purchased items or not).</p><pre><code class="sql hljs">11. <span class="hljs-keyword">SELECT</span> *
+   <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">users</span>
+   <span class="hljs-keyword">FULL</span> <span class="hljs-keyword">OUTER</span> <span class="hljs-keyword">JOIN</span> buyclicks
+       <span class="hljs-keyword">ON</span> users.userid = buyclicks.userid;
+</code></pre><p>In pandas, we use the argument “how” of the method <code>pd.merge</code>:</p><pre><code class="python hljs"><span class="hljs-number">11.</span> pd.merge(users, buyclicks, on=<span class="hljs-string">"userId"</span>, how=<span class="hljs-string">"outer"</span>)
+</code></pre><h3 id="LIMIT-operation"><a class="anchor hidden-xs" href="#LIMIT-operation" title="LIMIT-operation"><i class="fa fa-link"></i></a>LIMIT operation</h3><p>In SQL, we can use <code>LIMIT</code> keyword in <code>SELECT</code> statement, when we want to retrieve only a specific number of records. In pandas, we have <code>tail</code> and <code>head</code> methods who do similar jobs.</p><p>For example, we can retrieve only first 10 players.</p><pre><code class="sql hljs">12. <span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">users</span>
+    <span class="hljs-keyword">LIMIT</span> <span class="hljs-number">10</span>;
+</code></pre><p>In pandas, we use <code>head</code> method who performs the same jobs as <code>LIMIT</code> does. It also provides <code>tail</code> method which returns the last records from the query.</p><pre><code class="python hljs"><span class="hljs-number">12.</span> users.head(<span class="hljs-number">10</span>)
+</code></pre><div class="alert alert-success">
+<p><strong>Exercises on pandas DataFrame</strong></p>
+<ol start="15">
+<li>How many ads watched by players who belong to teams whose strength is more than 80%?</li>
+<li>What is the average price of items purchased by teams whose number of players is more than 5?</li>
+<li>What is the average price of items purchased by players who played on <code>Android</code> or <code>iPhone</code> platforms?</li>
+<li>How many hit click for users who played on <code>iPhone</code> platform?</li>
+<li>What is the average strength of teams who watched ads from more than one category (different categories)?</li>
+<li>How many players who performed assignments on <code>Android</code> platforms and watched ads from category <code>fashion</code>?</li>
+</ol>
+<!-- 21. What is the number of items puchased by each team?
+22. What is the number of items puchased by each team member? -->
+</div><h3 id="UPDATEDELETE-operation"><a class="anchor hidden-xs" href="#UPDATEDELETE-operation" title="UPDATEDELETE-operation"><i class="fa fa-link"></i></a>UPDATE/DELETE operation</h3><p>In addition to data retrieval, you can manipulate data in SQL by using <code>DELETE</code> and <code>UPDATE</code> statements. In pandas, we have multiple ways to manipulate the data but here I will mention using <code>loc</code> method to update the data in the dataframe.</p><p>For example, to decrease the price of items whose price is more than 5 by half, we can write as follows:</p><pre><code class="sql hljs">13. <span class="hljs-keyword">UPDATE</span> buyclicks
+    <span class="hljs-keyword">SET</span> price = price / <span class="hljs-number">2</span>
+    <span class="hljs-keyword">WHERE</span> price &gt; <span class="hljs-number">5</span>;
+</code></pre><p>Whereas in pandas:</p><pre><code class="python hljs"><span class="hljs-number">13.</span> buyclicks.loc[buyclicks[<span class="hljs-string">"price"</span>] &gt; <span class="hljs-number">5</span>, <span class="hljs-string">"price"</span>] /= <span class="hljs-number">2</span>
+</code></pre><p>If we want to delete some records, for instance, all players whose country code is <code>BR</code>.</p><pre><code class="sql hljs">14. <span class="hljs-keyword">DELETE</span> <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">users</span>
+    <span class="hljs-keyword">WHERE</span> country = <span class="hljs-string">'BR'</span>
+</code></pre><p>In pandas, we use just overwrite the original dataframe.</p><pre><code class="python hljs"><span class="hljs-number">14.</span> users = users.loc[users[<span class="hljs-string">"country"</span>] != <span class="hljs-string">"BR"</span>]
+</code></pre><p>Here, we showed how pandas DataFrame provides more flexible ways to retrieve and manipulate data in which dataframe is similar to tables in relational databases. We encourage you to learn more about methods provided by pandas DataFrame API from the <a href="https://pandas.pydata.org/docs/user_guide/index.html" target="_blank" rel="noopener">official website</a>. You can also learn more about differences between SQL and pandas DataFrame from <a href="https://ponder.io/pandas-vs-sql-food-court-michelin-style-restaurant/" target="_blank" rel="noopener">this blog</a>.</p><div class="alert alert-success">
+<p><strong>Exercises on pandas DataFrame</strong><br>
+<em>Note: For this practice you can work on a copy of the dataframe.</em><br>
+21. Delete all players who played on two different platforms?<br>
+22. Double the price of items which are purchased more than 3 time.<br>
+23. Delete all teams who has only 1 member.<br>
+24. Delete all items whose price is 20 or more.<br>
+25. Delete all ads from <code>computers</code> category and purchased by one player or less.</p>
+</div><h1 id="References"><a class="anchor hidden-xs" href="#References" title="References"><i class="fa fa-link"></i></a>References</h1><ul>
+<li><a href="https://pandas.pydata.org/docs/index.html" target="_blank" rel="noopener">Pandas documentation</a></li>
+<li><a href="https://eagronin.github.io/capstone-acquire/" target="_blank" rel="noopener">Catch the Pink Flamingo game description</a></li>
+<li><a href="https://pandas.pydata.org/docs/getting_started/comparison/comparison_with_sql.html" target="_blank" rel="noopener">Comparison with SQL</a></li>
+</ul></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#Lab-2---Data-Retrieval-with-SQL" title="Lab 2 - Data Retrieval with SQL">Lab 2 - Data Retrieval with SQL</a><ul class="nav">
+<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
+</ul>
+</li>
+<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li class=""><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li class=""><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li class=""><a href="#Pandas-DataFrame" title="Pandas DataFrame">Pandas DataFrame</a><ul class="nav">
+<li class=""><a href="#Installing-pandas-package" title="Installing pandas package">Installing pandas package</a></li>
+<li class=""><a href="#Installing-python-interpreter-on-Zeppelin" title="Installing python interpreter on Zeppelin">Installing python interpreter on Zeppelin</a></li>
+</ul>
+</li>
+<li class=""><a href="#Game-Description" title="Game Description">Game Description</a></li>
+<li class=""><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
+<li class=""><a href="#PostgreSQL-Meta-commands" title="PostgreSQL Meta-commands">PostgreSQL Meta-commands</a></li>
+<li class=""><a href="#Build-the-Database" title="Build the Database">Build the Database</a><ul class="nav">
+<li class=""><a href="#Reading-Data" title="Reading Data">Reading Data</a></li>
+<li class=""><a href="#Operations-on-Data" title="Operations on Data">Operations on Data</a><ul class="nav">
+<li class=""><a href="#SELECT-operation" title="SELECT operation">SELECT operation</a></li>
+<li class=""><a href="#WHERE-operation" title="WHERE operation">WHERE operation</a></li>
+<li class=""><a href="#GROUP-BY-operation" title="GROUP BY operation">GROUP BY operation</a></li>
+<li class=""><a href="#JOIN-operation" title="JOIN operation">JOIN operation</a></li>
+<li class=""><a href="#LIMIT-operation" title="LIMIT operation">LIMIT operation</a></li>
+<li class=""><a href="#UPDATEDELETE-operation" title="UPDATE/DELETE operation">UPDATE/DELETE operation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#Lab-2---Data-Retrieval-with-SQL" title="Lab 2 - Data Retrieval with SQL">Lab 2 - Data Retrieval with SQL</a><ul class="nav">
+<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
+</ul>
+</li>
+<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li class=""><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li class=""><a href="#Introduction" title="Introduction">Introduction</a></li>
+<li class=""><a href="#Pandas-DataFrame" title="Pandas DataFrame">Pandas DataFrame</a><ul class="nav">
+<li class=""><a href="#Installing-pandas-package" title="Installing pandas package">Installing pandas package</a></li>
+<li class=""><a href="#Installing-python-interpreter-on-Zeppelin" title="Installing python interpreter on Zeppelin">Installing python interpreter on Zeppelin</a></li>
+</ul>
+</li>
+<li class=""><a href="#Game-Description" title="Game Description">Game Description</a></li>
+<li class=""><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
+<li class=""><a href="#PostgreSQL-Meta-commands" title="PostgreSQL Meta-commands">PostgreSQL Meta-commands</a></li>
+<li class=""><a href="#Build-the-Database" title="Build the Database">Build the Database</a><ul class="nav">
+<li class=""><a href="#Reading-Data" title="Reading Data">Reading Data</a></li>
+<li class=""><a href="#Operations-on-Data" title="Operations on Data">Operations on Data</a><ul class="nav">
+<li class=""><a href="#SELECT-operation" title="SELECT operation">SELECT operation</a></li>
+<li class=""><a href="#WHERE-operation" title="WHERE operation">WHERE operation</a></li>
+<li class=""><a href="#GROUP-BY-operation" title="GROUP BY operation">GROUP BY operation</a></li>
+<li class=""><a href="#JOIN-operation" title="JOIN operation">JOIN operation</a></li>
+<li class=""><a href="#LIMIT-operation" title="LIMIT operation">LIMIT operation</a></li>
+<li class=""><a href="#UPDATEDELETE-operation" title="UPDATE/DELETE operation">UPDATE/DELETE operation</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha256-kJrlY+s09+QoWjpkOrXXwhxeaoDz9FW5SaxF8I0DibQ=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
