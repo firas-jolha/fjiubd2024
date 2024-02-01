@@ -63,9 +63,10 @@ details.menu {
 <li><a href="#Game-Description" title="Game Description">Game Description</a></li>
 <li><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
 <li><a href="#PostgreSQL-Meta-commands" title="PostgreSQL Meta-commands">PostgreSQL Meta-commands</a></li>
-<li><a href="#Build-the-Database" title="Build the Database">Build the Database</a><ul>
+<li><a href="#Build-the-Database" title="Build the Database">Build the Database</a></li>
 <li><a href="#Reading-Data" title="Reading Data">Reading Data</a></li>
 <li><a href="#Operations-on-Data" title="Operations on Data">Operations on Data</a><ul>
+<li class="invisable-node"><ul>
 <li><a href="#SELECT-operation" title="SELECT operation">SELECT operation</a></li>
 <li><a href="#WHERE-operation" title="WHERE operation">WHERE operation</a></li>
 <li><a href="#GROUP-BY-operation" title="GROUP BY operation">GROUP BY operation</a></li>
@@ -85,7 +86,7 @@ details.menu {
 <li>Practice on pandas DataFrame API</li>
 <li>Read and analyse data using pandas DataFrame API</li>
 <li>Access <code>PostgreSQL</code> database server installed on HDP</li>
-<li>Perform CRUD operations on a relational database</li>
+<li>Perform some select operations on a relational database</li>
 </ul><h1 id="Introduction"><a class="anchor hidden-xs" href="#Introduction" title="Introduction"><i class="fa fa-link"></i></a>Introduction</h1><p>The data in relational databases are typically structured where you need to define the schema of relations between database entities and the required constraints. You can store the data in relational databases according to the schema and the defined constraints. This kind of databases is not helpful for storing semistructured data (emails, xml, json, …etc) and unstructured data (e.g. Word, pdf, html, …etc). You can operate on structured data stored in relational databases using SQL whereas semistructured data need more flexible tools. In this lab, we will use one of the most common data analysis packages in Python, called pandas to retrieve and analyze the data. We will also introduce an analogy between SQL and pandas for data retrieval.</p><h1 id="Pandas-DataFrame"><a class="anchor hidden-xs" href="#Pandas-DataFrame" title="Pandas-DataFrame"><i class="fa fa-link"></i></a>Pandas DataFrame</h1><p>Pandas is an open-source Python library that is extensively used for data analysis and manipulation.</p><center>
 <img src="https://i.imgur.com/XpIJLBx.png" width="300">
 <p>pandas DataFrame
@@ -296,8 +297,8 @@ teamid <span class="hljs-built_in">INT</span> <span class="hljs-keyword">NOT</sp
 <ol start="6">
 <li>In the same way, import all other files into the database <code>flamingodb</code>.</li>
 </ol>
-</div><h2 id="Reading-Data"><a class="anchor hidden-xs" href="#Reading-Data" title="Reading-Data"><i class="fa fa-link"></i></a>Reading Data</h2><p>The pandas I/O API provides read/write for several file formats. You can check the full list of file formats from <a href="https://pandas.pydata.org/docs/user_guide/io.html" target="_blank" rel="noopener">here</a>. You can read data from csv files via <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas.read_csv" target="_blank" rel="noopener"><code>pd.read_csv</code></a> method and write to csv files using <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html#pandas.DataFrame.to_csv" target="_blank" rel="noopener"><code>pd.to_csv</code></a> method. For example, you can easily read the data from the file <code>users.csv</code> as follows:</p><pre><code class="python hljs">users = pd.read_csv(<span class="hljs-string">'/data/users.csv'</span>)
-</code></pre><h2 id="Operations-on-Data"><a class="anchor hidden-xs" href="#Operations-on-Data" title="Operations-on-Data"><i class="fa fa-link"></i></a>Operations on Data</h2><p>Most pandas operations return copies of the Series/DataFrame. To make the changes “stick”, you’ll need to either assign to a new variable:</p><pre><code class="python hljs">sorted_df = df.sort_values(<span class="hljs-string">"col1"</span>)
+</div><h1 id="Reading-Data"><a class="anchor hidden-xs" href="#Reading-Data" title="Reading-Data"><i class="fa fa-link"></i></a>Reading Data</h1><p>The pandas I/O API provides read/write for several file formats. You can check the full list of file formats from <a href="https://pandas.pydata.org/docs/user_guide/io.html" target="_blank" rel="noopener">here</a>. You can read data from csv files via <a href="https://pandas.pydata.org/docs/reference/api/pandas.read_csv.html#pandas.read_csv" target="_blank" rel="noopener"><code>pd.read_csv</code></a> method and write to csv files using <a href="https://pandas.pydata.org/docs/reference/api/pandas.DataFrame.to_csv.html#pandas.DataFrame.to_csv" target="_blank" rel="noopener"><code>pd.to_csv</code></a> method. For example, you can easily read the data from the file <code>users.csv</code> as follows:</p><pre><code class="python hljs">users = pd.read_csv(<span class="hljs-string">'/data/users.csv'</span>)
+</code></pre><h1 id="Operations-on-Data"><a class="anchor hidden-xs" href="#Operations-on-Data" title="Operations-on-Data"><i class="fa fa-link"></i></a>Operations on Data</h1><p>Most pandas operations return copies of the Series/DataFrame. To make the changes “stick”, you’ll need to either assign to a new variable:</p><pre><code class="python hljs">sorted_df = df.sort_values(<span class="hljs-string">"col1"</span>)
 </code></pre><p>or overwrite the original one:</p><pre><code class="python hljs">df = df.sort_values(<span class="hljs-string">"col1"</span>)
 </code></pre><p>You will see an <code>inplace=True</code> keyword for some methods but its usage <a href="https://pandas.pydata.org/docs/user_guide/indexing.html#indexing-view-versus-copy" target="_blank" rel="noopener">is discouraged</a>.</p><h3 id="SELECT-operation"><a class="anchor hidden-xs" href="#SELECT-operation" title="SELECT-operation"><i class="fa fa-link"></i></a>SELECT operation</h3><p>In SQL, selection is done using a comma-separated list of columns you’d like to select (or a <code>*</code> to select all columns). For example,  We can retreive the player nickname, dob and country via SQL:</p><pre><code class="sql hljs">1. <span class="hljs-keyword">SELECT</span> nick, dob, country 
    <span class="hljs-keyword">FROM</span> <span class="hljs-keyword">users</span>;
@@ -344,7 +345,7 @@ SELECT AVG()
 </code></pre><div class="alert alert-info">
 <p>NULL checking is done in pandas using the <code>notna()</code> and <code>isna()</code> methods whereas we use <code>IS NULL</code> and <code>IS NOT NULL</code> in SQL.</p>
 </div><div class="alert alert-success">
-<p><strong>Exercises on pandas DataFrame</strong></p>
+<p><strong>Exercises</strong></p>
 <ol start="3">
 <li>Who are the teams whose strength is more than 80% and length of the name is less than 8 chars?</li>
 <li>What gameclicks are hit by teams whose level is more than or equal to 5?</li>
@@ -366,7 +367,7 @@ SELECT AVG()
    <span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> userid, platformtype;
 </code></pre><p>The pandas equivalent would be:</p><pre><code class="python hljs"><span class="hljs-number">7.</span> usersessions.groupby([<span class="hljs-string">"userid"</span>, <span class="hljs-string">"platformtype"</span>]).agg({<span class="hljs-string">"usersessionid"</span>: [np.size]})
 </code></pre><div class="alert alert-success">
-<p><strong>Exercises on pandas DataFrame</strong></p>
+<p><strong>Exercises</strong></p>
 <ol start="7">
 <li>What is the average team level and number of players for each platform?</li>
 <li>How many ads are there for each category?</li>
@@ -406,7 +407,7 @@ SELECT AVG()
     <span class="hljs-keyword">LIMIT</span> <span class="hljs-number">10</span>;
 </code></pre><p>In pandas, we use <code>head</code> method who performs the same jobs as <code>LIMIT</code> does. It also provides <code>tail</code> method which returns the last records from the query.</p><pre><code class="python hljs"><span class="hljs-number">12.</span> users.head(<span class="hljs-number">10</span>)
 </code></pre><div class="alert alert-success">
-<p><strong>Exercises on pandas DataFrame</strong></p>
+<p><strong>Exercises</strong></p>
 <ol start="15">
 <li>How many ads watched by players who belong to teams whose strength is more than 80%?</li>
 <li>What is the average price of items purchased by teams whose number of players is more than 5?</li>
@@ -425,7 +426,7 @@ SELECT AVG()
     <span class="hljs-keyword">WHERE</span> country = <span class="hljs-string">'BR'</span>
 </code></pre><p>In pandas, we use just overwrite the original dataframe.</p><pre><code class="python hljs"><span class="hljs-number">14.</span> users = users.loc[users[<span class="hljs-string">"country"</span>] != <span class="hljs-string">"BR"</span>]
 </code></pre><p>Here, we showed how pandas DataFrame provides more flexible ways to retrieve and manipulate data in which dataframe is similar to tables in relational databases. We encourage you to learn more about methods provided by pandas DataFrame API from the <a href="https://pandas.pydata.org/docs/user_guide/index.html" target="_blank" rel="noopener">official website</a>. You can also learn more about differences between SQL and pandas DataFrame from <a href="https://ponder.io/pandas-vs-sql-food-court-michelin-style-restaurant/" target="_blank" rel="noopener">this blog</a>.</p><div class="alert alert-success">
-<p><strong>Exercises on pandas DataFrame</strong><br>
+<p><strong>Exercises</strong><br>
 <em>Note: For this practice you can work on a copy of the dataframe.</em><br>
 21. Delete all players who played on two different platforms?<br>
 22. Double the price of items which are purchased more than 3 time.<br>
@@ -460,9 +461,10 @@ SELECT AVG()
 <li class=""><a href="#Game-Description" title="Game Description">Game Description</a></li>
 <li class=""><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
 <li class=""><a href="#PostgreSQL-Meta-commands" title="PostgreSQL Meta-commands">PostgreSQL Meta-commands</a></li>
-<li class=""><a href="#Build-the-Database" title="Build the Database">Build the Database</a><ul class="nav">
+<li class=""><a href="#Build-the-Database" title="Build the Database">Build the Database</a></li>
 <li class=""><a href="#Reading-Data" title="Reading Data">Reading Data</a></li>
 <li class=""><a href="#Operations-on-Data" title="Operations on Data">Operations on Data</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
 <li class=""><a href="#SELECT-operation" title="SELECT operation">SELECT operation</a></li>
 <li class=""><a href="#WHERE-operation" title="WHERE operation">WHERE operation</a></li>
 <li class=""><a href="#GROUP-BY-operation" title="GROUP BY operation">GROUP BY operation</a></li>
@@ -473,7 +475,7 @@ SELECT AVG()
 </li>
 </ul>
 </li>
-<li class=""><a href="#References" title="References">References</a></li>
+<li><a href="#References" title="References">References</a></li>
 </ul>
 </div><div class="toc-menu" style="">
     <a class="expand-toggle expand-all" href="#">Expand all</a>
@@ -502,9 +504,10 @@ SELECT AVG()
 <li class=""><a href="#Game-Description" title="Game Description">Game Description</a></li>
 <li class=""><a href="#Access-PostgreSQL-server" title="Access PostgreSQL server">Access PostgreSQL server</a></li>
 <li class=""><a href="#PostgreSQL-Meta-commands" title="PostgreSQL Meta-commands">PostgreSQL Meta-commands</a></li>
-<li class=""><a href="#Build-the-Database" title="Build the Database">Build the Database</a><ul class="nav">
+<li class=""><a href="#Build-the-Database" title="Build the Database">Build the Database</a></li>
 <li class=""><a href="#Reading-Data" title="Reading Data">Reading Data</a></li>
 <li class=""><a href="#Operations-on-Data" title="Operations on Data">Operations on Data</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
 <li class=""><a href="#SELECT-operation" title="SELECT operation">SELECT operation</a></li>
 <li class=""><a href="#WHERE-operation" title="WHERE operation">WHERE operation</a></li>
 <li class=""><a href="#GROUP-BY-operation" title="GROUP BY operation">GROUP BY operation</a></li>
@@ -515,7 +518,7 @@ SELECT AVG()
 </li>
 </ul>
 </li>
-<li class=""><a href="#References" title="References">References</a></li>
+<li><a href="#References" title="References">References</a></li>
 </ul>
 </div><div class="toc-menu" style="">
     <a class="expand-toggle expand-all" href="#">Expand all</a>
