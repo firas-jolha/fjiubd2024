@@ -6,6 +6,8 @@ The materials are split into three parts. There are materials for labs, project 
 
 ## Project
 
+### [Project Description](html/common/Project Description.html)
+
 ## Labs
 
 ### [Lab 1 - Installing HDP Sandbox](html/common/Lab 1 - Installing HDP Sandbox.html)
