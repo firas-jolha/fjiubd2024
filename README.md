@@ -19,3 +19,5 @@ The materials are split into three parts. There are materials for labs, project 
 ## Assignments
 
 ### [Assignment 2 - Data Retrieval with SQL](html/common/Assignment 2 - Data Retrieval with SQL.html)
+
+### [Assignment 3 - Data Retrieval with Cypher](html/common/Assignment 3 - Data Retrieval with Cypher.html)
