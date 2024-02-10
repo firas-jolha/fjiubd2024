@@ -6,7 +6,11 @@ The materials are split into three parts. There are materials for labs, project 
 
 ## Project
 
-### [Project Description](html/common/Project Description.html)
+### [Project Description - Introduction to Big Data course](html/bachelors/Project Description for bachelors.html)
+
+### [Project Description - Big Data Technologies and Analytics course](html/masters/Project Description for masters.html)
+
+
 
 ## Labs
 
