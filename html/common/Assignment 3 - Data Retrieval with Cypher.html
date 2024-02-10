@@ -119,10 +119,10 @@ For example, for sid=10, your slice is users[9::104].</li>
 <td>userid</td>
 </tr>
 </tbody>
-</table><h1 id="Instructions"><a class="anchor hidden-xs" href="#Instructions" title="Instructions"><i class="fa fa-link"></i></a>Instructions</h1><p>In this assignment, you need to extract your slice of data using pandas on Zeppelin or Jupyter or any data analysis tool with the corresponding users’ checkins and friendships.</p><p>After that, you need to build your graph database only for the slice fo data you extracted based on your sid.  After building the database (loading all data), you need to get the database schema by running the following command in Neo4j Browser.</p><pre><code class="sql hljs"><span class="hljs-keyword">call</span> db.schema.visualization()
+</table><h1 id="Instructions"><a class="anchor hidden-xs" href="#Instructions" title="Instructions"><i class="fa fa-link"></i></a>Instructions</h1><p>In this assignment, you need to extract your slice of data using pandas on Zeppelin or Jupyter or any data analysis tool with the corresponding users’ checkins and friendships. Add commands and screenshots of output to the report in task 1.</p><p>After that, you need to build your graph database only for the slice fo data you extracted based on your sid.  After building the database (loading all data), you need to get the database schema by running the following command in Neo4j Browser.</p><pre><code class="sql hljs"><span class="hljs-keyword">call</span> db.schema.visualization()
 </code></pre><div class="alert alert-danger">
 <p>You should run this command after building the database or before you submit to Moodle.</p>
-</div><p>Take the screenshot for the schema and submit it to the report for the task 1. For each next task, you need to analyze the data and put the query as a text and a screenshot of the output. Please do not change the order of the queries.</p><p>You need to submit only the report <code>week3.pdf</code>. The total points for this assignment is 100.</p><div class="alert alert-warning">
+</div><p>Take the screenshot for the schema and submit it to the report for the task 2. For each next task, you need to analyze the data and put the query as a text and a screenshot of the output. Please do not change the order of the queries.</p><p>You need to submit only the report <code>week3.pdf</code>. The total points for this assignment is 100.</p><div class="alert alert-warning">
 <p><strong>Note:</strong> Some queries do not return graphs, so the text representation of the output need to be added as a screenshot to the report. If the output is long and does not fit into one screenshot then add the single screenshot and the text representation of the output.</p>
 </div><h1 id="Exercises"><a class="anchor hidden-xs" href="#Exercises" title="Exercises"><i class="fa fa-link"></i></a>Exercises</h1><p>The Neo4j database <code>foursquare</code> in this assignment has the following schema.</p><center>
 <img src="https://i.imgur.com/ls6CvzC.png" width="350">
@@ -173,14 +173,14 @@ For example, for sid=10, your slice is users[9::104].</li>
             <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
                 <div class="toc"><ul class="nav">
 <li class=""><a href="#Assignment-3--Data-Retrieval-with-Cypher" title="Assignment 3 : Data Retrieval with Cypher">Assignment 3 : Data Retrieval with Cypher</a></li>
-<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
-<li class=""><a href="#Report-format" title="Report format">Report format</a></li>
-<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
-<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
-<li class=""><a href="#Description" title="Description">Description</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Report-format" title="Report format">Report format</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Description" title="Description">Description</a></li>
 <li class=""><a href="#Data-Description" title="Data Description">Data Description</a></li>
-<li class=""><a href="#Instructions" title="Instructions">Instructions</a></li>
-<li class=""><a href="#Exercises" title="Exercises">Exercises</a></li>
+<li><a href="#Instructions" title="Instructions">Instructions</a></li>
+<li><a href="#Exercises" title="Exercises">Exercises</a></li>
 <li><a href="#References" title="References">References</a></li>
 </ul>
 </div><div class="toc-menu" style="">
@@ -194,15 +194,15 @@ For example, for sid=10, your slice is users[9::104].</li>
     </div>
     <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
         <div class="toc"><ul class="nav">
-<li class=""><a href="#Assignment-3--Data-Retrieval-with-Cypher" title="Assignment 3 : Data Retrieval with Cypher">Assignment 3 : Data Retrieval with Cypher</a></li>
-<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
-<li class=""><a href="#Report-format" title="Report format">Report format</a></li>
-<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
-<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
-<li class=""><a href="#Description" title="Description">Description</a></li>
+<li><a href="#Assignment-3--Data-Retrieval-with-Cypher" title="Assignment 3 : Data Retrieval with Cypher">Assignment 3 : Data Retrieval with Cypher</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Report-format" title="Report format">Report format</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Description" title="Description">Description</a></li>
 <li class=""><a href="#Data-Description" title="Data Description">Data Description</a></li>
 <li class=""><a href="#Instructions" title="Instructions">Instructions</a></li>
-<li class=""><a href="#Exercises" title="Exercises">Exercises</a></li>
+<li><a href="#Exercises" title="Exercises">Exercises</a></li>
 <li><a href="#References" title="References">References</a></li>
 </ul>
 </div><div class="toc-menu" style="">
