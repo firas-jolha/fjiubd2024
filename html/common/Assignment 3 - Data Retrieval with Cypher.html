@@ -80,7 +80,7 @@ For example, for sid=10, your slice is users[9::104].</li>
 [<span class="hljs-number">1100</span> rows x <span class="hljs-number">1</span> columns]
 </code></pre>
 <ol start="3">
-<li>You have to work only on the check-ins by users from your slice <strong>in addition to the check-ins from their friends</strong>. <s>The same for friendship_before and friendship_after. All friend ids of users should belong to your slice of users too.</s> The users can have friends whose ids are not from your slice of user ids. You have to extract all users whose ids in <em>user id</em> field with their friend ids for both friendship_before and friendship_after. Then, you extract the POIs and then the check-ins of users and friends.</li>
+<li>You have to work only on the check-ins by users from your slice <strong>in addition to the check-ins from their friends</strong>. <s>The same for friendship_before and friendship_after. All friend ids of users should belong to your slice of users too.</s> The users can have friends whose ids are not from your slice of user ids. You have to extract all users whose ids in <em>user id</em> field with their friend ids for both friendship_before and friendship_after. Then, you extract the check-ins of users and friends. After that, you extract the POIs for venues you extracted from check-ins (of users and friends).</li>
 <li>Do not query, or create nodes/relationships for users out of your slice <strong>or not their friends</strong>. Otherwise, your work will be penalized.</li>
 </ol>
 <!-- 4. Do not worry, you would have some  -->
@@ -173,15 +173,15 @@ For example, for sid=10, your slice is users[9::104].</li>
             <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
                 <div class="toc"><ul class="nav">
 <li class=""><a href="#Assignment-3--Data-Retrieval-with-Cypher" title="Assignment 3 : Data Retrieval with Cypher">Assignment 3 : Data Retrieval with Cypher</a></li>
-<li><a href="#Dataset" title="Dataset">Dataset</a></li>
-<li><a href="#Report-format" title="Report format">Report format</a></li>
-<li><a href="#Agenda" title="Agenda">Agenda</a></li>
-<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
-<li><a href="#Description" title="Description">Description</a></li>
-<li><a href="#Data-Description" title="Data Description">Data Description</a></li>
-<li><a href="#Instructions" title="Instructions">Instructions</a></li>
+<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li class=""><a href="#Report-format" title="Report format">Report format</a></li>
+<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li class=""><a href="#Description" title="Description">Description</a></li>
+<li class=""><a href="#Data-Description" title="Data Description">Data Description</a></li>
+<li class=""><a href="#Instructions" title="Instructions">Instructions</a></li>
 <li class=""><a href="#Exercises" title="Exercises">Exercises</a></li>
-<li><a href="#References" title="References">References</a></li>
+<li class=""><a href="#References" title="References">References</a></li>
 </ul>
 </div><div class="toc-menu" style="">
     <a class="expand-toggle expand-all" href="#">Expand all</a>
@@ -194,16 +194,16 @@ For example, for sid=10, your slice is users[9::104].</li>
     </div>
     <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
         <div class="toc"><ul class="nav">
-<li><a href="#Assignment-3--Data-Retrieval-with-Cypher" title="Assignment 3 : Data Retrieval with Cypher">Assignment 3 : Data Retrieval with Cypher</a></li>
-<li><a href="#Dataset" title="Dataset">Dataset</a></li>
-<li><a href="#Report-format" title="Report format">Report format</a></li>
-<li><a href="#Agenda" title="Agenda">Agenda</a></li>
-<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
-<li><a href="#Description" title="Description">Description</a></li>
-<li><a href="#Data-Description" title="Data Description">Data Description</a></li>
-<li><a href="#Instructions" title="Instructions">Instructions</a></li>
+<li class=""><a href="#Assignment-3--Data-Retrieval-with-Cypher" title="Assignment 3 : Data Retrieval with Cypher">Assignment 3 : Data Retrieval with Cypher</a></li>
+<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li class=""><a href="#Report-format" title="Report format">Report format</a></li>
+<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li class=""><a href="#Description" title="Description">Description</a></li>
+<li class=""><a href="#Data-Description" title="Data Description">Data Description</a></li>
+<li class=""><a href="#Instructions" title="Instructions">Instructions</a></li>
 <li class=""><a href="#Exercises" title="Exercises">Exercises</a></li>
-<li><a href="#References" title="References">References</a></li>
+<li class=""><a href="#References" title="References">References</a></li>
 </ul>
 </div><div class="toc-menu" style="">
     <a class="expand-toggle expand-all" href="#">Expand all</a>
