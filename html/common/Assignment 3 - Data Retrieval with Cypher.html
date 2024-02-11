@@ -80,7 +80,7 @@ For example, for sid=10, your slice is users[9::104].</li>
 [<span class="hljs-number">1100</span> rows x <span class="hljs-number">1</span> columns]
 </code></pre>
 <ol start="3">
-<li>You have to work only on the check-ins by users from your slice. The same for friendship_before and friendship_after. All friend ids of users should belong to your slice of users too.</li>
+<li>You have to work only on the check-ins by users from your slice <strong>in addition to the check-ins from their friends</strong>. <s>The same for friendship_before and friendship_after. All friend ids of users should belong to your slice of users too.</s> The users can have friends whose ids are not from your slice of user ids. You have to extract all users whose ids in <em>user id</em> field with their friend ids for both friendship_before and friendship_after. Then, you extract the POIs and then the check-ins of users and friends.</li>
 <li>Do not query, or create nodes/relationships for users out of your slice. Otherwise, your work will be penalized.</li>
 </ol>
 <!-- 4. Do not worry, you would have some  -->
@@ -132,10 +132,10 @@ For example, for sid=10, your slice is users[9::104].</li>
 <ol>
 <li><strong>[10 points]</strong> Extract your slice of users data and their corresponding check-ins and friends. Given the whole dataset files from the attached link, you need to prepare your data files. Specifically, you need to do as follows:
 <ul>
-<li>Prepare the check ins of your users and store it in “my_checkins_anonymized.tsv”.</li>
-<li>Prepare the friendships_before of your users and store it in “my_frienship_before.tsv”.</li>
-<li>Prepare the friendships_after of your users and store it in “my_frienship_after.tsv”.</li>
-<li>Prepare the POIs of your users and store it in “my_POIs.tsv”.</li>
+<li>Prepare the friendships_before of your users <strong>with their friends</strong> and store it in “my_frienship_before.tsv”.</li>
+<li>Prepare the friendships_after of your users <strong>with their friends</strong> and store it in “my_frienship_after.tsv”.</li>
+<li>Prepare the POIs of your users <strong>and friends</strong> and store it in “my_POIs.tsv”.</li>
+<li>Prepare the check ins of your users <strong>and friends</strong> and store it in “my_checkins_anonymized.tsv”.</li>
 <li>Throw users.csv and all other downloaded files to Recycle Bin (better to remove them completetly <img class="emoji" alt=":smile:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/smile.png">).</li>
 <li>Add to the report the commands and screenshots of the output of the commands.</li>
 </ul>
@@ -177,8 +177,8 @@ For example, for sid=10, your slice is users[9::104].</li>
 <li><a href="#Report-format" title="Report format">Report format</a></li>
 <li><a href="#Agenda" title="Agenda">Agenda</a></li>
 <li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
-<li><a href="#Description" title="Description">Description</a></li>
-<li class=""><a href="#Data-Description" title="Data Description">Data Description</a></li>
+<li class=""><a href="#Description" title="Description">Description</a></li>
+<li><a href="#Data-Description" title="Data Description">Data Description</a></li>
 <li><a href="#Instructions" title="Instructions">Instructions</a></li>
 <li><a href="#Exercises" title="Exercises">Exercises</a></li>
 <li><a href="#References" title="References">References</a></li>
@@ -199,9 +199,9 @@ For example, for sid=10, your slice is users[9::104].</li>
 <li><a href="#Report-format" title="Report format">Report format</a></li>
 <li><a href="#Agenda" title="Agenda">Agenda</a></li>
 <li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
-<li><a href="#Description" title="Description">Description</a></li>
-<li class=""><a href="#Data-Description" title="Data Description">Data Description</a></li>
-<li class=""><a href="#Instructions" title="Instructions">Instructions</a></li>
+<li class=""><a href="#Description" title="Description">Description</a></li>
+<li><a href="#Data-Description" title="Data Description">Data Description</a></li>
+<li><a href="#Instructions" title="Instructions">Instructions</a></li>
 <li><a href="#Exercises" title="Exercises">Exercises</a></li>
 <li><a href="#References" title="References">References</a></li>
 </ul>
