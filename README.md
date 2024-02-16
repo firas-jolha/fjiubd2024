@@ -28,4 +28,4 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Assignment 3 - Data Retrieval with Cypher](html/common/Assignment 3 - Data Retrieval with Cypher.html)
 
-### [Assignment 4 - Mongodb](html/common/Assignment 4 - Mongodb.html)
+<!-- ### [Assignment 4 - Mongodb](html/common/Assignment 4 - Mongodb.html) -->
