@@ -10,6 +10,7 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Project Description - Big Data Technologies and Analytics course](html/masters/Project Description for masters.html)
 
+<!-- ### [Stage I](html/common/Project Description for masters.html) -->
 
 
 ## Labs
@@ -22,11 +23,18 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Lab 4 - Mongodb](html/common/Lab 4 - Mongodb.html)
 
+### [Lab 5 - Apache Spark Core & SQL](html/common/Lab 5 - Apache Spark Core & SQL.html)
+
+<!-- ### [Lab 6 - Apache Spark ML](html/common/Lab 6 - Apache Spark ML.html) -->
+<!-- ### [Lab 7 - Apache Spark Streaming](html/common/Lab 7 - Apache Spark Streaming.html) -->
+
 ## Assignments/Tests
 
 ### [Assignment 2 - Data Retrieval with SQL](html/common/Assignment 2 - Data Retrieval with SQL.html)
 
 ### [Assignment 3 - Data Retrieval with Cypher](html/common/Assignment 3 - Data Retrieval with Cypher.html)
 
-### [Test 4 - Prerequisites (Mongodb)](html/common/Test 4 - Prerequisites (Mongodb).html)
+### [Test 4 - Mongodb (only prerequisites)](html/common/Test 4 - Mongodb (only prerequisites).html)
+
+### [Test 5 - Apache Spark Core & SQL (only prerequisites)](html/common/Test 5 - Apache Spark Core & SQL (only prerequisites).html)
 <!-- ### [Assignment 4 - Mongodb](html/common/Assignment 4 - Mongodb.html) -->
