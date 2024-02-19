@@ -36,5 +36,5 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Test 4 - Mongodb (only prerequisites)](html/common/Test 4 - Mongodb (only prerequisites).html)
 
-### [Test 5 - Apache Spark Core & SQL (only prerequisites)](html/common/Test 5 - Apache Spark Core & SQL (only prerequisites).html)
+<!-- ### [Test 5 - Apache Spark Core & SQL (only prerequisites)](html/common/Test 5 - Apache Spark Core & SQL (only prerequisites).html) -->
 <!-- ### [Assignment 4 - Mongodb](html/common/Assignment 4 - Mongodb.html) -->
