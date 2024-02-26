@@ -1,0 +1,1373 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Lab 5 - Apache Spark Core &amp; SQL - CodiMD
+    </title>
+    <link rel="icon" type="image/png" href="http://localhost:3000/favicon.png">
+    <link rel="apple-touch-icon" href="http://localhost:3000/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha256-H0KfTigpUV+0/5tn2HXC0CPwhhDhWgSawJdnFd0CGCo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fork-awesome/1.1.3/css/fork-awesome.min.css" integrity="sha256-ZhApazu+kejqTYhMF+1DzNKjIzP7KXu6AzyXcC1gMus=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github-gist.min.css" integrity="sha256-tAflq+ymku3Khs+I/WcAneIlafYgDiOQ9stIHH985Wo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,300italic,300|Source+Serif+Pro|Source+Code+Pro:400,300,500&subset=latin,latin-ext);.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{padding:0 1em;color:#777;border-left:.25em solid #ddd}.night .markdown-body blockquote{color:#bcbcbc}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.night .markdown-body h1,.night .markdown-body h2,.night .markdown-body h3,.night .markdown-body h4,.night .markdown-body h5,.night .markdown-body h6{color:#ddd}.markdown-body h1 .fa-link,.markdown-body h2 .fa-link,.markdown-body h3 .fa-link,.markdown-body h4 .fa-link,.markdown-body h5 .fa-link,.markdown-body h6 .fa-link{color:#000;vertical-align:middle;visibility:hidden;font-size:16px}.night .markdown-body h1 .fa-link,.night .markdown-body h2 .fa-link,.night .markdown-body h3 .fa-link,.night .markdown-body h4 .fa-link,.night .markdown-body h5 .fa-link,.night .markdown-body h6 .fa-link{color:#fff}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .fa-link,.markdown-body h2:hover .anchor .fa-link,.markdown-body h3:hover .anchor .fa-link,.markdown-body h4:hover .anchor .fa-link,.markdown-body h5:hover .anchor .fa-link,.markdown-body h6:hover .anchor .fa-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.night .markdown-body table tr{background-color:#5f5f5f}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.night .markdown-body table tr:nth-child(2n){background-color:#4f4f4f}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.night .markdown-body code,.night .markdown-body tt{color:#eee;background-color:hsla(0,0%,90.2%,.36)}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\A0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.markdown-body kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid;border-color:#ccc #ccc #bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body pre{border:inherit!important}.night .markdown-body pre{filter:invert(100%)}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-webkit-inline-flex;display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.night .markdown-body .gist table tr:nth-child(2n){background-color:#ddd}.markdown-body code[data-gist-id]{background:none;padding:0;filter:invert(100%)}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.geo,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.night .markdown-body pre.graphviz .graph>polygon{fill:#333}.night .markdown-body pre.mermaid .sectionTitle,.night .markdown-body pre.mermaid .titleText,.night .markdown-body pre.mermaid text{fill:#fff}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{max-width:100%;height:100%}.night .markdown-body .abc path{fill:#eee}.night .markdown-body .abc path.note_selected{fill:##4DD0E1}.night tspan{fill:#fefefe}.night pre rect{fill:transparent}.night pre.flow-chart path,.night pre.flow-chart rect{stroke:#fff}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body img{background-color:transparent}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;-webkit-transition:opacity .2s;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;-webkit-transition:opacity .2s;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.geo-map{width:100%;height:250px}.markmap-container{height:300px}.markmap-container>svg{width:100%;height:100%}.MJX_Assistive_MathML{display:none}.ui-infobar{position:relative;z-index:2;max-width:758px;margin-top:25px;margin-bottom:-25px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:10000}.ui-toc-label{opacity:.9;background-color:#ccc;border:none}.ui-toc-label,.ui-toc .open .ui-toc-label{-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#5f5f5f}.ui-toc-label:focus{opacity:1;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.night .ui-toc-dropdown .nav>li>a:focus,.night .ui-toc-dropdown .nav>li>a:hover{color:#fff;border-left-color:#fff}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.night .ui-toc-dropdown .nav>.active:focus>a,.night .ui-toc-dropdown .nav>.active:hover>a,.night .ui-toc-dropdown .nav>.active>a{color:#fff;border-left:2px solid #fff}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.night .ui-toc-dropdown .nav>li>a{color:#aaa}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:50px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a{padding-right:50px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:60px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a{padding-right:60px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:hover{padding-left:49px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:hover{padding-right:49px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-left:59px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-right:59px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>a{padding-left:48px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:48px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active>a{padding-left:58px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:58px}.markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,Hiragino Kaku Gothic Pro,"\30D2\30E9\30AE\30CE\89D2\30B4   Pro W3",Osaka,Meiryo,"\30E1\30A4\30EA\30AA",MS Gothic,"\FF2D\FF33   \30B4\30B7\30C3\30AF",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,"\FF2D\FF33   \FF30\30B4\30B7\30C3\30AF",sans-serif}.markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang TC,Microsoft JhengHei,"\5FAE\8EDF\6B63\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,"\5FAE\8EDF\6B63\9ED1UI",sans-serif}.markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang SC,Microsoft YaHei,"\5FAE\8F6F\96C5\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,"\5FAE\8F6F\96C5\9ED1UI",sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:rgba(0,0,0,.85)}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:contain}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}small span{line-height:22px}small .dropdown{display:inline-block}small .dropdown a:focus,small .dropdown a:hover{text-decoration:none}.unselectable{-moz-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-o-user-select:none;user-select:none}.night .navbar{background:#333;border-bottom-color:#333;color:#eee}.night .navbar a{color:#eee}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}.focus,:focus{outline:none!important}::-moz-focus-inner{border:0!important}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid" lang="en"><h6 id="Home-page"><a class="anchor hidden-xs" href="#Home-page" title="Home-page"><i class="fa fa-link"></i></a><a href="https://firas-jolha.github.io/fjiubd2024/" target="_blank" rel="noopener">Home page<img src="https://cdn4.iconfinder.com/data/icons/bold-ui-1/60/Home_2-512.png" alt="1" width="30px" height="30px"></a></h6><h1 id="Lab-5---Apache-Spark-Core-amp-SQL"><a class="anchor hidden-xs" href="#Lab-5---Apache-Spark-Core-amp-SQL" title="Lab-5---Apache-Spark-Core-amp-SQL"><i class="fa fa-link"></i></a>Lab 5 - Apache Spark Core &amp; SQL</h1><p><strong>Course:</strong> Big Data - IU S24<br>
+<strong>Author:</strong> Firas Jolha</p><h2 id="Dataset"><a class="anchor hidden-xs" href="#Dataset" title="Dataset"><i class="fa fa-link"></i></a>Dataset</h2><ul>
+<li><a href="https://raw.githubusercontent.com/firas-jolha/BigData-IU-S23/main/movies.csv" target="_blank" rel="noopener">Top gross movies between 2007 and 2011</a></li>
+<li><a href="https://raw.githubusercontent.com/aminebennaji19/FIFA-World-Cup-Qatar-2022/main/data/results.csv" target="_blank" rel="noopener">World cup results from 1872 till 2022</a></li>
+</ul><h2 id="Readings"><a class="anchor hidden-xs" href="#Readings" title="Readings"><i class="fa fa-link"></i></a>Readings</h2><ul>
+<li><a href="https://spark.apache.org/docs/3.0.3/api/python/index.html" target="_blank" rel="noopener">Spark 3.0.3 Python API Docs</a></li>
+</ul><h1 id="Agenda"><a class="anchor hidden-xs" href="#Agenda" title="Agenda"><i class="fa fa-link"></i></a>Agenda</h1><p></p><div class="toc"><ul>
+<li><a href="#Lab-5---Apache-Spark-Core-amp-SQL" title="Lab 5 - Apache Spark Core &amp; SQL">Lab 5 - Apache Spark Core &amp; SQL</a><ul>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Readings" title="Readings">Readings</a></li>
+</ul>
+</li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Intro-to-Apache-Spark-review" title="Intro to Apache Spark [review]">Intro to Apache Spark [review]</a><ul>
+<li><a href="#Core-Concepts-in-Spark" title="Core Concepts in Spark">Core Concepts in Spark</a></li>
+<li><a href="#Spark-Application-Model" title="Spark Application Model">Spark Application Model</a></li>
+<li><a href="#Spark-Execution-Model" title="Spark Execution Model">Spark Execution Model</a></li>
+<li><a href="#Spark-Components" title="Spark Components">Spark Components</a></li>
+<li><a href="#Spark-Architecture" title="Spark Architecture">Spark Architecture</a></li>
+<li><a href="#How-Spark-works" title="How Spark works?">How Spark works?</a></li>
+<li><a href="#Spark-Features" title="Spark Features">Spark Features</a></li>
+<li><a href="#Supported-Cluster-Managers" title="Supported Cluster Managers">Supported Cluster Managers</a></li>
+</ul>
+</li>
+<li><a href="#PySpark" title="PySpark">PySpark</a><ul>
+<li><a href="#PySpark-Modules-amp-Packages" title="PySpark Modules &amp; Packages">PySpark Modules &amp; Packages</a></li>
+<li><a href="#Install-PySpark-on-HDP-Sandbox" title="Install PySpark on HDP Sandbox">Install PySpark on HDP Sandbox</a></li>
+<li><a href="#Running-PySpark-applications" title="Running PySpark applications">Running PySpark applications</a></li>
+</ul>
+</li>
+<li><a href="#Spark-RDD" title="Spark RDD">Spark RDD</a><ul>
+<li><a href="#Spark-RDD-Operations" title="Spark RDD Operations">Spark RDD Operations</a></li>
+<li><a href="#Spark-RDD-Transformations" title="Spark RDD Transformations">Spark RDD Transformations</a></li>
+<li><a href="#Spark-RDD-Actions" title="Spark RDD Actions">Spark RDD Actions</a></li>
+</ul>
+</li>
+<li><a href="#Spark-Context" title="Spark Context">Spark Context</a><ul>
+<li><a href="#Import-required-packages" title="Import required packages">Import required packages</a></li>
+<li><a href="#Create-a-SparkContext" title="Create a SparkContext">Create a SparkContext</a></li>
+</ul>
+</li>
+<li><a href="#Spark-RDD1" title="Spark RDD">Spark RDD</a><ul>
+<li class="invisable-node"><ul>
+<li><a href="#1-using-parallelize-function" title="1. using parallelize() function">1. using parallelize() function</a></li>
+<li><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
+</ul>
+</li>
+<li><a href="#Create-empty-RDD" title="Create empty RDD">Create empty RDD</a></li>
+<li><a href="#Repartition-and-Coalesce" title="Repartition and Coalesce">Repartition and Coalesce</a></li>
+<li><a href="#PySpark-RDD-Transformations" title="PySpark RDD Transformations">PySpark RDD Transformations</a><ul>
+<li><a href="#map-and-flatMap" title="map and flatMap">map and flatMap</a></li>
+<li><a href="#filter" title="filter">filter</a></li>
+<li><a href="#distinct" title="distinct">distinct</a></li>
+<li><a href="#sample" title="sample">sample</a></li>
+<li><a href="#randomSplit" title="randomSplit">randomSplit</a></li>
+<li><a href="#mapPartitions-and-mapPartitionsWithIndex" title="mapPartitions and mapPartitionsWithIndex">mapPartitions and mapPartitionsWithIndex</a></li>
+<li><a href="#sortBy-and-groupBy" title="sortBy and groupBy">sortBy and groupBy</a></li>
+<li><a href="#sortByKey-and-reduceByKey" title="sortByKey and reduceByKey">sortByKey and reduceByKey</a></li>
+</ul>
+</li>
+<li><a href="#PySpark-RDD-Actions" title="PySpark RDD Actions">PySpark RDD Actions</a><ul>
+<li><a href="#collect" title="collect">collect</a></li>
+<li><a href="#max-min-first-top-take" title="max, min, first, top, take">max, min, first, top, take</a></li>
+<li><a href="#count-countByValue" title="count, countByValue">count, countByValue</a></li>
+<li><a href="#reduce-treeReduce" title="reduce, treeReduce">reduce, treeReduce</a></li>
+<li><a href="#saveAsTextFile" title="saveAsTextFile">saveAsTextFile</a></li>
+</ul>
+</li>
+<li><a href="#RDD-Persistence" title="RDD Persistence">RDD Persistence</a><ul>
+<li><a href="#RDD-Cache" title="RDD Cache">RDD Cache</a></li>
+<li><a href="#RDD-Persist" title="RDD Persist">RDD Persist</a></li>
+<li><a href="#RDD-Unpersist" title="RDD Unpersist">RDD Unpersist</a></li>
+</ul>
+</li>
+<li><a href="#Shuffling-in-Spark-engine" title="Shuffling in Spark engine">Shuffling in Spark engine</a></li>
+<li><a href="#Shared-Variables" title="Shared Variables">Shared Variables</a><ul>
+<li><a href="#Broadcast-variables" title="Broadcast variables">Broadcast variables</a></li>
+<li><a href="#Accumulator-variables" title="Accumulator variables">Accumulator variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Spark-DataFrame" title="Spark DataFrame">Spark DataFrame</a><ul>
+<li><a href="#1-using-createDataFrame-function" title="1. using createDataFrame() function">1. using createDataFrame() function</a></li>
+<li><a href="#2-using-toDF-function" title="2. using toDF() function">2. using toDF() function</a></li>
+<li><a href="#3-Read-from-a-local-file" title="3. Read from a local file">3. Read from a local file</a></li>
+<li><a href="#4-Read-from-MongoDB-via-PyMongo" title="4. Read from MongoDB via PyMongo">4. Read from MongoDB via PyMongo</a></li>
+<li><a href="#5-Read-from-HDFS" title="5. Read from HDFS">5. Read from HDFS</a></li>
+<li><a href="#StructType-amp-StructField" title="StructType &amp; StructField">StructType &amp; StructField</a></li>
+<li><a href="#Spark-DataFrame-Operations" title="Spark DataFrame Operations">Spark DataFrame Operations</a></li>
+<li><a href="#show-Action" title="show [Action]">show [Action]</a></li>
+<li><a href="#collect-Action" title="collect [Action]">collect [Action]</a></li>
+<li><a href="#select-Transformation" title="select [Transformation]">select [Transformation]</a></li>
+<li><a href="#withColumn-withColumnRenamed-drop-Transformation" title="withColumn, withColumnRenamed, drop [Transformation]">withColumn, withColumnRenamed, drop [Transformation]</a></li>
+<li><a href="#filter-where-Transformation" title="filter, where [Transformation]">filter, where [Transformation]</a><ul>
+<li><a href="#distinct-dropDuplicates-Transformation" title="distinct, dropDuplicates [Transformation]">distinct, dropDuplicates [Transformation]</a></li>
+<li><a href="#groupby-Transformation" title="groupby [Transformation]">groupby [Transformation]</a></li>
+<li><a href="#orderBy-sort-Transformation" title="orderBy, sort [Transformation]">orderBy, sort [Transformation]</a></li>
+<li><a href="#Join" title="Join">Join</a></li>
+<li><a href="#UDF-User-Defined-Function" title="UDF (User Defined Function)">UDF (User Defined Function)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Spark-Dataset" title="Spark Dataset">Spark Dataset</a></li>
+<li><a href="#Spark-SQL" title="Spark SQL">Spark SQL</a><ul>
+<li><a href="#Data-Description" title="Data Description">Data Description</a></li>
+<li><a href="#Spark-SQL-Examples" title="Spark SQL Examples">Spark SQL Examples</a></li>
+</ul>
+</li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><p></p><h1 id="Prerequisites"><a class="anchor hidden-xs" href="#Prerequisites" title="Prerequisites"><i class="fa fa-link"></i></a>Prerequisites</h1><ul>
+<li>Installed Hortonworks Data Platform (HDP) Sandbox</li>
+<li>Installed pip and pandas packages</li>
+<li>Added Python interpreter to Zeppelin</li>
+</ul><h1 id="Objectives"><a class="anchor hidden-xs" href="#Objectives" title="Objectives"><i class="fa fa-link"></i></a>Objectives</h1><ul>
+<li>Install pyspark on HDP Sandbox</li>
+<li>Distribute data in HDFS</li>
+<li>Transformations &amp; actions in pyspark</li>
+<li>Learn how to analyze data in pyspark</li>
+<li>Write spark applications</li>
+</ul><h1 id="Intro-to-Apache-Spark-review"><a class="anchor hidden-xs" href="#Intro-to-Apache-Spark-review" title="Intro-to-Apache-Spark-review"><i class="fa fa-link"></i></a>Intro to Apache Spark [review]</h1><div class="alert alert-warning">
+<p>This section gives a theoretical introduction to Spark, which will be covered in the lecture. Feel free to skip it if you have enough theoretical knowledge about Spark.</p>
+</div><p><strong>Apache Spark</strong> is a unified analytics engine for large-scale data processing. It provides high-level APIs in Java, Scala, Python and R, and an optimized engine that supports general execution graphs. It also supports a rich set of higher-level tools including Spark SQL for SQL and structured data processing, pandas API on Spark for pandas workloads (only for spark 3), MLlib for machine learning, GraphX for graph processing, and Structured Streaming for incremental computation and stream processing.</p><p><img src="https://i.imgur.com/N20Uo5D.png" alt="" class="md-image md-image"></p><p>Spark introduces the concept of an <strong>RDD (Resilient Distributed Dataset)</strong>, an immutable fault-tolerant, distributed collection of objects that can be operated on in parallel. An RDD can contain any type of object and is created by loading an external dataset or distributing a collection from the driver program. Each RDD is split into multiple partitions (similar pattern with smaller sets), which may be computed on different nodes of the cluster</p><p>RDD means:<br>
+<strong>Resilient</strong> – capable of rebuilding data on failure<br>
+<strong>Distributed</strong> – distributes data among various nodes in cluster<br>
+<strong>Dataset</strong> – collection of partitioned data with values</p><h2 id="Core-Concepts-in-Spark"><a class="anchor hidden-xs" href="#Core-Concepts-in-Spark" title="Core-Concepts-in-Spark"><i class="fa fa-link"></i></a>Core Concepts in Spark</h2><ul>
+<li><strong>Application:</strong> A user program built on Spark. Consists of a driver program and executors on the cluster.</li>
+<li><strong>Driver Program:</strong> The process running the <code>main()</code> function of the application and creating the <code>SparkContext</code>.</li>
+<li><strong>Cluster Manager:</strong> An external service for acquiring resources on the cluster (e.g. standalone manager, Mesos, YARN). <code>--master</code> option in <code>spark-submit</code> tool.</li>
+<li><strong>Deploy mode:</strong> Distinguishes where the driver process runs. In “cluster” mode, the framework launches the driver inside of the cluster. In “client” mode, the submitter launches the driver outside of the cluster. <code>--deploy-mode</code> option in <code>spark-submit</code> tool.</li>
+<li><strong>Job:</strong> A piece of code which reads some input from HDFS or local, performs some computation on the data and writes some output data.</li>
+<li><strong>Stages:</strong> Jobs are divided into stages. Stages are classified as a Map or reduce stages. Stages are divided based on computational boundaries, all computations (operators) cannot be updated in a single Stage. It happens over many stages.</li>
+<li><strong>Tasks:</strong> Each stage has some tasks, one task per partition. One task is executed on one partition of data on one executor (machine).</li>
+<li><strong>DAG:</strong> DAG stands for Directed Acyclic Graph, in the present context its a DAG of operators.</li>
+<li><strong>Executor:</strong> The process responsible for executing a task.</li>
+<li><strong>Master:</strong> The machine on which the Driver program runs</li>
+<li><strong>Slave:</strong> The machine on which the Executor program runs</li>
+</ul><p>Check the glossary from <a href="https://spark.apache.org/docs/3.0.3/cluster-overview.html" target="_blank" rel="noopener">here</a>.</p><h2 id="Spark-Application-Model"><a class="anchor hidden-xs" href="#Spark-Application-Model" title="Spark-Application-Model"><i class="fa fa-link"></i></a>Spark Application Model</h2><p>Apache Spark is widely considered to be the successor to MapReduce for general purpose data processing on Apache Hadoop clusters. In <strong>MapReduce</strong>, the highest-level unit of computation is a job. A job loads data, applies a map function, shuffles it, applies a reduce function, and writes data back out to persistent storage. In <strong>Spark</strong>, the highest-level unit of computation is an application. A Spark application can be used for a single batch job, an interactive session with multiple jobs, or a long-lived server continually satisfying requests. A Spark job can consist of more than just a single map and reduce.</p><p>MapReduce starts a process for each task. In contrast, a Spark application can have processes running on its behalf even when it is not running a job. Furthermore, multiple tasks can run within the same executor. Both combine to enable extremely fast task startup time as well as in-memory data storage, resulting in orders of magnitude faster performance over MapReduce.</p><h2 id="Spark-Execution-Model"><a class="anchor hidden-xs" href="#Spark-Execution-Model" title="Spark-Execution-Model"><i class="fa fa-link"></i></a>Spark Execution Model</h2><p>At runtime, a Spark application maps to a single driver process and a set of executor processes distributed across the hosts in a cluster.</p><p>The driver process manages the job flow and schedules tasks and is available the entire time the application is running. Typically, this driver process is the same as the client process used to initiate the job, although when run on YARN, the driver can run in the cluster. In interactive mode, the shell itself is the driver process.</p><p>The executors are responsible for executing work, in the form of tasks, as well as for storing any data that you cache. Executor lifetime depends on whether dynamic allocation is enabled. An executor has a number of slots for running tasks, and will run many concurrently throughout its lifetime.</p><p><img src="https://i.imgur.com/kErC1WW.png" alt="" class="md-image md-image"></p><p>Invoking an <code>action</code> operation inside a Spark application triggers the launch of a <strong>job</strong> to fulfill it. Spark examines the dataset on which that action depends and formulates an execution plan. The execution plan assembles the dataset transformations into <strong>stages</strong>. A stage is a collection of <strong>tasks</strong> that run the same code, each on a different subset of the data.</p><h2 id="Spark-Components"><a class="anchor hidden-xs" href="#Spark-Components" title="Spark-Components"><i class="fa fa-link"></i></a>Spark Components</h2><ul>
+<li>Spark Driver</li>
+<li>Executors</li>
+<li>Cluster Manager</li>
+</ul><p><img src="https://i.imgur.com/K7xzq0s.png" alt="" class="md-image md-image"></p><p>Spark Driver contains more components responsible for translation of user code into actual jobs executed on cluster:</p><p><img src="https://i.imgur.com/OMrw8jE.png" alt="" class="md-image md-image"></p><ul>
+<li><strong>SparkContext</strong>
+<ul>
+<li>represents the connection to a Spark cluster, and can be used to create RDDs, accumulators and broadcast variables on that cluster</li>
+</ul>
+</li>
+<li><strong>DAGScheduler</strong>
+<ul>
+<li>computes a DAG of stages for each job and submits them to TaskScheduler determines preferred locations for tasks (based on cache status or shuffle files locations) and finds minimum schedule to run the jobs</li>
+</ul>
+</li>
+<li><strong>TaskScheduler</strong>
+<ul>
+<li>responsible for sending tasks to the cluster, running them, retrying if there are failures, and mitigating stragglers</li>
+</ul>
+</li>
+<li><strong>SchedulerBackend</strong>
+<ul>
+<li>backend interface for scheduling systems that allows plugging in different implementations( Mesos, YARN, Standalone, local)</li>
+</ul>
+</li>
+<li><strong>BlockManager</strong>
+<ul>
+<li>provides interfaces for putting and retrieving blocks both locally and remotely into various stores (memory, disk, and off-heap)</li>
+</ul>
+</li>
+</ul><h2 id="Spark-Architecture"><a class="anchor hidden-xs" href="#Spark-Architecture" title="Spark-Architecture"><i class="fa fa-link"></i></a>Spark Architecture</h2><p>Apache Spark works in a master-slave architecture where the <strong>master</strong> is called <strong>“Driver”</strong> and <strong>slaves</strong> are called <strong>“Workers”</strong>.</p><p><img src="https://i.imgur.com/3Tj1QUG.png" alt="" class="md-image md-image"></p><p>When you run a Spark application, Spark Driver creates a context that is an entry point to your application, and all operations (transformations and actions) are executed on worker nodes, and the resources are managed by Cluster Manager.</p><h2 id="How-Spark-works"><a class="anchor hidden-xs" href="#How-Spark-works" title="How-Spark-works"><i class="fa fa-link"></i></a>How Spark works?</h2><p>Spark has a small code base and the system is divided in various layers. Each layer has some responsibilities. The layers are independent of each other.</p><p><img src="https://i.imgur.com/vLg1PoN.png" alt="" class="md-image md-image"></p><p>The first layer is the interpreter, Spark uses a Scala interpreter, with some modifications. As you enter your code in spark console (creating RDD’s and applying operators), Spark creates a operator graph. When the user runs an action (like collect), the Graph is submitted to a DAG Scheduler. The DAG scheduler divides operator graph into (map and reduce) stages. A stage is comprised of tasks based on partitions of the input data. The DAG scheduler pipelines operators together to optimize the graph. For e.g. Many map operators can be scheduled in a single stage. This optimization is key to Spark’s performance. The final result of a DAG scheduler is a set of stages. The stages are passed on to the Task Scheduler. The task scheduler launches tasks via cluster manager (Spark Standalone/Yarn/Mesos). The task scheduler doesn’t know about dependencies among stages.</p><h2 id="Spark-Features"><a class="anchor hidden-xs" href="#Spark-Features" title="Spark-Features"><i class="fa fa-link"></i></a>Spark Features</h2><ul>
+<li>In-memory computation
+<ul>
+<li>PySpark loads the data from disk and process in memory and keeps the data in memory.</li>
+<li>This is the main difference between PySpark and Mapreduce (I/O intensive).</li>
+</ul>
+</li>
+<li>Distributed processing using parallelize
+<ul>
+<li>When you create RDD from a data, it partitions the data elements. By default, Spark creates one partition for each core.</li>
+</ul>
+</li>
+<li>Can be used with many cluster managers (Spark, Yarn, Mesos e.t.c)</li>
+<li>Fault-tolerant
+<ul>
+<li>It can be used to read and write files from distributed file systems like HDFS.</li>
+</ul>
+</li>
+<li>Immutable
+<ul>
+<li>Once RDDs are created they cannot be modified, they need to be destroyed and recreated to perform any change.</li>
+</ul>
+</li>
+<li>Lazy evaluation
+<ul>
+<li>PySpark does not evaluate the RDD transformations as they appear/encountered by Driver, instead it keeps the all transformations as it encounters in a graph (DAG) and evaluates them when it sees the first RDD action.</li>
+</ul>
+</li>
+<li>Cache &amp; persistence
+<ul>
+<li>We can also cache/persists the RDD in memory to reuse the previous computations.</li>
+</ul>
+</li>
+<li>Inbuild-optimization when using DataFrames</li>
+<li>Supports SQL
+<ul>
+<li>We can perform analysis on the cluster via queries written in SQL and executed on Spark engine.</li>
+</ul>
+</li>
+</ul><h2 id="Supported-Cluster-Managers"><a class="anchor hidden-xs" href="#Supported-Cluster-Managers" title="Supported-Cluster-Managers"><i class="fa fa-link"></i></a>Supported Cluster Managers</h2><p>Spark supports four cluster managers:</p><ul>
+<li><em>Standalone</em> – a simple cluster manager included with Spark that makes it easy to set up a cluster.</li>
+<li><em>Hadoop YARN</em> – the resource manager in Hadoop 2. This is mostly used, cluster manager.</li>
+<li><em>Apache Mesos [deprecated]</em> – Mesos is a Cluster manager that can also run Hadoop MapReduce and PySpark applications.</li>
+<li><em>Kubernetes</em> – an open-source system for automating deployment, scaling, and management of containerized applications.</li>
+<li><strong>local</strong> – which is not really a cluster manager but still you can use “local” for master() in order to run Spark on your local machine.</li>
+</ul><h1 id="PySpark"><a class="anchor hidden-xs" href="#PySpark" title="PySpark"><i class="fa fa-link"></i></a>PySpark</h1><p>PySpark is a Spark library written in Python to run Python applications using Apache Spark capabilities. Using PySpark we can run applications in parallel on the distributed cluster (multiple nodes). In other words, PySpark is a Python API for Apache Spark.</p><p><strong>Spark</strong> is written in <strong>Scala</strong> and later on due to its industry adaptation, its API PySpark released for Python using Py4J Java library that is integrated within PySpark and allows Python to dynamically interface with JVM objects. Hence, to run PySpark you need Java to be installed along with Python, and Apache Spark.</p><h2 id="PySpark-Modules-amp-Packages"><a class="anchor hidden-xs" href="#PySpark-Modules-amp-Packages" title="PySpark-Modules-amp-Packages"><i class="fa fa-link"></i></a>PySpark Modules &amp; Packages</h2><ul>
+<li><strong>PySpark RDD</strong> (<code>pyspark.rdd</code>)</li>
+<li><strong>PySpark DataFrame and SQL</strong> (<code>pyspark.sql</code>)
+<ul>
+<li>Pandas-On-Spark (new in PySpark 3.2.0+)
+<ul>
+<li><code>pyspark.pandas</code></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>PySpark ML
+<ul>
+<li>RDD-based (<code>pyspark.mllib</code>)</li>
+<li>Spark DataFrame-based (<code>pyspark.ml</code>)</li>
+<li>Next week.</li>
+</ul>
+</li>
+<li>PySpark Streaming (<code>pyspark.streaming</code>)
+<ul>
+<li>Structured Streaming (new in PySpark 3.2.0+)
+<ul>
+<li><code>pyspark.sql.streaming</code></li>
+</ul>
+</li>
+<li>Last week.</li>
+</ul>
+</li>
+<li>PySpark GraphFrames (GraphFrames)
+<ul>
+<li>Spark GraphX supported only in Scala</li>
+<li>Last week.</li>
+</ul>
+</li>
+<li>PySpark Resource (<code>pyspark.resource</code>)
+<ul>
+<li>new in PySpark 3.0</li>
+</ul>
+</li>
+</ul><p>Besides these, if you wanted to use third-party libraries, you can find them at <a href="https://spark-packages.org/" target="_blank" rel="noopener">https://spark-packages.org/</a> . This page is kind of a repository of all Spark third-party libraries.</p><h2 id="Install-PySpark-on-HDP-Sandbox"><a class="anchor hidden-xs" href="#Install-PySpark-on-HDP-Sandbox" title="Install-PySpark-on-HDP-Sandbox"><i class="fa fa-link"></i></a>Install PySpark on HDP Sandbox</h2><p>If you have installed Python and pip from previous labs, then you just need to run the following command:</p><pre><code class="sh hljs">pip2 <span class="hljs-keyword">install</span> pyspark
+</code></pre><p>Otherwise, you need to return to the previous labs and install them.</p><div class="alert alert-warning">
+<p><a href="https://www.oreilly.com/library/view/data-algorithms-with/9781492082378/ch01.html" target="_blank" rel="noopener">Scala is the native language</a> for writing Spark applications but Apache Spark supports drivers for other languages such as Python (PySpark package), Java, and R.</p>
+</div><h2 id="Running-PySpark-applications"><a class="anchor hidden-xs" href="#Running-PySpark-applications" title="Running-PySpark-applications"><i class="fa fa-link"></i></a>Running PySpark applications</h2><p>You can run PySpark statements in interactive mode on the shell <code>pyspark</code> or you can write them in Pyhton file and submit it to Spark using the tool <code>spark-submit</code>.</p><h1 id="Spark-RDD"><a class="anchor hidden-xs" href="#Spark-RDD" title="Spark-RDD"><i class="fa fa-link"></i></a>Spark RDD</h1><p>RDD is a fundamental building block of Spark. RDDs are immutable distributed collections of objects. Immutable meaning once you create an RDD you cannot change it. Each record in RDD is divided into logical partitions, which can be computed on different nodes of the cluster.</p><p>In other words, RDDs are a collection of objects similar to list in Python, with the difference being RDD is computed on several processes scattered across multiple physical servers also called nodes in a cluster while a Python collection lives and process in just one process.</p><p>Additionally, RDDs provide data abstraction of partitioning and distribution of the data designed to run computations in parallel on several nodes, while doing transformations on RDD we do not have to worry about the parallelism as Spark by default provides.</p><h2 id="Spark-RDD-Operations"><a class="anchor hidden-xs" href="#Spark-RDD-Operations" title="Spark-RDD-Operations"><i class="fa fa-link"></i></a>Spark RDD Operations</h2><p>There are two main types of Spark operations: Transformations and Actions.</p><p><img src="https://i.imgur.com/5Rzg8rU.png" alt="" class="md-image md-image"></p><h2 id="Spark-RDD-Transformations"><a class="anchor hidden-xs" href="#Spark-RDD-Transformations" title="Spark-RDD-Transformations"><i class="fa fa-link"></i></a>Spark RDD Transformations</h2><p>Spark RDD Transformations are functions that take an RDD as the input and produce one or many RDDs as the output. They do not change the input RDD (since RDDs are immutable), but always produce one or more new RDDs by applying the computations they represent e.g. map(), filter(), reduceByKey() etc.</p><p>Spark supports lazy evaluation and when you apply the transformation on any RDD it will not perform the operation immediately. It will create a DAG(Directed Acyclic Graph) using 1) the applied operation, 2) source RDD and 3) function used for transformation. It will keep on building this graph using the references till you apply any action operation on the last lined up RDDs. That is why the transformations in Spark are lazy.</p><p>Transformations construct a new RDD from a previous one.</p><p><img src="https://i.imgur.com/GJgpmBr.png" alt="" class="md-image md-image"></p><p>For example, we can build a simple Spark application for counting the words in a text file. A spark job of two stages needs to be created (we do not create stages manually but the we define a pipeline for which the stages will be determined):</p><ul>
+<li>
+<p>Stage 1</p>
+<ul>
+<li>Read the data from the files
+<ul>
+<li>input: text file</li>
+<li>output: RDD1</li>
+</ul>
+</li>
+<li>Split the sentences in the RDD into words
+<ul>
+<li>input: RDD1</li>
+<li>output: RDD2</li>
+<li>operation: flatMap(split the words by space)</li>
+<li>The elements of RDD are only values.</li>
+</ul>
+</li>
+<li>Initialize the counters to 1 for each word.
+<ul>
+<li>input: RDD2</li>
+<li>output: RDD3</li>
+<li>operation: map(initialize the counters to 1 for each word)</li>
+<li>The elements of RDD are key-value pairs.
+<ul>
+<li>PairRDD</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Aggregates the counts of words where the group key is the word.
+<ul>
+<li>input: RDD3</li>
+<li>ouput: RDD4</li>
+<li>operation: reduceByKey(aggregates the counts based on the word which is the key in the key-value pair)</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Stage 2</p>
+<ul>
+<li>Print the word counts to the screen
+<ul>
+<li>input: RDD4</li>
+<li>output: RDD5</li>
+<li>operation: foreach(prints the words with their counts)</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul><p><img src="https://i.imgur.com/zomLW1S.png" alt="" class="md-image md-image"></p><p>There are two types of transformations:<br>
+<strong>Narrow transformation</strong> — In Narrow transformation, all the elements that are required to compute the records in single partition live in the single partition of parent RDD. A limited subset of partition is used to calculate the result. Narrow transformations are the result of map(), filter().</p><p><img src="https://i.imgur.com/LFPbHzv.png" alt="" class="md-image md-image"></p><p><strong>Wide transformation</strong> — In wide transformation, all the elements that are required to compute the records in the single partition may live in many partitions of parent RDD. Wide transformations are the result of groupbyKey() and reducebyKey().</p><p><strong>Spark Pair RDDs</strong> are nothing but RDDs containing a key-value pair. Basically, key-value pair (KVP) consists of a two linked data item in it. Here, the key is the identifier, whereas value is the data corresponding to the key value.<br>
+Moreover, Spark operations work on RDDs containing any type of objects. However key-value pair RDDs attains few special operations in it. Such as, distributed “shuffle” operations, grouping or aggregating the elements by a key.</p><p>The following Spark transformations accept input as an RDD consisting of single values.<br>
+<img src="https://i.imgur.com/RqpWt7h.png" alt="" class="md-image md-image"></p><p>Where the transformations below accept an input as a pair RDD consisting of key-value pairs.<br>
+<img src="https://i.imgur.com/DbTTs5o.png" alt="" class="md-image md-image"></p><h2 id="Spark-RDD-Actions"><a class="anchor hidden-xs" href="#Spark-RDD-Actions" title="Spark-RDD-Actions"><i class="fa fa-link"></i></a>Spark RDD Actions</h2><p>Actions, on the other hand, compute a result based on an RDD, and either return it to the driver program or save it to an external storage system (e.g., HDFS).</p><p>The following actions are applied on RDDs which contains single values.<br>
+<img src="https://i.imgur.com/XOM1KVq.png" alt="" class="md-image md-image"></p><p>Action is one of the ways of sending data from Executer to the driver. Executors are agents that are responsible for executing a task. While the driver is a JVM process that coordinates workers and execution of the task. The following actions are applied on pair RDDs which contain key-value pairs.<br>
+<img src="https://i.imgur.com/vdaocQQ.png" alt="" class="md-image md-image"></p><h1 id="Spark-Context"><a class="anchor hidden-xs" href="#Spark-Context" title="Spark-Context"><i class="fa fa-link"></i></a>Spark Context</h1><p>The dataset for this demo is movies data and can be downloaded from the link attached to this document.</p><h2 id="Import-required-packages"><a class="anchor hidden-xs" href="#Import-required-packages" title="Import-required-packages"><i class="fa fa-link"></i></a>Import required packages</h2><pre><code class="python hljs"><span class="hljs-keyword">import</span> pandas <span class="hljs-keyword">as</span> pd
+<span class="hljs-keyword">import</span> pyspark 
+<span class="hljs-keyword">import</span> pymongo
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+<span class="hljs-keyword">from</span> pyspark.sql <span class="hljs-keyword">import</span> SparkSession
+<span class="hljs-keyword">from</span> os.path <span class="hljs-keyword">import</span> join
+</code></pre><h2 id="Create-a-SparkContext"><a class="anchor hidden-xs" href="#Create-a-SparkContext" title="Create-a-SparkContext"><i class="fa fa-link"></i></a>Create a SparkContext</h2><pre><code class="wrap python hljs">
+<span class="hljs-comment"># Import SparkSession</span>
+<span class="hljs-keyword">from</span> pyspark.sql <span class="hljs-keyword">import</span> SparkSession 
+
+<span class="hljs-comment"># Create SparkSession </span>
+spark = SparkSession \
+        .builder \
+        .appName(<span class="hljs-string">"my spark app"</span>) \
+        .master(<span class="hljs-string">"local[*]"</span>) \ <span class="hljs-comment"># local[n] it uses n cores/threads for running spark job</span>
+        .getOrCreate()
+
+sc = spark.sparkContext
+
+<span class="hljs-comment"># Or</span>
+
+<span class="hljs-comment"># Import SparkContext and SparkConf</span>
+<span class="hljs-keyword">from</span> pyspark <span class="hljs-keyword">import</span> SparkContext, SparkConf
+
+<span class="hljs-comment"># Create SparkContext</span>
+conf = SparkConf() \
+        .setAppName(<span class="hljs-string">"my spark app"</span>)\
+        .setMaster(<span class="hljs-string">"local[*]"</span>)
+
+sc = SparkContext(conf=conf)
+spark = SparkSession.builder.config(conf).getOrCreate()
+sc = spark.sparkContext
+
+</code></pre><div class="alert alert-warning">
+<p>Here we are using the local machine as the resource manager with as many as threads/cores as it has.</p>
+</div><div class="alert alert-warning">
+<p>A Spark Driver is an application that creates a <code>SparkContext</code> for executing one or more jobs in the cluster. It allows your Spark/PySpark application to access Spark Cluster with the help of Resource Manager.</p>
+<p>When you create a <code>SparkSession</code> object, <code>SparkContext</code> is also created and can be retrieved using <code>spark.sparkContext</code>. <code>SparkContext</code> will be created only once for an application; even if you try to create another SparkContext, it still returns existing SparkContext.</p>
+</div><div class="alert alert-danger">
+<p>In order to change settings of SparkSession, you need to kill the application and create it again. If your application is running on YARN cluster manager then you can kill it by getting its application_id as follows.</p>
+<pre><code class="wrap powershell hljs">yarn application -kill &lt;application_id&gt;
+</code></pre>
+<p>If your application is running in the local machine, then you can kill from Spark Web UI as follows:</p>
+<ul>
+<li>Open Spark History Server UI.
+<ul>
+<li>In HDP you follow the link
+<ul>
+<li><a href="http://localhost:18081/history/" target="_blank" rel="noopener">http://localhost:18081/history/</a>&lt;application_id&gt;/jobs/</li>
+<li>Replace &lt;application_id&gt; with the id of your application</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Select the jobs tab.</li>
+<li>Find a job you wanted to kill.</li>
+<li>Select kill to stop the Job</li>
+</ul>
+<p><img src="https://i.imgur.com/9YKkrqH.png" alt="" class="md-image md-image"></p>
+</div><h1 id="Spark-RDD1"><a class="anchor hidden-xs" href="#Spark-RDD1" title="Spark-RDD1"><i class="fa fa-link"></i></a>Spark RDD</h1><p>There are multiple ways to create RDDs in PySpark.</p><h3 id="1-using-parallelize-function"><a class="anchor hidden-xs" href="#1-using-parallelize-function" title="1-using-parallelize-function"><i class="fa fa-link"></i></a>1. using <code>parallelize()</code> function</h3><pre><code class="python hljs">data = [(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>, <span class="hljs-string">'a b c'</span>), (<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>, <span class="hljs-string">'d e f'</span>), (<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-string">'g h i'</span>)]
+rdd = sc.parallelize(data) <span class="hljs-comment"># Spark RDD creation</span>
+<span class="hljs-comment"># rdd = sc.parallelize(data, n) # n is minimum number of partitions</span>
+</code></pre><p>This function will split the dataset into multiple partitions. You can get number of partitions by using the function <code>&lt;rdd&gt;.getNumParititions()</code>.</p><h3 id="2-using-textFile-or-wholeTextFiles-functions"><a class="anchor hidden-xs" href="#2-using-textFile-or-wholeTextFiles-functions" title="2-using-textFile-or-wholeTextFiles-functions"><i class="fa fa-link"></i></a>2. using <code>textFile</code> or <code>wholeTextFiles</code> functions</h3><h4 id="Read-from-a-local-file"><a class="anchor hidden-xs" href="#Read-from-a-local-file" title="Read-from-a-local-file"><i class="fa fa-link"></i></a>Read from a local file</h4><pre><code class="python hljs">path = <span class="hljs-string">"file:///sparkdata/movies.csv"</span>
+
+rdd = sc.textFile(path) <span class="hljs-comment"># a spark rdd</span>
+</code></pre><p>The file <code>movies.csv</code> is uploaded to the local file system and stored in the folder <code>/sparkdata</code>.</p><h4 id="Read-from-HDFS"><a class="anchor hidden-xs" href="#Read-from-HDFS" title="Read-from-HDFS"><i class="fa fa-link"></i></a>Read from HDFS</h4><pre><code class="wrap python hljs">path = <span class="hljs-string">"hdfs:///data/movies.csv"</span>
+
+rdd3 = sc.textFile(path) <span class="hljs-comment"># a spark rdd</span>
+</code></pre><p>The file <code>movies.csv</code> is uploaded to HDFS and stored in the folder <code>/data</code>.</p><div class="alert alert-info">
+<p>The function <code>wholeTextFiles</code> will read the whole file as a single row in the RDD whereas the function <code>textFile</code> will read each line of the file as a row in the RDD.</p>
+</div><div class="alert alert-warning">
+<p>When we use <code>parallelize()</code> or <code>textFile()</code> or <code>wholeTextFiles()</code> methods of <code>SparkContxt</code> to initiate RDD, it automatically splits the data into partitions based on resource availability. when you run it on a local machine it would create partitions as the same number of cores available on your system.</p>
+</div><h2 id="Create-empty-RDD"><a class="anchor hidden-xs" href="#Create-empty-RDD" title="Create-empty-RDD"><i class="fa fa-link"></i></a>Create empty RDD</h2><pre><code class="wrap python hljs">rdd = sc.emptyRDD()
+
+rdd = sc.paralellize([], <span class="hljs-number">10</span>)
+</code></pre><h2 id="Repartition-and-Coalesce"><a class="anchor hidden-xs" href="#Repartition-and-Coalesce" title="Repartition-and-Coalesce"><i class="fa fa-link"></i></a>Repartition and Coalesce</h2><p>Sometimes we may need to repartition the RDD, PySpark provides two ways to repartition; first using <code>repartition()</code> method which shuffles data from all nodes also called full shuffle and second <code>coalesce()</code> method which shuffle data from minimum nodes, for examples if you have data in 4 partitions and doing coalesce(2) moves data from just 2 nodes.</p><pre><code class="wrap python hljs">rdd = sc.parallelize(range(<span class="hljs-number">1</span>,<span class="hljs-number">100</span>), <span class="hljs-number">10</span>)
+
+print(rdd.getNumPartitions())
+print(rdd.collect())
+
+rdd2 = rdd.repartition(<span class="hljs-number">4</span>)
+print(rdd2.getNumPartitions())
+print(rdd2.collect())
+
+rdd3 = rdd.coalesce(<span class="hljs-number">4</span>)
+print(rdd3.getNumPartitions())
+print(rdd3.collect())
+</code></pre><p>Note that <code>repartition()</code> method is a very expensive operation as it shuffles data from all nodes in a cluster. Both functions return RDD.</p><div class="alert alert-info">
+<ul>
+<li><code>collect</code> is a Spark action and returns all elements of the RDD.</li>
+<li><code>repartition</code> and <code>coalesce</code> are considered as transformations in Spark.</li>
+</ul>
+</div><h2 id="PySpark-RDD-Transformations"><a class="anchor hidden-xs" href="#PySpark-RDD-Transformations" title="PySpark-RDD-Transformations"><i class="fa fa-link"></i></a>PySpark RDD Transformations</h2><p>Transformations are lazy operations, instead of updating an RDD, these operations return another RDD.</p><h3 id="map-and-flatMap"><a class="anchor hidden-xs" href="#map-and-flatMap" title="map-and-flatMap"><i class="fa fa-link"></i></a>map and flatMap</h3><p><code>map</code> operation returns a new RDD by applying a function to each element of this RDD. <code>flatMap</code> applies the map operation and then flattens the RDD rows. We use this function when you the map operation returns a list of values and flattening will convert the list of list of values into list of values.</p><pre><code class="wrap python hljs"><span class="hljs-comment"># Read file</span>
+rdd1 = sc.textFile(<span class="hljs-string">"movies.csv"</span>)
+rdd1.take(<span class="hljs-number">10</span>)
+
+<span class="hljs-comment"># tokenize</span>
+rdd2 = rdd1.flatMap(<span class="hljs-keyword">lambda</span> x : x.split(<span class="hljs-string">","</span>))
+rdd2.take(<span class="hljs-number">10</span>)
+
+<span class="hljs-comment"># Or</span>
+<span class="hljs-comment"># def f(x): </span>
+<span class="hljs-comment">#     return x.split(",")</span>
+<span class="hljs-comment"># rdd2 = rdd1.flatMap(f)</span>
+<span class="hljs-comment"># rdd2.take(10)</span>
+
+<span class="hljs-comment"># Remove the additional spaces</span>
+rdd3 = rdd2.map(<span class="hljs-keyword">lambda</span> x : x.strip())
+rdd3.take(<span class="hljs-number">10</span>)
+</code></pre><div class="alert alert-info">
+<p><code>take(k)</code> is a Spark action and returns the first <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-1-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>k</mi></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1" style="width: 0.649em; display: inline-block;"><span style="display: inline-block; position: relative; width: 0.541em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1000.54em, 2.535em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-2"><span class="mi" id="MathJax-Span-3" style="font-family: MathJax_Math-italic;">k</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>k</mi></math></span></span><script type="math/tex" id="MathJax-Element-1">k</script></span> elements of the RDD.</p>
+</div><h3 id="filter"><a class="anchor hidden-xs" href="#filter" title="filter"><i class="fa fa-link"></i></a>filter</h3><p>Returns a new RDD after applying filter function on source dataset.</p><pre><code class="wrap python hljs"><span class="hljs-comment"># Returns only values which are digits</span>
+rdd4 = rdd3.filter(<span class="hljs-keyword">lambda</span> x : str(x).isdigit())
+
+print(rdd4.count())
+</code></pre><div class="alert alert-info">
+<p><code>count</code> is a Spark action and returns the number of elements in the RDD.</p>
+</div><h3 id="distinct"><a class="anchor hidden-xs" href="#distinct" title="distinct"><i class="fa fa-link"></i></a>distinct</h3><p>Returns a new RDD after eliminating all duplicated elements…</p><pre><code class="wrap python hljs"><span class="hljs-comment"># Returns unique number of values which are only digits</span>
+rdd5 = rdd4.distinct()
+
+print(rdd5.count())
+</code></pre><h3 id="sample"><a class="anchor hidden-xs" href="#sample" title="sample"><i class="fa fa-link"></i></a>sample</h3><p>Return a sampled subset of this RDD.</p><pre><code class="wrap python hljs">rdd6 = rdd5.sample(withReplacement=<span class="hljs-literal">False</span>, fraction=<span class="hljs-number">0.6</span>, seed=<span class="hljs-number">0</span>)
+
+print(rdd6.count())
+</code></pre><h3 id="randomSplit"><a class="anchor hidden-xs" href="#randomSplit" title="randomSplit"><i class="fa fa-link"></i></a>randomSplit</h3><p>Splits the RDD by the weights specified in the argument. For example rdd.randomSplit(0.7,0.3)</p><pre><code class="wrap python hljs">rdd7, rdd8 = rdd1.randomSplit(weights=[<span class="hljs-number">0.2</span>, <span class="hljs-number">0.3</span>], seed=<span class="hljs-number">0</span>)
+
+print(rdd7.count())
+print(rdd8.count())
+</code></pre><h3 id="mapPartitions-and-mapPartitionsWithIndex"><a class="anchor hidden-xs" href="#mapPartitions-and-mapPartitionsWithIndex" title="mapPartitions-and-mapPartitionsWithIndex"><i class="fa fa-link"></i></a>mapPartitions and mapPartitionsWithIndex</h3><p><code>mapPartitions</code> is similar to <code>map</code>, but executes transformation function on each partition, This gives better performance than <code>map</code> function. <code>mapPartitionsWithIndex</code> returns a new RDD by applying a function to each partition of this RDD, while tracking the index of the original partition. They both should return a generator.</p><pre><code class="wrap python hljs"><span class="hljs-comment"># a generator function</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f9</span><span class="hljs-params">(iter)</span>:</span>
+    <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> iter:
+        <span class="hljs-keyword">yield</span> (v, <span class="hljs-number">1</span>)
+
+rdd9 = rdd3.mapPartitions(f9)
+
+print(rdd9.take(<span class="hljs-number">10</span>))
+
+<span class="hljs-comment"># a generator function</span>
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">f10</span><span class="hljs-params">(index, iter)</span>:</span>
+    <span class="hljs-keyword">for</span> v <span class="hljs-keyword">in</span> iter:
+        <span class="hljs-keyword">yield</span> (v, index)
+
+rdd10 = rdd3.mapPartitionsWithIndex(f10)
+print(rdd10.take(<span class="hljs-number">10</span>))
+</code></pre><h3 id="sortBy-and-groupBy"><a class="anchor hidden-xs" href="#sortBy-and-groupBy" title="sortBy-and-groupBy"><i class="fa fa-link"></i></a>sortBy and groupBy</h3><pre><code class="wrap python hljs"><span class="hljs-comment"># Compute the word-digit frequency in the file and show the top 10 words.</span>
+
+<span class="hljs-comment"># Group by all tokens</span>
+rdd11 = rdd3.groupBy(<span class="hljs-keyword">lambda</span> x : x)
+
+<span class="hljs-comment"># Calculate the length of the list of token duplicates</span>
+rdd12 = rdd11.map(<span class="hljs-keyword">lambda</span> x: (x[<span class="hljs-number">0</span>], len(x[<span class="hljs-number">1</span>])))
+<span class="hljs-comment"># or</span>
+<span class="hljs-comment"># rdd12 = rd11.mapValues(len)</span>
+
+<span class="hljs-comment"># Sort the results</span>
+rdd13 = rdd12.sortBy(<span class="hljs-keyword">lambda</span> x : x[<span class="hljs-number">1</span>], ascending=<span class="hljs-literal">False</span>)
+
+<span class="hljs-comment"># Take the first elements of the RDD and display</span>
+print(rdd13.take(<span class="hljs-number">10</span>))
+</code></pre><p><img src="https://i.imgur.com/7HDMygw.png" alt="" class="md-image md-image"></p><h3 id="sortByKey-and-reduceByKey"><a class="anchor hidden-xs" href="#sortByKey-and-reduceByKey" title="sortByKey-and-reduceByKey"><i class="fa fa-link"></i></a>sortByKey and reduceByKey</h3><pre><code class="wrap python hljs"><span class="hljs-comment"># Compute the digit frequency in the file and show the top 10 words.</span>
+
+<span class="hljs-comment"># Get all digits</span>
+rdd14 = rdd3.filter(<span class="hljs-keyword">lambda</span> x: x.isdigit())
+
+<span class="hljs-comment"># Initialize the counters</span>
+rdd15 = rdd14.map(<span class="hljs-keyword">lambda</span> x : (x, <span class="hljs-number">1</span>))
+
+<span class="hljs-comment"># Aggregate the counters who have same key which is here a digit</span>
+rdd16 = rdd15.reduceByKey(<span class="hljs-keyword">lambda</span> x, y : x+y)
+
+<span class="hljs-comment"># Sort the results</span>
+rdd17 = rdd16.sortBy(<span class="hljs-keyword">lambda</span> x : x[<span class="hljs-number">1</span>], ascending=<span class="hljs-literal">False</span>)
+
+<span class="hljs-comment"># Take the first elements of the RDD and display</span>
+print(rdd17.take(<span class="hljs-number">10</span>))
+</code></pre><p><img src="https://i.imgur.com/cXhsMEs.png" alt="" class="md-image md-image"></p><h2 id="PySpark-RDD-Actions"><a class="anchor hidden-xs" href="#PySpark-RDD-Actions" title="PySpark-RDD-Actions"><i class="fa fa-link"></i></a>PySpark RDD Actions</h2><p>RDD Action operations return the values from an RDD to a driver program. In other words, any RDD function that returns non-RDD is considered as an action.</p><h3 id="collect"><a class="anchor hidden-xs" href="#collect" title="collect"><i class="fa fa-link"></i></a>collect</h3><p>returns the complete dataset as an Array.</p><h3 id="max-min-first-top-take"><a class="anchor hidden-xs" href="#max-min-first-top-take" title="max-min-first-top-take"><i class="fa fa-link"></i></a>max, min, first, top, take</h3><p><code>max</code> returns the maximum value from the dataset whereas <code>min</code> returns the minimum value from the dataset. <code>first</code> returns the first element in the dataset. <code>top</code> returns top <code>n</code> elements from the dataset (after sorting them). <code>take</code> returns the first <code>n</code> elements of the dataset.</p><p><img src="https://i.imgur.com/2OfDP3p.png" alt="" class="md-image md-image"></p><div class="alert alert-info">
+<p>The operation <code>take</code> in Spark RDD is the same as <code>head</code> in pandas DataFrame whereas <code>top</code> is interpreted as the first elements after sorting them.</p>
+</div><h3 id="count-countByValue"><a class="anchor hidden-xs" href="#count-countByValue" title="count-countByValue"><i class="fa fa-link"></i></a>count, countByValue</h3><p><code>count</code> returns the count of elements in the dataset.</p><div class="alert alert-info">
+<p>There are other similar operations. <code>countApprox(timeout, confidence=0.95)</code> which is the approximate version of <code>count()</code> and returns a potentially incomplete result within a timeout, even if not all tasks have finished. <code>countApproxDistinct(relative_accuracy)</code> returns an approximate number of distinct elements in the dataset.</p>
+<p><strong>Note:</strong> These operations are used when you have very large dataset which takes a lot of time to get the count.</p>
+</div><p><code>countByValue</code>Return a dictionary where the key represents each unique value in the dataset and the value represents count of each value present.</p><pre><code class="wrap python hljs">print(rdd3.countByValue())
+</code></pre><p><img src="https://i.imgur.com/hBLLvZe.png" alt="" class="md-image md-image"></p><h3 id="reduce-treeReduce"><a class="anchor hidden-xs" href="#reduce-treeReduce" title="reduce-treeReduce"><i class="fa fa-link"></i></a>reduce, treeReduce</h3><p><code>reduce</code> reduces the elements of the dataset using the specified binary operator. <code>treeReduce</code> reduces the elements of this RDD in a multi-level tree pattern. The output is the same.</p><pre><code class="wrap python hljs">result = rdd3 \
+    .map(<span class="hljs-keyword">lambda</span> x : <span class="hljs-number">1</span>) \
+    .reduce(<span class="hljs-keyword">lambda</span> x, y : x+y)
+
+resultTree = rdd3 \
+    .map(<span class="hljs-keyword">lambda</span> x : <span class="hljs-number">1</span>) \
+    .treeReduce(<span class="hljs-keyword">lambda</span> x, y : x+y)
+
+<span class="hljs-comment"># You should get the same results as rdd3.count() operation</span>
+<span class="hljs-keyword">assert</span> rdd3.count()==result==resultTree
+</code></pre><div class="alert alert-warning">
+<p>Here I showed some of the operations, but you can find more in the <a href="https://spark.apache.org/docs/3.0.3/api/python/pyspark.html" target="_blank" rel="noopener">documentation</a>.</p>
+</div><h3 id="saveAsTextFile"><a class="anchor hidden-xs" href="#saveAsTextFile" title="saveAsTextFile"><i class="fa fa-link"></i></a>saveAsTextFile</h3><p>Used to save the rdd to an external data store.</p><pre><code class="wrap python hljs">rdd3.saveAsTextFile(<span class="hljs-string">"/root/myrdd"</span>)
+</code></pre><p><img src="https://i.imgur.com/qJv2oqR.png" alt="" class="md-image md-image"></p><h2 id="RDD-Persistence"><a class="anchor hidden-xs" href="#RDD-Persistence" title="RDD-Persistence"><i class="fa fa-link"></i></a>RDD Persistence</h2><p>Persistence is useful due to:</p><ul>
+<li>Cost efficient – Spark computations are very expensive hence reusing the computations are used to save cost.</li>
+<li>Time efficient – Reusing the repeated computations saves lots of time.</li>
+<li>Execution time – Saves execution time of the job which allows us to perform more jobs on the same cluster.</li>
+</ul><p>We have different levels for storage like memory, disk, serialized, unserialized, repliacted, unreplicated. You can check <a href="https://spark.apache.org/docs/latest/rdd-programming-guide.html#rdd-persistence" target="_blank" rel="noopener">here</a> for the avilable options.</p><h3 id="RDD-Cache"><a class="anchor hidden-xs" href="#RDD-Cache" title="RDD-Cache"><i class="fa fa-link"></i></a>RDD Cache</h3><p>PySpark RDD <code>cache()</code> method by default saves RDD computation to storage level <code>MEMORY_ONLY</code> meaning it will store the data in the JVM heap as unserialized objects.</p><pre><code class="wrap python hljs">cachedRDD = rdd.cache()
+
+cachedRDD.collect()
+</code></pre><h3 id="RDD-Persist"><a class="anchor hidden-xs" href="#RDD-Persist" title="RDD-Persist"><i class="fa fa-link"></i></a>RDD Persist</h3><p>PySpark <code>persist()</code> method is used to store the RDD to a specific storage level.</p><pre><code class="wrap python hljs"><span class="hljs-keyword">import</span> pyspark
+
+persistedRDD = rdd.persist(pyspark.StorageLevel.MEMORY_ONLY)
+
+persistedRDD.collect()
+</code></pre><h3 id="RDD-Unpersist"><a class="anchor hidden-xs" href="#RDD-Unpersist" title="RDD-Unpersist"><i class="fa fa-link"></i></a>RDD Unpersist</h3><p>PySpark automatically monitors every <code>persist()</code> and <code>cache()</code> calls you make and it checks usage on each node and drops persisted data if not used or by using least-recently-used (LRU) algorithm. You can also manually remove using <code>unpersist()</code> method. <code>unpersist()</code> marks the RDD as non-persistent, and remove all blocks for it from memory and disk.</p><pre><code class="wrap python hljs">unpersistedRDD = persistedRDD.unpersist()
+
+unpersistedRDD.collect()
+</code></pre><h2 id="Shuffling-in-Spark-engine"><a class="anchor hidden-xs" href="#Shuffling-in-Spark-engine" title="Shuffling-in-Spark-engine"><i class="fa fa-link"></i></a>Shuffling in Spark engine</h2><p>Shuffling is a mechanism Spark to redistribute the data across different executors and even across machines. PySpark shuffling triggers when we perform certain transformation operations like <code>gropByKey()</code>, <code>reduceByKey()</code>, <code>join()</code> on RDDS.</p><p>Shuffling is an expensive operation since it involves the following:</p><ul>
+<li>Disk I/O</li>
+<li>Data serialization and deserialization</li>
+<li>Network I/O</li>
+</ul><p>For example, when we perform <code>reduceByKey()</code> operation, PySpark does the following:</p><ol>
+<li>Spark engine firstly runs map tasks on all partitions which groups all values for a single key.</li>
+<li>The results of the map tasks are kept in memory.</li>
+<li>When results do not fit in memory, PySpark stores the data into a disk.</li>
+<li>PySpark shuffles the mapped data across partitions, some times it also stores the shuffled data into a disk for reuse when it needs to recalculate.</li>
+<li>Run the garbage collection</li>
+<li>Finally runs reduce tasks on each partition based on key.</li>
+</ol><p>PySpark RDD triggers shuffle and repartition for several operations like <code>repartition()</code>, <code>coalesce()</code>,  <code>groupByKey()</code>, and  <code>reduceByKey()</code>.</p><p>Based on your dataset size, a number of cores and specific memory size, can benefit or harm the Spark shuffling. When you deal with less amount of data, you should typically reduce the number of partitions otherwise you will end up with many partitioned files with less number of records in each partition. which results in running many tasks with lesser data to process.</p><p>On other hand, when you have too much of data and having less number of partitions results in fewer longer running tasks and some times you may also get out of memory error.</p><p>Getting the right size of the shuffle partition is always tricky and takes many runs with different values to achieve the optimized number. This is one of the key properties to look for when you have performance issues on Spark jobs.</p><h2 id="Shared-Variables"><a class="anchor hidden-xs" href="#Shared-Variables" title="Shared-Variables"><i class="fa fa-link"></i></a>Shared Variables</h2><p>When Spark executes transformation using <code>map</code> or <code>reduce</code> operations, It executes the transformations on a remote node by using the variables that are shipped with the tasks and these variables are not sent back to PySpark Driver hence there is no capability to reuse and sharing the variables across tasks. PySpark shared variables solve this problem using the below two techniques. PySpark provides two types of shared variables.</p><ul>
+<li>Broadcast variables (read-only shared variable)</li>
+<li>Accumulator variables (updatable shared variables)</li>
+</ul><h3 id="Broadcast-variables"><a class="anchor hidden-xs" href="#Broadcast-variables" title="Broadcast-variables"><i class="fa fa-link"></i></a>Broadcast variables</h3><p>We can create broadcast variables using the function <code>sc.broadcast</code>. A broadcast variable created with <code>SparkContext.broadcast()</code>. Access its value through <code>value</code>.</p><pre><code class="wrap python hljs">v = sc.broadcast(range(<span class="hljs-number">1</span>, <span class="hljs-number">100</span>))
+
+print(v.value)
+</code></pre><h3 id="Accumulator-variables"><a class="anchor hidden-xs" href="#Accumulator-variables" title="Accumulator-variables"><i class="fa fa-link"></i></a>Accumulator variables</h3><p>A shared variable that can be accumulated, i.e., has a commutative and associative <code>add</code> operation. Worker tasks on a Spark cluster can add values to an Accumulator with the <code>+=</code> operator, but only the driver program is allowed to access its value, using value. Updates from the workers get propagated automatically to the driver program.</p><pre><code class="wrap python hljs">acc = sc.accumulator(<span class="hljs-number">0</span>)
+
+acc+=<span class="hljs-number">10</span>
+acc.add(<span class="hljs-number">10</span>)
+
+print(acc.value) <span class="hljs-comment"># 20</span>
+</code></pre><h1 id="Spark-DataFrame"><a class="anchor hidden-xs" href="#Spark-DataFrame" title="Spark-DataFrame"><i class="fa fa-link"></i></a>Spark DataFrame</h1><p><strong>DataFrame</strong> is a distributed collection of data organized into named columns. It is conceptually equivalent to a table in a relational database or a data frame in Python, but with richer optimizations under the hood. DataFrames can be constructed from a wide array of sources such as structured data files, tables in Hive, external databases, or existing RDDs.</p><p><strong>PySpark DataFrame</strong> is mostly similar to <strong>Pandas DataFrame</strong> with the exception PySpark DataFrames are <strong>distributed</strong> in the <strong>cluster</strong> (meaning the data in DataFrame’s are stored in different machines in a cluster) and any operations in PySpark executes in parallel on all machines whereas Panda Dataframe stores and operates on a <strong>single machine</strong>. Due to parallel execution on all cores on multiple machines, PySpark runs operations faster then pandas.</p><p>Each record in the dataframe is of type <code>pyspark.sql.Row</code> whereas each column is of type <code>pyspark.sql.Column</code>. There are multiple ways to create DataFrame  in PySpark:</p><h2 id="1-using-createDataFrame-function"><a class="anchor hidden-xs" href="#1-using-createDataFrame-function" title="1-using-createDataFrame-function"><i class="fa fa-link"></i></a>1. using <code>createDataFrame()</code> function</h2><pre><code class="wrap python hljs">data = [(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>, <span class="hljs-string">'a b c'</span>), (<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>, <span class="hljs-string">'d e f'</span>), (<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-string">'g h i'</span>)]
+df = spark.createDataFrame(data) <span class="hljs-comment"># is a dataframe</span>
+
+df.rdd <span class="hljs-comment"># Convert Spark DataFrame into RDD</span>
+</code></pre><h2 id="2-using-toDF-function"><a class="anchor hidden-xs" href="#2-using-toDF-function" title="2-using-toDF-function"><i class="fa fa-link"></i></a>2. using <code>toDF()</code> function</h2><pre><code class="wrap python hljs">rdd = sc.parallelize(data)
+df = rdd.toDF()
+</code></pre><h2 id="3-Read-from-a-local-file"><a class="anchor hidden-xs" href="#3-Read-from-a-local-file" title="3-Read-from-a-local-file"><i class="fa fa-link"></i></a>3. Read from a local file</h2><pre><code class="wrap python hljs">path = <span class="hljs-string">"file:///sparkdata/movies.csv"</span>
+
+df1 = spark.read.format(<span class="hljs-string">"csv"</span>) \
+  .option(<span class="hljs-string">"sep"</span>, <span class="hljs-string">","</span>) \
+  .option(<span class="hljs-string">"inferSchema"</span>, <span class="hljs-string">"true"</span>) \
+  .option(<span class="hljs-string">"header"</span>, <span class="hljs-string">"true"</span>) \
+  .load(path)
+
+df1.show() <span class="hljs-comment"># Display the dataframe</span>
+df1.printSchema() <span class="hljs-comment"># print the schema of the dataframe</span>
+</code></pre><h2 id="4-Read-from-MongoDB-via-PyMongo"><a class="anchor hidden-xs" href="#4-Read-from-MongoDB-via-PyMongo" title="4-Read-from-MongoDB-via-PyMongo"><i class="fa fa-link"></i></a>4. Read from MongoDB via PyMongo</h2><pre><code class="wrap python hljs"><span class="hljs-keyword">import</span> pymongo
+
+<span class="hljs-comment"># The default configuration</span>
+<span class="hljs-comment"># localhost:27017</span>
+client = pymongo.MongoClient()
+
+db = client[<span class="hljs-string">'moviesdb'</span>] <span class="hljs-comment"># client['&lt;db_name&gt;']</span>
+
+<span class="hljs-comment"># A pymongo Cursor </span>
+<span class="hljs-comment"># db.&lt;collection_name&gt;</span>
+movies_cur = db.movies.find() <span class="hljs-comment"># Get all documents</span>
+
+<span class="hljs-comment"># Convert to Pandas DataFrame</span>
+df1 = pd.DataFrame(movies_cur)
+
+<span class="hljs-keyword">from</span> pyspark.sql.types <span class="hljs-keyword">import</span> *
+
+schema = StructType([
+    <span class="hljs-comment"># StructField(&lt;fieldname&gt;, &lt;fieldtype&gt;, &lt;nullability&gt;)</span>
+    StructField(<span class="hljs-string">"Audience score %"</span>, IntegerType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"Film"</span>, StringType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"Genre"</span>, StringType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"Lead Studio"</span>, StringType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"Profitability"</span>, FloatType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"Rotten Tomatoes %"</span>, IntegerType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"Worldwide Gross"</span>, StringType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"Year"</span>, IntegerType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"_id"</span>, StringType(), <span class="hljs-literal">True</span>)
+    ])
+
+<span class="hljs-comment"># Try to run spark.createDataFrame(movies_cur) </span>
+
+<span class="hljs-comment"># Convert immediately to Spark DataFrame</span>
+df3 = spark.createDataFrame(movies_cur, schema)
+
+<span class="hljs-comment"># Convert to RDD then to Spark DataFrame</span>
+df4 = spark.createDataFrame(sc.parallelize(movies_cur), schema) <span class="hljs-comment"># Convert to Spark DataFrame</span>
+</code></pre><h2 id="5-Read-from-HDFS"><a class="anchor hidden-xs" href="#5-Read-from-HDFS" title="5-Read-from-HDFS"><i class="fa fa-link"></i></a>5. Read from HDFS</h2><pre><code class="wrap python hljs">path = <span class="hljs-string">"hdfs://sandbox-hdp.hortonworks.com:8020/data/movies.csv"</span> <span class="hljs-comment"># See note below</span>
+df = spark.read.load(path, format=<span class="hljs-string">"csv"</span>, sep = <span class="hljs-string">","</span>, inferSchema = <span class="hljs-string">"true"</span>, header = <span class="hljs-string">"true"</span>) 
+<span class="hljs-comment"># a spark dataframe</span>
+
+<span class="hljs-comment"># OR</span>
+df = spark.read.csv(path, sep = <span class="hljs-string">","</span>, inferSchema = <span class="hljs-string">"true"</span>, header = <span class="hljs-string">"true"</span>) 
+<span class="hljs-comment"># a spark dataframe</span>
+
+df.printSchema()
+df.show(truncate=<span class="hljs-literal">False</span>)
+</code></pre><p>The file <code>movies.csv</code> is uploaded to HDFS and stored in the folder <code>/data</code>.</p><div class="alert alert-warning">
+<p><strong>Note:</strong> To access the HDFS from Spark application, you need to use the hostname <code>sandbox-hdp.hortonworks.com</code> or the ip address assigned to the cluster container (for instance, it is <code>172.18.0.2</code> in my machine). You can get that address from the setting <code>fs.defaultFS</code> in HDFS advanced configuration. Here <code>localhost</code> will not work due to the different schema <code>hdfs</code>.</p>
+<p><img src="https://i.imgur.com/qE3b8u5.png" alt="" class="md-image md-image"></p>
+</div><h2 id="StructType-amp-StructField"><a class="anchor hidden-xs" href="#StructType-amp-StructField" title="StructType-amp-StructField"><i class="fa fa-link"></i></a>StructType &amp; StructField</h2><p><code>StructType</code> and <code>StructField</code> classes are used to programmatically specify the schema to the DataFrame and create complex columns like nested struct, array, and map columns. <code>StructType</code> is a collection of <code>StructField</code>’s that defines column name, column data type, boolean to specify if the field can be nullable or not and metadata.</p><pre><code class="wrap python hljs">
+<span class="hljs-keyword">from</span> pyspark.sql.types <span class="hljs-keyword">import</span> StructField, StructType, StringType, IntegerType
+
+<span class="hljs-comment"># A sample data</span>
+data = [ ((<span class="hljs-string">"James"</span>,<span class="hljs-string">""</span>,<span class="hljs-string">"Smith"</span>),<span class="hljs-string">"36636"</span>,<span class="hljs-string">"M"</span>,<span class="hljs-number">3100</span>),
+    ((<span class="hljs-string">"Michael"</span>,<span class="hljs-string">"Rose"</span>,<span class="hljs-string">""</span>),<span class="hljs-string">"40288"</span>,<span class="hljs-string">"M"</span>,<span class="hljs-number">4300</span>),
+    ((<span class="hljs-string">"Robert"</span>,<span class="hljs-string">""</span>,<span class="hljs-string">"Williams"</span>),<span class="hljs-string">"42114"</span>,<span class="hljs-string">"M"</span>,<span class="hljs-number">1400</span>),
+    ((<span class="hljs-string">"Maria"</span>,<span class="hljs-string">"Anne"</span>,<span class="hljs-string">"Jones"</span>),<span class="hljs-string">"39192"</span>,<span class="hljs-string">"F"</span>,<span class="hljs-number">5500</span>),
+    ((<span class="hljs-string">"Jen"</span>,<span class="hljs-string">"Mary"</span>,<span class="hljs-string">"Brown"</span>),<span class="hljs-string">""</span>,<span class="hljs-string">"F"</span>,<span class="hljs-number">-1</span>)
+]
+
+
+schema = StructType([
+        StructField(<span class="hljs-string">'name'</span>, StructType([
+             StructField(<span class="hljs-string">'firstname'</span>, StringType(), <span class="hljs-literal">True</span>),
+             StructField(<span class="hljs-string">'middlename'</span>, StringType(), <span class="hljs-literal">True</span>),
+             StructField(<span class="hljs-string">'lastname'</span>, StringType(), <span class="hljs-literal">True</span>)
+             ])),
+         StructField(<span class="hljs-string">'id'</span>, StringType(), <span class="hljs-literal">True</span>),
+         StructField(<span class="hljs-string">'gender'</span>, StringType(), <span class="hljs-literal">True</span>),
+         StructField(<span class="hljs-string">'salary'</span>, IntegerType(), <span class="hljs-literal">True</span>)
+         ])
+ 
+df = spark.createDataFrame(data=data,schema=schema)
+df.printSchema()
+df.show(truncate=<span class="hljs-literal">False</span>)
+</code></pre><h2 id="Spark-DataFrame-Operations"><a class="anchor hidden-xs" href="#Spark-DataFrame-Operations" title="Spark-DataFrame-Operations"><i class="fa fa-link"></i></a>Spark DataFrame Operations</h2><h2 id="show-Action"><a class="anchor hidden-xs" href="#show-Action" title="show-Action"><i class="fa fa-link"></i></a>show [Action]</h2><p><code>show()</code> is used to display the contents of the DataFrame in a Table Row and Column Format. By default, it shows only 20 Rows, and the column values are truncated at 20 characters.</p><pre><code class="wrap python hljs">
+df.show()
+df.show(<span class="hljs-number">5</span>)
+df.show(<span class="hljs-number">5</span>, truncate=<span class="hljs-literal">False</span>)
+df.show(<span class="hljs-number">10</span>, truncate=<span class="hljs-literal">False</span>, vertical=<span class="hljs-literal">True</span>)
+</code></pre><h2 id="collect-Action"><a class="anchor hidden-xs" href="#collect-Action" title="collect-Action"><i class="fa fa-link"></i></a>collect [Action]</h2><p><code>collect()</code> is an action operation that is used to retrieve all the elements of the dataset (from all nodes) to the driver node. It retrieves all elements in a DataFrame as a <code>list</code> of <code>Row</code> type to the driver node. We should use <code>collect()</code> on smaller dataset usually after <code>filter()</code>, <code>group()</code> e.t.c. Retrieving larger datasets results in <em>OutOfMemory</em> error. You can use <code>head</code> operation to get only the first rows/records.</p><pre><code class="wrap python hljs">df.collect() <span class="hljs-comment"># all elements</span>
+df.collect()[<span class="hljs-number">0</span>] <span class="hljs-comment"># first row</span>
+df.collect()[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] <span class="hljs-comment"># first cell at first row and first column</span>
+</code></pre><h2 id="select-Transformation"><a class="anchor hidden-xs" href="#select-Transformation" title="select-Transformation"><i class="fa fa-link"></i></a>select [Transformation]</h2><p><code>select()</code> function is used to select single, multiple, column by index, all columns from the list and the nested columns from a DataFrame. This function returns a DataFrame with the selected columns.</p><pre><code class="wrap python hljs"><span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> col
+df.select(<span class="hljs-string">"name"</span>, \
+          <span class="hljs-string">"name.firstname"</span>, \
+          df.id, \
+          df[<span class="hljs-string">'gender'</span>], \
+          col(<span class="hljs-string">"salary"</span>)) \
+.show()
+</code></pre><p><img src="https://i.imgur.com/x7JOSWW.png" alt="" class="md-image md-image"></p><pre><code class="wrap python hljs">df.select(<span class="hljs-string">"*"</span>).show()
+</code></pre><p><img src="https://i.imgur.com/wK8K36m.png" alt="" class="md-image md-image"></p><pre><code class="wrap python hljs">df.select([col <span class="hljs-keyword">for</span> col <span class="hljs-keyword">in</span> df.columns]).show()
+</code></pre><p><img src="https://i.imgur.com/F3qeTRp.png" alt="" class="md-image md-image"></p><pre><code class="wrap python hljs">df.select(df.columns[:<span class="hljs-number">2</span>]).show()
+</code></pre><p><img src="https://i.imgur.com/kDklnx4.png" alt="" class="md-image md-image"></p><h2 id="withColumn-withColumnRenamed-drop-Transformation"><a class="anchor hidden-xs" href="#withColumn-withColumnRenamed-drop-Transformation" title="withColumn-withColumnRenamed-drop-Transformation"><i class="fa fa-link"></i></a>withColumn, withColumnRenamed, drop [Transformation]</h2><p>withColumn() is a transformation function of DataFrame which is used to change the value, convert the datatype of an existing column, create a new column, and many more.</p><pre><code class="wrap python hljs"><span class="hljs-comment"># Read the data</span>
+path = <span class="hljs-string">"hdfs://sandbox-hdp.hortonworks.com:8020/data/movies.csv"</span> <span class="hljs-comment"># See note below</span>
+df = spark.read.load(path, format=<span class="hljs-string">"csv"</span>, sep = <span class="hljs-string">","</span>, inferSchema = <span class="hljs-string">"true"</span>, header = <span class="hljs-string">"true"</span>) 
+
+<span class="hljs-comment"># Print Schema</span>
+df.printSchema()
+</code></pre><ol>
+<li>Change the datatype of the column.</li>
+</ol><pre><code class="wrap python hljs"><span class="hljs-comment"># Convert the `Worldwide Gross` column to double</span>
+<span class="hljs-comment"># 1. Remove the $ sign</span>
+<span class="hljs-keyword">import</span> pyspark.sql.functions <span class="hljs-keyword">as</span> F
+df.withColumn(<span class="hljs-string">"Worldwide Gross"</span>, F.translate(<span class="hljs-string">'Worldwide Gross'</span>, <span class="hljs-string">'$'</span>, <span class="hljs-string">''</span>).cast(<span class="hljs-string">"Double"</span>)).show(<span class="hljs-number">5</span>)
+
+df.withColumn(<span class="hljs-string">"Worldwide Gross"</span>, F.col(<span class="hljs-string">"Worldwide Gross"</span>).cast(<span class="hljs-string">"Double"</span>))
+
+<span class="hljs-comment"># You can merge the previous operations into one operation as shown below</span>
+</code></pre><p><img src="https://i.imgur.com/uRr3CBw.png" alt="" class="md-image md-image"></p><ol start="2">
+<li>Update the values in a column</li>
+</ol><pre><code class="wrap python hljs">col_name = df.columns[<span class="hljs-number">3</span>]
+df2.withColumn(col_name, F.col(col_name)/<span class="hljs-number">100</span>).show(<span class="hljs-number">5</span>)
+</code></pre><p><img src="https://i.imgur.com/XAduwQ3.png" alt="" class="md-image md-image"></p><ol start="3">
+<li>Create a Column from an existing one</li>
+</ol><pre><code class="wrap python hljs">col_name = df2.columns[<span class="hljs-number">3</span>]
+df2.withColumn(<span class="hljs-string">"score"</span>, F.col(col_name)/<span class="hljs-number">100</span>).show(<span class="hljs-number">5</span>)
+</code></pre><p><img src="https://i.imgur.com/7J4SF67.png" alt="" class="md-image md-image"></p><ol start="4">
+<li>Add a New Column with fixed value</li>
+</ol><pre><code class="wrap python hljs">df2.withColumn(<span class="hljs-string">"Country"</span>, F.lit(<span class="hljs-string">"Russia"</span>)).show()
+</code></pre><ol start="5">
+<li>Rename a column</li>
+</ol><pre><code class="wrap python hljs">df2.withColumnRenamed(df2.columns[<span class="hljs-number">3</span>], <span class="hljs-string">"score"</span>).show(<span class="hljs-number">5</span>)
+</code></pre><p><img src="https://i.imgur.com/zDDZ153.png" alt="" class="md-image md-image"></p><ol start="6">
+<li>Drop a column</li>
+</ol><pre><code class="wrap python hljs">df2.drop(<span class="hljs-string">"Year"</span>).show(<span class="hljs-number">5</span>)
+</code></pre><p><img src="https://i.imgur.com/uqHXiIJ.png" alt="" class="md-image md-image"></p><h2 id="filter-where-Transformation"><a class="anchor hidden-xs" href="#filter-where-Transformation" title="filter-where-Transformation"><i class="fa fa-link"></i></a>filter, where [Transformation]</h2><p>PySpark <code>filter()</code> function is used to filter the rows from RDD/DataFrame based on the given condition or SQL expression, you can also use <code>where()</code> clause instead of the <code>filter()</code> if you are coming from an SQL background, both these functions operate exactly the same.</p><pre><code class="wrap python hljs">df2.filter((df2.Year == <span class="hljs-number">2008</span>) &amp; (df2[<span class="hljs-string">'Film'</span>].startswith(<span class="hljs-string">"Wh"</span>))).show(<span class="hljs-number">5</span>)
+</code></pre><p><img src="https://i.imgur.com/1uZZDVE.png" alt="" class="md-image md-image"></p><pre><code class="wrap python hljs">df2.filter(~F.col(<span class="hljs-string">'Genre'</span>).isin([<span class="hljs-string">'Comedy'</span>, <span class="hljs-string">'Drama'</span>])).show(<span class="hljs-number">5</span>)
+</code></pre><p><img src="https://i.imgur.com/ZuQTK8O.png" alt="" class="md-image md-image"></p><h3 id="distinct-dropDuplicates-Transformation"><a class="anchor hidden-xs" href="#distinct-dropDuplicates-Transformation" title="distinct-dropDuplicates-Transformation"><i class="fa fa-link"></i></a>distinct, dropDuplicates [Transformation]</h3><p>PySpark <code>distinct()</code> function is used to drop/remove the duplicate rows (all columns) from DataFrame and <code>dropDuplicates()</code> is used to drop rows based on selected (one or multiple) columns.</p><pre><code class="wrap python hljs">print(df2.count() - df2.distinct().count())
+</code></pre><p><img src="https://i.imgur.com/U5LsUIF.png" alt="" class="md-image md-image"></p><pre><code class="wrap python hljs">df2.dropDuplicates([<span class="hljs-string">'Genre'</span>, <span class="hljs-string">'Lead Studio'</span>]).show(<span class="hljs-number">5</span>)
+</code></pre><p><img src="https://i.imgur.com/jVKnkRh.png" alt="" class="md-image md-image"></p><h3 id="groupby-Transformation"><a class="anchor hidden-xs" href="#groupby-Transformation" title="groupby-Transformation"><i class="fa fa-link"></i></a>groupby [Transformation]</h3><p>Similar to SQL <code>GROUP BY</code> clause, PySpark <code>groupBy()</code> function is used to collect the identical data into groups on DataFrame and perform count, sum, avg, min, max functions on the grouped data. When we perform <code>groupBy()</code> on PySpark Dataframe, it returns <code>GroupedData</code> object which contains aggregate functions. Some of them are <code>avg</code>, <code>sum</code>, <code>min</code>, <code>max</code>.</p><div class="alert alert-warning">
+<p>Notice that the aggregate functions are transformations and will return a DataFrame. You need to call an action to see the output of the aggregation.</p>
+</div><ol>
+<li>Total gross for each film genre.</li>
+</ol><pre><code class="wrap python hljs">df2.groupby(<span class="hljs-string">"Genre"</span>).sum(<span class="hljs-string">"Worldwide Gross"</span>).show()
+</code></pre><p><img src="https://i.imgur.com/acvOGm3.png" alt="" class="md-image md-image"><br>
+2. Calculate the average score for audience and max gross for each film genre every year. Exclude elements whose max gross is less than 50.</p><pre><code class="wrap python hljs">df2.groupby(<span class="hljs-string">"Genre"</span>, <span class="hljs-string">'Year'</span>) \
+    .agg(
+        F.avg(<span class="hljs-string">"Audience score %"</span>).alias(<span class="hljs-string">"avg_score"</span>), \
+        F.max(df2.columns[<span class="hljs-number">6</span>]).alias(<span class="hljs-string">"max_gross"</span>)
+).where(F.col(<span class="hljs-string">"max_gross"</span>)&gt;=<span class="hljs-number">50</span>) \
+.show(<span class="hljs-number">5</span>)
+
+
+<span class="hljs-comment"># Equivalent SQL Query</span>
+<span class="hljs-comment"># SELECT Genre, </span>
+<span class="hljs-comment"># Year, </span>
+<span class="hljs-comment"># avg("Audience score ") AS avg_score, </span>
+<span class="hljs-comment"># max("Worldwide Gross") AS max_score </span>
+<span class="hljs-comment"># FROM movies</span>
+<span class="hljs-comment"># GROUP BY Genre, Year</span>
+<span class="hljs-comment"># HAVING max_score &gt;= 50</span>
+</code></pre><p><img src="https://i.imgur.com/kiVRe3U.png" alt="" class="md-image md-image"></p><h3 id="orderBy-sort-Transformation"><a class="anchor hidden-xs" href="#orderBy-sort-Transformation" title="orderBy-sort-Transformation"><i class="fa fa-link"></i></a>orderBy, sort [Transformation]</h3><p>You can use either <code>sort</code> or <code>orderBy</code> function of PySpark DataFrame to sort DataFrame by ascending or descending order based on single or multiple columns, you can also do sorting using PySpark SQL sorting functions.<br>
+<strong>Example:</strong> Calculate the average score for audience and max gross for each film genre every year. Exclude elements whose max gross is less than 50.</p><pre><code class="wrap python hljs">df2.groupby(<span class="hljs-string">"Genre"</span>, <span class="hljs-string">'Year'</span>) \
+    .agg(
+        F.avg(<span class="hljs-string">"Audience score %"</span>).alias(<span class="hljs-string">"avg_score"</span>), \
+        F.max(df2.columns[<span class="hljs-number">6</span>]).alias(<span class="hljs-string">"max_gross"</span>)
+).where(F.col(<span class="hljs-string">"max_gross"</span>)&gt;=<span class="hljs-number">50</span>) \
+.sort(F.col(<span class="hljs-string">"max_gross"</span>).asc(), F.col(<span class="hljs-string">"avg_score"</span>).desc()) \
+.show(<span class="hljs-number">5</span>)
+
+
+<span class="hljs-comment"># Equivalent SQL Query</span>
+<span class="hljs-comment"># SELECT Genre, </span>
+<span class="hljs-comment"># Year, </span>
+<span class="hljs-comment"># avg("Audience score ") AS avg_score, </span>
+<span class="hljs-comment"># max("Worldwide Gross") AS max_score </span>
+<span class="hljs-comment"># FROM movies</span>
+<span class="hljs-comment"># GROUP BY Genre, Year</span>
+<span class="hljs-comment"># HAVING max_score &gt;= 50</span>
+<span class="hljs-comment"># ORDER BY max_gross asc, avg_score desc</span>
+</code></pre><h3 id="Join"><a class="anchor hidden-xs" href="#Join" title="Join"><i class="fa fa-link"></i></a>Join</h3><p>Join is used to combine two DataFrames and by chaining these you can join multiple DataFrames.  it supports all basic join type operations available in traditional SQL like INNER, LEFT OUTER, RIGHT OUTER, LEFT ANTI, LEFT SEMI, CROSS, SELF JOIN.</p><pre><code class="wrap python hljs">df3 = df2.groupby(<span class="hljs-string">"Genre"</span>, <span class="hljs-string">'Year'</span>) \
+    .agg(
+        F.avg(<span class="hljs-string">"Audience score %"</span>).alias(<span class="hljs-string">"avg_score"</span>), \
+        F.max(df2.columns[<span class="hljs-number">6</span>]).alias(<span class="hljs-string">"max_gross"</span>)
+).where(F.col(<span class="hljs-string">"max_gross"</span>)&gt;=<span class="hljs-number">50</span>)
+
+
+df3.join(df2, (df2.Genre==df3.Genre) &amp; (df2.Year==df3.Year), how=<span class="hljs-string">"inner"</span>).show(<span class="hljs-number">5</span>)
+</code></pre><p><img src="https://i.imgur.com/VfGHevN.png" alt="" class="md-image md-image"></p><h3 id="UDF-User-Defined-Function"><a class="anchor hidden-xs" href="#UDF-User-Defined-Function" title="UDF-User-Defined-Function"><i class="fa fa-link"></i></a>UDF (User Defined Function)</h3><p>PySpark UDF is the most useful feature of Spark SQL &amp; DataFrame that is used to extend the PySpark built-in capabilities. I will show here the steps for creating UDF for capitalizing the first character in each word. Steps of creating UDFs are:</p><ol>
+<li>Create a Python function.</li>
+</ol><pre><code class="wrap python hljs"><span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">convertCase</span><span class="hljs-params">(s)</span>:</span>
+    resStr=<span class="hljs-string">""</span>
+    arr = s.split(<span class="hljs-string">" "</span>)
+    <span class="hljs-keyword">for</span> x <span class="hljs-keyword">in</span> arr:
+        resStr =  resStr + x[<span class="hljs-number">0</span>].upper() + x[<span class="hljs-number">1</span>:len(x)] + <span class="hljs-string">" "</span>
+    <span class="hljs-keyword">return</span> resStr 
+</code></pre><ol start="2">
+<li>Convert a Python function to PySpark UDF</li>
+</ol><pre><code class="wrap python hljs"><span class="hljs-keyword">import</span> pyspark.sql.functions <span class="hljs-keyword">as</span> F
+<span class="hljs-keyword">from</span> pyspark.sql.types <span class="hljs-keyword">import</span> StringType
+capitalizeUDF = F.udf(<span class="hljs-keyword">lambda</span> x: convertCase(x),StringType())
+
+<span class="hljs-comment"># Since the default return type of the udf() is StringType, you can write it as follows</span>
+capitalizeUDF = F.udf(<span class="hljs-keyword">lambda</span> x: convertCase(x))
+</code></pre><ol start="3">
+<li>Use the UDF</li>
+</ol><pre><code class="wrap python hljs">df2.select(<span class="hljs-string">"Film"</span>, capitalizeUDF(F.col(<span class="hljs-string">"Film"</span>)).alias(<span class="hljs-string">"Capitalized_Film"</span>)).show(<span class="hljs-number">5</span>, truncate = <span class="hljs-literal">False</span>)
+</code></pre><p><img src="https://i.imgur.com/84tA0GJ.png" alt="" class="md-image md-image"></p><div class="alert alert-danger">
+<p>Note: UDFs are treated as a black box to Spark hence it can not apply optimization and you will lose all the optimization PySpark does on Dataframe/Dataset. We recommend to use UDFs only if you do not have them as built-in functions.</p>
+</div><h1 id="Spark-Dataset"><a class="anchor hidden-xs" href="#Spark-Dataset" title="Spark-Dataset"><i class="fa fa-link"></i></a>Spark Dataset</h1><p>Spark Dataset API is supported in in statically typed languages like Java and Scala since Spark Datasets rely heavily on static typing. Python is a dynamically typed language, it still has access to Spark’s DataFrame API, which offers similar functionality as Datasets.</p><h1 id="Spark-SQL"><a class="anchor hidden-xs" href="#Spark-SQL" title="Spark-SQL"><i class="fa fa-link"></i></a>Spark SQL</h1><p>It is a module used for structured data processing. Spark SQL allows you to query structured data using either SQL or DataFrame API.</p><p>The <code>pyspark.sql</code> is a module in Spark that is used to perform SQL-like operations on the data stored in memory. You can either leverage using programming API to query the data or use the ANSI SQL queries similar to RDBMS. You can also mix both, for example, use API on the result of an SQL query.</p><p><strong>Spark SQL</strong> is one of the most used Spark modules for processing structured columnar data format. Once you have a DataFrame created, you can interact with the data by using SQL syntax. In other words, Spark SQL brings native RAW SQL queries on Spark meaning you can run traditional ANSI SQL on Spark Dataframe.</p><p>In order to use SQL, first, register a <strong>temporary table/view on DataFrame</strong> using the <code>createOrReplaceTempView()</code> function. Once created, this table can be accessed throughout the SparkSession using <code>sql()</code> and it will be dropped along with your SparkContext termination. Use <code>sql()</code> method of the SparkSession object to run the query and this method returns a new DataFrame</p><h2 id="Data-Description"><a class="anchor hidden-xs" href="#Data-Description" title="Data-Description"><i class="fa fa-link"></i></a>Data Description</h2><p>This dataset includes <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-2-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>44</mn><mo>,</mo><mn>341</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4" style="width: 3.451em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.966em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1002.91em, 2.751em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-5"><span class="mn" id="MathJax-Span-6" style="font-family: MathJax_Main;">44</span><span class="mo" id="MathJax-Span-7" style="font-family: MathJax_Main;">,</span><span class="mn" id="MathJax-Span-8" style="font-family: MathJax_Main; padding-left: 0.164em;">341</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.309em; border-left: 0px solid; width: 0px; height: 1.128em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>44</mn><mo>,</mo><mn>341</mn></math></span></span><script type="math/tex" id="MathJax-Element-2">44,341</script></span> results of international football matches starting from the very first official match in <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-3-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>1872</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-9" style="width: 2.32em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.996em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1001.94em, 2.535em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-10"><span class="mn" id="MathJax-Span-11" style="font-family: MathJax_Main;">1872</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1872</mn></math></span></span><script type="math/tex" id="MathJax-Element-3">1872</script></span> up to <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-4-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>2022</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-12" style="width: 2.32em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.996em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.565em, 1001.94em, 2.535em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-13"><span class="mn" id="MathJax-Span-14" style="font-family: MathJax_Main;">2022</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2022</mn></math></span></span><script type="math/tex" id="MathJax-Element-4">2022</script></span>. The matches range from FIFA World Cup to FIFI Wild Cup to regular friendly matches. The matches are strictly men’s full internationals and the data does not include Olympic Games or matches where at least one of the teams was the nation’s B-team, U-23 or a league select team.</p><p><strong>results.csv</strong> includes the following columns:</p><ul>
+<li><strong>date</strong> - date of the match</li>
+<li><strong>home_team</strong> - the name of the home team</li>
+<li><strong>away_team</strong> - the name of the away team</li>
+<li><strong>home_score</strong> - full-time home team score including extra time, not including penalty-shootouts</li>
+<li><strong>away_score</strong> - full-time away team score including extra time, not including penalty-shootouts</li>
+<li><strong>tournament</strong> - the name of the tournament</li>
+<li><strong>city</strong> - the name of the city/town/administrative unit where the match was played</li>
+<li><strong>country</strong> - the name of the country where the match was played</li>
+<li><strong>neutral</strong> - TRUE/FALSE column indicating whether the match was played at a neutral venue</li>
+</ul><p>For the dataset of scorers and shootouts you can check this <a href="https://www.kaggle.com/datasets/martj42/international-football-results-from-1872-to-2017" target="_blank" rel="noopener">Kaggle data card</a>.</p><h2 id="Spark-SQL-Examples"><a class="anchor hidden-xs" href="#Spark-SQL-Examples" title="Spark-SQL-Examples"><i class="fa fa-link"></i></a>Spark SQL Examples</h2><p>Here we will use the dataset</p><ol>
+<li>
+<p>Create SQL View</p>
+<ul>
+<li>Load the data and read the <code>results</code> dataframe.<pre><code class="python hljs"><span class="hljs-keyword">from</span> pyspark.sql.types <span class="hljs-keyword">import</span> StructType, StructField, IntegerType, StringType, BooleanType, DateType
+
+schema = StructType([
+    StructField(<span class="hljs-string">"date"</span>, DateType(), <span class="hljs-literal">False</span>),
+    StructField(<span class="hljs-string">"home_team"</span>, StringType(), <span class="hljs-literal">False</span>),
+    StructField(<span class="hljs-string">"away_team"</span>, StringType(), <span class="hljs-literal">False</span>),
+    StructField(<span class="hljs-string">"home_score"</span>, IntegerType(), <span class="hljs-literal">False</span>),
+    StructField(<span class="hljs-string">"away_score"</span>, IntegerType(), <span class="hljs-literal">False</span>),
+    StructField(<span class="hljs-string">"tournament"</span>, StringType(), <span class="hljs-literal">False</span>),
+    StructField(<span class="hljs-string">"city"</span>, StringType(), <span class="hljs-literal">False</span>),
+    StructField(<span class="hljs-string">"country"</span>, StringType(), <span class="hljs-literal">False</span>),
+    StructField(<span class="hljs-string">"neutral"</span>, BooleanType(), <span class="hljs-literal">False</span>),
+])
+
+<span class="hljs-comment"># You can also use spark.read.csv function</span>
+df = spark.read.format(<span class="hljs-string">"csv"</span>).load(<span class="hljs-string">"results.csv"</span>, header = <span class="hljs-literal">True</span>, schema = schema)
+df
+</code></pre>
+</li>
+<li>Creat the temporary view.<pre><code class="wrap python hljs">df.createOrReplaceTempView(<span class="hljs-string">"results_table"</span>)
+</code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>Spark SQL to Select Columns</p>
+<pre><code class="wrap python hljs">// DataFrame API Select query
+df.select(<span class="hljs-string">"home_team"</span>,<span class="hljs-string">"city"</span>,<span class="hljs-string">"country"</span>,<span class="hljs-string">"tournament"</span>) 
+     .show(<span class="hljs-number">5</span>)
+
+// SQL Select query
+spark.sql(<span class="hljs-string">"SELECT home_team, city, country, tournament FROM RESULTS_TABLE"</span>) 
+     .show(<span class="hljs-number">5</span>)
+</code></pre>
+</li>
+<li>
+<p>Filter Rows<br>
+To filter the rows from the data, you can use <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-5-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>w</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>e</mi><mo stretchy=&quot;false&quot;>(</mo><mo stretchy=&quot;false&quot;>)</mo></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-15" style="width: 4.044em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.451em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.457em, 1003.34em, 2.804em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-16"><span class="mi" id="MathJax-Span-17" style="font-family: MathJax_Math-italic;">w</span><span class="mi" id="MathJax-Span-18" style="font-family: MathJax_Math-italic;">h</span><span class="mi" id="MathJax-Span-19" style="font-family: MathJax_Math-italic;">e</span><span class="mi" id="MathJax-Span-20" style="font-family: MathJax_Math-italic;">r</span><span class="mi" id="MathJax-Span-21" style="font-family: MathJax_Math-italic;">e</span><span class="mo" id="MathJax-Span-22" style="font-family: MathJax_Main;">(</span><span class="mo" id="MathJax-Span-23" style="font-family: MathJax_Main;">)</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.372em; border-left: 0px solid; width: 0px; height: 1.316em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>w</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>e</mi><mo stretchy="false">(</mo><mo stretchy="false">)</mo></math></span></span><script type="math/tex" id="MathJax-Element-5">where()</script></span> function from the DataFrame API.</p>
+<pre><code class="wrap python hljs">// DataFrame API where()
+df.select(<span class="hljs-string">"country"</span>,<span class="hljs-string">"city"</span>,<span class="hljs-string">"home_team"</span>,<span class="hljs-string">"tournament"</span>) 
+  .where(<span class="hljs-string">"city == 'Moscow'"</span>) 
+  .show(<span class="hljs-number">5</span>)
+</code></pre>
+<p>Similarly, in SQL you can use WHERE clause as follows.</p>
+<pre><code class="wrap python hljs">// SQL where
+spark.sql(<span class="hljs-string">""" SELECT  country, city, home_team, tournament FROM RESULTS_TABLE 
+          WHERE city = 'Moscow' """</span>) 
+     .show(<span class="hljs-number">5</span>)
+
+</code></pre>
+</li>
+<li>
+<p>Sorting</p>
+<pre><code class="wrap python hljs">// sorting
+df.select(<span class="hljs-string">"country"</span>,<span class="hljs-string">"city"</span>,<span class="hljs-string">"home_team"</span>,<span class="hljs-string">"tournament"</span>) 
+  .where(<span class="hljs-string">"city in ('London','Paris','Moscow')"</span>) 
+  .orderBy(<span class="hljs-string">"city"</span>)
+  .show(<span class="hljs-number">10</span>)
+
+
+// SQL ORDER BY
+spark.sql(<span class="hljs-string">""" SELECT  country, city, home_team, tournament FROM RESULTS_TABLE 
+          WHERE city in ('London','Paris','Moscow') order by city """</span>) 
+     .show(<span class="hljs-number">10</span>)
+
+</code></pre>
+</li>
+<li>
+<p>Grouping</p>
+</li>
+</ol><pre><code class="wrap python hljs">// grouping
+df.groupBy(<span class="hljs-string">"city"</span>).count() 
+  .show()
+    
+// SQL GROUP BY clause
+spark.sql(<span class="hljs-string">""" SELECT city, count(*) as count FROM RESULTS_TABLE 
+          GROUP BY city"""</span>) 
+     .show()
+</code></pre><ol start="8">
+<li>SQL Join Operations</li>
+</ol><p>PySpark SQL join has a below syntax and it can be accessed directly from DataFrame.</p><pre><code class="wrap scala hljs">join(self, other, on=<span class="hljs-type">None</span>, how=<span class="hljs-type">None</span>)
+</code></pre><p>join() operation takes parameters as below and returns DataFrame.</p><ul>
+<li>param <em>other</em>: Right side of the join</li>
+<li>param <em>on</em>: a string for the join column name</li>
+<li>param <em>how</em>: default inner. Must be one of inner, cross, outer,full, full_outer, left, left_outer, right, right_outer,left_semi, and left_anti.</li>
+</ul><p>You can also write Join expression by adding <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-6-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>w</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>e</mi><mo stretchy=&quot;false&quot;>(</mo><mo stretchy=&quot;false&quot;>)</mo></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-24" style="width: 4.044em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.451em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.457em, 1003.34em, 2.804em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-25"><span class="mi" id="MathJax-Span-26" style="font-family: MathJax_Math-italic;">w</span><span class="mi" id="MathJax-Span-27" style="font-family: MathJax_Math-italic;">h</span><span class="mi" id="MathJax-Span-28" style="font-family: MathJax_Math-italic;">e</span><span class="mi" id="MathJax-Span-29" style="font-family: MathJax_Math-italic;">r</span><span class="mi" id="MathJax-Span-30" style="font-family: MathJax_Math-italic;">e</span><span class="mo" id="MathJax-Span-31" style="font-family: MathJax_Main;">(</span><span class="mo" id="MathJax-Span-32" style="font-family: MathJax_Main;">)</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.372em; border-left: 0px solid; width: 0px; height: 1.316em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>w</mi><mi>h</mi><mi>e</mi><mi>r</mi><mi>e</mi><mo stretchy="false">(</mo><mo stretchy="false">)</mo></math></span></span><script type="math/tex" id="MathJax-Element-6">where()</script></span> and <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-7-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>f</mi><mi>i</mi><mi>l</mi><mi>t</mi><mi>e</mi><mi>r</mi><mo stretchy=&quot;false&quot;>(</mo><mo stretchy=&quot;false&quot;>)</mo></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-33" style="width: 3.774em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.235em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.457em, 1003.13em, 2.804em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-34"><span class="mi" id="MathJax-Span-35" style="font-family: MathJax_Math-italic;">f<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.057em;"></span></span><span class="mi" id="MathJax-Span-36" style="font-family: MathJax_Math-italic;">i</span><span class="mi" id="MathJax-Span-37" style="font-family: MathJax_Math-italic;">l</span><span class="mi" id="MathJax-Span-38" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-39" style="font-family: MathJax_Math-italic;">e</span><span class="mi" id="MathJax-Span-40" style="font-family: MathJax_Math-italic;">r</span><span class="mo" id="MathJax-Span-41" style="font-family: MathJax_Main;">(</span><span class="mo" id="MathJax-Span-42" style="font-family: MathJax_Main;">)</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.372em; border-left: 0px solid; width: 0px; height: 1.316em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>f</mi><mi>i</mi><mi>l</mi><mi>t</mi><mi>e</mi><mi>r</mi><mo stretchy="false">(</mo><mo stretchy="false">)</mo></math></span></span><script type="math/tex" id="MathJax-Element-7">filter()</script></span> methods on DataFrame and can have Join on multiple columns.</p><ul>
+<li>Create two Spark dataframes</li>
+</ul><pre><code class="wrap python hljs">emp = [(<span class="hljs-number">1</span>,<span class="hljs-string">"Smith"</span>,<span class="hljs-number">-1</span>,<span class="hljs-string">"2018"</span>,<span class="hljs-string">"10"</span>,<span class="hljs-string">"M"</span>,<span class="hljs-number">3000</span>), \
+    (<span class="hljs-number">2</span>,<span class="hljs-string">"Rose"</span>,<span class="hljs-number">1</span>,<span class="hljs-string">"2010"</span>,<span class="hljs-string">"20"</span>,<span class="hljs-string">"M"</span>,<span class="hljs-number">4000</span>), \
+    (<span class="hljs-number">3</span>,<span class="hljs-string">"Williams"</span>,<span class="hljs-number">1</span>,<span class="hljs-string">"2010"</span>,<span class="hljs-string">"10"</span>,<span class="hljs-string">"M"</span>,<span class="hljs-number">1000</span>), \
+    (<span class="hljs-number">4</span>,<span class="hljs-string">"Jones"</span>,<span class="hljs-number">2</span>,<span class="hljs-string">"2005"</span>,<span class="hljs-string">"10"</span>,<span class="hljs-string">"F"</span>,<span class="hljs-number">2000</span>), \
+    (<span class="hljs-number">5</span>,<span class="hljs-string">"Brown"</span>,<span class="hljs-number">2</span>,<span class="hljs-string">"2010"</span>,<span class="hljs-string">"40"</span>,<span class="hljs-string">""</span>,<span class="hljs-number">-1</span>), \
+      (<span class="hljs-number">6</span>,<span class="hljs-string">"Brown"</span>,<span class="hljs-number">2</span>,<span class="hljs-string">"2010"</span>,<span class="hljs-string">"50"</span>,<span class="hljs-string">""</span>,<span class="hljs-number">-1</span>) \
+  ]
+empColumns = [<span class="hljs-string">"emp_id"</span>,<span class="hljs-string">"name"</span>,<span class="hljs-string">"superior_emp_id"</span>,<span class="hljs-string">"year_joined"</span>, \
+       <span class="hljs-string">"emp_dept_id"</span>,<span class="hljs-string">"gender"</span>,<span class="hljs-string">"salary"</span>]
+
+empDF = spark.createDataFrame(data=emp, schema = empColumns)
+empDF.printSchema()
+empDF.show(truncate=<span class="hljs-literal">False</span>)
+
+dept = [(<span class="hljs-string">"Finance"</span>,<span class="hljs-number">10</span>), \
+    (<span class="hljs-string">"Marketing"</span>,<span class="hljs-number">20</span>), \
+    (<span class="hljs-string">"Sales"</span>,<span class="hljs-number">30</span>), \
+    (<span class="hljs-string">"IT"</span>,<span class="hljs-number">40</span>) \
+  ]
+deptColumns = [<span class="hljs-string">"dept_name"</span>,<span class="hljs-string">"dept_id"</span>]
+deptDF = spark.createDataFrame(data=dept, schema = deptColumns)
+deptDF.printSchema()
+deptDF.show(truncate=<span class="hljs-literal">False</span>)
+</code></pre><ul>
+<li>Create two tables</li>
+</ul><pre><code class="wrap python hljs">empDF.createOrReplaceTempView(<span class="hljs-string">"EMP"</span>)
+deptDF.createOrReplaceTempView(<span class="hljs-string">"DEPT"</span>)
+</code></pre><ul>
+<li>Inner join</li>
+</ul><pre><code class="wrap python hljs">
+<span class="hljs-comment"># Join in pyspark.sql.DataFrame API</span>
+
+empDF.join(deptDF,empDF.emp_dept_id ==  deptDF.dept_id,<span class="hljs-string">"inner"</span>) \
+     .show(truncate=<span class="hljs-literal">False</span>)
+
+
+<span class="hljs-comment"># SQL INNER JOIN</span>
+joinDF = spark.sql(<span class="hljs-string">"select * from EMP e, DEPT d where e.emp_dept_id == d.dept_id"</span>) \
+  .show(truncate=<span class="hljs-literal">False</span>)
+
+<span class="hljs-comment"># SQL INNER JOIN</span>
+joinDF2 = spark.sql(<span class="hljs-string">"select * from EMP e INNER JOIN DEPT d ON e.emp_dept_id == d.dept_id"</span>) \
+  .show(truncate=<span class="hljs-literal">False</span>)
+</code></pre><ul>
+<li>Left join<br>
+<strong>Left</strong> a.k.a <strong>Leftouter join</strong> returns all rows from the left dataset regardless of match found on the right dataset when join expression doesn’t match, it assigns null for that record and drops records from right where match not found.</li>
+</ul><pre><code class="wrap python hljs">
+<span class="hljs-comment"># Left Join in pyspark.sql.DataFrame API</span>
+empDF.join(deptDF,empDF.emp_dept_id ==  deptDF.dept_id, <span class="hljs-string">"left"</span>) \ 
+    .show(truncate=<span class="hljs-literal">False</span>)
+    
+    
+<span class="hljs-comment"># SQL LEFT JOIN</span>
+joinDF = spark.sql(<span class="hljs-string">"select * from EMP e LEFT OUTER JOIN DEPT d ON e.emp_dept_id == d.dept_id"</span>) \
+  .show(truncate=<span class="hljs-literal">False</span>)
+</code></pre><ul>
+<li>Right Join</li>
+</ul><pre><code class="wrap python hljs">
+<span class="hljs-comment"># Right Join in pyspark.sql.DataFrame API</span>
+empDF.join(deptDF,empDF.emp_dept_id ==  deptDF.dept_id, <span class="hljs-string">"right"</span>) \ 
+    .show(truncate=<span class="hljs-literal">False</span>)
+    
+    
+<span class="hljs-comment"># SQL RIGHT JOIN</span>
+joinDF = spark.sql(<span class="hljs-string">"select * from EMP e RIGHT OUTER JOIN DEPT d ON e.emp_dept_id == d.dept_id"</span>) \
+  .show(truncate=<span class="hljs-literal">False</span>)
+</code></pre><ul>
+<li>Full join</li>
+</ul><pre><code class="wrap python hljs">
+<span class="hljs-comment"># Full Join in pyspark.sql.DataFrame API</span>
+empDF.join(deptDF,empDF.emp_dept_id ==  deptDF.dept_id, <span class="hljs-string">"full"</span>) \ 
+    .show(truncate=<span class="hljs-literal">False</span>)
+    
+    
+<span class="hljs-comment"># SQL FULL JOIN</span>
+joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOIN DEPT d ON e.emp_dept_id == d.dept_id"</span>) \
+  .show(truncate=<span class="hljs-literal">False</span>)
+</code></pre><p>You can read about Anti-joins, semi-joins and unions from [here]</p><h1 id="References"><a class="anchor hidden-xs" href="#References" title="References"><i class="fa fa-link"></i></a>References</h1><ul>
+<li><a href="https://spark.apache.org" target="_blank" rel="noopener">Apache Spark</a></li>
+<li><a href="https://blog.knoldus.com/deep-dive-into-apache-spark-transformations-and-action/" target="_blank" rel="noopener">Deep Dive into Apache Spark Transformations and Action</a></li>
+<li><a href="https://data-flair.training/blogs/apache-spark-rdd-vs-dataframe-vs-dataset/" target="_blank" rel="noopener">Apache Spark RDD vs DataFrame vs DataSet</a></li>
+<li><a href="https://sparkbyexamples.com/pyspark-tutorial/" target="_blank" rel="noopener">Spark with Python (PySpark) Tutorial For Beginners</a></li>
+<li><a href="https://www.amazon.com/Learning-PySpark-Tomasz-Drabas/dp/1786463709" target="_blank" rel="noopener">Learning PySpark</a></li>
+</ul></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#Lab-5---Apache-Spark-Core-amp-SQL" title="Lab 5 - Apache Spark Core &amp; SQL">Lab 5 - Apache Spark Core &amp; SQL</a><ul class="nav">
+<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li class=""><a href="#Readings" title="Readings">Readings</a></li>
+</ul>
+</li>
+<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li class=""><a href="#Intro-to-Apache-Spark-review" title="Intro to Apache Spark [review]">Intro to Apache Spark [review]</a><ul class="nav">
+<li class=""><a href="#Core-Concepts-in-Spark" title="Core Concepts in Spark">Core Concepts in Spark</a></li>
+<li class=""><a href="#Spark-Application-Model" title="Spark Application Model">Spark Application Model</a></li>
+<li class=""><a href="#Spark-Execution-Model" title="Spark Execution Model">Spark Execution Model</a></li>
+<li class=""><a href="#Spark-Components" title="Spark Components">Spark Components</a></li>
+<li class=""><a href="#Spark-Architecture" title="Spark Architecture">Spark Architecture</a></li>
+<li class=""><a href="#How-Spark-works" title="How Spark works?">How Spark works?</a></li>
+<li class=""><a href="#Spark-Features" title="Spark Features">Spark Features</a></li>
+<li class=""><a href="#Supported-Cluster-Managers" title="Supported Cluster Managers">Supported Cluster Managers</a></li>
+</ul>
+</li>
+<li class=""><a href="#PySpark" title="PySpark">PySpark</a><ul class="nav">
+<li class=""><a href="#PySpark-Modules-amp-Packages" title="PySpark Modules &amp; Packages">PySpark Modules &amp; Packages</a></li>
+<li class=""><a href="#Install-PySpark-on-HDP-Sandbox" title="Install PySpark on HDP Sandbox">Install PySpark on HDP Sandbox</a></li>
+<li><a href="#Running-PySpark-applications" title="Running PySpark applications">Running PySpark applications</a></li>
+</ul>
+</li>
+<li class=""><a href="#Spark-RDD" title="Spark RDD">Spark RDD</a><ul class="nav">
+<li class=""><a href="#Spark-RDD-Operations" title="Spark RDD Operations">Spark RDD Operations</a></li>
+<li class=""><a href="#Spark-RDD-Transformations" title="Spark RDD Transformations">Spark RDD Transformations</a></li>
+<li class=""><a href="#Spark-RDD-Actions" title="Spark RDD Actions">Spark RDD Actions</a></li>
+</ul>
+</li>
+<li class=""><a href="#Spark-Context" title="Spark Context">Spark Context</a><ul class="nav">
+<li class=""><a href="#Import-required-packages" title="Import required packages">Import required packages</a></li>
+<li class=""><a href="#Create-a-SparkContext" title="Create a SparkContext">Create a SparkContext</a></li>
+</ul>
+</li>
+<li class=""><a href="#Spark-RDD1" title="Spark RDD">Spark RDD</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li class=""><a href="#1-using-parallelize-function" title="1. using parallelize() function">1. using parallelize() function</a></li>
+<li class=""><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
+</ul>
+</li>
+<li class=""><a href="#Create-empty-RDD" title="Create empty RDD">Create empty RDD</a></li>
+<li class=""><a href="#Repartition-and-Coalesce" title="Repartition and Coalesce">Repartition and Coalesce</a></li>
+<li class=""><a href="#PySpark-RDD-Transformations" title="PySpark RDD Transformations">PySpark RDD Transformations</a><ul class="nav">
+<li class=""><a href="#map-and-flatMap" title="map and flatMap">map and flatMap</a></li>
+<li class=""><a href="#filter" title="filter">filter</a></li>
+<li class=""><a href="#distinct" title="distinct">distinct</a></li>
+<li class=""><a href="#sample" title="sample">sample</a></li>
+<li class=""><a href="#randomSplit" title="randomSplit">randomSplit</a></li>
+<li class=""><a href="#mapPartitions-and-mapPartitionsWithIndex" title="mapPartitions and mapPartitionsWithIndex">mapPartitions and mapPartitionsWithIndex</a></li>
+<li class=""><a href="#sortBy-and-groupBy" title="sortBy and groupBy">sortBy and groupBy</a></li>
+<li class=""><a href="#sortByKey-and-reduceByKey" title="sortByKey and reduceByKey">sortByKey and reduceByKey</a></li>
+</ul>
+</li>
+<li class=""><a href="#PySpark-RDD-Actions" title="PySpark RDD Actions">PySpark RDD Actions</a><ul class="nav">
+<li class=""><a href="#collect" title="collect">collect</a></li>
+<li class=""><a href="#max-min-first-top-take" title="max, min, first, top, take">max, min, first, top, take</a></li>
+<li class=""><a href="#count-countByValue" title="count, countByValue">count, countByValue</a></li>
+<li class=""><a href="#reduce-treeReduce" title="reduce, treeReduce">reduce, treeReduce</a></li>
+<li class=""><a href="#saveAsTextFile" title="saveAsTextFile">saveAsTextFile</a></li>
+</ul>
+</li>
+<li class=""><a href="#RDD-Persistence" title="RDD Persistence">RDD Persistence</a><ul class="nav">
+<li class=""><a href="#RDD-Cache" title="RDD Cache">RDD Cache</a></li>
+<li class=""><a href="#RDD-Persist" title="RDD Persist">RDD Persist</a></li>
+<li class=""><a href="#RDD-Unpersist" title="RDD Unpersist">RDD Unpersist</a></li>
+</ul>
+</li>
+<li class=""><a href="#Shuffling-in-Spark-engine" title="Shuffling in Spark engine">Shuffling in Spark engine</a></li>
+<li class=""><a href="#Shared-Variables" title="Shared Variables">Shared Variables</a><ul class="nav">
+<li class=""><a href="#Broadcast-variables" title="Broadcast variables">Broadcast variables</a></li>
+<li class=""><a href="#Accumulator-variables" title="Accumulator variables">Accumulator variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#Spark-DataFrame" title="Spark DataFrame">Spark DataFrame</a><ul class="nav">
+<li class=""><a href="#1-using-createDataFrame-function" title="1. using createDataFrame() function">1. using createDataFrame() function</a></li>
+<li class=""><a href="#2-using-toDF-function" title="2. using toDF() function">2. using toDF() function</a></li>
+<li class=""><a href="#3-Read-from-a-local-file" title="3. Read from a local file">3. Read from a local file</a></li>
+<li class=""><a href="#4-Read-from-MongoDB-via-PyMongo" title="4. Read from MongoDB via PyMongo">4. Read from MongoDB via PyMongo</a></li>
+<li class=""><a href="#5-Read-from-HDFS" title="5. Read from HDFS">5. Read from HDFS</a></li>
+<li class=""><a href="#StructType-amp-StructField" title="StructType &amp; StructField">StructType &amp; StructField</a></li>
+<li class=""><a href="#Spark-DataFrame-Operations" title="Spark DataFrame Operations">Spark DataFrame Operations</a></li>
+<li class=""><a href="#show-Action" title="show [Action]">show [Action]</a></li>
+<li class=""><a href="#collect-Action" title="collect [Action]">collect [Action]</a></li>
+<li class=""><a href="#select-Transformation" title="select [Transformation]">select [Transformation]</a></li>
+<li class=""><a href="#withColumn-withColumnRenamed-drop-Transformation" title="withColumn, withColumnRenamed, drop [Transformation]">withColumn, withColumnRenamed, drop [Transformation]</a></li>
+<li class=""><a href="#filter-where-Transformation" title="filter, where [Transformation]">filter, where [Transformation]</a><ul class="nav">
+<li class=""><a href="#distinct-dropDuplicates-Transformation" title="distinct, dropDuplicates [Transformation]">distinct, dropDuplicates [Transformation]</a></li>
+<li class=""><a href="#groupby-Transformation" title="groupby [Transformation]">groupby [Transformation]</a></li>
+<li class=""><a href="#orderBy-sort-Transformation" title="orderBy, sort [Transformation]">orderBy, sort [Transformation]</a></li>
+<li class=""><a href="#Join" title="Join">Join</a></li>
+<li class=""><a href="#UDF-User-Defined-Function" title="UDF (User Defined Function)">UDF (User Defined Function)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#Spark-Dataset" title="Spark Dataset">Spark Dataset</a></li>
+<li class=""><a href="#Spark-SQL" title="Spark SQL">Spark SQL</a><ul class="nav">
+<li class=""><a href="#Data-Description" title="Data Description">Data Description</a></li>
+<li class=""><a href="#Spark-SQL-Examples" title="Spark SQL Examples">Spark SQL Examples</a></li>
+</ul>
+</li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#Lab-5---Apache-Spark-Core-amp-SQL" title="Lab 5 - Apache Spark Core &amp; SQL">Lab 5 - Apache Spark Core &amp; SQL</a><ul class="nav">
+<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li class=""><a href="#Readings" title="Readings">Readings</a></li>
+</ul>
+</li>
+<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li class=""><a href="#Intro-to-Apache-Spark-review" title="Intro to Apache Spark [review]">Intro to Apache Spark [review]</a><ul class="nav">
+<li class=""><a href="#Core-Concepts-in-Spark" title="Core Concepts in Spark">Core Concepts in Spark</a></li>
+<li class=""><a href="#Spark-Application-Model" title="Spark Application Model">Spark Application Model</a></li>
+<li class=""><a href="#Spark-Execution-Model" title="Spark Execution Model">Spark Execution Model</a></li>
+<li class=""><a href="#Spark-Components" title="Spark Components">Spark Components</a></li>
+<li class=""><a href="#Spark-Architecture" title="Spark Architecture">Spark Architecture</a></li>
+<li class=""><a href="#How-Spark-works" title="How Spark works?">How Spark works?</a></li>
+<li class=""><a href="#Spark-Features" title="Spark Features">Spark Features</a></li>
+<li class=""><a href="#Supported-Cluster-Managers" title="Supported Cluster Managers">Supported Cluster Managers</a></li>
+</ul>
+</li>
+<li class=""><a href="#PySpark" title="PySpark">PySpark</a><ul class="nav">
+<li class=""><a href="#PySpark-Modules-amp-Packages" title="PySpark Modules &amp; Packages">PySpark Modules &amp; Packages</a></li>
+<li class=""><a href="#Install-PySpark-on-HDP-Sandbox" title="Install PySpark on HDP Sandbox">Install PySpark on HDP Sandbox</a></li>
+<li><a href="#Running-PySpark-applications" title="Running PySpark applications">Running PySpark applications</a></li>
+</ul>
+</li>
+<li class=""><a href="#Spark-RDD" title="Spark RDD">Spark RDD</a><ul class="nav">
+<li class=""><a href="#Spark-RDD-Operations" title="Spark RDD Operations">Spark RDD Operations</a></li>
+<li class=""><a href="#Spark-RDD-Transformations" title="Spark RDD Transformations">Spark RDD Transformations</a></li>
+<li class=""><a href="#Spark-RDD-Actions" title="Spark RDD Actions">Spark RDD Actions</a></li>
+</ul>
+</li>
+<li class=""><a href="#Spark-Context" title="Spark Context">Spark Context</a><ul class="nav">
+<li class=""><a href="#Import-required-packages" title="Import required packages">Import required packages</a></li>
+<li class=""><a href="#Create-a-SparkContext" title="Create a SparkContext">Create a SparkContext</a></li>
+</ul>
+</li>
+<li class=""><a href="#Spark-RDD1" title="Spark RDD">Spark RDD</a><ul class="nav">
+<li class="invisable-node"><ul class="nav">
+<li class=""><a href="#1-using-parallelize-function" title="1. using parallelize() function">1. using parallelize() function</a></li>
+<li class=""><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
+</ul>
+</li>
+<li class=""><a href="#Create-empty-RDD" title="Create empty RDD">Create empty RDD</a></li>
+<li class=""><a href="#Repartition-and-Coalesce" title="Repartition and Coalesce">Repartition and Coalesce</a></li>
+<li class=""><a href="#PySpark-RDD-Transformations" title="PySpark RDD Transformations">PySpark RDD Transformations</a><ul class="nav">
+<li class=""><a href="#map-and-flatMap" title="map and flatMap">map and flatMap</a></li>
+<li class=""><a href="#filter" title="filter">filter</a></li>
+<li class=""><a href="#distinct" title="distinct">distinct</a></li>
+<li class=""><a href="#sample" title="sample">sample</a></li>
+<li class=""><a href="#randomSplit" title="randomSplit">randomSplit</a></li>
+<li class=""><a href="#mapPartitions-and-mapPartitionsWithIndex" title="mapPartitions and mapPartitionsWithIndex">mapPartitions and mapPartitionsWithIndex</a></li>
+<li class=""><a href="#sortBy-and-groupBy" title="sortBy and groupBy">sortBy and groupBy</a></li>
+<li class=""><a href="#sortByKey-and-reduceByKey" title="sortByKey and reduceByKey">sortByKey and reduceByKey</a></li>
+</ul>
+</li>
+<li class=""><a href="#PySpark-RDD-Actions" title="PySpark RDD Actions">PySpark RDD Actions</a><ul class="nav">
+<li class=""><a href="#collect" title="collect">collect</a></li>
+<li class=""><a href="#max-min-first-top-take" title="max, min, first, top, take">max, min, first, top, take</a></li>
+<li class=""><a href="#count-countByValue" title="count, countByValue">count, countByValue</a></li>
+<li class=""><a href="#reduce-treeReduce" title="reduce, treeReduce">reduce, treeReduce</a></li>
+<li class=""><a href="#saveAsTextFile" title="saveAsTextFile">saveAsTextFile</a></li>
+</ul>
+</li>
+<li class=""><a href="#RDD-Persistence" title="RDD Persistence">RDD Persistence</a><ul class="nav">
+<li class=""><a href="#RDD-Cache" title="RDD Cache">RDD Cache</a></li>
+<li class=""><a href="#RDD-Persist" title="RDD Persist">RDD Persist</a></li>
+<li class=""><a href="#RDD-Unpersist" title="RDD Unpersist">RDD Unpersist</a></li>
+</ul>
+</li>
+<li class=""><a href="#Shuffling-in-Spark-engine" title="Shuffling in Spark engine">Shuffling in Spark engine</a></li>
+<li class=""><a href="#Shared-Variables" title="Shared Variables">Shared Variables</a><ul class="nav">
+<li class=""><a href="#Broadcast-variables" title="Broadcast variables">Broadcast variables</a></li>
+<li class=""><a href="#Accumulator-variables" title="Accumulator variables">Accumulator variables</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#Spark-DataFrame" title="Spark DataFrame">Spark DataFrame</a><ul class="nav">
+<li class=""><a href="#1-using-createDataFrame-function" title="1. using createDataFrame() function">1. using createDataFrame() function</a></li>
+<li class=""><a href="#2-using-toDF-function" title="2. using toDF() function">2. using toDF() function</a></li>
+<li class=""><a href="#3-Read-from-a-local-file" title="3. Read from a local file">3. Read from a local file</a></li>
+<li class=""><a href="#4-Read-from-MongoDB-via-PyMongo" title="4. Read from MongoDB via PyMongo">4. Read from MongoDB via PyMongo</a></li>
+<li class=""><a href="#5-Read-from-HDFS" title="5. Read from HDFS">5. Read from HDFS</a></li>
+<li class=""><a href="#StructType-amp-StructField" title="StructType &amp; StructField">StructType &amp; StructField</a></li>
+<li class=""><a href="#Spark-DataFrame-Operations" title="Spark DataFrame Operations">Spark DataFrame Operations</a></li>
+<li class=""><a href="#show-Action" title="show [Action]">show [Action]</a></li>
+<li class=""><a href="#collect-Action" title="collect [Action]">collect [Action]</a></li>
+<li class=""><a href="#select-Transformation" title="select [Transformation]">select [Transformation]</a></li>
+<li class=""><a href="#withColumn-withColumnRenamed-drop-Transformation" title="withColumn, withColumnRenamed, drop [Transformation]">withColumn, withColumnRenamed, drop [Transformation]</a></li>
+<li class=""><a href="#filter-where-Transformation" title="filter, where [Transformation]">filter, where [Transformation]</a><ul class="nav">
+<li class=""><a href="#distinct-dropDuplicates-Transformation" title="distinct, dropDuplicates [Transformation]">distinct, dropDuplicates [Transformation]</a></li>
+<li class=""><a href="#groupby-Transformation" title="groupby [Transformation]">groupby [Transformation]</a></li>
+<li class=""><a href="#orderBy-sort-Transformation" title="orderBy, sort [Transformation]">orderBy, sort [Transformation]</a></li>
+<li class=""><a href="#Join" title="Join">Join</a></li>
+<li class=""><a href="#UDF-User-Defined-Function" title="UDF (User Defined Function)">UDF (User Defined Function)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#Spark-Dataset" title="Spark Dataset">Spark Dataset</a></li>
+<li class=""><a href="#Spark-SQL" title="Spark SQL">Spark SQL</a><ul class="nav">
+<li class=""><a href="#Data-Description" title="Data Description">Data Description</a></li>
+<li class=""><a href="#Spark-SQL-Examples" title="Spark SQL Examples">Spark SQL Examples</a></li>
+</ul>
+</li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha256-kJrlY+s09+QoWjpkOrXXwhxeaoDz9FW5SaxF8I0DibQ=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
