@@ -34,12 +34,12 @@
 </head>
 
 <body>
-    <div id="doc" class="markdown-body container-fluid" lang="en"><h6 id="Home-page"><a class="anchor hidden-xs" href="#Home-page" title="Home-page"><i class="fa fa-link"></i></a><a href="https://firas-jolha.github.io/fjiubd2024/" target="_blank" rel="noopener">Home page<img src="https://cdn4.iconfinder.com/data/icons/bold-ui-1/60/Home_2-512.png" alt="1" width="30px" height="30px"></a></h6><h1 id="Lab-5---Apache-Spark-Core-amp-SQL"><a class="anchor hidden-xs" href="#Lab-5---Apache-Spark-Core-amp-SQL" title="Lab-5---Apache-Spark-Core-amp-SQL"><i class="fa fa-link"></i></a>Lab 5 - Apache Spark Core &amp; SQL</h1><p><strong>Course:</strong> Big Data - IU S24<br>
+    <div id="doc" class="markdown-body container-fluid" lang="en"><h6 id="-Home-page"><a class="anchor hidden-xs" href="#-Home-page" title="-Home-page"><i class="fa fa-link"></i></a><a href="https://firas-jolha.github.io/fjiubd2024/" target="_blank" rel="noopener"><img src="https://cdn4.iconfinder.com/data/icons/bold-ui-1/60/Home_2-512.png" alt="1" width="30px" height="30px"> Home page</a></h6><h1 id="Lab-5---Apache-Spark-Core-amp-SQL"><a class="anchor hidden-xs" href="#Lab-5---Apache-Spark-Core-amp-SQL" title="Lab-5---Apache-Spark-Core-amp-SQL"><i class="fa fa-link"></i></a>Lab 5 - Apache Spark Core &amp; SQL</h1><p><strong>Course:</strong> Big Data - IU S24<br>
 <strong>Author:</strong> Firas Jolha</p><h2 id="Dataset"><a class="anchor hidden-xs" href="#Dataset" title="Dataset"><i class="fa fa-link"></i></a>Dataset</h2><ul>
-<li><a href="https://raw.githubusercontent.com/firas-jolha/BigData-IU-S23/main/movies.csv" target="_blank" rel="noopener">Top gross movies between 2007 and 2011</a></li>
+<li><a href="https://github.com/firas-jolha/fjiubd2024/raw/main/data/movies.csv" target="_blank" rel="noopener">Top gross movies between 2007 and 2011</a></li>
 <li><a href="https://raw.githubusercontent.com/aminebennaji19/FIFA-World-Cup-Qatar-2022/main/data/results.csv" target="_blank" rel="noopener">World cup results from 1872 till 2022</a></li>
 </ul><h2 id="Readings"><a class="anchor hidden-xs" href="#Readings" title="Readings"><i class="fa fa-link"></i></a>Readings</h2><ul>
-<li><a href="https://spark.apache.org/docs/3.0.3/api/python/index.html" target="_blank" rel="noopener">Spark 3.0.3 Python API Docs</a></li>
+<li><a href="https://spark.apache.org/docs/3.2.4/api/python/index.html" target="_blank" rel="noopener">Spark 3.2.4 Python API Docs</a></li>
 </ul><h1 id="Agenda"><a class="anchor hidden-xs" href="#Agenda" title="Agenda"><i class="fa fa-link"></i></a>Agenda</h1><p></p><div class="toc"><ul>
 <li><a href="#Lab-5---Apache-Spark-Core-amp-SQL" title="Lab 5 - Apache Spark Core &amp; SQL">Lab 5 - Apache Spark Core &amp; SQL</a><ul>
 <li><a href="#Dataset" title="Dataset">Dataset</a></li>
@@ -63,7 +63,23 @@
 <li><a href="#PySpark" title="PySpark">PySpark</a><ul>
 <li><a href="#PySpark-Modules-amp-Packages" title="PySpark Modules &amp; Packages">PySpark Modules &amp; Packages</a></li>
 <li><a href="#Install-PySpark-on-HDP-Sandbox" title="Install PySpark on HDP Sandbox">Install PySpark on HDP Sandbox</a></li>
-<li><a href="#Running-PySpark-applications" title="Running PySpark applications">Running PySpark applications</a></li>
+<li><a href="#Running-Spark-applications" title="Running Spark applications">Running Spark applications</a><ul>
+<li><a href="#pyspark-shell" title="pyspark shell">pyspark shell</a></li>
+<li><a href="#spark-submit" title="spark-submit">spark-submit</a></li>
+<li><a href="#Zeppelin" title="Zeppelin">Zeppelin</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Spark-Web-UI" title="Spark Web UI">Spark Web UI</a><ul>
+<li><a href="#Jobs-Tab" title="Jobs Tab">Jobs Tab</a><ul>
+<li><a href="#Job-details" title="Job details">Job details</a></li>
+</ul>
+</li>
+<li><a href="#Stages-Tab" title="Stages Tab">Stages Tab</a><ul>
+<li><a href="#Stage-details" title="Stage details">Stage details</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li><a href="#Spark-RDD" title="Spark RDD">Spark RDD</a><ul>
@@ -292,7 +308,63 @@
 </ul><p>Besides these, if you wanted to use third-party libraries, you can find them at <a href="https://spark-packages.org/" target="_blank" rel="noopener">https://spark-packages.org/</a> . This page is kind of a repository of all Spark third-party libraries.</p><h2 id="Install-PySpark-on-HDP-Sandbox"><a class="anchor hidden-xs" href="#Install-PySpark-on-HDP-Sandbox" title="Install-PySpark-on-HDP-Sandbox"><i class="fa fa-link"></i></a>Install PySpark on HDP Sandbox</h2><p>If you have installed Python and pip from previous labs, then you just need to run the following command:</p><pre><code class="sh hljs">pip2 <span class="hljs-keyword">install</span> pyspark
 </code></pre><p>Otherwise, you need to return to the previous labs and install them.</p><div class="alert alert-warning">
 <p><a href="https://www.oreilly.com/library/view/data-algorithms-with/9781492082378/ch01.html" target="_blank" rel="noopener">Scala is the native language</a> for writing Spark applications but Apache Spark supports drivers for other languages such as Python (PySpark package), Java, and R.</p>
-</div><h2 id="Running-PySpark-applications"><a class="anchor hidden-xs" href="#Running-PySpark-applications" title="Running-PySpark-applications"><i class="fa fa-link"></i></a>Running PySpark applications</h2><p>You can run PySpark statements in interactive mode on the shell <code>pyspark</code> or you can write them in Pyhton file and submit it to Spark using the tool <code>spark-submit</code>.</p><h1 id="Spark-RDD"><a class="anchor hidden-xs" href="#Spark-RDD" title="Spark-RDD"><i class="fa fa-link"></i></a>Spark RDD</h1><p>RDD is a fundamental building block of Spark. RDDs are immutable distributed collections of objects. Immutable meaning once you create an RDD you cannot change it. Each record in RDD is divided into logical partitions, which can be computed on different nodes of the cluster.</p><p>In other words, RDDs are a collection of objects similar to list in Python, with the difference being RDD is computed on several processes scattered across multiple physical servers also called nodes in a cluster while a Python collection lives and process in just one process.</p><p>Additionally, RDDs provide data abstraction of partitioning and distribution of the data designed to run computations in parallel on several nodes, while doing transformations on RDD we do not have to worry about the parallelism as Spark by default provides.</p><h2 id="Spark-RDD-Operations"><a class="anchor hidden-xs" href="#Spark-RDD-Operations" title="Spark-RDD-Operations"><i class="fa fa-link"></i></a>Spark RDD Operations</h2><p>There are two main types of Spark operations: Transformations and Actions.</p><p><img src="https://i.imgur.com/5Rzg8rU.png" alt="" class="md-image md-image"></p><h2 id="Spark-RDD-Transformations"><a class="anchor hidden-xs" href="#Spark-RDD-Transformations" title="Spark-RDD-Transformations"><i class="fa fa-link"></i></a>Spark RDD Transformations</h2><p>Spark RDD Transformations are functions that take an RDD as the input and produce one or many RDDs as the output. They do not change the input RDD (since RDDs are immutable), but always produce one or more new RDDs by applying the computations they represent e.g. map(), filter(), reduceByKey() etc.</p><p>Spark supports lazy evaluation and when you apply the transformation on any RDD it will not perform the operation immediately. It will create a DAG(Directed Acyclic Graph) using 1) the applied operation, 2) source RDD and 3) function used for transformation. It will keep on building this graph using the references till you apply any action operation on the last lined up RDDs. That is why the transformations in Spark are lazy.</p><p>Transformations construct a new RDD from a previous one.</p><p><img src="https://i.imgur.com/GJgpmBr.png" alt="" class="md-image md-image"></p><p>For example, we can build a simple Spark application for counting the words in a text file. A spark job of two stages needs to be created (we do not create stages manually but the we define a pipeline for which the stages will be determined):</p><ul>
+</div><div class="alert alert-danger">
+<p><strong>Note:</strong> You can use Python3.6 to write Spark applications if you configured it properly in HDP Sandbox.</p>
+</div><h2 id="Running-Spark-applications"><a class="anchor hidden-xs" href="#Running-Spark-applications" title="Running-Spark-applications"><i class="fa fa-link"></i></a>Running Spark applications</h2><p>You can execute PySpark statements in interactive mode on the shell <code>pyspark</code> or you can write them in Pyhton file and submit it to Spark using the tool <code>spark-submit</code>. You can also use <strong>Zeppelin</strong> with <code>spark</code> or <code>python</code> interpreters. In addition, Spark comes with a set of ready-to-execute examples of Spark applications.</p><div class="alert alert-danger">
+<p><strong>Note:</strong> In HDP Sandbox, check that Spark engine is running from Ambari dashboard.</p>
+</div><h3 id="pyspark-shell"><a class="anchor hidden-xs" href="#pyspark-shell" title="pyspark-shell"><i class="fa fa-link"></i></a>pyspark shell</h3><p>You can open a spark shell session by running the command <code>pyspark</code> for Python, <code>spark-shell</code> for Scala, <code>sparkR</code> for R language.</p><pre><code class="wrap python hljs">pyspark
+</code></pre><p><img src="/uploads/29030be24713ff2f56eeb3d00.png" alt="" class="md-image md-image"></p><p>The pyspark shell starts a Spark application and initiates/gets the Spark context <code>sc</code> (<code>spark</code> for Spark session) which internally creates a Web UI with URL localhost:4040 (or next port if 4040 is not free). By default, it uses local[*] as master. It also displays Spark, and Python versions.</p><div class="alert alert-warning">
+<p><strong>Note:</strong> In HDP Sandbox, if you are running two or more Spark applications simultaneously, then the next ports to 4040 (e.g. 4041, 4042, …etc) are not mapped to the host machine and you need to set the port for Spark app web UI manually to one of the custom ports such as 4242 as follows:</p>
+<pre><code class="sh hljs">pyspark --conf spark<span class="hljs-selector-class">.ui</span><span class="hljs-selector-class">.port</span>=<span class="hljs-number">4242</span>
+</code></pre>
+</div><p>You can run Python code on <code>pyspark</code> shell.</p><p><img src="/uploads/29030be24713ff2f56eeb3d02.png" alt="" class="md-image md-image"></p><div class="alert alert-info">
+<p>You can exit the <code>pyspark</code> shell by executing statement <code>exit()</code> like in a Python shell.</p>
+</div><p>Whereas <code>spark-shell</code> command runs a Spark shell for Scala.</p><pre><code class="shell hljs">spark-shell
+</code></pre><p><img src="/uploads/29030be24713ff2f56eeb3d03.png" alt="" class="md-image md-image"></p><h3 id="spark-submit"><a class="anchor hidden-xs" href="#spark-submit" title="spark-submit"><i class="fa fa-link"></i></a>spark-submit</h3><p>We can use this tool for non-interactive mode of data anlysis. This command accepts the main file path for the spark application.</p><pre><code class="wrap sh hljs"><span class="hljs-comment"># Submit the application main.py with default configs</span>
+spark-submit main.py
+<span class="hljs-comment"># master is local[*]</span>
+
+<span class="hljs-comment"># Submit the application main.py on the YARN cluster where the driver program will run in the client machine</span>
+spark-submit \
+    --<span class="hljs-keyword">master</span> <span class="hljs-title">yarn</span>
+    main.p
+
+</code></pre><h4 id="Spark-History-Server"><a class="anchor hidden-xs" href="#Spark-History-Server" title="Spark-History-Server"><i class="fa fa-link"></i></a>Spark History Server</h4><p><img src="/uploads/e52e2b6468f45ff76b29d1900.png" alt="" class="md-image md-image"></p><h3 id="Zeppelin"><a class="anchor hidden-xs" href="#Zeppelin" title="Zeppelin"><i class="fa fa-link"></i></a>Zeppelin</h3><p>We will cover this section next lab.</p><h1 id="Spark-Web-UI"><a class="anchor hidden-xs" href="#Spark-Web-UI" title="Spark-Web-UI"><i class="fa fa-link"></i></a>Spark Web UI</h1><p>Apache Spark provides a suite of web user interfaces (UIs) that you can use to monitor the status and resource consumption of your Spark cluster.</p><h2 id="Jobs-Tab"><a class="anchor hidden-xs" href="#Jobs-Tab" title="Jobs-Tab"><i class="fa fa-link"></i></a>Jobs Tab</h2><p>The Jobs tab displays a summary page of all jobs in the Spark application and a details page for each job. The summary page shows high-level information, such as the status, duration, and progress of all jobs and the overall event timeline. When you click on a job on the summary page, you see the details page for that job. The details page further shows the event timeline, DAG visualization, and all stages of the job.</p><p>The information that is displayed in this section is:</p><ul>
+<li>User: Current Spark user</li>
+<li>Total uptime: Time since Spark application started</li>
+<li>Scheduling mode: See job scheduling</li>
+<li>Number of jobs per status: Active, Completed, Failed</li>
+</ul><center>
+<p><img src="/uploads/29030be24713ff2f56eeb3d04.png" alt="" width="200" height="200" class="md-image md-image"></p>
+</center><ul>
+<li>Event timeline: Displays in chronological order the events related to the executors (added, removed) and the jobs</li>
+</ul><center>
+<p><img src="https://spark.apache.org/docs/3.2.4/img/AllJobsPageDetail2.png" alt="" width="600" height="200" class="md-image md-image"></p>
+</center><ul>
+<li>Details of jobs grouped by status: Displays detailed information of the jobs including Job ID, description (with a link to detailed job page), submitted time, duration, stages summary and tasks progress bar</li>
+</ul><center>
+<p><img src="https://spark.apache.org/docs/3.2.4/img/AllJobsPageDetail3.png" alt="" width="1200" height="200" class="md-image md-image"></p>
+</center><h3 id="Job-details"><a class="anchor hidden-xs" href="#Job-details" title="Job-details"><i class="fa fa-link"></i></a>Job details</h3><p>When you click on a specific job, you can see the detailed information of this job. This page displays the details of a specific job identified by its job ID.</p><ul>
+<li>Job Status: (running, succeeded, failed)</li>
+<li>Number of stages per status (active, pending, completed, skipped, failed)</li>
+<li>Associated SQL Query: Link to the sql tab for this job</li>
+<li>Event timeline: Displays in chronological order the events related to the executors (added, removed) and the stages of the job</li>
+</ul><pre><code class="wrap python hljs">sc.parallelize([<span class="hljs-string">"hello world"</span>, <span class="hljs-string">"hello this is a message"</span>]) \
+    .flatMap(<span class="hljs-keyword">lambda</span> e: e.split(<span class="hljs-string">" "</span>)) \
+    .map(<span class="hljs-keyword">lambda</span> e: (e,<span class="hljs-number">1</span>)) \
+    .reduceByKey(<span class="hljs-keyword">lambda</span> v1,v2: v1+v2) \
+    .collect()
+</code></pre><h2 id="Stages-Tab"><a class="anchor hidden-xs" href="#Stages-Tab" title="Stages-Tab"><i class="fa fa-link"></i></a>Stages Tab</h2><p>The Stages tab displays a summary page that shows the current state of all stages of all jobs in the Spark application.</p><p>At the beginning of the page is the summary with the count of all stages by status (active, pending, completed, skipped, and failed)</p><center>
+<p><img src="https://spark.apache.org/docs/3.2.4/img/AllStagesPageDetail1.png" alt="" width="200" height="100" class="md-image md-image"></p>
+</center><p>After that are the details of stages per status (active, pending, completed, skipped, failed). In active stages, it’s possible to kill the stage with the kill link. Only in failed stages, failure reason is shown. Task detail can be accessed by clicking on the description.</p><center>
+<p><img src="https://spark.apache.org/docs/3.2.4/img/AllStagesPageDetail3.png" alt="" class="md-image md-image"></p>
+</center><h3 id="Stage-details"><a class="anchor hidden-xs" href="#Stage-details" title="Stage-details"><i class="fa fa-link"></i></a>Stage details</h3><p>The stage details page begins with information like total time across all tasks, Locality level summary, Shuffle Read Size / Records and Associated Job IDs.</p><center>
+<p><img src="https://spark.apache.org/docs/3.2.4/img/AllStagesPageDetail4.png" alt="" width="250" height="100" class="md-image md-image"></p>
+</center><p>There is also a visual representation of the directed acyclic graph (DAG) of this stage, where vertices represent the RDDs or DataFrames and the edges represent an operation to be applied. Nodes are grouped by operation scope in the DAG visualization and labelled with the operation scope name (BatchScan, WholeStageCodegen, Exchange, etc). Notably, Whole Stage Code Generation operations are also annotated with the code generation id. For stages belonging to Spark DataFrame or SQL execution, this allows to cross-reference Stage execution details to the relevant details in the Web-UI SQL Tab page where SQL plan graphs and execution plans are reported.</p><center>
+<p><img src="https://spark.apache.org/docs/3.2.4/img/AllStagesPageDetail5.png" alt="" width="400" height="400" class="md-image md-image"></p>
+</center><div class="alert alert-warning">
+<p>You can find more info about the web UI from <a href="https://spark.apache.org/docs/3.2.4/web-ui.html" target="_blank" rel="noopener">here</a>.</p>
+</div><h1 id="Spark-RDD"><a class="anchor hidden-xs" href="#Spark-RDD" title="Spark-RDD"><i class="fa fa-link"></i></a>Spark RDD</h1><p>RDD is a fundamental building block of Spark. RDDs are immutable distributed collections of objects. Immutable meaning once you create an RDD you cannot change it. Each record in RDD is divided into logical partitions, which can be computed on different nodes of the cluster.</p><p>In other words, RDDs are a collection of objects similar to list in Python, with the difference being RDD is computed on several processes scattered across multiple physical servers also called nodes in a cluster while a Python collection lives and process in just one process.</p><p>Additionally, RDDs provide data abstraction of partitioning and distribution of the data designed to run computations in parallel on several nodes, while doing transformations on RDD we do not have to worry about the parallelism as Spark by default provides.</p><h2 id="Spark-RDD-Operations"><a class="anchor hidden-xs" href="#Spark-RDD-Operations" title="Spark-RDD-Operations"><i class="fa fa-link"></i></a>Spark RDD Operations</h2><p>There are two main types of Spark operations: Transformations and Actions.</p><p><img src="https://i.imgur.com/5Rzg8rU.png" alt="" class="md-image md-image"></p><h2 id="Spark-RDD-Transformations"><a class="anchor hidden-xs" href="#Spark-RDD-Transformations" title="Spark-RDD-Transformations"><i class="fa fa-link"></i></a>Spark RDD Transformations</h2><p>Spark RDD Transformations are functions that take an RDD as the input and produce one or many RDDs as the output. They do not change the input RDD (since RDDs are immutable), but always produce one or more new RDDs by applying the computations they represent e.g. map(), filter(), reduceByKey() etc.</p><p>Spark supports lazy evaluation and when you apply the transformation on any RDD it will not perform the operation immediately. It will create a DAG(Directed Acyclic Graph) using 1) the applied operation, 2) source RDD and 3) function used for transformation. It will keep on building this graph using the references till you apply any action operation on the last lined up RDDs. That is why the transformations in Spark are lazy.</p><p>Transformations construct a new RDD from a previous one.</p><p><img src="https://i.imgur.com/GJgpmBr.png" alt="" class="md-image md-image"></p><p>For example, we can build a simple Spark application for counting the words in a text file. A spark job of two stages needs to be created (we do not create stages manually but we define a pipeline for which the stages will be determined):</p><ul>
 <li>
 <p>Stage 1</p>
 <ul>
@@ -343,7 +415,7 @@
 </li>
 </ul>
 </li>
-</ul><p><img src="https://i.imgur.com/zomLW1S.png" alt="" class="md-image md-image"></p><p>There are two types of transformations:<br>
+</ul><p><img src="/uploads/f3ca432d9a90db31c0e548500.png" alt="" class="md-image md-image"></p><p><img src="https://i.imgur.com/zomLW1S.png" alt="" class="md-image md-image"></p><p>There are two types of transformations:<br>
 <strong>Narrow transformation</strong> — In Narrow transformation, all the elements that are required to compute the records in single partition live in the single partition of parent RDD. A limited subset of partition is used to calculate the result. Narrow transformations are the result of map(), filter().</p><p><img src="https://i.imgur.com/LFPbHzv.png" alt="" class="md-image md-image"></p><p><strong>Wide transformation</strong> — In wide transformation, all the elements that are required to compute the records in the single partition may live in many partitions of parent RDD. Wide transformations are the result of groupbyKey() and reducebyKey().</p><p><strong>Spark Pair RDDs</strong> are nothing but RDDs containing a key-value pair. Basically, key-value pair (KVP) consists of a two linked data item in it. Here, the key is the identifier, whereas value is the data corresponding to the key value.<br>
 Moreover, Spark operations work on RDDs containing any type of objects. However key-value pair RDDs attains few special operations in it. Such as, distributed “shuffle” operations, grouping or aggregating the elements by a key.</p><p>The following Spark transformations accept input as an RDD consisting of single values.<br>
 <img src="https://i.imgur.com/RqpWt7h.png" alt="" class="md-image md-image"></p><p>Where the transformations below accept an input as a pair RDD consisting of key-value pairs.<br>
@@ -798,7 +870,7 @@ capitalizeUDF = F.udf(<span class="hljs-keyword">lambda</span> x: convertCase(x)
 </ol><pre><code class="wrap python hljs">df2.select(<span class="hljs-string">"Film"</span>, capitalizeUDF(F.col(<span class="hljs-string">"Film"</span>)).alias(<span class="hljs-string">"Capitalized_Film"</span>)).show(<span class="hljs-number">5</span>, truncate = <span class="hljs-literal">False</span>)
 </code></pre><p><img src="https://i.imgur.com/84tA0GJ.png" alt="" class="md-image md-image"></p><div class="alert alert-danger">
 <p>Note: UDFs are treated as a black box to Spark hence it can not apply optimization and you will lose all the optimization PySpark does on Dataframe/Dataset. We recommend to use UDFs only if you do not have them as built-in functions.</p>
-</div><h1 id="Spark-Dataset"><a class="anchor hidden-xs" href="#Spark-Dataset" title="Spark-Dataset"><i class="fa fa-link"></i></a>Spark Dataset</h1><p>Spark Dataset API is supported in in statically typed languages like Java and Scala since Spark Datasets rely heavily on static typing. Python is a dynamically typed language, it still has access to Spark’s DataFrame API, which offers similar functionality as Datasets.</p><h1 id="Spark-SQL"><a class="anchor hidden-xs" href="#Spark-SQL" title="Spark-SQL"><i class="fa fa-link"></i></a>Spark SQL</h1><p>It is a module used for structured data processing. Spark SQL allows you to query structured data using either SQL or DataFrame API.</p><p>The <code>pyspark.sql</code> is a module in Spark that is used to perform SQL-like operations on the data stored in memory. You can either leverage using programming API to query the data or use the ANSI SQL queries similar to RDBMS. You can also mix both, for example, use API on the result of an SQL query.</p><p><strong>Spark SQL</strong> is one of the most used Spark modules for processing structured columnar data format. Once you have a DataFrame created, you can interact with the data by using SQL syntax. In other words, Spark SQL brings native RAW SQL queries on Spark meaning you can run traditional ANSI SQL on Spark Dataframe.</p><p>In order to use SQL, first, register a <strong>temporary table/view on DataFrame</strong> using the <code>createOrReplaceTempView()</code> function. Once created, this table can be accessed throughout the SparkSession using <code>sql()</code> and it will be dropped along with your SparkContext termination. Use <code>sql()</code> method of the SparkSession object to run the query and this method returns a new DataFrame</p><h2 id="Data-Description"><a class="anchor hidden-xs" href="#Data-Description" title="Data-Description"><i class="fa fa-link"></i></a>Data Description</h2><p>This dataset includes <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-2-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>44</mn><mo>,</mo><mn>341</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4" style="width: 3.451em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.966em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1002.91em, 2.751em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-5"><span class="mn" id="MathJax-Span-6" style="font-family: MathJax_Main;">44</span><span class="mo" id="MathJax-Span-7" style="font-family: MathJax_Main;">,</span><span class="mn" id="MathJax-Span-8" style="font-family: MathJax_Main; padding-left: 0.164em;">341</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.309em; border-left: 0px solid; width: 0px; height: 1.128em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>44</mn><mo>,</mo><mn>341</mn></math></span></span><script type="math/tex" id="MathJax-Element-2">44,341</script></span> results of international football matches starting from the very first official match in <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-3-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>1872</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-9" style="width: 2.32em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.996em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1001.94em, 2.535em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-10"><span class="mn" id="MathJax-Span-11" style="font-family: MathJax_Main;">1872</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1872</mn></math></span></span><script type="math/tex" id="MathJax-Element-3">1872</script></span> up to <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-4-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>2022</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-12" style="width: 2.32em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.996em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.565em, 1001.94em, 2.535em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-13"><span class="mn" id="MathJax-Span-14" style="font-family: MathJax_Main;">2022</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2022</mn></math></span></span><script type="math/tex" id="MathJax-Element-4">2022</script></span>. The matches range from FIFA World Cup to FIFI Wild Cup to regular friendly matches. The matches are strictly men’s full internationals and the data does not include Olympic Games or matches where at least one of the teams was the nation’s B-team, U-23 or a league select team.</p><p><strong>results.csv</strong> includes the following columns:</p><ul>
+</div><h1 id="Spark-Dataset"><a class="anchor hidden-xs" href="#Spark-Dataset" title="Spark-Dataset"><i class="fa fa-link"></i></a>Spark Dataset</h1><p>Spark Dataset is a new interface added in Spark 1.6 that provides the benefits of RDDs (strong typing, ability to use powerful lambda functions) with the benefits of Spark SQL’s optimized execution engine. Spark Dataset API is supported in statically typed languages like Java and Scala since Spark Datasets rely heavily on static typing. A DataFrame is a Dataset organized into named columns. Python is a dynamically typed language, it still has access to Spark’s DataFrame API, which offers similar functionality as Datasets.</p><h1 id="Spark-SQL"><a class="anchor hidden-xs" href="#Spark-SQL" title="Spark-SQL"><i class="fa fa-link"></i></a>Spark SQL</h1><p>It is a module used for structured data processing. Spark SQL allows you to query structured data using either SQL or DataFrame API.</p><p>The <code>pyspark.sql</code> is a module in Spark that is used to perform SQL-like operations on the data stored in memory. You can either leverage using programming API to query the data or use the ANSI SQL queries similar to RDBMS. You can also mix both, for example, use API on the result of an SQL query.</p><p><strong>Spark SQL</strong> is one of the most used Spark modules for processing structured columnar data format. Once you have a DataFrame created, you can interact with the data by using SQL syntax. In other words, Spark SQL brings native RAW SQL queries on Spark meaning you can run traditional ANSI SQL on Spark Dataframe.</p><p>In order to use SQL, first, register a <strong>temporary table/view on DataFrame</strong> using the <code>createOrReplaceTempView()</code> function. Once created, this table can be accessed throughout the SparkSession using <code>sql()</code> and it will be dropped along with your SparkContext termination. Use <code>sql()</code> method of the SparkSession object to run the query and this method returns a new DataFrame</p><h2 id="Data-Description"><a class="anchor hidden-xs" href="#Data-Description" title="Data-Description"><i class="fa fa-link"></i></a>Data Description</h2><p>This dataset includes <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-2-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>44</mn><mo>,</mo><mn>341</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4" style="width: 3.451em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.966em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1002.91em, 2.751em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-5"><span class="mn" id="MathJax-Span-6" style="font-family: MathJax_Main;">44</span><span class="mo" id="MathJax-Span-7" style="font-family: MathJax_Main;">,</span><span class="mn" id="MathJax-Span-8" style="font-family: MathJax_Main; padding-left: 0.164em;">341</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.309em; border-left: 0px solid; width: 0px; height: 1.128em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>44</mn><mo>,</mo><mn>341</mn></math></span></span><script type="math/tex" id="MathJax-Element-2">44,341</script></span> results of international football matches starting from the very first official match in <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-3-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>1872</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-9" style="width: 2.32em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.996em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1001.94em, 2.535em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-10"><span class="mn" id="MathJax-Span-11" style="font-family: MathJax_Main;">1872</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1872</mn></math></span></span><script type="math/tex" id="MathJax-Element-3">1872</script></span> up to <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-4-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>2022</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-12" style="width: 2.32em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.996em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.565em, 1001.94em, 2.535em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-13"><span class="mn" id="MathJax-Span-14" style="font-family: MathJax_Main;">2022</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2022</mn></math></span></span><script type="math/tex" id="MathJax-Element-4">2022</script></span>. The matches range from FIFA World Cup to FIFI Wild Cup to regular friendly matches. The matches are strictly men’s full internationals and the data does not include Olympic Games or matches where at least one of the teams was the nation’s B-team, U-23 or a league select team.</p><p><strong>results.csv</strong> includes the following columns:</p><ul>
 <li><strong>date</strong> - date of the match</li>
 <li><strong>home_team</strong> - the name of the home team</li>
 <li><strong>away_team</strong> - the name of the away team</li>
@@ -976,12 +1048,13 @@ empDF.join(deptDF,empDF.emp_dept_id ==  deptDF.dept_id, <span class="hljs-string
 <span class="hljs-comment"># SQL FULL JOIN</span>
 joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOIN DEPT d ON e.emp_dept_id == d.dept_id"</span>) \
   .show(truncate=<span class="hljs-literal">False</span>)
-</code></pre><p>You can read about Anti-joins, semi-joins and unions from [here]</p><h1 id="References"><a class="anchor hidden-xs" href="#References" title="References"><i class="fa fa-link"></i></a>References</h1><ul>
+</code></pre><p>You can read about Anti-joins, semi-joins and unions from <a href="https://spark.apache.org/docs/3.2.4/sql-ref-syntax-qry-select-join.html" target="_blank" rel="noopener">here</a></p><h1 id="References"><a class="anchor hidden-xs" href="#References" title="References"><i class="fa fa-link"></i></a>References</h1><ul>
 <li><a href="https://spark.apache.org" target="_blank" rel="noopener">Apache Spark</a></li>
 <li><a href="https://blog.knoldus.com/deep-dive-into-apache-spark-transformations-and-action/" target="_blank" rel="noopener">Deep Dive into Apache Spark Transformations and Action</a></li>
 <li><a href="https://data-flair.training/blogs/apache-spark-rdd-vs-dataframe-vs-dataset/" target="_blank" rel="noopener">Apache Spark RDD vs DataFrame vs DataSet</a></li>
 <li><a href="https://sparkbyexamples.com/pyspark-tutorial/" target="_blank" rel="noopener">Spark with Python (PySpark) Tutorial For Beginners</a></li>
 <li><a href="https://www.amazon.com/Learning-PySpark-Tomasz-Drabas/dp/1786463709" target="_blank" rel="noopener">Learning PySpark</a></li>
+<li><a href="https://spark.apache.org/docs/latest/web-ui.html#storage-tab" target="_blank" rel="noopener">Spark Web UI Guide</a></li>
 </ul></div>
     <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
         <div class="pull-right dropdown">
@@ -990,109 +1063,125 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
             </a>
             <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
                 <div class="toc"><ul class="nav">
-<li class=""><a href="#Lab-5---Apache-Spark-Core-amp-SQL" title="Lab 5 - Apache Spark Core &amp; SQL">Lab 5 - Apache Spark Core &amp; SQL</a><ul class="nav">
-<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
-<li class=""><a href="#Readings" title="Readings">Readings</a></li>
+<li><a href="#Lab-5---Apache-Spark-Core-amp-SQL" title="Lab 5 - Apache Spark Core &amp; SQL">Lab 5 - Apache Spark Core &amp; SQL</a><ul class="nav">
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Readings" title="Readings">Readings</a></li>
 </ul>
 </li>
-<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
-<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
 <li><a href="#Objectives" title="Objectives">Objectives</a></li>
-<li class=""><a href="#Intro-to-Apache-Spark-review" title="Intro to Apache Spark [review]">Intro to Apache Spark [review]</a><ul class="nav">
-<li class=""><a href="#Core-Concepts-in-Spark" title="Core Concepts in Spark">Core Concepts in Spark</a></li>
-<li class=""><a href="#Spark-Application-Model" title="Spark Application Model">Spark Application Model</a></li>
-<li class=""><a href="#Spark-Execution-Model" title="Spark Execution Model">Spark Execution Model</a></li>
-<li class=""><a href="#Spark-Components" title="Spark Components">Spark Components</a></li>
-<li class=""><a href="#Spark-Architecture" title="Spark Architecture">Spark Architecture</a></li>
-<li class=""><a href="#How-Spark-works" title="How Spark works?">How Spark works?</a></li>
-<li class=""><a href="#Spark-Features" title="Spark Features">Spark Features</a></li>
-<li class=""><a href="#Supported-Cluster-Managers" title="Supported Cluster Managers">Supported Cluster Managers</a></li>
+<li><a href="#Intro-to-Apache-Spark-review" title="Intro to Apache Spark [review]">Intro to Apache Spark [review]</a><ul class="nav">
+<li><a href="#Core-Concepts-in-Spark" title="Core Concepts in Spark">Core Concepts in Spark</a></li>
+<li><a href="#Spark-Application-Model" title="Spark Application Model">Spark Application Model</a></li>
+<li><a href="#Spark-Execution-Model" title="Spark Execution Model">Spark Execution Model</a></li>
+<li><a href="#Spark-Components" title="Spark Components">Spark Components</a></li>
+<li><a href="#Spark-Architecture" title="Spark Architecture">Spark Architecture</a></li>
+<li><a href="#How-Spark-works" title="How Spark works?">How Spark works?</a></li>
+<li><a href="#Spark-Features" title="Spark Features">Spark Features</a></li>
+<li><a href="#Supported-Cluster-Managers" title="Supported Cluster Managers">Supported Cluster Managers</a></li>
 </ul>
 </li>
-<li class=""><a href="#PySpark" title="PySpark">PySpark</a><ul class="nav">
-<li class=""><a href="#PySpark-Modules-amp-Packages" title="PySpark Modules &amp; Packages">PySpark Modules &amp; Packages</a></li>
-<li class=""><a href="#Install-PySpark-on-HDP-Sandbox" title="Install PySpark on HDP Sandbox">Install PySpark on HDP Sandbox</a></li>
-<li><a href="#Running-PySpark-applications" title="Running PySpark applications">Running PySpark applications</a></li>
+<li><a href="#PySpark" title="PySpark">PySpark</a><ul class="nav">
+<li><a href="#PySpark-Modules-amp-Packages" title="PySpark Modules &amp; Packages">PySpark Modules &amp; Packages</a></li>
+<li><a href="#Install-PySpark-on-HDP-Sandbox" title="Install PySpark on HDP Sandbox">Install PySpark on HDP Sandbox</a></li>
+<li><a href="#Running-Spark-applications" title="Running Spark applications">Running Spark applications</a><ul class="nav">
+<li><a href="#pyspark-shell" title="pyspark shell">pyspark shell</a></li>
+<li><a href="#spark-submit" title="spark-submit">spark-submit</a></li>
+<li><a href="#Zeppelin" title="Zeppelin">Zeppelin</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Spark-Web-UI" title="Spark Web UI">Spark Web UI</a><ul class="nav">
+<li><a href="#Jobs-Tab" title="Jobs Tab">Jobs Tab</a><ul class="nav">
+<li><a href="#Job-details" title="Job details">Job details</a></li>
+</ul>
+</li>
+<li><a href="#Stages-Tab" title="Stages Tab">Stages Tab</a><ul class="nav">
+<li><a href="#Stage-details" title="Stage details">Stage details</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class=""><a href="#Spark-RDD" title="Spark RDD">Spark RDD</a><ul class="nav">
-<li class=""><a href="#Spark-RDD-Operations" title="Spark RDD Operations">Spark RDD Operations</a></li>
+<li><a href="#Spark-RDD-Operations" title="Spark RDD Operations">Spark RDD Operations</a></li>
 <li class=""><a href="#Spark-RDD-Transformations" title="Spark RDD Transformations">Spark RDD Transformations</a></li>
-<li class=""><a href="#Spark-RDD-Actions" title="Spark RDD Actions">Spark RDD Actions</a></li>
+<li><a href="#Spark-RDD-Actions" title="Spark RDD Actions">Spark RDD Actions</a></li>
 </ul>
 </li>
-<li class=""><a href="#Spark-Context" title="Spark Context">Spark Context</a><ul class="nav">
-<li class=""><a href="#Import-required-packages" title="Import required packages">Import required packages</a></li>
-<li class=""><a href="#Create-a-SparkContext" title="Create a SparkContext">Create a SparkContext</a></li>
+<li><a href="#Spark-Context" title="Spark Context">Spark Context</a><ul class="nav">
+<li><a href="#Import-required-packages" title="Import required packages">Import required packages</a></li>
+<li><a href="#Create-a-SparkContext" title="Create a SparkContext">Create a SparkContext</a></li>
 </ul>
 </li>
-<li class=""><a href="#Spark-RDD1" title="Spark RDD">Spark RDD</a><ul class="nav">
+<li><a href="#Spark-RDD1" title="Spark RDD">Spark RDD</a><ul class="nav">
 <li class="invisable-node"><ul class="nav">
-<li class=""><a href="#1-using-parallelize-function" title="1. using parallelize() function">1. using parallelize() function</a></li>
-<li class=""><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
+<li><a href="#1-using-parallelize-function" title="1. using parallelize() function">1. using parallelize() function</a></li>
+<li><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
 </ul>
 </li>
-<li class=""><a href="#Create-empty-RDD" title="Create empty RDD">Create empty RDD</a></li>
-<li class=""><a href="#Repartition-and-Coalesce" title="Repartition and Coalesce">Repartition and Coalesce</a></li>
-<li class=""><a href="#PySpark-RDD-Transformations" title="PySpark RDD Transformations">PySpark RDD Transformations</a><ul class="nav">
-<li class=""><a href="#map-and-flatMap" title="map and flatMap">map and flatMap</a></li>
-<li class=""><a href="#filter" title="filter">filter</a></li>
-<li class=""><a href="#distinct" title="distinct">distinct</a></li>
-<li class=""><a href="#sample" title="sample">sample</a></li>
-<li class=""><a href="#randomSplit" title="randomSplit">randomSplit</a></li>
-<li class=""><a href="#mapPartitions-and-mapPartitionsWithIndex" title="mapPartitions and mapPartitionsWithIndex">mapPartitions and mapPartitionsWithIndex</a></li>
-<li class=""><a href="#sortBy-and-groupBy" title="sortBy and groupBy">sortBy and groupBy</a></li>
-<li class=""><a href="#sortByKey-and-reduceByKey" title="sortByKey and reduceByKey">sortByKey and reduceByKey</a></li>
+<li><a href="#Create-empty-RDD" title="Create empty RDD">Create empty RDD</a></li>
+<li><a href="#Repartition-and-Coalesce" title="Repartition and Coalesce">Repartition and Coalesce</a></li>
+<li><a href="#PySpark-RDD-Transformations" title="PySpark RDD Transformations">PySpark RDD Transformations</a><ul class="nav">
+<li><a href="#map-and-flatMap" title="map and flatMap">map and flatMap</a></li>
+<li><a href="#filter" title="filter">filter</a></li>
+<li><a href="#distinct" title="distinct">distinct</a></li>
+<li><a href="#sample" title="sample">sample</a></li>
+<li><a href="#randomSplit" title="randomSplit">randomSplit</a></li>
+<li><a href="#mapPartitions-and-mapPartitionsWithIndex" title="mapPartitions and mapPartitionsWithIndex">mapPartitions and mapPartitionsWithIndex</a></li>
+<li><a href="#sortBy-and-groupBy" title="sortBy and groupBy">sortBy and groupBy</a></li>
+<li><a href="#sortByKey-and-reduceByKey" title="sortByKey and reduceByKey">sortByKey and reduceByKey</a></li>
 </ul>
 </li>
-<li class=""><a href="#PySpark-RDD-Actions" title="PySpark RDD Actions">PySpark RDD Actions</a><ul class="nav">
-<li class=""><a href="#collect" title="collect">collect</a></li>
-<li class=""><a href="#max-min-first-top-take" title="max, min, first, top, take">max, min, first, top, take</a></li>
-<li class=""><a href="#count-countByValue" title="count, countByValue">count, countByValue</a></li>
-<li class=""><a href="#reduce-treeReduce" title="reduce, treeReduce">reduce, treeReduce</a></li>
-<li class=""><a href="#saveAsTextFile" title="saveAsTextFile">saveAsTextFile</a></li>
+<li><a href="#PySpark-RDD-Actions" title="PySpark RDD Actions">PySpark RDD Actions</a><ul class="nav">
+<li><a href="#collect" title="collect">collect</a></li>
+<li><a href="#max-min-first-top-take" title="max, min, first, top, take">max, min, first, top, take</a></li>
+<li><a href="#count-countByValue" title="count, countByValue">count, countByValue</a></li>
+<li><a href="#reduce-treeReduce" title="reduce, treeReduce">reduce, treeReduce</a></li>
+<li><a href="#saveAsTextFile" title="saveAsTextFile">saveAsTextFile</a></li>
 </ul>
 </li>
-<li class=""><a href="#RDD-Persistence" title="RDD Persistence">RDD Persistence</a><ul class="nav">
-<li class=""><a href="#RDD-Cache" title="RDD Cache">RDD Cache</a></li>
-<li class=""><a href="#RDD-Persist" title="RDD Persist">RDD Persist</a></li>
-<li class=""><a href="#RDD-Unpersist" title="RDD Unpersist">RDD Unpersist</a></li>
+<li><a href="#RDD-Persistence" title="RDD Persistence">RDD Persistence</a><ul class="nav">
+<li><a href="#RDD-Cache" title="RDD Cache">RDD Cache</a></li>
+<li><a href="#RDD-Persist" title="RDD Persist">RDD Persist</a></li>
+<li><a href="#RDD-Unpersist" title="RDD Unpersist">RDD Unpersist</a></li>
 </ul>
 </li>
-<li class=""><a href="#Shuffling-in-Spark-engine" title="Shuffling in Spark engine">Shuffling in Spark engine</a></li>
-<li class=""><a href="#Shared-Variables" title="Shared Variables">Shared Variables</a><ul class="nav">
-<li class=""><a href="#Broadcast-variables" title="Broadcast variables">Broadcast variables</a></li>
-<li class=""><a href="#Accumulator-variables" title="Accumulator variables">Accumulator variables</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class=""><a href="#Spark-DataFrame" title="Spark DataFrame">Spark DataFrame</a><ul class="nav">
-<li class=""><a href="#1-using-createDataFrame-function" title="1. using createDataFrame() function">1. using createDataFrame() function</a></li>
-<li class=""><a href="#2-using-toDF-function" title="2. using toDF() function">2. using toDF() function</a></li>
-<li class=""><a href="#3-Read-from-a-local-file" title="3. Read from a local file">3. Read from a local file</a></li>
-<li class=""><a href="#4-Read-from-MongoDB-via-PyMongo" title="4. Read from MongoDB via PyMongo">4. Read from MongoDB via PyMongo</a></li>
-<li class=""><a href="#5-Read-from-HDFS" title="5. Read from HDFS">5. Read from HDFS</a></li>
-<li class=""><a href="#StructType-amp-StructField" title="StructType &amp; StructField">StructType &amp; StructField</a></li>
-<li class=""><a href="#Spark-DataFrame-Operations" title="Spark DataFrame Operations">Spark DataFrame Operations</a></li>
-<li class=""><a href="#show-Action" title="show [Action]">show [Action]</a></li>
-<li class=""><a href="#collect-Action" title="collect [Action]">collect [Action]</a></li>
-<li class=""><a href="#select-Transformation" title="select [Transformation]">select [Transformation]</a></li>
-<li class=""><a href="#withColumn-withColumnRenamed-drop-Transformation" title="withColumn, withColumnRenamed, drop [Transformation]">withColumn, withColumnRenamed, drop [Transformation]</a></li>
-<li class=""><a href="#filter-where-Transformation" title="filter, where [Transformation]">filter, where [Transformation]</a><ul class="nav">
-<li class=""><a href="#distinct-dropDuplicates-Transformation" title="distinct, dropDuplicates [Transformation]">distinct, dropDuplicates [Transformation]</a></li>
-<li class=""><a href="#groupby-Transformation" title="groupby [Transformation]">groupby [Transformation]</a></li>
-<li class=""><a href="#orderBy-sort-Transformation" title="orderBy, sort [Transformation]">orderBy, sort [Transformation]</a></li>
-<li class=""><a href="#Join" title="Join">Join</a></li>
-<li class=""><a href="#UDF-User-Defined-Function" title="UDF (User Defined Function)">UDF (User Defined Function)</a></li>
+<li><a href="#Shuffling-in-Spark-engine" title="Shuffling in Spark engine">Shuffling in Spark engine</a></li>
+<li><a href="#Shared-Variables" title="Shared Variables">Shared Variables</a><ul class="nav">
+<li><a href="#Broadcast-variables" title="Broadcast variables">Broadcast variables</a></li>
+<li><a href="#Accumulator-variables" title="Accumulator variables">Accumulator variables</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class=""><a href="#Spark-Dataset" title="Spark Dataset">Spark Dataset</a></li>
-<li class=""><a href="#Spark-SQL" title="Spark SQL">Spark SQL</a><ul class="nav">
-<li class=""><a href="#Data-Description" title="Data Description">Data Description</a></li>
-<li class=""><a href="#Spark-SQL-Examples" title="Spark SQL Examples">Spark SQL Examples</a></li>
+<li><a href="#Spark-DataFrame" title="Spark DataFrame">Spark DataFrame</a><ul class="nav">
+<li><a href="#1-using-createDataFrame-function" title="1. using createDataFrame() function">1. using createDataFrame() function</a></li>
+<li><a href="#2-using-toDF-function" title="2. using toDF() function">2. using toDF() function</a></li>
+<li><a href="#3-Read-from-a-local-file" title="3. Read from a local file">3. Read from a local file</a></li>
+<li><a href="#4-Read-from-MongoDB-via-PyMongo" title="4. Read from MongoDB via PyMongo">4. Read from MongoDB via PyMongo</a></li>
+<li><a href="#5-Read-from-HDFS" title="5. Read from HDFS">5. Read from HDFS</a></li>
+<li><a href="#StructType-amp-StructField" title="StructType &amp; StructField">StructType &amp; StructField</a></li>
+<li><a href="#Spark-DataFrame-Operations" title="Spark DataFrame Operations">Spark DataFrame Operations</a></li>
+<li><a href="#show-Action" title="show [Action]">show [Action]</a></li>
+<li><a href="#collect-Action" title="collect [Action]">collect [Action]</a></li>
+<li><a href="#select-Transformation" title="select [Transformation]">select [Transformation]</a></li>
+<li><a href="#withColumn-withColumnRenamed-drop-Transformation" title="withColumn, withColumnRenamed, drop [Transformation]">withColumn, withColumnRenamed, drop [Transformation]</a></li>
+<li><a href="#filter-where-Transformation" title="filter, where [Transformation]">filter, where [Transformation]</a><ul class="nav">
+<li><a href="#distinct-dropDuplicates-Transformation" title="distinct, dropDuplicates [Transformation]">distinct, dropDuplicates [Transformation]</a></li>
+<li><a href="#groupby-Transformation" title="groupby [Transformation]">groupby [Transformation]</a></li>
+<li><a href="#orderBy-sort-Transformation" title="orderBy, sort [Transformation]">orderBy, sort [Transformation]</a></li>
+<li><a href="#Join" title="Join">Join</a></li>
+<li><a href="#UDF-User-Defined-Function" title="UDF (User Defined Function)">UDF (User Defined Function)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Spark-Dataset" title="Spark Dataset">Spark Dataset</a></li>
+<li><a href="#Spark-SQL" title="Spark SQL">Spark SQL</a><ul class="nav">
+<li><a href="#Data-Description" title="Data Description">Data Description</a></li>
+<li><a href="#Spark-SQL-Examples" title="Spark SQL Examples">Spark SQL Examples</a></li>
 </ul>
 </li>
 <li><a href="#References" title="References">References</a></li>
@@ -1108,109 +1197,125 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
     </div>
     <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
         <div class="toc"><ul class="nav">
-<li class=""><a href="#Lab-5---Apache-Spark-Core-amp-SQL" title="Lab 5 - Apache Spark Core &amp; SQL">Lab 5 - Apache Spark Core &amp; SQL</a><ul class="nav">
-<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
-<li class=""><a href="#Readings" title="Readings">Readings</a></li>
+<li><a href="#Lab-5---Apache-Spark-Core-amp-SQL" title="Lab 5 - Apache Spark Core &amp; SQL">Lab 5 - Apache Spark Core &amp; SQL</a><ul class="nav">
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Readings" title="Readings">Readings</a></li>
 </ul>
 </li>
-<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
-<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
 <li><a href="#Objectives" title="Objectives">Objectives</a></li>
-<li class=""><a href="#Intro-to-Apache-Spark-review" title="Intro to Apache Spark [review]">Intro to Apache Spark [review]</a><ul class="nav">
-<li class=""><a href="#Core-Concepts-in-Spark" title="Core Concepts in Spark">Core Concepts in Spark</a></li>
-<li class=""><a href="#Spark-Application-Model" title="Spark Application Model">Spark Application Model</a></li>
-<li class=""><a href="#Spark-Execution-Model" title="Spark Execution Model">Spark Execution Model</a></li>
-<li class=""><a href="#Spark-Components" title="Spark Components">Spark Components</a></li>
-<li class=""><a href="#Spark-Architecture" title="Spark Architecture">Spark Architecture</a></li>
-<li class=""><a href="#How-Spark-works" title="How Spark works?">How Spark works?</a></li>
-<li class=""><a href="#Spark-Features" title="Spark Features">Spark Features</a></li>
-<li class=""><a href="#Supported-Cluster-Managers" title="Supported Cluster Managers">Supported Cluster Managers</a></li>
+<li><a href="#Intro-to-Apache-Spark-review" title="Intro to Apache Spark [review]">Intro to Apache Spark [review]</a><ul class="nav">
+<li><a href="#Core-Concepts-in-Spark" title="Core Concepts in Spark">Core Concepts in Spark</a></li>
+<li><a href="#Spark-Application-Model" title="Spark Application Model">Spark Application Model</a></li>
+<li><a href="#Spark-Execution-Model" title="Spark Execution Model">Spark Execution Model</a></li>
+<li><a href="#Spark-Components" title="Spark Components">Spark Components</a></li>
+<li><a href="#Spark-Architecture" title="Spark Architecture">Spark Architecture</a></li>
+<li><a href="#How-Spark-works" title="How Spark works?">How Spark works?</a></li>
+<li><a href="#Spark-Features" title="Spark Features">Spark Features</a></li>
+<li><a href="#Supported-Cluster-Managers" title="Supported Cluster Managers">Supported Cluster Managers</a></li>
 </ul>
 </li>
-<li class=""><a href="#PySpark" title="PySpark">PySpark</a><ul class="nav">
-<li class=""><a href="#PySpark-Modules-amp-Packages" title="PySpark Modules &amp; Packages">PySpark Modules &amp; Packages</a></li>
-<li class=""><a href="#Install-PySpark-on-HDP-Sandbox" title="Install PySpark on HDP Sandbox">Install PySpark on HDP Sandbox</a></li>
-<li><a href="#Running-PySpark-applications" title="Running PySpark applications">Running PySpark applications</a></li>
+<li><a href="#PySpark" title="PySpark">PySpark</a><ul class="nav">
+<li><a href="#PySpark-Modules-amp-Packages" title="PySpark Modules &amp; Packages">PySpark Modules &amp; Packages</a></li>
+<li><a href="#Install-PySpark-on-HDP-Sandbox" title="Install PySpark on HDP Sandbox">Install PySpark on HDP Sandbox</a></li>
+<li><a href="#Running-Spark-applications" title="Running Spark applications">Running Spark applications</a><ul class="nav">
+<li><a href="#pyspark-shell" title="pyspark shell">pyspark shell</a></li>
+<li><a href="#spark-submit" title="spark-submit">spark-submit</a></li>
+<li><a href="#Zeppelin" title="Zeppelin">Zeppelin</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Spark-Web-UI" title="Spark Web UI">Spark Web UI</a><ul class="nav">
+<li><a href="#Jobs-Tab" title="Jobs Tab">Jobs Tab</a><ul class="nav">
+<li><a href="#Job-details" title="Job details">Job details</a></li>
+</ul>
+</li>
+<li><a href="#Stages-Tab" title="Stages Tab">Stages Tab</a><ul class="nav">
+<li><a href="#Stage-details" title="Stage details">Stage details</a></li>
+</ul>
+</li>
 </ul>
 </li>
 <li class=""><a href="#Spark-RDD" title="Spark RDD">Spark RDD</a><ul class="nav">
-<li class=""><a href="#Spark-RDD-Operations" title="Spark RDD Operations">Spark RDD Operations</a></li>
+<li><a href="#Spark-RDD-Operations" title="Spark RDD Operations">Spark RDD Operations</a></li>
 <li class=""><a href="#Spark-RDD-Transformations" title="Spark RDD Transformations">Spark RDD Transformations</a></li>
-<li class=""><a href="#Spark-RDD-Actions" title="Spark RDD Actions">Spark RDD Actions</a></li>
+<li><a href="#Spark-RDD-Actions" title="Spark RDD Actions">Spark RDD Actions</a></li>
 </ul>
 </li>
-<li class=""><a href="#Spark-Context" title="Spark Context">Spark Context</a><ul class="nav">
-<li class=""><a href="#Import-required-packages" title="Import required packages">Import required packages</a></li>
-<li class=""><a href="#Create-a-SparkContext" title="Create a SparkContext">Create a SparkContext</a></li>
+<li><a href="#Spark-Context" title="Spark Context">Spark Context</a><ul class="nav">
+<li><a href="#Import-required-packages" title="Import required packages">Import required packages</a></li>
+<li><a href="#Create-a-SparkContext" title="Create a SparkContext">Create a SparkContext</a></li>
 </ul>
 </li>
-<li class=""><a href="#Spark-RDD1" title="Spark RDD">Spark RDD</a><ul class="nav">
+<li><a href="#Spark-RDD1" title="Spark RDD">Spark RDD</a><ul class="nav">
 <li class="invisable-node"><ul class="nav">
-<li class=""><a href="#1-using-parallelize-function" title="1. using parallelize() function">1. using parallelize() function</a></li>
-<li class=""><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
+<li><a href="#1-using-parallelize-function" title="1. using parallelize() function">1. using parallelize() function</a></li>
+<li><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
 </ul>
 </li>
-<li class=""><a href="#Create-empty-RDD" title="Create empty RDD">Create empty RDD</a></li>
-<li class=""><a href="#Repartition-and-Coalesce" title="Repartition and Coalesce">Repartition and Coalesce</a></li>
-<li class=""><a href="#PySpark-RDD-Transformations" title="PySpark RDD Transformations">PySpark RDD Transformations</a><ul class="nav">
-<li class=""><a href="#map-and-flatMap" title="map and flatMap">map and flatMap</a></li>
-<li class=""><a href="#filter" title="filter">filter</a></li>
-<li class=""><a href="#distinct" title="distinct">distinct</a></li>
-<li class=""><a href="#sample" title="sample">sample</a></li>
-<li class=""><a href="#randomSplit" title="randomSplit">randomSplit</a></li>
-<li class=""><a href="#mapPartitions-and-mapPartitionsWithIndex" title="mapPartitions and mapPartitionsWithIndex">mapPartitions and mapPartitionsWithIndex</a></li>
-<li class=""><a href="#sortBy-and-groupBy" title="sortBy and groupBy">sortBy and groupBy</a></li>
-<li class=""><a href="#sortByKey-and-reduceByKey" title="sortByKey and reduceByKey">sortByKey and reduceByKey</a></li>
+<li><a href="#Create-empty-RDD" title="Create empty RDD">Create empty RDD</a></li>
+<li><a href="#Repartition-and-Coalesce" title="Repartition and Coalesce">Repartition and Coalesce</a></li>
+<li><a href="#PySpark-RDD-Transformations" title="PySpark RDD Transformations">PySpark RDD Transformations</a><ul class="nav">
+<li><a href="#map-and-flatMap" title="map and flatMap">map and flatMap</a></li>
+<li><a href="#filter" title="filter">filter</a></li>
+<li><a href="#distinct" title="distinct">distinct</a></li>
+<li><a href="#sample" title="sample">sample</a></li>
+<li><a href="#randomSplit" title="randomSplit">randomSplit</a></li>
+<li><a href="#mapPartitions-and-mapPartitionsWithIndex" title="mapPartitions and mapPartitionsWithIndex">mapPartitions and mapPartitionsWithIndex</a></li>
+<li><a href="#sortBy-and-groupBy" title="sortBy and groupBy">sortBy and groupBy</a></li>
+<li><a href="#sortByKey-and-reduceByKey" title="sortByKey and reduceByKey">sortByKey and reduceByKey</a></li>
 </ul>
 </li>
-<li class=""><a href="#PySpark-RDD-Actions" title="PySpark RDD Actions">PySpark RDD Actions</a><ul class="nav">
-<li class=""><a href="#collect" title="collect">collect</a></li>
-<li class=""><a href="#max-min-first-top-take" title="max, min, first, top, take">max, min, first, top, take</a></li>
-<li class=""><a href="#count-countByValue" title="count, countByValue">count, countByValue</a></li>
-<li class=""><a href="#reduce-treeReduce" title="reduce, treeReduce">reduce, treeReduce</a></li>
-<li class=""><a href="#saveAsTextFile" title="saveAsTextFile">saveAsTextFile</a></li>
+<li><a href="#PySpark-RDD-Actions" title="PySpark RDD Actions">PySpark RDD Actions</a><ul class="nav">
+<li><a href="#collect" title="collect">collect</a></li>
+<li><a href="#max-min-first-top-take" title="max, min, first, top, take">max, min, first, top, take</a></li>
+<li><a href="#count-countByValue" title="count, countByValue">count, countByValue</a></li>
+<li><a href="#reduce-treeReduce" title="reduce, treeReduce">reduce, treeReduce</a></li>
+<li><a href="#saveAsTextFile" title="saveAsTextFile">saveAsTextFile</a></li>
 </ul>
 </li>
-<li class=""><a href="#RDD-Persistence" title="RDD Persistence">RDD Persistence</a><ul class="nav">
-<li class=""><a href="#RDD-Cache" title="RDD Cache">RDD Cache</a></li>
-<li class=""><a href="#RDD-Persist" title="RDD Persist">RDD Persist</a></li>
-<li class=""><a href="#RDD-Unpersist" title="RDD Unpersist">RDD Unpersist</a></li>
+<li><a href="#RDD-Persistence" title="RDD Persistence">RDD Persistence</a><ul class="nav">
+<li><a href="#RDD-Cache" title="RDD Cache">RDD Cache</a></li>
+<li><a href="#RDD-Persist" title="RDD Persist">RDD Persist</a></li>
+<li><a href="#RDD-Unpersist" title="RDD Unpersist">RDD Unpersist</a></li>
 </ul>
 </li>
-<li class=""><a href="#Shuffling-in-Spark-engine" title="Shuffling in Spark engine">Shuffling in Spark engine</a></li>
-<li class=""><a href="#Shared-Variables" title="Shared Variables">Shared Variables</a><ul class="nav">
-<li class=""><a href="#Broadcast-variables" title="Broadcast variables">Broadcast variables</a></li>
-<li class=""><a href="#Accumulator-variables" title="Accumulator variables">Accumulator variables</a></li>
-</ul>
-</li>
-</ul>
-</li>
-<li class=""><a href="#Spark-DataFrame" title="Spark DataFrame">Spark DataFrame</a><ul class="nav">
-<li class=""><a href="#1-using-createDataFrame-function" title="1. using createDataFrame() function">1. using createDataFrame() function</a></li>
-<li class=""><a href="#2-using-toDF-function" title="2. using toDF() function">2. using toDF() function</a></li>
-<li class=""><a href="#3-Read-from-a-local-file" title="3. Read from a local file">3. Read from a local file</a></li>
-<li class=""><a href="#4-Read-from-MongoDB-via-PyMongo" title="4. Read from MongoDB via PyMongo">4. Read from MongoDB via PyMongo</a></li>
-<li class=""><a href="#5-Read-from-HDFS" title="5. Read from HDFS">5. Read from HDFS</a></li>
-<li class=""><a href="#StructType-amp-StructField" title="StructType &amp; StructField">StructType &amp; StructField</a></li>
-<li class=""><a href="#Spark-DataFrame-Operations" title="Spark DataFrame Operations">Spark DataFrame Operations</a></li>
-<li class=""><a href="#show-Action" title="show [Action]">show [Action]</a></li>
-<li class=""><a href="#collect-Action" title="collect [Action]">collect [Action]</a></li>
-<li class=""><a href="#select-Transformation" title="select [Transformation]">select [Transformation]</a></li>
-<li class=""><a href="#withColumn-withColumnRenamed-drop-Transformation" title="withColumn, withColumnRenamed, drop [Transformation]">withColumn, withColumnRenamed, drop [Transformation]</a></li>
-<li class=""><a href="#filter-where-Transformation" title="filter, where [Transformation]">filter, where [Transformation]</a><ul class="nav">
-<li class=""><a href="#distinct-dropDuplicates-Transformation" title="distinct, dropDuplicates [Transformation]">distinct, dropDuplicates [Transformation]</a></li>
-<li class=""><a href="#groupby-Transformation" title="groupby [Transformation]">groupby [Transformation]</a></li>
-<li class=""><a href="#orderBy-sort-Transformation" title="orderBy, sort [Transformation]">orderBy, sort [Transformation]</a></li>
-<li class=""><a href="#Join" title="Join">Join</a></li>
-<li class=""><a href="#UDF-User-Defined-Function" title="UDF (User Defined Function)">UDF (User Defined Function)</a></li>
+<li><a href="#Shuffling-in-Spark-engine" title="Shuffling in Spark engine">Shuffling in Spark engine</a></li>
+<li><a href="#Shared-Variables" title="Shared Variables">Shared Variables</a><ul class="nav">
+<li><a href="#Broadcast-variables" title="Broadcast variables">Broadcast variables</a></li>
+<li><a href="#Accumulator-variables" title="Accumulator variables">Accumulator variables</a></li>
 </ul>
 </li>
 </ul>
 </li>
-<li class=""><a href="#Spark-Dataset" title="Spark Dataset">Spark Dataset</a></li>
-<li class=""><a href="#Spark-SQL" title="Spark SQL">Spark SQL</a><ul class="nav">
-<li class=""><a href="#Data-Description" title="Data Description">Data Description</a></li>
-<li class=""><a href="#Spark-SQL-Examples" title="Spark SQL Examples">Spark SQL Examples</a></li>
+<li><a href="#Spark-DataFrame" title="Spark DataFrame">Spark DataFrame</a><ul class="nav">
+<li><a href="#1-using-createDataFrame-function" title="1. using createDataFrame() function">1. using createDataFrame() function</a></li>
+<li><a href="#2-using-toDF-function" title="2. using toDF() function">2. using toDF() function</a></li>
+<li><a href="#3-Read-from-a-local-file" title="3. Read from a local file">3. Read from a local file</a></li>
+<li><a href="#4-Read-from-MongoDB-via-PyMongo" title="4. Read from MongoDB via PyMongo">4. Read from MongoDB via PyMongo</a></li>
+<li><a href="#5-Read-from-HDFS" title="5. Read from HDFS">5. Read from HDFS</a></li>
+<li><a href="#StructType-amp-StructField" title="StructType &amp; StructField">StructType &amp; StructField</a></li>
+<li><a href="#Spark-DataFrame-Operations" title="Spark DataFrame Operations">Spark DataFrame Operations</a></li>
+<li><a href="#show-Action" title="show [Action]">show [Action]</a></li>
+<li><a href="#collect-Action" title="collect [Action]">collect [Action]</a></li>
+<li><a href="#select-Transformation" title="select [Transformation]">select [Transformation]</a></li>
+<li><a href="#withColumn-withColumnRenamed-drop-Transformation" title="withColumn, withColumnRenamed, drop [Transformation]">withColumn, withColumnRenamed, drop [Transformation]</a></li>
+<li><a href="#filter-where-Transformation" title="filter, where [Transformation]">filter, where [Transformation]</a><ul class="nav">
+<li><a href="#distinct-dropDuplicates-Transformation" title="distinct, dropDuplicates [Transformation]">distinct, dropDuplicates [Transformation]</a></li>
+<li><a href="#groupby-Transformation" title="groupby [Transformation]">groupby [Transformation]</a></li>
+<li><a href="#orderBy-sort-Transformation" title="orderBy, sort [Transformation]">orderBy, sort [Transformation]</a></li>
+<li><a href="#Join" title="Join">Join</a></li>
+<li><a href="#UDF-User-Defined-Function" title="UDF (User Defined Function)">UDF (User Defined Function)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Spark-Dataset" title="Spark Dataset">Spark Dataset</a></li>
+<li><a href="#Spark-SQL" title="Spark SQL">Spark SQL</a><ul class="nav">
+<li><a href="#Data-Description" title="Data Description">Data Description</a></li>
+<li><a href="#Spark-SQL-Examples" title="Spark SQL Examples">Spark SQL Examples</a></li>
 </ul>
 </li>
 <li><a href="#References" title="References">References</a></li>

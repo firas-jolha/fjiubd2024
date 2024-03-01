@@ -28,6 +28,7 @@ The materials are split into three parts. There are materials for labs, project 
 <!-- ### [Lab 6 - Apache Spark ML](html/common/Lab 6 - Apache Spark ML.html) -->
 <!-- ### [Lab 7 - Apache Spark Streaming](html/common/Lab 7 - Apache Spark Streaming.html) -->
 
+
 ## Assignments/Tests
 
 ### [Assignment 2 - Data Retrieval with SQL](html/common/Assignment 2 - Data Retrieval with SQL.html)
@@ -38,3 +39,7 @@ The materials are split into three parts. There are materials for labs, project 
 
 <!-- ### [Test 5 - Apache Spark Core & SQL (only prerequisites)](html/common/Test 5 - Apache Spark Core & SQL (only prerequisites).html) -->
 <!-- ### [Assignment 4 - Mongodb](html/common/Assignment 4 - Mongodb.html) -->
+
+
+
+<!-- docker cp hackmd-codimd-1:/home/hackmd/app/public/uploads "C:\Users\Admin\Documents\Inno\bigdata2024\github\fjiubd2024" -->
