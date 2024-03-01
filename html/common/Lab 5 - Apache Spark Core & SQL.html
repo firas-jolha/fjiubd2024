@@ -39,11 +39,14 @@
 <li><a href="https://raw.githubusercontent.com/dscape/spell/master/test/resources/big.txt" target="_blank" rel="noopener">The Adventures of Sherlock Holmes E. 12</a></li>
 <li><a href="https://github.com/firas-jolha/fjiubd2024/raw/main/data/movies.csv" target="_blank" rel="noopener">Top gross movies between 2007 and 2011</a></li>
 <li><a href="https://raw.githubusercontent.com/aminebennaji19/FIFA-World-Cup-Qatar-2022/main/data/results.csv" target="_blank" rel="noopener">World cup results from 1872 till 2022</a></li>
+</ul><h2 id="PySpark-on-Colab"><a class="anchor hidden-xs" href="#PySpark-on-Colab" title="PySpark-on-Colab"><i class="fa fa-link"></i></a>PySpark on Colab</h2><ul>
+<li><a href="https://colab.research.google.com/drive/1G7N69pzwgKhJWdcs06KA6O_l8i2xp-WK?usp=sharing" target="_blank" rel="noopener">PySparkOnColab 2024.ipynb</a></li>
 </ul><h2 id="Readings"><a class="anchor hidden-xs" href="#Readings" title="Readings"><i class="fa fa-link"></i></a>Readings</h2><ul>
 <li><a href="https://spark.apache.org/docs/3.2.4/api/python/index.html" target="_blank" rel="noopener">Spark 3.2.4 Python API Docs</a></li>
 </ul><h1 id="Agenda"><a class="anchor hidden-xs" href="#Agenda" title="Agenda"><i class="fa fa-link"></i></a>Agenda</h1><p></p><div class="toc"><ul>
 <li><a href="#Lab-5---Apache-Spark-Core-amp-SQL" title="Lab 5 - Apache Spark Core &amp; SQL">Lab 5 - Apache Spark Core &amp; SQL</a><ul>
 <li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#PySpark-on-Colab" title="PySpark on Colab">PySpark on Colab</a></li>
 <li><a href="#Readings" title="Readings">Readings</a></li>
 </ul>
 </li>
@@ -83,7 +86,7 @@
 </li>
 </ul>
 </li>
-<li><a href="#Spark-RDD-data-structure" title="Spark RDD data structure">Spark RDD data structure</a><ul>
+<li><a href="#Spark-Core" title="Spark Core">Spark Core</a><ul>
 <li><a href="#Spark-RDD-Operations" title="Spark RDD Operations">Spark RDD Operations</a></li>
 <li><a href="#Spark-RDD-Transformations" title="Spark RDD Transformations">Spark RDD Transformations</a></li>
 <li><a href="#Spark-RDD-Actions" title="Spark RDD Actions">Spark RDD Actions</a></li>
@@ -429,7 +432,7 @@ spark-submit \
 <p><img src="https://spark.apache.org/docs/3.2.4/img/AllStagesPageDetail5.png" alt="" width="400" height="400" class="md-image md-image"></p>
 </center><div class="alert alert-warning">
 <p>You can find more info about the web UI from <a href="https://spark.apache.org/docs/3.2.4/web-ui.html" target="_blank" rel="noopener">here</a>.</p>
-</div><h1 id="Spark-RDD-data-structure"><a class="anchor hidden-xs" href="#Spark-RDD-data-structure" title="Spark-RDD-data-structure"><i class="fa fa-link"></i></a>Spark RDD data structure</h1><p>RDD is a fundamental building block of Spark. RDDs are immutable distributed collections of objects. Immutable meaning once you create an RDD you cannot change it. Each record in RDD is divided into logical partitions, which can be computed on different nodes of the cluster.</p><p>In other words, RDDs are a collection of objects similar to list in Python, with the difference being RDD is computed on several processes scattered across multiple physical servers also called nodes in a cluster while a Python collection lives and process in just one process.</p><p>Additionally, RDDs provide data abstraction of partitioning and distribution of the data designed to run computations in parallel on several nodes, while doing transformations on RDD we do not have to worry about the parallelism as Spark by default provides.</p><h2 id="Spark-RDD-Operations"><a class="anchor hidden-xs" href="#Spark-RDD-Operations" title="Spark-RDD-Operations"><i class="fa fa-link"></i></a>Spark RDD Operations</h2><p>There are two main types of Spark operations: Transformations and Actions.</p><p><img src="https://i.imgur.com/5Rzg8rU.png" alt="" class="md-image md-image"></p><h2 id="Spark-RDD-Transformations"><a class="anchor hidden-xs" href="#Spark-RDD-Transformations" title="Spark-RDD-Transformations"><i class="fa fa-link"></i></a>Spark RDD Transformations</h2><p>Spark RDD Transformations are functions that take an RDD as the input and produce one or many RDDs as the output. They do not change the input RDD (since RDDs are immutable), but always produce one or more new RDDs by applying the computations they represent e.g. map(), filter(), reduceByKey() etc.</p><p>Spark supports lazy evaluation and when you apply the transformation on any RDD it will not perform the operation immediately. It will create a DAG(Directed Acyclic Graph) using 1) the applied operation, 2) source RDD and 3) function used for transformation. It will keep on building this graph using the references till you apply any action operation on the last lined up RDDs. That is why the transformations in Spark are lazy.</p><p>Transformations construct a new RDD from a previous one.</p><p><img src="https://i.imgur.com/GJgpmBr.png" alt="" class="md-image md-image"></p><p>For example, we can build a simple Spark application for counting the words in a text file. A spark job of two stages needs to be created (we do not create stages manually but we define a pipeline for which the stages will be determined):</p><ul>
+</div><h1 id="Spark-Core"><a class="anchor hidden-xs" href="#Spark-Core" title="Spark-Core"><i class="fa fa-link"></i></a>Spark Core</h1><p>RDD is a fundamental building block of Spark. RDDs are immutable distributed collections of objects. Immutable meaning once you create an RDD you cannot change it. Each record in RDD is divided into logical partitions, which can be computed on different nodes of the cluster.</p><p>In other words, RDDs are a collection of objects similar to list in Python, with the difference being RDD is computed on several processes scattered across multiple physical servers also called nodes in a cluster while a Python collection lives and process in just one process.</p><p>Additionally, RDDs provide data abstraction of partitioning and distribution of the data designed to run computations in parallel on several nodes, while doing transformations on RDD we do not have to worry about the parallelism as Spark by default provides.</p><h2 id="Spark-RDD-Operations"><a class="anchor hidden-xs" href="#Spark-RDD-Operations" title="Spark-RDD-Operations"><i class="fa fa-link"></i></a>Spark RDD Operations</h2><p>There are two main types of Spark operations: Transformations and Actions.</p><p><img src="https://i.imgur.com/5Rzg8rU.png" alt="" class="md-image md-image"></p><h2 id="Spark-RDD-Transformations"><a class="anchor hidden-xs" href="#Spark-RDD-Transformations" title="Spark-RDD-Transformations"><i class="fa fa-link"></i></a>Spark RDD Transformations</h2><p>Spark RDD Transformations are functions that take an RDD as the input and produce one or many RDDs as the output. They do not change the input RDD (since RDDs are immutable), but always produce one or more new RDDs by applying the computations they represent e.g. map(), filter(), reduceByKey() etc.</p><p>Spark supports lazy evaluation and when you apply the transformation on any RDD it will not perform the operation immediately. It will create a DAG(Directed Acyclic Graph) using 1) the applied operation, 2) source RDD and 3) function used for transformation. It will keep on building this graph using the references till you apply any action operation on the last lined up RDDs. That is why the transformations in Spark are lazy.</p><p>Transformations construct a new RDD from a previous one.</p><p><img src="https://i.imgur.com/GJgpmBr.png" alt="" class="md-image md-image"></p><p>For example, we can build a simple Spark application for counting the words in a text file. A spark job of two stages needs to be created (we do not create stages manually but we define a pipeline for which the stages will be determined):</p><ul>
 <li>
 <p>Stage 1</p>
 <ul>
@@ -1131,6 +1134,7 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
                 <div class="toc"><ul class="nav">
 <li><a href="#Lab-5---Apache-Spark-Core-amp-SQL" title="Lab 5 - Apache Spark Core &amp; SQL">Lab 5 - Apache Spark Core &amp; SQL</a><ul class="nav">
 <li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#PySpark-on-Colab" title="PySpark on Colab">PySpark on Colab</a></li>
 <li><a href="#Readings" title="Readings">Readings</a></li>
 </ul>
 </li>
@@ -1148,12 +1152,12 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
 <li><a href="#Supported-Cluster-Managers" title="Supported Cluster Managers">Supported Cluster Managers</a></li>
 </ul>
 </li>
-<li class=""><a href="#PySpark" title="PySpark">PySpark</a><ul class="nav">
+<li><a href="#PySpark" title="PySpark">PySpark</a><ul class="nav">
 <li><a href="#PySpark-Modules-amp-Packages" title="PySpark Modules &amp; Packages">PySpark Modules &amp; Packages</a></li>
 <li><a href="#Install-PySpark-on-HDP-Sandbox" title="Install PySpark on HDP Sandbox">Install PySpark on HDP Sandbox</a></li>
-<li class=""><a href="#Running-Spark-applications" title="Running Spark applications">Running Spark applications</a><ul class="nav">
+<li><a href="#Running-Spark-applications" title="Running Spark applications">Running Spark applications</a><ul class="nav">
 <li><a href="#pyspark-shell" title="pyspark shell">pyspark shell</a></li>
-<li class=""><a href="#spark-submit" title="spark-submit">spark-submit</a></li>
+<li><a href="#spark-submit" title="spark-submit">spark-submit</a></li>
 <li><a href="#Zeppelin" title="Zeppelin">Zeppelin</a></li>
 </ul>
 </li>
@@ -1170,9 +1174,9 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
 </li>
 </ul>
 </li>
-<li><a href="#Spark-RDD-data-structure" title="Spark RDD data structure">Spark RDD data structure</a><ul class="nav">
+<li class=""><a href="#Spark-Core" title="Spark Core">Spark Core</a><ul class="nav">
 <li><a href="#Spark-RDD-Operations" title="Spark RDD Operations">Spark RDD Operations</a></li>
-<li><a href="#Spark-RDD-Transformations" title="Spark RDD Transformations">Spark RDD Transformations</a></li>
+<li class=""><a href="#Spark-RDD-Transformations" title="Spark RDD Transformations">Spark RDD Transformations</a></li>
 <li><a href="#Spark-RDD-Actions" title="Spark RDD Actions">Spark RDD Actions</a></li>
 </ul>
 </li>
@@ -1265,6 +1269,7 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
         <div class="toc"><ul class="nav">
 <li><a href="#Lab-5---Apache-Spark-Core-amp-SQL" title="Lab 5 - Apache Spark Core &amp; SQL">Lab 5 - Apache Spark Core &amp; SQL</a><ul class="nav">
 <li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#PySpark-on-Colab" title="PySpark on Colab">PySpark on Colab</a></li>
 <li><a href="#Readings" title="Readings">Readings</a></li>
 </ul>
 </li>
@@ -1282,12 +1287,12 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
 <li><a href="#Supported-Cluster-Managers" title="Supported Cluster Managers">Supported Cluster Managers</a></li>
 </ul>
 </li>
-<li class=""><a href="#PySpark" title="PySpark">PySpark</a><ul class="nav">
+<li><a href="#PySpark" title="PySpark">PySpark</a><ul class="nav">
 <li><a href="#PySpark-Modules-amp-Packages" title="PySpark Modules &amp; Packages">PySpark Modules &amp; Packages</a></li>
 <li><a href="#Install-PySpark-on-HDP-Sandbox" title="Install PySpark on HDP Sandbox">Install PySpark on HDP Sandbox</a></li>
-<li class=""><a href="#Running-Spark-applications" title="Running Spark applications">Running Spark applications</a><ul class="nav">
+<li><a href="#Running-Spark-applications" title="Running Spark applications">Running Spark applications</a><ul class="nav">
 <li><a href="#pyspark-shell" title="pyspark shell">pyspark shell</a></li>
-<li class=""><a href="#spark-submit" title="spark-submit">spark-submit</a></li>
+<li><a href="#spark-submit" title="spark-submit">spark-submit</a></li>
 <li><a href="#Zeppelin" title="Zeppelin">Zeppelin</a></li>
 </ul>
 </li>
@@ -1304,9 +1309,9 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
 </li>
 </ul>
 </li>
-<li><a href="#Spark-RDD-data-structure" title="Spark RDD data structure">Spark RDD data structure</a><ul class="nav">
+<li class=""><a href="#Spark-Core" title="Spark Core">Spark Core</a><ul class="nav">
 <li><a href="#Spark-RDD-Operations" title="Spark RDD Operations">Spark RDD Operations</a></li>
-<li><a href="#Spark-RDD-Transformations" title="Spark RDD Transformations">Spark RDD Transformations</a></li>
+<li class=""><a href="#Spark-RDD-Transformations" title="Spark RDD Transformations">Spark RDD Transformations</a></li>
 <li><a href="#Spark-RDD-Actions" title="Spark RDD Actions">Spark RDD Actions</a></li>
 </ul>
 </li>
