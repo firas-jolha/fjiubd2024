@@ -42,4 +42,4 @@ The materials are split into three parts. There are materials for labs, project 
 
 
 
-<!-- docker cp hackmd-codimd-1:/home/hackmd/app/public/uploads "C:\Users\Admin\Documents\Inno\bigdata2024\github\fjiubd2024" -->
+<!-- docker cp hackmd-codimd-1:/home/hackmd/app/public/uploads "C:\Users\Admin\Documents\Inno\bigdata2024\github\fjiubd2024\html\common\" -->
