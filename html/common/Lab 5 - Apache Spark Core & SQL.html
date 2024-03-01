@@ -554,17 +554,17 @@ rdd = sc.parallelize(data) <span class="hljs-comment"># Spark RDD creation</span
 </code></pre><p>This function will split the dataset into multiple partitions. You can get number of partitions by using the function <code>&lt;rdd&gt;.getNumParititions()</code>.</p><h3 id="2-using-textFile-or-wholeTextFiles-functions"><a class="anchor hidden-xs" href="#2-using-textFile-or-wholeTextFiles-functions" title="2-using-textFile-or-wholeTextFiles-functions"><i class="fa fa-link"></i></a>2. using <code>textFile</code> or <code>wholeTextFiles</code> functions</h3><h4 id="Read-from-a-local-file"><a class="anchor hidden-xs" href="#Read-from-a-local-file" title="Read-from-a-local-file"><i class="fa fa-link"></i></a>Read from a local file</h4><pre><code class="python hljs">path = <span class="hljs-string">"file:///sparkdata/movies.csv"</span>
 
 rdd = sc.textFile(path) <span class="hljs-comment"># a spark rdd</span>
-</code></pre><p>The file <code>movies.csv</code> is uploaded to the local file system and stored in the folder <code>/sparkdata</code>.</p><h4 id="Read-from-HDFS"><a class="anchor hidden-xs" href="#Read-from-HDFS" title="Read-from-HDFS"><i class="fa fa-link"></i></a>Read from HDFS</h4><pre><code class="wrap python hljs">path = <span class="hljs-string">"hdfs:///data/movies.csv"</span>
+</code></pre><p>The file <code>movies.csv</code> is uploaded to the local file system and stored in the folder <code>/sparkdata</code>.</p><h4 id="Read-from-HDFS"><a class="anchor hidden-xs" href="#Read-from-HDFS" title="Read-from-HDFS"><i class="fa fa-link"></i></a>Read from HDFS</h4><pre><code class="wrap python hljs">path = <span class="hljs-string">"hdfs://sandbox-hdp.hortonworks.com:8020/data/movies.csv"</span>
 
 rdd3 = sc.textFile(path) <span class="hljs-comment"># a spark rdd</span>
 </code></pre><p>The file <code>movies.csv</code> is uploaded to HDFS and stored in the folder <code>/data</code>.</p><div class="alert alert-info">
-<p>The function <code>wholeTextFiles</code> will read the whole file as a single row in the RDD whereas the function <code>textFile</code> will read each line of the file as a row in the RDD.</p>
+<p>The function <code>wholeTextFiles</code> will read all files in the directory and each file will be read as a single row in the RDD whereas the function <code>textFile</code> will read each line of the file as a row in the RDD.</p>
 </div><div class="alert alert-warning">
 <p>When we use <code>parallelize()</code> or <code>textFile()</code> or <code>wholeTextFiles()</code> methods of <code>SparkContxt</code> to initiate RDD, it automatically splits the data into partitions based on resource availability. when you run it on a local machine it would create partitions as the same number of cores available on your system.</p>
 </div><h2 id="Create-empty-RDD"><a class="anchor hidden-xs" href="#Create-empty-RDD" title="Create-empty-RDD"><i class="fa fa-link"></i></a>Create empty RDD</h2><pre><code class="wrap python hljs">rdd = sc.emptyRDD()
 
 rdd = sc.paralellize([], <span class="hljs-number">10</span>)
-</code></pre><h2 id="Repartition-and-Coalesce"><a class="anchor hidden-xs" href="#Repartition-and-Coalesce" title="Repartition-and-Coalesce"><i class="fa fa-link"></i></a>Repartition and Coalesce</h2><p>Sometimes we may need to repartition the RDD, PySpark provides two ways to repartition; first using <code>repartition()</code> method which shuffles data from all nodes also called full shuffle and second <code>coalesce()</code> method which shuffle data from minimum nodes, for examples if you have data in 4 partitions and doing coalesce(2) moves data from just 2 nodes.</p><pre><code class="wrap python hljs">rdd = sc.parallelize(range(<span class="hljs-number">1</span>,<span class="hljs-number">100</span>), <span class="hljs-number">10</span>)
+</code></pre><p>This will create an empty RDD with 10 partitions.</p><h2 id="Repartition-and-Coalesce"><a class="anchor hidden-xs" href="#Repartition-and-Coalesce" title="Repartition-and-Coalesce"><i class="fa fa-link"></i></a>Repartition and Coalesce</h2><p>Sometimes we may need to repartition the RDD, PySpark provides two ways to repartition; first using <code>repartition()</code> method which shuffles data from all nodes also called full shuffle and second <code>coalesce()</code> method which shuffle data from minimum nodes, for examples if you have data in 4 partitions and doing coalesce(2) moves data from just 2 nodes.</p><pre><code class="wrap python hljs">rdd = sc.parallelize(range(<span class="hljs-number">1</span>,<span class="hljs-number">100</span>), <span class="hljs-number">10</span>)
 
 print(rdd.getNumPartitions())
 print(rdd.collect())
@@ -1174,9 +1174,9 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
 </li>
 </ul>
 </li>
-<li class=""><a href="#Spark-Core" title="Spark Core">Spark Core</a><ul class="nav">
+<li><a href="#Spark-Core" title="Spark Core">Spark Core</a><ul class="nav">
 <li><a href="#Spark-RDD-Operations" title="Spark RDD Operations">Spark RDD Operations</a></li>
-<li class=""><a href="#Spark-RDD-Transformations" title="Spark RDD Transformations">Spark RDD Transformations</a></li>
+<li><a href="#Spark-RDD-Transformations" title="Spark RDD Transformations">Spark RDD Transformations</a></li>
 <li><a href="#Spark-RDD-Actions" title="Spark RDD Actions">Spark RDD Actions</a></li>
 </ul>
 </li>
@@ -1185,10 +1185,10 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
 <li><a href="#Create-a-SparkContext" title="Create a SparkContext">Create a SparkContext</a></li>
 </ul>
 </li>
-<li><a href="#Spark-RDD1" title="Spark RDD">Spark RDD</a><ul class="nav">
+<li class=""><a href="#Spark-RDD1" title="Spark RDD">Spark RDD</a><ul class="nav">
 <li class="invisable-node"><ul class="nav">
 <li><a href="#1-using-parallelize-function" title="1. using parallelize() function">1. using parallelize() function</a></li>
-<li><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
+<li class=""><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
 </ul>
 </li>
 <li><a href="#Create-empty-RDD" title="Create empty RDD">Create empty RDD</a></li>
@@ -1309,9 +1309,9 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
 </li>
 </ul>
 </li>
-<li class=""><a href="#Spark-Core" title="Spark Core">Spark Core</a><ul class="nav">
+<li><a href="#Spark-Core" title="Spark Core">Spark Core</a><ul class="nav">
 <li><a href="#Spark-RDD-Operations" title="Spark RDD Operations">Spark RDD Operations</a></li>
-<li class=""><a href="#Spark-RDD-Transformations" title="Spark RDD Transformations">Spark RDD Transformations</a></li>
+<li><a href="#Spark-RDD-Transformations" title="Spark RDD Transformations">Spark RDD Transformations</a></li>
 <li><a href="#Spark-RDD-Actions" title="Spark RDD Actions">Spark RDD Actions</a></li>
 </ul>
 </li>
@@ -1320,10 +1320,10 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
 <li><a href="#Create-a-SparkContext" title="Create a SparkContext">Create a SparkContext</a></li>
 </ul>
 </li>
-<li><a href="#Spark-RDD1" title="Spark RDD">Spark RDD</a><ul class="nav">
+<li class=""><a href="#Spark-RDD1" title="Spark RDD">Spark RDD</a><ul class="nav">
 <li class="invisable-node"><ul class="nav">
 <li><a href="#1-using-parallelize-function" title="1. using parallelize() function">1. using parallelize() function</a></li>
-<li><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
+<li class=""><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
 </ul>
 </li>
 <li><a href="#Create-empty-RDD" title="Create empty RDD">Create empty RDD</a></li>
