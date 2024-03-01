@@ -555,9 +555,13 @@ rdd = sc.parallelize(data) <span class="hljs-comment"># Spark RDD creation</span
 
 rdd = sc.textFile(path) <span class="hljs-comment"># a spark rdd</span>
 </code></pre><p>The file <code>movies.csv</code> is uploaded to the local file system and stored in the folder <code>/sparkdata</code>.</p><h4 id="Read-from-HDFS"><a class="anchor hidden-xs" href="#Read-from-HDFS" title="Read-from-HDFS"><i class="fa fa-link"></i></a>Read from HDFS</h4><pre><code class="wrap python hljs">path = <span class="hljs-string">"hdfs://sandbox-hdp.hortonworks.com:8020/data/movies.csv"</span>
-
+<span class="hljs-comment"># See note below</span>
+    
 rdd3 = sc.textFile(path) <span class="hljs-comment"># a spark rdd</span>
-</code></pre><p>The file <code>movies.csv</code> is uploaded to HDFS and stored in the folder <code>/data</code>.</p><div class="alert alert-info">
+</code></pre><p>The file <code>movies.csv</code> is uploaded to HDFS and stored in the folder <code>/data</code>.</p><div class="alert alert-warning">
+<p><strong>Note:</strong> To access the HDFS from Spark application, you need to use the hostname <code>sandbox-hdp.hortonworks.com</code> or the ip address assigned to the cluster container (for instance, it is <code>172.18.0.2</code> in my machine). You can get that address from the setting <code>fs.defaultFS</code> in HDFS advanced configuration. Here <code>localhost</code> will not work due to the different schema <code>hdfs</code>.</p>
+<p><img src="https://i.imgur.com/qE3b8u5.png" alt="" class="md-image md-image"></p>
+</div><div class="alert alert-info">
 <p>The function <code>wholeTextFiles</code> will read all files in the directory and each file will be read as a single row in the RDD whereas the function <code>textFile</code> will read each line of the file as a row in the RDD.</p>
 </div><div class="alert alert-warning">
 <p>When we use <code>parallelize()</code> or <code>textFile()</code> or <code>wholeTextFiles()</code> methods of <code>SparkContxt</code> to initiate RDD, it automatically splits the data into partitions based on resource availability. when you run it on a local machine it would create partitions as the same number of cores available on your system.</p>
