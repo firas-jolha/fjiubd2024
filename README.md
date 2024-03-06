@@ -10,8 +10,13 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Project Description - Big Data Technologies and Analytics course](html/masters/Project Description for masters.html)
 
-<!-- ### [Stage I](html/common/Project Description for masters.html) -->
+### [Stage I - Data collection and Ingestion](html/common/Stage I - Data collection and Ingestion.html)
 
+### [Stage II - Data Storage/Preparation & EDA](html/common/Stage II - Data Storage/Preparation & EDA.html)
+
+### [Stage III - Predictive Data Analytics](html/common/Stage III - Predictive Data Analytics.html)
+
+### [Stage IV - Presentation](html/common/Stage IV - Presentation.html)
 
 ## Labs
 
@@ -38,6 +43,8 @@ The materials are split into three parts. There are materials for labs, project 
 ### [Test 4 - Mongodb (only prerequisites)](html/common/Test 4 - Mongodb (only prerequisites).html)
 
 ### [Practice on Apache Spark RDD](html/common/Practice on Apache Spark RDD.html)
+
+<!-- ### [Practice on Apache Spark DataFrame & SQL](html/common/Practice on Apache Spark RDD.html) -->
 
 <!-- ### [Test 5 - Apache Spark Core & SQL (only prerequisites)](html/common/Test 5 - Apache Spark Core & SQL (only prerequisites).html) -->
 <!-- ### [Assignment 4 - Mongodb](html/common/Assignment 4 - Mongodb.html) -->
