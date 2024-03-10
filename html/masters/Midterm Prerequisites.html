@@ -1,0 +1,386 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Midterm Prerequisites - CodiMD
+    </title>
+    <link rel="icon" type="image/png" href="http://localhost:3000/favicon.png">
+    <link rel="apple-touch-icon" href="http://localhost:3000/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha256-H0KfTigpUV+0/5tn2HXC0CPwhhDhWgSawJdnFd0CGCo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fork-awesome/1.1.3/css/fork-awesome.min.css" integrity="sha256-ZhApazu+kejqTYhMF+1DzNKjIzP7KXu6AzyXcC1gMus=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github-gist.min.css" integrity="sha256-tAflq+ymku3Khs+I/WcAneIlafYgDiOQ9stIHH985Wo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,300italic,300|Source+Serif+Pro|Source+Code+Pro:400,300,500&subset=latin,latin-ext);.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{padding:0 1em;color:#777;border-left:.25em solid #ddd}.night .markdown-body blockquote{color:#bcbcbc}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.night .markdown-body h1,.night .markdown-body h2,.night .markdown-body h3,.night .markdown-body h4,.night .markdown-body h5,.night .markdown-body h6{color:#ddd}.markdown-body h1 .fa-link,.markdown-body h2 .fa-link,.markdown-body h3 .fa-link,.markdown-body h4 .fa-link,.markdown-body h5 .fa-link,.markdown-body h6 .fa-link{color:#000;vertical-align:middle;visibility:hidden;font-size:16px}.night .markdown-body h1 .fa-link,.night .markdown-body h2 .fa-link,.night .markdown-body h3 .fa-link,.night .markdown-body h4 .fa-link,.night .markdown-body h5 .fa-link,.night .markdown-body h6 .fa-link{color:#fff}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .fa-link,.markdown-body h2:hover .anchor .fa-link,.markdown-body h3:hover .anchor .fa-link,.markdown-body h4:hover .anchor .fa-link,.markdown-body h5:hover .anchor .fa-link,.markdown-body h6:hover .anchor .fa-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.night .markdown-body table tr{background-color:#5f5f5f}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.night .markdown-body table tr:nth-child(2n){background-color:#4f4f4f}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.night .markdown-body code,.night .markdown-body tt{color:#eee;background-color:hsla(0,0%,90.2%,.36)}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\A0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.markdown-body kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid;border-color:#ccc #ccc #bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body pre{border:inherit!important}.night .markdown-body pre{filter:invert(100%)}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-webkit-inline-flex;display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.night .markdown-body .gist table tr:nth-child(2n){background-color:#ddd}.markdown-body code[data-gist-id]{background:none;padding:0;filter:invert(100%)}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.geo,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.night .markdown-body pre.graphviz .graph>polygon{fill:#333}.night .markdown-body pre.mermaid .sectionTitle,.night .markdown-body pre.mermaid .titleText,.night .markdown-body pre.mermaid text{fill:#fff}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{max-width:100%;height:100%}.night .markdown-body .abc path{fill:#eee}.night .markdown-body .abc path.note_selected{fill:##4DD0E1}.night tspan{fill:#fefefe}.night pre rect{fill:transparent}.night pre.flow-chart path,.night pre.flow-chart rect{stroke:#fff}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body img{background-color:transparent}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;-webkit-transition:opacity .2s;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;-webkit-transition:opacity .2s;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.geo-map{width:100%;height:250px}.markmap-container{height:300px}.markmap-container>svg{width:100%;height:100%}.MJX_Assistive_MathML{display:none}.ui-infobar{position:relative;z-index:2;max-width:758px;margin-top:25px;margin-bottom:-25px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:10000}.ui-toc-label{opacity:.9;background-color:#ccc;border:none}.ui-toc-label,.ui-toc .open .ui-toc-label{-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#5f5f5f}.ui-toc-label:focus{opacity:1;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.night .ui-toc-dropdown .nav>li>a:focus,.night .ui-toc-dropdown .nav>li>a:hover{color:#fff;border-left-color:#fff}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.night .ui-toc-dropdown .nav>.active:focus>a,.night .ui-toc-dropdown .nav>.active:hover>a,.night .ui-toc-dropdown .nav>.active>a{color:#fff;border-left:2px solid #fff}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.night .ui-toc-dropdown .nav>li>a{color:#aaa}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:50px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a{padding-right:50px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:60px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a{padding-right:60px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:hover{padding-left:49px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:hover{padding-right:49px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-left:59px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-right:59px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>a{padding-left:48px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:48px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active>a{padding-left:58px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:58px}.markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,Hiragino Kaku Gothic Pro,"\30D2\30E9\30AE\30CE\89D2\30B4   Pro W3",Osaka,Meiryo,"\30E1\30A4\30EA\30AA",MS Gothic,"\FF2D\FF33   \30B4\30B7\30C3\30AF",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,"\FF2D\FF33   \FF30\30B4\30B7\30C3\30AF",sans-serif}.markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang TC,Microsoft JhengHei,"\5FAE\8EDF\6B63\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,"\5FAE\8EDF\6B63\9ED1UI",sans-serif}.markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang SC,Microsoft YaHei,"\5FAE\8F6F\96C5\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,"\5FAE\8F6F\96C5\9ED1UI",sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:rgba(0,0,0,.85)}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:contain}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}small span{line-height:22px}small .dropdown{display:inline-block}small .dropdown a:focus,small .dropdown a:hover{text-decoration:none}.unselectable{-moz-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-o-user-select:none;user-select:none}.night .navbar{background:#333;border-bottom-color:#333;color:#eee}.night .navbar a{color:#eee}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}.focus,:focus{outline:none!important}::-moz-focus-inner{border:0!important}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid" lang="en"><h1 id="Midterm-Prerequisites"><a class="anchor hidden-xs" href="#Midterm-Prerequisites" title="Midterm-Prerequisites"><i class="fa fa-link"></i></a>Midterm Prerequisites</h1><p><strong>Course:</strong> Big Data - IU S24<br>
+<strong>Date:</strong> Tuesday - March 14, 2024<br>
+<strong>Start time:</strong> 12:30<br>
+<strong>Break:</strong> 14:10-16:00<br>
+<strong>Due time:</strong> 17:30<br>
+<strong>Total points:</strong> 100</p><details open=""><summary><strong>Late submissions</strong></summary>
+<p>The grade will be penalized as <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-1-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;><mi>g</mi><mi>r</mi><mi>a</mi><mi>d</mi><mi>e</mi><mo>=</mo><mi>r</mi><mi>o</mi><mi>u</mi><mi>n</mi><mi>d</mi><mrow><mo>(</mo><mi>g</mi><mi>r</mi><mi>a</mi><mi>d</mi><mi>e</mi><mo>&amp;#x2217;</mo><mrow><mo>(</mo><mn>1</mn><mo>&amp;#x2212;</mo><msup><mrow><mo>(</mo><mfrac><mrow><mi>t</mi><mi>i</mi><mi>m</mi><mi>e</mi><mo>&amp;#x2212;</mo><mn>17.5</mn></mrow><mn>6.5</mn></mfrac><mo>)</mo></mrow><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mn>1.2</mn></mrow></msup><mo>)</mo></mrow><mo>)</mo></mrow></math>" role="presentation" style="text-align: center; position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1" style="width: 25.035em; display: inline-block;"><span style="display: inline-block; position: relative; width: 22.526em; height: 0px; font-size: 111%;"><span style="position: absolute; clip: rect(2.127em, 1022.27em, 5.473em, -999.997em); top: -4.051em; left: 0em;"><span class="mrow" id="MathJax-Span-2"><span class="mi" id="MathJax-Span-3" style="font-family: MathJax_Math-italic;">g<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-4" style="font-family: MathJax_Math-italic;">r</span><span class="mi" id="MathJax-Span-5" style="font-family: MathJax_Math-italic;">a</span><span class="mi" id="MathJax-Span-6" style="font-family: MathJax_Math-italic;">d<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-7" style="font-family: MathJax_Math-italic;">e</span><span class="mo" id="MathJax-Span-8" style="font-family: MathJax_Main; padding-left: 0.261em;">=</span><span class="mi" id="MathJax-Span-9" style="font-family: MathJax_Math-italic; padding-left: 0.261em;">r</span><span class="mi" id="MathJax-Span-10" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-11" style="font-family: MathJax_Math-italic;">u</span><span class="mi" id="MathJax-Span-12" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-13" style="font-family: MathJax_Math-italic;">d<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mrow" id="MathJax-Span-14" style="padding-left: 0.196em;"><span class="mo" id="MathJax-Span-15" style="vertical-align: 0em;"><span style="font-family: MathJax_Size4;">(</span></span><span class="mi" id="MathJax-Span-16" style="font-family: MathJax_Math-italic;">g<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-17" style="font-family: MathJax_Math-italic;">r</span><span class="mi" id="MathJax-Span-18" style="font-family: MathJax_Math-italic;">a</span><span class="mi" id="MathJax-Span-19" style="font-family: MathJax_Math-italic;">d<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-20" style="font-family: MathJax_Math-italic;">e</span><span class="mo" id="MathJax-Span-21" style="font-family: MathJax_Main; padding-left: 0.196em;">∗</span><span class="mrow" id="MathJax-Span-22" style="padding-left: 0.196em;"><span class="mo" id="MathJax-Span-23" style="vertical-align: 0em;"><span style="font-family: MathJax_Size4;">(</span></span><span class="mn" id="MathJax-Span-24" style="font-family: MathJax_Main;">1</span><span class="mo" id="MathJax-Span-25" style="font-family: MathJax_Main; padding-left: 0.196em;">−</span><span class="msubsup" id="MathJax-Span-26" style="padding-left: 0.196em;"><span style="display: inline-block; position: relative; width: 7.79em; height: 0px;"><span style="position: absolute; clip: rect(2.32em, 1006.63em, 5.151em, -999.997em); top: -3.986em; left: 0em;"><span class="mrow" id="MathJax-Span-27"><span class="mo" id="MathJax-Span-28" style="vertical-align: 0em;"><span style="font-family: MathJax_Size3;">(</span></span><span class="mfrac" id="MathJax-Span-29"><span style="display: inline-block; position: relative; width: 5.151em; height: 0px; margin-right: 0.132em; margin-left: 0.132em;"><span style="position: absolute; clip: rect(3.092em, 1004.96em, 4.25em, -999.997em); top: -4.694em; left: 50%; margin-left: -2.506em;"><span class="mrow" id="MathJax-Span-30"><span class="mi" id="MathJax-Span-31" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-32" style="font-family: MathJax_Math-italic;">i</span><span class="mi" id="MathJax-Span-33" style="font-family: MathJax_Math-italic;">m</span><span class="mi" id="MathJax-Span-34" style="font-family: MathJax_Math-italic;">e</span><span class="mo" id="MathJax-Span-35" style="font-family: MathJax_Main; padding-left: 0.196em;">−</span><span class="mn" id="MathJax-Span-36" style="font-family: MathJax_Main; padding-left: 0.196em;">17.5</span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span><span style="position: absolute; clip: rect(3.156em, 1001.23em, 4.186em, -999.997em); top: -3.279em; left: 50%; margin-left: -0.64em;"><span class="mn" id="MathJax-Span-37" style="font-family: MathJax_Main;">6.5</span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span><span style="position: absolute; clip: rect(0.84em, 1005.15em, 1.29em, -999.997em); top: -1.284em; left: 0em;"><span style="display: inline-block; overflow: hidden; vertical-align: 0em; border-top: 1.3px solid; width: 5.151em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.097em;"></span></span></span></span><span class="mo" id="MathJax-Span-38" style="vertical-align: 0em;"><span style="font-family: MathJax_Size3;">)</span></span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span><span style="position: absolute; top: -5.145em; left: 6.824em;"><span class="texatom" id="MathJax-Span-39"><span class="mrow" id="MathJax-Span-40"><span class="mn" id="MathJax-Span-41" style="font-size: 70.7%; font-family: MathJax_Main;">1.2</span></span></span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span></span></span><span class="mo" id="MathJax-Span-42" style="vertical-align: 0em;"><span style="font-family: MathJax_Size4;">)</span></span></span><span class="mo" id="MathJax-Span-43" style="vertical-align: 0em;"><span style="font-family: MathJax_Size4;">)</span></span></span></span><span style="display: inline-block; width: 0px; height: 4.057em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -1.425em; border-left: 0px solid; width: 0px; height: 3.504em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>g</mi><mi>r</mi><mi>a</mi><mi>d</mi><mi>e</mi><mo>=</mo><mi>r</mi><mi>o</mi><mi>u</mi><mi>n</mi><mi>d</mi><mrow><mo>(</mo><mi>g</mi><mi>r</mi><mi>a</mi><mi>d</mi><mi>e</mi><mo>∗</mo><mrow><mo>(</mo><mn>1</mn><mo>−</mo><msup><mrow><mo>(</mo><mfrac><mrow><mi>t</mi><mi>i</mi><mi>m</mi><mi>e</mi><mo>−</mo><mn>17.5</mn></mrow><mn>6.5</mn></mfrac><mo>)</mo></mrow><mrow class="MJX-TeXAtom-ORD"><mn>1.2</mn></mrow></msup><mo>)</mo></mrow><mo>)</mo></mrow></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-1"> grade = round\left(grade  * \left( 1-\left(\frac{time-17.5}{6.5}\right)^{1.2}\right)\right) </script></span><br>
+where <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-2-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>t</mi><mi>i</mi><mi>m</mi><mi>e</mi></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-44" style="width: 2.32em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.062em; height: 0px; font-size: 111%;"><span style="position: absolute; clip: rect(1.483em, 1002em, 2.513em, -999.997em); top: -2.313em; left: 0em;"><span class="mrow" id="MathJax-Span-45"><span class="mi" id="MathJax-Span-46" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-47" style="font-family: MathJax_Math-italic;">i</span><span class="mi" id="MathJax-Span-48" style="font-family: MathJax_Math-italic;">m</span><span class="mi" id="MathJax-Span-49" style="font-family: MathJax_Math-italic;">e</span></span><span style="display: inline-block; width: 0px; height: 2.32em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.068em; border-left: 0px solid; width: 0px; height: 0.861em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>t</mi><mi>i</mi><mi>m</mi><mi>e</mi></math></span></span><script type="math/tex" id="MathJax-Element-2">time</script></span> is the float representation of the hour in 24-hour format and minutes for the same day. For instance, if you submit at <code>17:30</code> then <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-3-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>t</mi><mi>i</mi><mi>m</mi><mi>e</mi><mo>=</mo><mn>17</mn><mo>+</mo><mfrac><mn>30</mn><mn>60</mn></mfrac><mo>=</mo><mn>17.5</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-50" style="width: 10.814em; display: inline-block;"><span style="display: inline-block; position: relative; width: 9.72em; height: 0px; font-size: 111%;"><span style="position: absolute; clip: rect(1.226em, 1009.66em, 2.899em, -999.997em); top: -2.313em; left: 0em;"><span class="mrow" id="MathJax-Span-51"><span class="mi" id="MathJax-Span-52" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-53" style="font-family: MathJax_Math-italic;">i</span><span class="mi" id="MathJax-Span-54" style="font-family: MathJax_Math-italic;">m</span><span class="mi" id="MathJax-Span-55" style="font-family: MathJax_Math-italic;">e</span><span class="mo" id="MathJax-Span-56" style="font-family: MathJax_Main; padding-left: 0.261em;">=</span><span class="mn" id="MathJax-Span-57" style="font-family: MathJax_Main; padding-left: 0.261em;">17</span><span class="mo" id="MathJax-Span-58" style="font-family: MathJax_Main; padding-left: 0.196em;">+</span><span class="mfrac" id="MathJax-Span-59" style="padding-left: 0.196em;"><span style="display: inline-block; position: relative; width: 0.84em; height: 0px; margin-right: 0.132em; margin-left: 0.132em;"><span style="position: absolute; clip: rect(3.349em, 1000.71em, 4.186em, -999.997em); top: -4.437em; left: 50%; margin-left: -0.319em;"><span class="mn" id="MathJax-Span-60" style="font-size: 70.7%; font-family: MathJax_Main;">30</span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span><span style="position: absolute; clip: rect(3.349em, 1000.71em, 4.186em, -999.997em); top: -3.6em; left: 50%; margin-left: -0.319em;"><span class="mn" id="MathJax-Span-61" style="font-size: 70.7%; font-family: MathJax_Main;">60</span><span style="display: inline-block; width: 0px; height: 3.993em;"></span></span><span style="position: absolute; clip: rect(0.84em, 1000.84em, 1.29em, -999.997em); top: -1.284em; left: 0em;"><span style="display: inline-block; overflow: hidden; vertical-align: 0em; border-top: 1.3px solid; width: 0.84em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.097em;"></span></span></span></span><span class="mo" id="MathJax-Span-62" style="font-family: MathJax_Main; padding-left: 0.261em;">=</span><span class="mn" id="MathJax-Span-63" style="font-family: MathJax_Main; padding-left: 0.261em;">17.5</span></span><span style="display: inline-block; width: 0px; height: 2.32em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.496em; border-left: 0px solid; width: 0px; height: 1.646em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>t</mi><mi>i</mi><mi>m</mi><mi>e</mi><mo>=</mo><mn>17</mn><mo>+</mo><mfrac><mn>30</mn><mn>60</mn></mfrac><mo>=</mo><mn>17.5</mn></math></span></span><script type="math/tex" id="MathJax-Element-3">time = 17 + \frac{30}{60} = 17.5</script></span></p>
+</details><h1 id="Agenda"><a class="anchor hidden-xs" href="#Agenda" title="Agenda"><i class="fa fa-link"></i></a>Agenda</h1><p></p><div class="toc"><ul>
+<li><a href="#Midterm-Prerequisites" title="Midterm Prerequisites">Midterm Prerequisites</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Hardware-requirements" title="Hardware requirements">Hardware requirements</a></li>
+<li><a href="#Software-requirements" title="Software requirements">Software requirements</a></li>
+<li><a href="#Install-JDK-21" title="Install JDK 21">Install JDK 21</a></li>
+<li><a href="#Install-Neo4j-server---Enterprise-edition" title="Install Neo4j server - Enterprise edition">Install Neo4j server - Enterprise edition</a><ul>
+<li><a href="#Windows-user" title="Windows user">Windows user</a></li>
+<li><a href="#Unix-based-OS-user-tested-on-Ubuntu-22043" title="Unix-based OS user (tested on Ubuntu 22.04.3)">Unix-based OS user (tested on Ubuntu 22.04.3)</a></li>
+</ul>
+</li>
+<li><a href="#Install-MongoDB-tools" title="Install MongoDB tools">Install MongoDB tools</a></li>
+<li><a href="#Self-check-tasks" title="Self-check tasks">Self-check tasks</a></li>
+</ul>
+</div><p></p><h1 id="Objectives"><a class="anchor hidden-xs" href="#Objectives" title="Objectives"><i class="fa fa-link"></i></a>Objectives</h1><p>This tutorial is written to provide you the requirements that you need to check and prepare before you come to the midterm. If you do not have the requirements, then you need to satisfy them during the midterm and it will take from your time. If you have issues related to the requirements, please contact your TA before the midterm.</p><h1 id="Hardware-requirements"><a class="anchor hidden-xs" href="#Hardware-requirements" title="Hardware-requirements"><i class="fa fa-link"></i></a>Hardware requirements</h1><ul>
+<li>CPU (4 cores or more)</li>
+<li>Memory (8GB or more)</li>
+<li>Storage (~12 GB)</li>
+</ul><h1 id="Software-requirements"><a class="anchor hidden-xs" href="#Software-requirements" title="Software-requirements"><i class="fa fa-link"></i></a>Software requirements</h1><ul>
+<li>Install Open JDK <strong>21</strong> or Oracle JDK <strong>21</strong>.
+<ul>
+<li>This is a requirement to install Neo4j server.</li>
+</ul>
+</li>
+<li>Install Neo4j server - Enterprise edition.
+<ul>
+<li>Tested version <strong>5.17.0</strong></li>
+<li>Do not install community edition.</li>
+<li>The download links are given below.</li>
+</ul>
+</li>
+<li>Install MongoDB server
+<ul>
+<li>Tested version <strong>6.0.4</strong></li>
+</ul>
+</li>
+<li>Install MongoDB Compass
+<ul>
+<li>Tested version <strong>1.42.1</strong></li>
+</ul>
+</li>
+<li>Download MongoDB shell tool
+<ul>
+<li>Tested version <strong>2.1.4</strong></li>
+</ul>
+</li>
+</ul><h1 id="Install-JDK-21"><a class="anchor hidden-xs" href="#Install-JDK-21" title="Install-JDK-21"><i class="fa fa-link"></i></a>Install JDK 21</h1><div class="alert alert-warning">
+<p>If you have JDK installed previously, then you can go to the next step immediately. Indeed, Neo4j will not run if you do not have Java installed.</p>
+</div><p>Since Neo4j server is written in Java and operates on JVM. You need to install JDK version 21 for Neo4j server version 5.17.0. You can check the version of JDK by running <code>java --version</code> in the terminal.</p><p>You can check the official website of Neo4j for <a href="https://neo4j.com/docs/operations-manual/current/installation/requirements/" target="_blank" rel="noopener">tutorials</a>.</p><h1 id="Install-Neo4j-server---Enterprise-edition"><a class="anchor hidden-xs" href="#Install-Neo4j-server---Enterprise-edition" title="Install-Neo4j-server---Enterprise-edition"><i class="fa fa-link"></i></a>Install Neo4j server - Enterprise edition</h1><p>You can download the server from the official website from <a href="https://neo4j.com/deployment-center/#enterprise" target="_blank" rel="noopener">here</a>. You can also follow the direct download links below.</p><ul>
+<li><a href="https://disk.yandex.com/d/XKO_JkFwWRmdBw" target="_blank" rel="noopener">Windows</a></li>
+<li><a href="https://disk.yandex.com/d/bM7YjFrrv4bqfw" target="_blank" rel="noopener">Linux or Macos</a></li>
+</ul><hr><div class="alert alert-danger">
+<p>Before you install Neo4j server, stop/kill all Neo4j services if you have running ones.</p>
+</div><p>The installation steps are very similar with slight differnce in Windows. Please follow the installation approach according to your local operating system.</p><h2 id="Windows-user"><a class="anchor hidden-xs" href="#Windows-user" title="Windows-user"><i class="fa fa-link"></i></a><strong>Windows user</strong></h2><p>You need to download the zipped folder, unzip it and you can access the server folder as shown below.<br>
+<img src="https://i.imgur.com/ecs2iQ5.png" alt="" class="md-image md-image"></p><p>The server CLI tool is <code>.\bin\neo4j.bat</code>. In order to run this server, you need to install it as Windows service. You can do that by simply running the command as follows.</p><pre><code class="wrap sh hljs">.\<span class="hljs-keyword">bin\neo4j.bat </span>windows-service <span class="hljs-keyword">install
+</span></code></pre><p>You can check that the service is installed by visiting the local Windows services <code>services.msc</code>.</p><p><img src="https://i.imgur.com/5Mv1pHw.png" alt="" class="md-image md-image"></p><div class="alert alert-warning">
+<p>Notice that you may have issues as follows:<br>
+<img src="https://i.imgur.com/UnvByU2.png" alt="" class="md-image md-image"></p>
+<p>This means that you are already have a neo4j service with the <strong>same name</strong> as shown below.<br>
+<img src="https://i.imgur.com/ExkmijW.png" alt="" class="md-image md-image"></p>
+<p>You can fix it by renaming the service name in <code>.\conf\neo4j.conf</code> to a different name as follows.<br>
+<img src="https://i.imgur.com/jUKijE4.png" alt="" class="md-image md-image"></p>
+<p>and install the service again with the new name.</p>
+</div><p>If you successfully installed the service, the service will be added to <code>services.msc</code> and you would see such output <code>Neo4j service installed.</code>.<br>
+<img src="https://i.imgur.com/OrRHqzW.png" alt="" class="md-image md-image"></p><p>Now the server is not running. We can change the configuration of the server in <code>.\conf\neo4j.conf</code>.<br>
+<img src="https://i.imgur.com/MvtlZWl.png" alt="" class="md-image md-image"></p><div class="alert alert-danger">
+<p>Before you start the server, you have to accept the evaluation license as follows:</p>
+<pre><code class="wrap shell hljs">.\bin\neo4j-admin server license --accept-evaluation
+</code></pre>
+</div><p>We can run the server as follows:</p><pre><code class="wrap sh hljs">.\bin\neo4j<span class="hljs-selector-class">.bat</span> start
+</code></pre><p>Check in <code>services.msc</code> that it is <code>running</code>. After running the server, it will give you an address where you can access the Neo4j DBMS instance. For the default settings, you can access the server on <code>http://localhost:7474</code><br>
+<img src="https://i.imgur.com/onicvF0.png" alt="" class="md-image md-image"></p><p>You can connect to the server in the browser as follows (the default username and password are <code>neo4j</code>):</p><pre><code class="neo4j hljs">:<span class="hljs-keyword">server</span> <span class="hljs-keyword">connect</span>
+</code></pre><p><img src="https://i.imgur.com/ho8Arwp.png" alt="" class="md-image md-image"></p><p>Then it will ask you to change the default password.<br>
+<img src="https://i.imgur.com/ZGB5Z2I.png" alt="" class="md-image md-image"><br>
+You can set a password like <code>neo4jneo4j</code>, then you will be able to connect to the server.</p><p>We can stop the service as follows:</p><pre><code class="wrap sh hljs">.\bin\neo4j<span class="hljs-selector-class">.bat</span> stop
+</code></pre><p>For more information about this tool, you can run <code>.\bin\neo4j.bat --help</code>.</p><p>You can delete the service from your Windows system <code>services.msc</code> as follows:</p><pre><code class="pony hljs"><span class="hljs-type">C</span>:\<span class="hljs-type">Windows</span>\<span class="hljs-type">System32</span>\sc.exe delete <span class="hljs-type">ServiceName</span>
+</code></pre><p>Where <code>ServiceName</code> is your Neo4j Windows service name <code>neo4j2</code>.</p><p>After you connect to the server, you need to check that you can monitor the server via <a href="https://halin.graphapp.io/" target="_blank" rel="noopener">Halin</a>. For the default settings, you set the username and password. In my case, username is <code>neo4j</code> and password is <code>neo4jneo4j</code>.</p><p><img src="https://i.imgur.com/Ms2O3r8.png" alt="" class="md-image md-image"></p><h2 id="Unix-based-OS-user-tested-on-Ubuntu-22043"><a class="anchor hidden-xs" href="#Unix-based-OS-user-tested-on-Ubuntu-22043" title="Unix-based-OS-user-tested-on-Ubuntu-22043"><i class="fa fa-link"></i></a><strong>Unix-based OS user <em>(tested on Ubuntu 22.04.3)</em></strong></h2><p>You first need to unzip the compressed folder as follows:</p><pre><code class="wrap sh hljs"><span class="hljs-selector-tag">tar</span> <span class="hljs-selector-tag">zxf</span> <span class="hljs-selector-tag">neo4j-enterprise-5</span><span class="hljs-selector-class">.17</span><span class="hljs-selector-class">.0-unix</span><span class="hljs-selector-class">.tar</span><span class="hljs-selector-class">.gz</span>
+</code></pre><p>You will get the server instance folder as follows:<br>
+<img src="https://i.imgur.com/e5ZwDpI.png" alt="" class="md-image md-image"></p><p>Access that folder and you will see as follows:<br>
+<img src="https://i.imgur.com/LbZCOVT.png" alt="" class="md-image md-image"></p><p>The server CLI tool is <code>.\bin\neo4j</code>. Now the server is not running. We can change the configuration of the server in <code>./conf/neo4j.conf</code>.<br>
+<img src="https://i.imgur.com/fusyjzt.png" alt="" class="md-image md-image"></p><div class="alert alert-warning">
+<p>Make sure that you have Java 21 installed and your JAVA_HOME is set to the path of the home directory of Java.</p>
+</div><div class="alert alert-info">
+<p>You can install Java 21 on Ubuntu 22 as follows:</p>
+<pre><code class="sh hljs"><span class="hljs-quote">&gt; sudo apt update</span>
+<span class="hljs-quote">&gt; sudo apt install openjdk-21-jdk</span>
+</code></pre>
+</div><div class="alert alert-danger">
+<p>Before you start the server, you have to accept the evaluation license as follows:</p>
+<pre><code class="wrap shell hljs">./bin/neo4j-admin server license --accept-evaluation
+</code></pre>
+</div><p>We can run the server as follows:</p><pre><code class="wrap sh hljs">./<span class="hljs-keyword">bin/neo4j </span>start
+</code></pre><p>After running the server, it will give you an address where you can access the Neo4j DBMS instance. For the default settings, you can access the server on <code>http://localhost:7474</code></p><p><img src="https://i.imgur.com/6XwUYqT.png" alt="" class="md-image md-image"></p><p>You can connect to the server in the browser as follows (the default username and password are <code>neo4j</code>):</p><pre><code class="neo4j hljs">:<span class="hljs-keyword">server</span> <span class="hljs-keyword">connect</span>
+</code></pre><p><img src="https://i.imgur.com/ho8Arwp.png" alt="" class="md-image md-image"></p><p>Then it will ask you to change the default password.<br>
+<img src="https://i.imgur.com/ZGB5Z2I.png" alt="" class="md-image md-image"><br>
+You can set a password like <code>neo4jneo4j</code>, then you will be able to connect to the server.</p><p>We can stop the service as follows:</p><pre><code class="wrap sh hljs">./bin/neo4j <span class="hljs-built_in">stop</span>
+</code></pre><p>Or by killing the process whose <em>pid</em> is given when you started the server.<br>
+<img src="https://i.imgur.com/6XwUYqT.png" alt="" class="md-image md-image"></p><p>For instance, to kill the server running at the process (pid:5899), we can write as follows:</p><pre><code class="wrap sh hljs">kill <span class="hljs-number">5899</span>
+</code></pre><p>If it does not terminate with SIGTERM then send SIGKILL signal to force the termination as follows:</p><pre><code class="wrap sh hljs">kill <span class="hljs-number">-9</span> <span class="hljs-number">5899</span>
+</code></pre><p>For more information about this tool, you can run <code>./bin/neo4j --help</code>.</p><p>After you connect to the server, you need to check that you can monitor the server via <a href="https://halin.graphapp.io/" target="_blank" rel="noopener">Halin</a>. For the default settings, you set the username and password. In my case, username is <code>neo4j</code> and password is <code>neo4jneo4j</code>.</p><p><img src="https://i.imgur.com/Ms2O3r8.png" alt="" class="md-image md-image"></p><h1 id="Install-MongoDB-tools"><a class="anchor hidden-xs" href="#Install-MongoDB-tools" title="Install-MongoDB-tools"><i class="fa fa-link"></i></a>Install MongoDB tools</h1><div class="alert alert-danger">
+<p>Before you install MongoDB server, stop/kill all MongoDB services if you have running ones.</p>
+</div><p>Here we need to download and install three tools:</p><ul>
+<li>
+<p><strong>The server (Community edition is enough)</strong></p>
+<ul>
+<li>Download website
+<ul>
+<li><a href="https://www.mongodb.com/try/download/community" target="_blank" rel="noopener">https://www.mongodb.com/try/download/community</a><br>
+<img src="https://i.imgur.com/AvPmelP.png" alt="" class="md-image md-image"></li>
+</ul>
+</li>
+<li>Go to the directory where the server is installed and locate the <code>bin</code> folder. Add the path of this <code>bin</code> folder to <code>PATH</code> environment variable.<br>
+<img src="https://i.imgur.com/Zgo8Oqt.png" alt="" class="md-image md-image"></li>
+</ul>
+</li>
+<li>
+<p><strong>The compass</strong></p>
+<ul>
+<li>You need to download it from official webite.
+<ul>
+<li><a href="https://www.mongodb.com/try/download/compass" target="_blank" rel="noopener">https://www.mongodb.com/try/download/compass</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p><strong>The shell (mongosh)</strong></p>
+<ul>
+<li>You can download it from <a href="https://www.mongodb.com/try/download/shell" target="_blank" rel="noopener">here</a> as follows and you do not need to install it <img class="emoji" alt=":smile:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/smile.png">.<br>
+<img src="https://i.imgur.com/hiNRB6l.png" alt="" class="md-image md-image"></li>
+<li>Go to the directory where the shell is downloaded and locate the <code>bin</code> folder. Add the path of this <code>bin</code> folder to <code>PATH</code> environment variable.<br>
+<img src="https://i.imgur.com/IzqOxTp.png" alt="" class="md-image md-image"></li>
+</ul>
+</li>
+</ul><h1 id="Self-check-tasks"><a class="anchor hidden-xs" href="#Self-check-tasks" title="Self-check-tasks"><i class="fa fa-link"></i></a>Self-check tasks</h1><ol>
+<li>Check that you installed all required tools for mongodb (The compass, the server and the shell) and can access .</li>
+<li>Check that you can start a Neo4j server in Enterprise edition and you can monitor it via Halin.</li>
+<li>Check that you have a Google account to run Spark tasks on Colab.</li>
+</ol><p>Good luck in the midterm <img class="emoji" alt=":+1:" src="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/images/basic/+1.png"></p></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#Midterm-Prerequisites" title="Midterm Prerequisites">Midterm Prerequisites</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Hardware-requirements" title="Hardware requirements">Hardware requirements</a></li>
+<li><a href="#Software-requirements" title="Software requirements">Software requirements</a></li>
+<li><a href="#Install-JDK-21" title="Install JDK 21">Install JDK 21</a></li>
+<li><a href="#Install-Neo4j-server---Enterprise-edition" title="Install Neo4j server - Enterprise edition">Install Neo4j server - Enterprise edition</a><ul class="nav">
+<li><a href="#Windows-user" title="Windows user">Windows user</a></li>
+<li><a href="#Unix-based-OS-user-tested-on-Ubuntu-22043" title="Unix-based OS user (tested on Ubuntu 22.04.3)">Unix-based OS user (tested on Ubuntu 22.04.3)</a></li>
+</ul>
+</li>
+<li><a href="#Install-MongoDB-tools" title="Install MongoDB tools">Install MongoDB tools</a></li>
+<li><a href="#Self-check-tasks" title="Self-check tasks">Self-check tasks</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#Midterm-Prerequisites" title="Midterm Prerequisites">Midterm Prerequisites</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Hardware-requirements" title="Hardware requirements">Hardware requirements</a></li>
+<li><a href="#Software-requirements" title="Software requirements">Software requirements</a></li>
+<li><a href="#Install-JDK-21" title="Install JDK 21">Install JDK 21</a></li>
+<li><a href="#Install-Neo4j-server---Enterprise-edition" title="Install Neo4j server - Enterprise edition">Install Neo4j server - Enterprise edition</a><ul class="nav">
+<li><a href="#Windows-user" title="Windows user">Windows user</a></li>
+<li><a href="#Unix-based-OS-user-tested-on-Ubuntu-22043" title="Unix-based OS user (tested on Ubuntu 22.04.3)">Unix-based OS user (tested on Ubuntu 22.04.3)</a></li>
+</ul>
+</li>
+<li><a href="#Install-MongoDB-tools" title="Install MongoDB tools">Install MongoDB tools</a></li>
+<li><a href="#Self-check-tasks" title="Self-check tasks">Self-check tasks</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha256-kJrlY+s09+QoWjpkOrXXwhxeaoDz9FW5SaxF8I0DibQ=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
