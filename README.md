@@ -44,7 +44,7 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Practice on Apache Spark RDD](html/common/Practice on Apache Spark RDD.html)
 
-### [Master's students - Mideterm prerequisites](html/common/masters/Midterm Prerequisites.html)
+### [Master's students - Mideterm prerequisites](html/masters/Midterm Prerequisites.html)
 
 <!-- ### [Practice on Apache Spark DataFrame & SQL](html/common/Practice on Apache Spark RDD.html) -->
 
