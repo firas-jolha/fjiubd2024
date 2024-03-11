@@ -46,7 +46,7 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Master's students - Mideterm prerequisites](html/masters/Midterm Prerequisites.html)
 
-### [Practice on Apache Spark DataFrame & SQL](html/common/Practice on Apache Spark DataFrame & SQL.html)
+### [Practice on Apache Spark DataFrame & SQL](html/common/Practice on Apache Spark Dataframe & SQL.html)
 
 <!-- ### [Test 5 - Apache Spark Core & SQL (only prerequisites)](html/common/Test 5 - Apache Spark Core & SQL (only prerequisites).html) -->
 <!-- ### [Assignment 4 - Mongodb](html/common/Assignment 4 - Mongodb.html) -->
