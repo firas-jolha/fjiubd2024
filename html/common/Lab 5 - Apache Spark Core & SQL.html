@@ -97,7 +97,7 @@
 <li><a href="#Create-a-SparkContext" title="Create a SparkContext">Create a SparkContext</a></li>
 </ul>
 </li>
-<li><a href="#Spark-RDD1" title="Spark RDD">Spark RDD</a><ul>
+<li><a href="#Spark-RDD" title="Spark RDD">Spark RDD</a><ul>
 <li class="invisable-node"><ul>
 <li><a href="#1-using-parallelize-function" title="1. using parallelize() function">1. using parallelize() function</a></li>
 <li><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
@@ -156,6 +156,7 @@
 <li><a href="#orderBy-sort-Transformation" title="orderBy, sort [Transformation]">orderBy, sort [Transformation]</a></li>
 <li><a href="#Join" title="Join">Join</a></li>
 <li><a href="#UDF-User-Defined-Function" title="UDF (User Defined Function)">UDF (User Defined Function)</a></li>
+<li><a href="#Save-DataFrame-to-disk" title="Save DataFrame to disk">Save DataFrame to disk</a></li>
 </ul>
 </li>
 </ul>
@@ -317,14 +318,14 @@
 </div><h2 id="Running-Spark-applications"><a class="anchor hidden-xs" href="#Running-Spark-applications" title="Running-Spark-applications"><i class="fa fa-link"></i></a>Running Spark applications</h2><p>You can execute PySpark statements in interactive mode on the shell <code>pyspark</code> or you can write them in Pyhton file and submit it to Spark using the tool <code>spark-submit</code>. You can also use <strong>Zeppelin</strong> with <code>spark</code> or <code>python</code> interpreters. In addition, Spark comes with a set of ready-to-execute examples of Spark applications.</p><div class="alert alert-danger">
 <p><strong>Note:</strong> In HDP Sandbox, check that Spark engine is running from Ambari dashboard.</p>
 </div><h3 id="pyspark-shell"><a class="anchor hidden-xs" href="#pyspark-shell" title="pyspark-shell"><i class="fa fa-link"></i></a>pyspark shell</h3><p>You can open a spark shell session by running the command <code>pyspark</code> for Python, <code>spark-shell</code> for Scala, <code>sparkR</code> for R language.</p><pre><code class="wrap python hljs">pyspark
-</code></pre><p><img src="uploads/29030be24713ff2f56eeb3d00.png" alt="" class="md-image md-image"></p><p>The pyspark shell starts a Spark application and initiates/gets the Spark context <code>sc</code> (<code>spark</code> for Spark session) which internally creates a Web UI with URL localhost:4040 (or next port if 4040 is not free). By default, it uses local[*] as master. It also displays Spark, and Python versions.</p><div class="alert alert-warning">
+</code></pre><p><img src="/uploads/29030be24713ff2f56eeb3d00.png" alt="" class="md-image md-image"></p><p>The pyspark shell starts a Spark application and initiates/gets the Spark context <code>sc</code> (<code>spark</code> for Spark session) which internally creates a Web UI with URL localhost:4040 (or next port if 4040 is not free). By default, it uses local[*] as master. It also displays Spark, and Python versions.</p><div class="alert alert-warning">
 <p><strong>Note:</strong> In HDP Sandbox, if you are running two or more Spark applications simultaneously, then the next ports to 4040 (e.g. 4041, 4042, …etc) are not mapped to the host machine and you need to set the port for Spark app web UI manually to one of the custom ports such as 4242 as follows:</p>
 <pre><code class="sh hljs">pyspark --conf spark<span class="hljs-selector-class">.ui</span><span class="hljs-selector-class">.port</span>=<span class="hljs-number">4242</span>
 </code></pre>
-</div><p>You can run Python code on <code>pyspark</code> shell.</p><p><img src="uploads/29030be24713ff2f56eeb3d02.png" alt="" class="md-image md-image"></p><div class="alert alert-info">
+</div><p>You can run Python code on <code>pyspark</code> shell.</p><p><img src="/uploads/29030be24713ff2f56eeb3d02.png" alt="" class="md-image md-image"></p><div class="alert alert-info">
 <p>You can exit the <code>pyspark</code> shell by executing statement <code>exit()</code> like in a Python shell.</p>
 </div><p>Whereas <code>spark-shell</code> command runs a Spark shell for Scala.</p><pre><code class="shell hljs">spark-shell
-</code></pre><p><img src="uploads/29030be24713ff2f56eeb3d03.png" alt="" class="md-image md-image"></p><h3 id="spark-submit"><a class="anchor hidden-xs" href="#spark-submit" title="spark-submit"><i class="fa fa-link"></i></a>spark-submit</h3><p>We can use this tool for non-interactive mode of data anlysis. This command accepts the main file path for the spark application.</p><pre><code class="wrap coffeescript hljs"><span class="hljs-comment"># Submit the application main.py with default configs</span>
+</code></pre><p><img src="/uploads/29030be24713ff2f56eeb3d03.png" alt="" class="md-image md-image"></p><h3 id="spark-submit"><a class="anchor hidden-xs" href="#spark-submit" title="spark-submit"><i class="fa fa-link"></i></a>spark-submit</h3><p>We can use this tool for non-interactive mode of data anlysis. This command accepts the main file path for the spark application.</p><pre><code class="wrap coffeescript hljs"><span class="hljs-comment"># Submit the application main.py with default configs</span>
 spark-submit main.py
 <span class="hljs-comment"># master is local[*]</span>
 
@@ -361,11 +362,11 @@ spark-submit \
 
 </code></pre><div class="alert alert-danger">
 <p>For the first time to run our application on Yarn cluster in HDP Sandbox, you may get the following error:</p>
-<p><img src="uploads/29030be24713ff2f56eeb3d06.png" alt="" class="md-image md-image"></p>
+<p><img src="/uploads/29030be24713ff2f56eeb3d06.png" alt="" class="md-image md-image"></p>
 <p>To fix it, you just need to set the environment variable <code>HADOOP_CONF_DIR</code> to the value <code>/etc/hadoop/conf</code> as follows:</p>
 <pre><code class="wrap sh hljs"><span class="hljs-builtin-name">export</span> <span class="hljs-attribute">HADOOP_CONF_DIR</span>=/etc/hadoop/conf
 </code></pre>
-<p><img src="uploads/29030be24713ff2f56eeb3d07.png" alt="" class="md-image md-image"></p>
+<p><img src="/uploads/29030be24713ff2f56eeb3d07.png" alt="" class="md-image md-image"></p>
 <p><strong>Note:</strong> It is better to add this variable to <code>.bashrc</code> file in your home directory and execute <code>source ~/.bashrc</code> then submit your Spark application again to the cluster.</p>
 </div><div class="alert alert-warning">
 <p><strong>Note:</strong> <code>/path/to/examples.jar</code> in HDP Sandbox is<br>
@@ -408,7 +409,7 @@ spark-submit \
 <li>Scheduling mode: See job scheduling</li>
 <li>Number of jobs per status: Active, Completed, Failed</li>
 </ul><center>
-<p><img src="uploads/29030be24713ff2f56eeb3d04.png" alt="" width="200" height="200" class="md-image md-image"></p>
+<p><img src="/uploads/29030be24713ff2f56eeb3d04.png" alt="" width="200" height="200" class="md-image md-image"></p>
 </center><ul>
 <li>Event timeline: Displays in chronological order the events related to the executors (added, removed) and the jobs</li>
 </ul><center>
@@ -483,7 +484,7 @@ spark-submit \
 </li>
 </ul>
 </li>
-</ul><p><img src="uploads/f3ca432d9a90db31c0e548500.png" alt="" class="md-image md-image"></p><p><img src="https://i.imgur.com/zomLW1S.png" alt="" class="md-image md-image"></p><p>There are two types of transformations:<br>
+</ul><p><img src="/uploads/f3ca432d9a90db31c0e548500.png" alt="" class="md-image md-image"></p><p><img src="https://i.imgur.com/zomLW1S.png" alt="" class="md-image md-image"></p><p>There are two types of transformations:<br>
 <strong>Narrow transformation</strong> — In Narrow transformation, all the elements that are required to compute the records in single partition live in the single partition of parent RDD. A limited subset of partition is used to calculate the result. Narrow transformations are the result of map(), filter().</p><p><img src="https://i.imgur.com/LFPbHzv.png" alt="" class="md-image md-image"></p><p><strong>Wide transformation</strong> — In wide transformation, all the elements that are required to compute the records in the single partition may live in many partitions of parent RDD. Wide transformations are the result of groupbyKey() and reducebyKey().</p><p><strong>Spark Pair RDDs</strong> are nothing but RDDs containing a key-value pair. Basically, key-value pair (KVP) consists of a two linked data item in it. Here, the key is the identifier, whereas value is the data corresponding to the key value.<br>
 Moreover, Spark operations work on RDDs containing any type of objects. However key-value pair RDDs attains few special operations in it. Such as, distributed “shuffle” operations, grouping or aggregating the elements by a key.</p><p>The following Spark transformations accept input as an RDD consisting of single values.<br>
 <img src="https://i.imgur.com/RqpWt7h.png" alt="" class="md-image md-image"></p><p>Where the transformations below accept an input as a pair RDD consisting of key-value pairs.<br>
@@ -548,7 +549,7 @@ sc = spark.sparkContext
 <li>Select kill to stop the Job</li>
 </ul>
 <p><img src="https://i.imgur.com/9YKkrqH.png" alt="" class="md-image md-image"></p>
-</div><h1 id="Spark-RDD1"><a class="anchor hidden-xs" href="#Spark-RDD1" title="Spark-RDD1"><i class="fa fa-link"></i></a>Spark RDD</h1><p>There are multiple ways to create RDDs in PySpark.</p><h3 id="1-using-parallelize-function"><a class="anchor hidden-xs" href="#1-using-parallelize-function" title="1-using-parallelize-function"><i class="fa fa-link"></i></a>1. using <code>parallelize()</code> function</h3><pre><code class="python hljs">data = [(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>, <span class="hljs-string">'a b c'</span>), (<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>, <span class="hljs-string">'d e f'</span>), (<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-string">'g h i'</span>)]
+</div><h1 id="Spark-RDD"><a class="anchor hidden-xs" href="#Spark-RDD" title="Spark-RDD"><i class="fa fa-link"></i></a>Spark RDD</h1><p>There are multiple ways to create RDDs in PySpark.</p><h3 id="1-using-parallelize-function"><a class="anchor hidden-xs" href="#1-using-parallelize-function" title="1-using-parallelize-function"><i class="fa fa-link"></i></a>1. using <code>parallelize()</code> function</h3><pre><code class="python hljs">data = [(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>, <span class="hljs-string">'a b c'</span>), (<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>, <span class="hljs-string">'d e f'</span>), (<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-string">'g h i'</span>)]
 rdd = sc.parallelize(data) <span class="hljs-comment"># Spark RDD creation</span>
 <span class="hljs-comment"># rdd = sc.parallelize(data, n) # n is minimum number of partitions</span>
 </code></pre><p>This function will split the dataset into multiple partitions. You can get number of partitions by using the function <code>&lt;rdd&gt;.getNumParititions()</code>.</p><h3 id="2-using-textFile-or-wholeTextFiles-functions"><a class="anchor hidden-xs" href="#2-using-textFile-or-wholeTextFiles-functions" title="2-using-textFile-or-wholeTextFiles-functions"><i class="fa fa-link"></i></a>2. using <code>textFile</code> or <code>wholeTextFiles</code> functions</h3><h4 id="Read-from-a-local-file"><a class="anchor hidden-xs" href="#Read-from-a-local-file" title="Read-from-a-local-file"><i class="fa fa-link"></i></a>Read from a local file</h4><pre><code class="python hljs">path = <span class="hljs-string">"file:///sparkdata/movies.csv"</span>
@@ -726,11 +727,42 @@ acc.add(<span class="hljs-number">10</span>)
 
 print(acc.value) <span class="hljs-comment"># 20</span>
 </code></pre><h1 id="Spark-DataFrame"><a class="anchor hidden-xs" href="#Spark-DataFrame" title="Spark-DataFrame"><i class="fa fa-link"></i></a>Spark DataFrame</h1><p><strong>DataFrame</strong> is a distributed collection of data organized into named columns. It is conceptually equivalent to a table in a relational database or a data frame in Python, but with richer optimizations under the hood. DataFrames can be constructed from a wide array of sources such as structured data files, tables in Hive, external databases, or existing RDDs.</p><p><strong>PySpark DataFrame</strong> is mostly similar to <strong>Pandas DataFrame</strong> with the exception PySpark DataFrames are <strong>distributed</strong> in the <strong>cluster</strong> (meaning the data in DataFrame’s are stored in different machines in a cluster) and any operations in PySpark executes in parallel on all machines whereas Panda Dataframe stores and operates on a <strong>single machine</strong>. Due to parallel execution on all cores on multiple machines, PySpark runs operations faster then pandas.</p><p>Each record in the dataframe is of type <code>pyspark.sql.Row</code> whereas each column is of type <code>pyspark.sql.Column</code>. There are multiple ways to create DataFrame  in PySpark:</p><h2 id="1-using-createDataFrame-function"><a class="anchor hidden-xs" href="#1-using-createDataFrame-function" title="1-using-createDataFrame-function"><i class="fa fa-link"></i></a>1. using <code>createDataFrame()</code> function</h2><pre><code class="wrap python hljs">data = [(<span class="hljs-number">1</span>,<span class="hljs-number">2</span>,<span class="hljs-number">3</span>, <span class="hljs-string">'a b c'</span>), (<span class="hljs-number">4</span>,<span class="hljs-number">5</span>,<span class="hljs-number">6</span>, <span class="hljs-string">'d e f'</span>), (<span class="hljs-number">7</span>,<span class="hljs-number">8</span>,<span class="hljs-number">9</span>,<span class="hljs-string">'g h i'</span>)]
-df = spark.createDataFrame(data) <span class="hljs-comment"># is a dataframe</span>
+df = spark.createDataFrame(data) <span class="hljs-comment"># is a dataframe from a list</span>
 
 df.rdd <span class="hljs-comment"># Convert Spark DataFrame into RDD</span>
+    
+    
+rdd = sc.parallelize(data)
+df = spark.createDataFrame(rdd) <span class="hljs-comment"># is a dataframe from an rdd</span>
 </code></pre><h2 id="2-using-toDF-function"><a class="anchor hidden-xs" href="#2-using-toDF-function" title="2-using-toDF-function"><i class="fa fa-link"></i></a>2. using <code>toDF()</code> function</h2><pre><code class="wrap python hljs">rdd = sc.parallelize(data)
-df = rdd.toDF()
+
+    
+df = rdd.toDF() <span class="hljs-comment"># From RDD to Dataframe</span>
+
+<span class="hljs-comment"># from RDD to Dataframe with custom column names</span>
+df = rdd.toDF([<span class="hljs-string">"int1"</span>, <span class="hljs-string">"int2"</span>, <span class="hljs-string">"int3"</span>, <span class="hljs-string">"str"</span>])
+
+
+<span class="hljs-comment"># from RDD to Dataframe without defining the schema (inferSchema option is true)</span>
+df = spark.createDataFrame(rdd) 
+    
+    
+
+
+<span class="hljs-keyword">from</span> pyspark.sql.types <span class="hljs-keyword">import</span> *    
+    
+rdd = rdd.map(<span class="hljs-keyword">lambda</span> t: Row(t._1, t._2, t._3))
+
+schema = StructType([
+    <span class="hljs-comment"># StructField(&lt;fieldname&gt;, &lt;fieldtype&gt;, &lt;nullability&gt;)</span>
+    StructField(<span class="hljs-string">"int1"</span>, IntegerType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"int2"</span>, IntegerType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"int3"</span>, IntegerType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"str"</span>, StringType(), <span class="hljs-literal">True</span>)
+    ])
+
+<span class="hljs-comment"># From RDD to Dataframe with an explicit schema</span>
+df = spark.createDataFrame(rdd, schema) 
 </code></pre><h2 id="3-Read-from-a-local-file"><a class="anchor hidden-xs" href="#3-Read-from-a-local-file" title="3-Read-from-a-local-file"><i class="fa fa-link"></i></a>3. Read from a local file</h2><pre><code class="wrap python hljs">path = <span class="hljs-string">"file:///sparkdata/movies.csv"</span>
 
 df1 = spark.read.format(<span class="hljs-string">"csv"</span>) \
@@ -739,9 +771,11 @@ df1 = spark.read.format(<span class="hljs-string">"csv"</span>) \
   .option(<span class="hljs-string">"header"</span>, <span class="hljs-string">"true"</span>) \
   .load(path)
 
+df1 = spark.read.csv(path)
+
 df1.show() <span class="hljs-comment"># Display the dataframe</span>
 df1.printSchema() <span class="hljs-comment"># print the schema of the dataframe</span>
-</code></pre><h2 id="4-Read-from-MongoDB-via-PyMongo"><a class="anchor hidden-xs" href="#4-Read-from-MongoDB-via-PyMongo" title="4-Read-from-MongoDB-via-PyMongo"><i class="fa fa-link"></i></a>4. Read from MongoDB via PyMongo</h2><pre><code class="wrap python hljs"><span class="hljs-keyword">import</span> pymongo
+</code></pre><p>You can find more csv options <a href="https://spark.apache.org/docs/latest/sql-data-sources-csv.html#data-source-option" target="_blank" rel="noopener">here</a>.</p><h2 id="4-Read-from-MongoDB-via-PyMongo"><a class="anchor hidden-xs" href="#4-Read-from-MongoDB-via-PyMongo" title="4-Read-from-MongoDB-via-PyMongo"><i class="fa fa-link"></i></a>4. Read from MongoDB via PyMongo</h2><pre><code class="wrap python hljs"><span class="hljs-keyword">import</span> pymongo
 
 <span class="hljs-comment"># The default configuration</span>
 <span class="hljs-comment"># localhost:27017</span>
@@ -760,24 +794,41 @@ df1 = pd.DataFrame(movies_cur)
 
 schema = StructType([
     <span class="hljs-comment"># StructField(&lt;fieldname&gt;, &lt;fieldtype&gt;, &lt;nullability&gt;)</span>
-    StructField(<span class="hljs-string">"Audience score %"</span>, IntegerType(), <span class="hljs-literal">True</span>),
     StructField(<span class="hljs-string">"Film"</span>, StringType(), <span class="hljs-literal">True</span>),
     StructField(<span class="hljs-string">"Genre"</span>, StringType(), <span class="hljs-literal">True</span>),
     StructField(<span class="hljs-string">"Lead Studio"</span>, StringType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"Audience score %"</span>, IntegerType(), <span class="hljs-literal">True</span>),
     StructField(<span class="hljs-string">"Profitability"</span>, FloatType(), <span class="hljs-literal">True</span>),
     StructField(<span class="hljs-string">"Rotten Tomatoes %"</span>, IntegerType(), <span class="hljs-literal">True</span>),
     StructField(<span class="hljs-string">"Worldwide Gross"</span>, StringType(), <span class="hljs-literal">True</span>),
     StructField(<span class="hljs-string">"Year"</span>, IntegerType(), <span class="hljs-literal">True</span>),
-    StructField(<span class="hljs-string">"_id"</span>, StringType(), <span class="hljs-literal">True</span>)
+    StructField(<span class="hljs-string">"_id"</span>, StringType(), <span class="hljs-literal">True</span>) <span class="hljs-comment"># Special field for the documents in Mongodb</span>
     ])
 
 <span class="hljs-comment"># Try to run spark.createDataFrame(movies_cur) </span>
 
 <span class="hljs-comment"># Convert immediately to Spark DataFrame</span>
 df3 = spark.createDataFrame(movies_cur, schema)
-
+    
+    
 <span class="hljs-comment"># Convert to RDD then to Spark DataFrame</span>
 df4 = spark.createDataFrame(sc.parallelize(movies_cur), schema) <span class="hljs-comment"># Convert to Spark DataFrame</span>
+
+
+
+schema = StructType([
+    StructField(<span class="hljs-string">"Film"</span>, StringType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"Genre"</span>, StringType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"Lead Studio"</span>, StringType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"Audience score %"</span>, IntegerType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"Profitability"</span>, FloatType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"Rotten Tomatoes %"</span>, IntegerType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"Worldwide Gross"</span>, StringType(), <span class="hljs-literal">True</span>),
+    StructField(<span class="hljs-string">"Year"</span>, IntegerType(), <span class="hljs-literal">True</span>)
+    ])
+    
+<span class="hljs-comment"># Read from local file system with a schema</span>
+df3 = spark.read.csv(path, schema)
 </code></pre><h2 id="5-Read-from-HDFS"><a class="anchor hidden-xs" href="#5-Read-from-HDFS" title="5-Read-from-HDFS"><i class="fa fa-link"></i></a>5. Read from HDFS</h2><pre><code class="wrap python hljs">path = <span class="hljs-string">"hdfs://sandbox-hdp.hortonworks.com:8020/data/movies.csv"</span> <span class="hljs-comment"># See note below</span>
 df = spark.read.load(path, format=<span class="hljs-string">"csv"</span>, sep = <span class="hljs-string">","</span>, inferSchema = <span class="hljs-string">"true"</span>, header = <span class="hljs-string">"true"</span>) 
 <span class="hljs-comment"># a spark dataframe</span>
@@ -825,7 +876,13 @@ df.show(<span class="hljs-number">10</span>, truncate=<span class="hljs-literal"
 </code></pre><h2 id="collect-Action"><a class="anchor hidden-xs" href="#collect-Action" title="collect-Action"><i class="fa fa-link"></i></a>collect [Action]</h2><p><code>collect()</code> is an action operation that is used to retrieve all the elements of the dataset (from all nodes) to the driver node. It retrieves all elements in a DataFrame as a <code>list</code> of <code>Row</code> type to the driver node. We should use <code>collect()</code> on smaller dataset usually after <code>filter()</code>, <code>group()</code> e.t.c. Retrieving larger datasets results in <em>OutOfMemory</em> error. You can use <code>head</code> operation to get only the first rows/records.</p><pre><code class="wrap python hljs">df.collect() <span class="hljs-comment"># all elements</span>
 df.collect()[<span class="hljs-number">0</span>] <span class="hljs-comment"># first row</span>
 df.collect()[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] <span class="hljs-comment"># first cell at first row and first column</span>
-</code></pre><h2 id="select-Transformation"><a class="anchor hidden-xs" href="#select-Transformation" title="select-Transformation"><i class="fa fa-link"></i></a>select [Transformation]</h2><p><code>select()</code> function is used to select single, multiple, column by index, all columns from the list and the nested columns from a DataFrame. This function returns a DataFrame with the selected columns.</p><pre><code class="wrap python hljs"><span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> col
+</code></pre><div class="alert alert-danger">
+<p>Notice that collect on a big dataframe can cause performance and memory issues since this action collects the partitions of the dataframe from all cluster nodes to the memory of one machine. So we suggest more efficient methods as follows:</p>
+<pre><code class="wrap python hljs">df.take(<span class="hljs-number">10</span>) <span class="hljs-comment"># first 10 elements</span>
+df.take(<span class="hljs-number">1</span>)[<span class="hljs-number">0</span>] <span class="hljs-comment"># first row</span>
+df.take(<span class="hljs-number">1</span>)[<span class="hljs-number">0</span>][<span class="hljs-number">0</span>] <span class="hljs-comment"># first cell at first row and first column</span>
+</code></pre>
+</div><h2 id="select-Transformation"><a class="anchor hidden-xs" href="#select-Transformation" title="select-Transformation"><i class="fa fa-link"></i></a>select [Transformation]</h2><p><code>select()</code> function is used to select single, multiple, column by index, all columns from the list and the nested columns from a DataFrame. This function returns a DataFrame with the selected columns.</p><pre><code class="wrap python hljs"><span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> col
 df.select(<span class="hljs-string">"name"</span>, \
           <span class="hljs-string">"name.firstname"</span>, \
           df.id, \
@@ -942,7 +999,49 @@ capitalizeUDF = F.udf(<span class="hljs-keyword">lambda</span> x: convertCase(x)
 </ol><pre><code class="wrap python hljs">df2.select(<span class="hljs-string">"Film"</span>, capitalizeUDF(F.col(<span class="hljs-string">"Film"</span>)).alias(<span class="hljs-string">"Capitalized_Film"</span>)).show(<span class="hljs-number">5</span>, truncate = <span class="hljs-literal">False</span>)
 </code></pre><p><img src="https://i.imgur.com/84tA0GJ.png" alt="" class="md-image md-image"></p><div class="alert alert-danger">
 <p>Note: UDFs are treated as a black box to Spark hence it can not apply optimization and you will lose all the optimization PySpark does on Dataframe/Dataset. We recommend to use UDFs only if you do not have them as built-in functions.</p>
-</div><h1 id="Spark-Dataset"><a class="anchor hidden-xs" href="#Spark-Dataset" title="Spark-Dataset"><i class="fa fa-link"></i></a>Spark Dataset</h1><p>Spark Dataset is a new interface added in Spark 1.6 that provides the benefits of RDDs (strong typing, ability to use powerful lambda functions) with the benefits of Spark SQL’s optimized execution engine. Spark Dataset API is supported in statically typed languages like Java and Scala since Spark Datasets rely heavily on static typing. A DataFrame is a Dataset organized into named columns. Python is a dynamically typed language, it still has access to Spark’s DataFrame API, which offers similar functionality as Datasets.</p><h1 id="Spark-SQL"><a class="anchor hidden-xs" href="#Spark-SQL" title="Spark-SQL"><i class="fa fa-link"></i></a>Spark SQL</h1><p>It is a module used for structured data processing. Spark SQL allows you to query structured data using either SQL or DataFrame API.</p><p>The <code>pyspark.sql</code> is a module in Spark that is used to perform SQL-like operations on the data stored in memory. You can either leverage using programming API to query the data or use the ANSI SQL queries similar to RDBMS. You can also mix both, for example, use API on the result of an SQL query.</p><p><strong>Spark SQL</strong> is one of the most used Spark modules for processing structured columnar data format. Once you have a DataFrame created, you can interact with the data by using SQL syntax. In other words, Spark SQL brings native RAW SQL queries on Spark meaning you can run traditional ANSI SQL on Spark Dataframe.</p><p>In order to use SQL, first, register a <strong>temporary table/view on DataFrame</strong> using the <code>createOrReplaceTempView()</code> function. Once created, this table can be accessed throughout the SparkSession using <code>sql()</code> and it will be dropped along with your SparkContext termination. Use <code>sql()</code> method of the SparkSession object to run the query and this method returns a new DataFrame</p><h2 id="Data-Description"><a class="anchor hidden-xs" href="#Data-Description" title="Data-Description"><i class="fa fa-link"></i></a>Data Description</h2><p>This dataset includes <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-2-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>44</mn><mo>,</mo><mn>341</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4" style="width: 3.451em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.966em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1002.91em, 2.751em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-5"><span class="mn" id="MathJax-Span-6" style="font-family: MathJax_Main;">44</span><span class="mo" id="MathJax-Span-7" style="font-family: MathJax_Main;">,</span><span class="mn" id="MathJax-Span-8" style="font-family: MathJax_Main; padding-left: 0.164em;">341</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.309em; border-left: 0px solid; width: 0px; height: 1.128em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>44</mn><mo>,</mo><mn>341</mn></math></span></span><script type="math/tex" id="MathJax-Element-2">44,341</script></span> results of international football matches starting from the very first official match in <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-3-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>1872</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-9" style="width: 2.32em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.996em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1001.94em, 2.535em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-10"><span class="mn" id="MathJax-Span-11" style="font-family: MathJax_Main;">1872</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1872</mn></math></span></span><script type="math/tex" id="MathJax-Element-3">1872</script></span> up to <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-4-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>2022</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-12" style="width: 2.32em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.996em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.565em, 1001.94em, 2.535em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-13"><span class="mn" id="MathJax-Span-14" style="font-family: MathJax_Main;">2022</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2022</mn></math></span></span><script type="math/tex" id="MathJax-Element-4">2022</script></span>. The matches range from FIFA World Cup to FIFI Wild Cup to regular friendly matches. The matches are strictly men’s full internationals and the data does not include Olympic Games or matches where at least one of the teams was the nation’s B-team, U-23 or a league select team.</p><p><strong>results.csv</strong> includes the following columns:</p><ul>
+</div><h3 id="Save-DataFrame-to-disk"><a class="anchor hidden-xs" href="#Save-DataFrame-to-disk" title="Save-DataFrame-to-disk"><i class="fa fa-link"></i></a>Save DataFrame to disk</h3><p>In Spark, you can save (write/extract) a DataFrame to a CSV file on disk by using dataframeObj.write.csv(“path”). Using this you can also write DataFrame to HDFS, or any Spark supported file systems.</p><pre><code class="wrap python hljs"><span class="hljs-comment">#Write DataFrame data to CSV file</span>
+df.write.csv(<span class="hljs-string">"movies_df"</span>)
+
+<span class="hljs-comment">#You can also use below</span>
+df.write.format(<span class="hljs-string">"csv"</span>).save(<span class="hljs-string">"movies_df"</span>)
+    
+df.write.format(<span class="hljs-string">"csv"</span>) \
+    .option(<span class="hljs-string">"header"</span>, <span class="hljs-string">"true"</span>) \
+    .option(<span class="hljs-string">"delimiter"</span>, <span class="hljs-string">","</span>) \
+    .save(<span class="hljs-string">"movies_df"</span>)
+    
+df.write.option(<span class="hljs-string">"header"</span>,<span class="hljs-string">"true"</span>) \
+  .csv(<span class="hljs-string">"hdfs://sandbox-hdp.hortonworks.com:8020/movies_df"</span>)
+</code></pre><h4 id="Partitioning-in-Spark"><a class="anchor hidden-xs" href="#Partitioning-in-Spark" title="Partitioning-in-Spark"><i class="fa fa-link"></i></a>Partitioning in Spark</h4><p>PySpark <code>partitionBy()</code> is a function of <code>pyspark.sql.DataFrameWriter</code> class which is used to partition the large dataset (DataFrame) into smaller files based on one or multiple columns while writing to disk. Partitioning the data on the file system is a way to improve the performance of the query when dealing with a large dataset in the Data lake.</p><p>PySpark supports partition in two ways; partition in memory (DataFrame) and partition on the disk (File system).</p><ol>
+<li>
+<p><strong>Partition in memory:</strong> You can partition or repartition the DataFrame by calling repartition() or coalesce() transformations. This is discussed above in RDD section.</p>
+</li>
+<li>
+<p><strong>Partition on disk:</strong> While writing the PySpark DataFrame back to disk, you can choose how to partition the data based on columns using <code>partitionBy()</code> of <code>pyspark.sql.DataFrameWriter</code>. This is similar to Hives partitions scheme.</p>
+</li>
+</ol><p>Some advantages of partitions are: <strong>a)</strong> Fast access to the data, <strong>b)</strong> The ability to perform an operation on a smaller dataset.</p><pre><code class="wrap python hljs"><span class="hljs-comment"># We can store the dataframe in the disk in partitions based on the values of Genre column.</span>
+df.write.option(<span class="hljs-string">"header"</span>,<span class="hljs-literal">True</span>) \
+  .partitionBy(<span class="hljs-string">"Genre"</span>) \
+  .csv(<span class="hljs-string">"movies_df"</span>)
+
+<span class="hljs-comment"># Read only a specific parition `Genre=Animation` of the dataframe.</span>
+df = spark.read.csv(<span class="hljs-string">"movies_df/Genre=Animation"</span>, header=<span class="hljs-literal">True</span>, sep=<span class="hljs-string">","</span>)
+</code></pre><h4 id="Save-modes"><a class="anchor hidden-xs" href="#Save-modes" title="Save-modes"><i class="fa fa-link"></i></a>Save modes</h4><p>Save operations can optionally take a SaveMode, that specifies how to handle existing data if present. It is important to realize that these save modes do not utilize any locking and are not atomic. Additionally, when performing an Overwrite, the data will be deleted before writing out the new data. Options include:</p><ol>
+<li>append: Append contents of this DataFrame to existing data.</li>
+<li>overwrite: Overwrite existing data.</li>
+<li>error or errorifexists: Throw an exception if data already exists. (default option)</li>
+<li>ignore: Silently ignore this operation if data already exists.</li>
+</ol><pre><code class="wrap python hljs"><span class="hljs-comment"># Save modes</span>
+df.write.format(<span class="hljs-string">"csv"</span>) \
+    .mode(<span class="hljs-string">"append"</span>) \
+    .option(<span class="hljs-string">"delimiter"</span>, <span class="hljs-string">"|"</span>) \
+    .save(<span class="hljs-string">"/tmp/spark_output/datacsv"</span>)
+
+df.write.format(<span class="hljs-string">"csv"</span>) \
+    .option(<span class="hljs-string">"mode"</span>,<span class="hljs-string">"append"</span>) \
+    .option(<span class="hljs-string">"delimiter"</span>, <span class="hljs-string">"|"</span>) \
+    .save(<span class="hljs-string">"/tmp/spark_output/datacsv"</span>)
+</code></pre><h1 id="Spark-Dataset"><a class="anchor hidden-xs" href="#Spark-Dataset" title="Spark-Dataset"><i class="fa fa-link"></i></a>Spark Dataset</h1><p>Spark Dataset is a new interface added in Spark 1.6 that provides the benefits of RDDs (strong typing, ability to use powerful lambda functions) with the benefits of Spark SQL’s optimized execution engine. Spark Dataset API is supported in statically typed languages like Java and Scala since Spark Datasets rely heavily on static typing. A DataFrame is a Dataset organized into named columns. Python is a dynamically typed language, it still has access to Spark’s DataFrame API, which offers similar functionality as Datasets.</p><h1 id="Spark-SQL"><a class="anchor hidden-xs" href="#Spark-SQL" title="Spark-SQL"><i class="fa fa-link"></i></a>Spark SQL</h1><p>It is a module used for structured data processing. Spark SQL allows you to query structured data using either SQL or DataFrame API.</p><p>The <code>pyspark.sql</code> is a module in Spark that is used to perform SQL-like operations on the data stored in memory. You can either leverage using programming API to query the data or use the ANSI SQL queries similar to RDBMS. You can also mix both, for example, use API on the result of an SQL query.</p><p><strong>Spark SQL</strong> is one of the most used Spark modules for processing structured columnar data format. Once you have a DataFrame created, you can interact with the data by using SQL syntax. In other words, Spark SQL brings native RAW SQL queries on Spark meaning you can run traditional ANSI SQL on Spark Dataframe.</p><p>In order to use SQL, first, register a <strong>temporary table/view on DataFrame</strong> using the <code>createOrReplaceTempView()</code> function. Once created, this table can be accessed throughout the SparkSession using <code>sql()</code> and it will be dropped along with your SparkContext termination. Use <code>sql()</code> method of the SparkSession object to run the query and this method returns a new DataFrame</p><h2 id="Data-Description"><a class="anchor hidden-xs" href="#Data-Description" title="Data-Description"><i class="fa fa-link"></i></a>Data Description</h2><p>This dataset includes <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-2-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>44</mn><mo>,</mo><mn>341</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-4" style="width: 3.451em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.966em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1002.91em, 2.751em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-5"><span class="mn" id="MathJax-Span-6" style="font-family: MathJax_Main;">44</span><span class="mo" id="MathJax-Span-7" style="font-family: MathJax_Main;">,</span><span class="mn" id="MathJax-Span-8" style="font-family: MathJax_Main; padding-left: 0.164em;">341</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.309em; border-left: 0px solid; width: 0px; height: 1.128em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>44</mn><mo>,</mo><mn>341</mn></math></span></span><script type="math/tex" id="MathJax-Element-2">44,341</script></span> results of international football matches starting from the very first official match in <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-3-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>1872</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-9" style="width: 2.32em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.996em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1001.94em, 2.535em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-10"><span class="mn" id="MathJax-Span-11" style="font-family: MathJax_Main;">1872</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>1872</mn></math></span></span><script type="math/tex" id="MathJax-Element-3">1872</script></span> up to <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-4-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mn>2022</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-12" style="width: 2.32em; display: inline-block;"><span style="display: inline-block; position: relative; width: 1.996em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.565em, 1001.94em, 2.535em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-13"><span class="mn" id="MathJax-Span-14" style="font-family: MathJax_Main;">2022</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.059em; border-left: 0px solid; width: 0px; height: 0.941em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mn>2022</mn></math></span></span><script type="math/tex" id="MathJax-Element-4">2022</script></span>. The matches range from FIFA World Cup to FIFI Wild Cup to regular friendly matches. The matches are strictly men’s full internationals and the data does not include Olympic Games or matches where at least one of the teams was the nation’s B-team, U-23 or a league select team.</p><p><strong>results.csv</strong> includes the following columns:</p><ul>
 <li><strong>date</strong> - date of the match</li>
 <li><strong>home_team</strong> - the name of the home team</li>
 <li><strong>away_team</strong> - the name of the away team</li>
@@ -1189,10 +1288,10 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
 <li><a href="#Create-a-SparkContext" title="Create a SparkContext">Create a SparkContext</a></li>
 </ul>
 </li>
-<li class=""><a href="#Spark-RDD1" title="Spark RDD">Spark RDD</a><ul class="nav">
+<li><a href="#Spark-RDD" title="Spark RDD">Spark RDD</a><ul class="nav">
 <li class="invisable-node"><ul class="nav">
 <li><a href="#1-using-parallelize-function" title="1. using parallelize() function">1. using parallelize() function</a></li>
-<li class=""><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
+<li><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
 </ul>
 </li>
 <li><a href="#Create-empty-RDD" title="Create empty RDD">Create empty RDD</a></li>
@@ -1230,10 +1329,10 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
 </li>
 </ul>
 </li>
-<li><a href="#Spark-DataFrame" title="Spark DataFrame">Spark DataFrame</a><ul class="nav">
+<li class=""><a href="#Spark-DataFrame" title="Spark DataFrame">Spark DataFrame</a><ul class="nav">
 <li><a href="#1-using-createDataFrame-function" title="1. using createDataFrame() function">1. using createDataFrame() function</a></li>
 <li><a href="#2-using-toDF-function" title="2. using toDF() function">2. using toDF() function</a></li>
-<li><a href="#3-Read-from-a-local-file" title="3. Read from a local file">3. Read from a local file</a></li>
+<li class=""><a href="#3-Read-from-a-local-file" title="3. Read from a local file">3. Read from a local file</a></li>
 <li><a href="#4-Read-from-MongoDB-via-PyMongo" title="4. Read from MongoDB via PyMongo">4. Read from MongoDB via PyMongo</a></li>
 <li><a href="#5-Read-from-HDFS" title="5. Read from HDFS">5. Read from HDFS</a></li>
 <li><a href="#StructType-amp-StructField" title="StructType &amp; StructField">StructType &amp; StructField</a></li>
@@ -1248,6 +1347,7 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
 <li><a href="#orderBy-sort-Transformation" title="orderBy, sort [Transformation]">orderBy, sort [Transformation]</a></li>
 <li><a href="#Join" title="Join">Join</a></li>
 <li><a href="#UDF-User-Defined-Function" title="UDF (User Defined Function)">UDF (User Defined Function)</a></li>
+<li><a href="#Save-DataFrame-to-disk" title="Save DataFrame to disk">Save DataFrame to disk</a></li>
 </ul>
 </li>
 </ul>
@@ -1324,10 +1424,10 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
 <li><a href="#Create-a-SparkContext" title="Create a SparkContext">Create a SparkContext</a></li>
 </ul>
 </li>
-<li class=""><a href="#Spark-RDD1" title="Spark RDD">Spark RDD</a><ul class="nav">
+<li><a href="#Spark-RDD" title="Spark RDD">Spark RDD</a><ul class="nav">
 <li class="invisable-node"><ul class="nav">
 <li><a href="#1-using-parallelize-function" title="1. using parallelize() function">1. using parallelize() function</a></li>
-<li class=""><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
+<li><a href="#2-using-textFile-or-wholeTextFiles-functions" title="2. using textFile or wholeTextFiles functions">2. using textFile or wholeTextFiles functions</a></li>
 </ul>
 </li>
 <li><a href="#Create-empty-RDD" title="Create empty RDD">Create empty RDD</a></li>
@@ -1365,10 +1465,10 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
 </li>
 </ul>
 </li>
-<li><a href="#Spark-DataFrame" title="Spark DataFrame">Spark DataFrame</a><ul class="nav">
+<li class=""><a href="#Spark-DataFrame" title="Spark DataFrame">Spark DataFrame</a><ul class="nav">
 <li><a href="#1-using-createDataFrame-function" title="1. using createDataFrame() function">1. using createDataFrame() function</a></li>
-<li><a href="#2-using-toDF-function" title="2. using toDF() function">2. using toDF() function</a></li>
-<li><a href="#3-Read-from-a-local-file" title="3. Read from a local file">3. Read from a local file</a></li>
+<li class=""><a href="#2-using-toDF-function" title="2. using toDF() function">2. using toDF() function</a></li>
+<li class=""><a href="#3-Read-from-a-local-file" title="3. Read from a local file">3. Read from a local file</a></li>
 <li><a href="#4-Read-from-MongoDB-via-PyMongo" title="4. Read from MongoDB via PyMongo">4. Read from MongoDB via PyMongo</a></li>
 <li><a href="#5-Read-from-HDFS" title="5. Read from HDFS">5. Read from HDFS</a></li>
 <li><a href="#StructType-amp-StructField" title="StructType &amp; StructField">StructType &amp; StructField</a></li>
@@ -1383,6 +1483,7 @@ joinDF = spark.sql(<span class="hljs-string">"select * from EMP e FULL OUTER JOI
 <li><a href="#orderBy-sort-Transformation" title="orderBy, sort [Transformation]">orderBy, sort [Transformation]</a></li>
 <li><a href="#Join" title="Join">Join</a></li>
 <li><a href="#UDF-User-Defined-Function" title="UDF (User Defined Function)">UDF (User Defined Function)</a></li>
+<li><a href="#Save-DataFrame-to-disk" title="Save DataFrame to disk">Save DataFrame to disk</a></li>
 </ul>
 </li>
 </ul>
