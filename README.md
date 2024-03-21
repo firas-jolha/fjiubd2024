@@ -48,7 +48,11 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Practice on Apache Spark DataFrame & SQL](html/common/Practice on Apache Spark Dataframe & SQL.html)
 
-<!-- ### [Test 5 - Apache Spark Core & SQL (only prerequisites)](html/common/Test 5 - Apache Spark Core & SQL (only prerequisites).html) -->
+### [Test 5 - Spark Core & SQL (only Colab template)](https://colab.research.google.com/drive/1iKOJkuXleIDfoDngle1QGNT9pwMF9ZN1?usp=sharing)
+
+<!-- ### [Assignment 6 - Spark ML](html/common/Assignment 6 - Spark ML.html) -->
+
+
 <!-- ### [Assignment 4 - Mongodb](html/common/Assignment 4 - Mongodb.html) -->
 
 
