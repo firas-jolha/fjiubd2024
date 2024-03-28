@@ -30,7 +30,7 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Lab 5 - Apache Spark Core & SQL](html/common/Lab 5 - Apache Spark Core & SQL.html)
 
-<!-- ### [Lab 6 - Apache Spark ML](html/common/Lab 6 - Apache Spark ML.html) -->
+### [Lab 6 - Apache Spark ML](html/common/Lab 6 - Apache Spark MLlib.html)
 <!-- ### [Lab 7 - Apache Spark Streaming](html/common/Lab 7 - Apache Spark Streaming.html) -->
 
 
