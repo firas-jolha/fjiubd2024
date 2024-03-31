@@ -6,7 +6,7 @@ The materials are split into three parts. There are materials for labs, project 
 
 ## Project
 
-### [Project Description - Introduction to Big Data course](html/bachelors/Project Description for bachelors.html)
+### [Project Description - Introduction to Big Data course](html/bachelors/Final Project for BS.html)
 
 ### [Project Description - Big Data Technologies and Analytics course](html/masters/Project Description for masters.html)
 
@@ -50,7 +50,7 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Test 5 - Spark Core & SQL (only Colab template)](https://colab.research.google.com/drive/1iKOJkuXleIDfoDngle1QGNT9pwMF9ZN1?usp=sharing)
 
-<!-- ### [Assignment 6 - Spark ML](html/common/Assignment 6 - Spark ML.html) -->
+### [Assignment 6 - Spark ML](html/common/Assignment 6 - Spark ML.html)
 
 
 <!-- ### [Assignment 4 - Mongodb](html/common/Assignment 4 - Mongodb.html) -->
