@@ -34,7 +34,7 @@
 </head>
 
 <body>
-    <div id="doc" class="markdown-body container-fluid" lang="en"><h1 id="Stage-I---Data-collection-and-Ingestion"><a class="anchor hidden-xs" href="#Stage-I---Data-collection-and-Ingestion" title="Stage-I---Data-collection-and-Ingestion"><i class="fa fa-link"></i></a>Stage I - Data collection and Ingestion</h1><p><strong>Course:</strong> Big Data - IU S24<br>
+    <div id="doc" class="markdown-body container-fluid" lang="en"><h6 id="-Home-page"><a class="anchor hidden-xs" href="#-Home-page" title="-Home-page"><i class="fa fa-link"></i></a><a href="https://firas-jolha.github.io/fjiubd2024/" target="_blank" rel="noopener"><img src="https://cdn4.iconfinder.com/data/icons/bold-ui-1/60/Home_2-512.png" alt="1" width="30px" height="30px"> Home page</a></h6><h1 id="Stage-I---Data-collection-and-Ingestion"><a class="anchor hidden-xs" href="#Stage-I---Data-collection-and-Ingestion" title="Stage-I---Data-collection-and-Ingestion"><i class="fa fa-link"></i></a>Stage I - Data collection and Ingestion</h1><p><strong>Course:</strong> Big Data - IU S24<br>
 <strong>Author:</strong> Firas Jolha</p><h1 id="Dataset"><a class="anchor hidden-xs" href="#Dataset" title="Dataset"><i class="fa fa-link"></i></a>Dataset</h1><ul>
 <li>Some emps and depts
 <ul>
@@ -50,14 +50,14 @@
 <li><a href="#Description" title="Description">Description</a></li>
 <li><a href="#Dataset-Description" title="Dataset Description">Dataset Description</a></li>
 <li><a href="#A-IU-Hadoop-cluster" title="A. IU Hadoop cluster">A. IU Hadoop cluster</a><ul>
-<li><a href="#Initiate-the-project-repository0" title="Initiate the project repository">Initiate the project repository</a></li>
+<li><a href="#Initiate-the-project-repository" title="Initiate the project repository">Initiate the project repository</a></li>
 <li><a href="#Download-dataset" title="Download dataset">Download dataset</a></li>
 <li><a href="#Build-a-relational-Database-via-PostgreSQL" title="Build a relational Database via PostgreSQL">Build a relational Database via PostgreSQL</a></li>
 <li><a href="#Import-the-database-into-HDFS-via-Sqoop" title="Import the database into HDFS via Sqoop">Import the database into HDFS via Sqoop</a></li>
 </ul>
 </li>
 <li><a href="#B-HDP-Sandbox" title="B. HDP Sandbox">B. HDP Sandbox</a><ul>
-<li><a href="#Initiate-the-project-repository" title="Initiate the project repository">Initiate the project repository</a></li>
+<li><a href="#Initiate-the-project-repository1" title="Initiate the project repository">Initiate the project repository</a></li>
 <li><a href="#Build-a-relational-Database-via-PostgreSQL1" title="Build a relational Database via PostgreSQL">Build a relational Database via PostgreSQL</a></li>
 <li><a href="#Import-the-database-into-HDFS-via-Sqoop1" title="Import the database into HDFS via Sqoop">Import the database into HDFS via Sqoop</a></li>
 </ul>
@@ -89,7 +89,7 @@
 <li>LOC: The location where each department is based.</li>
 </ul><div class="alert alert-danger">
 <p><strong>Note:</strong> In these tutorials, I provide two methods to run the commands. The first method is on the A. IU Hadoop cluster, and the second method is on the B. HDP Sandbox.</p>
-</div><h1 id="A-IU-Hadoop-cluster"><a class="anchor hidden-xs" href="#A-IU-Hadoop-cluster" title="A-IU-Hadoop-cluster"><i class="fa fa-link"></i></a>A. IU Hadoop cluster</h1><p><strong>Note:</strong> We assume that your current working directory <code>.</code> is your home directory <code>/home/teamx</code>.</p><h2 id="Initiate-the-project-repository0"><a class="anchor hidden-xs" href="#Initiate-the-project-repository0" title="Initiate-the-project-repository0"><i class="fa fa-link"></i></a>Initiate the project repository</h2><p>Access the cluster using the credentials provided by the TA and go to your home directory which is <code>/home/teamx</code> (where <code>x</code> is your team number). Duplicate the <a href="https://github.com/firas-jolha/bigdata-final-project-iu-2024.git" target="_blank" rel="noopener">project repo</a> shared on Github. You can learn how to duplicate a repo from this <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository" target="_blank" rel="noopener">link</a>.</p><h2 id="Download-dataset"><a class="anchor hidden-xs" href="#Download-dataset" title="Download-dataset"><i class="fa fa-link"></i></a>Download dataset</h2><p>You need to download the dataset files of your project from their sources and put them in <code>./data</code> folder. Notice that you need to automate this task by modifying scripts in <code>./scripts</code> folder.</p><p>I added the following to <code>scripts/stage1.sh</code></p><pre><code class="wrap sh hljs"><span class="hljs-title">url</span>=<span class="hljs-string">"https://disk.yandex.com/d/EgOiWzvrh9qLIg"</span>
+</div><h1 id="A-IU-Hadoop-cluster"><a class="anchor hidden-xs" href="#A-IU-Hadoop-cluster" title="A-IU-Hadoop-cluster"><i class="fa fa-link"></i></a>A. IU Hadoop cluster</h1><p><strong>Note:</strong> We assume that your current working directory <code>.</code> is your repo root directory (for instance, my repo root directory is <code>/home/teamx/project/bigdata-final-project-iu-2024</code>).</p><h2 id="Initiate-the-project-repository"><a class="anchor hidden-xs" href="#Initiate-the-project-repository" title="Initiate-the-project-repository"><i class="fa fa-link"></i></a>Initiate the project repository</h2><p>Access the cluster using the credentials provided by the TA and go to your home directory which is <code>/home/teamx</code> (where <code>x</code> is your team number). Duplicate the <a href="https://github.com/firas-jolha/bigdata-final-project-iu-2024.git" target="_blank" rel="noopener">project repo</a> shared on Github. You can learn how to duplicate a repo from this <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository" target="_blank" rel="noopener">link</a>. The root directory of my repo in the cluster is <code>/home/teamx/project/bigdata-final-project-iu-2024</code>.</p><h2 id="Download-dataset"><a class="anchor hidden-xs" href="#Download-dataset" title="Download-dataset"><i class="fa fa-link"></i></a>Download dataset</h2><p>You need to download the dataset files of your project from their sources and put them in <code>./data</code> folder. Notice that you need to automate this task by modifying scripts in <code>./scripts</code> folder.</p><p>I added the following to <code>scripts/stage1.sh</code></p><pre><code class="wrap sh hljs"><span class="hljs-title">url</span>=<span class="hljs-string">"https://disk.yandex.com/d/EgOiWzvrh9qLIg"</span>
 
 <span class="hljs-title">wget</span> <span class="hljs-string">"$(yadisk-direct $url)"</span> -<span class="hljs-type">O</span> <span class="hljs-class"><span class="hljs-keyword">data</span>/<span class="hljs-keyword">data</span>.zip</span>
 
@@ -230,31 +230,31 @@ conn_string=<span class="hljs-string">"host=hadoop-04.uni.innopolis.ru port=5432
                         <span class="hljs-comment"># Read all records and print them                        </span>
                         pprint(cur.fetchall())
 
-</code></pre><p>We add the command to run this script to <code>scripts/stage1.sh</code> file.</p><h2 id="Import-the-database-into-HDFS-via-Sqoop"><a class="anchor hidden-xs" href="#Import-the-database-into-HDFS-via-Sqoop" title="Import-the-database-into-HDFS-via-Sqoop"><i class="fa fa-link"></i></a>Import the database into HDFS via Sqoop</h2><p>Sqoop is a command-line tool used for importing data from relational databases to HDFS. It is a data ingestion tool that enables you to bulk import and export data from a relational database to/from HDFS. You can use Sqoop to import data into HDFS or directly into Hive. Sqoop is installed in the cluster as a client and we will use the command <code>sqoop</code> for that purpose. We will import the tables created in PostgreSQL to HDFS and store them in <code>/user/teamx/project_data</code> folder.</p><p>Now we are ready to run commands on Sqoop to call Postgresql databases. You run these commands on the cluster node <code>hadoop-01.uni.innopolis.ru</code> where you have access in. Here, I put some examples.</p><div class="alert alert-warning">
+</code></pre><p>We add the command to run this script to <code>scripts/stage1.sh</code> file.</p><h2 id="Import-the-database-into-HDFS-via-Sqoop"><a class="anchor hidden-xs" href="#Import-the-database-into-HDFS-via-Sqoop" title="Import-the-database-into-HDFS-via-Sqoop"><i class="fa fa-link"></i></a>Import the database into HDFS via Sqoop</h2><p>Sqoop is a command-line tool used for importing data from relational databases to HDFS. It is a data ingestion tool that enables you to bulk import and export data from a relational database to/from HDFS. You can use Sqoop to import data into HDFS or directly into Hive. Sqoop is installed in the cluster as a client and we will use the command <code>sqoop</code> for that purpose. We will import the tables created in PostgreSQL to HDFS and store them in <code>/user/teamx/project/warehouse</code> folder.</p><p>Now we are ready to run commands on Sqoop to call Postgresql databases. You run these commands on the cluster node <code>hadoop-01.uni.innopolis.ru</code> where you have access in. Here, I put some examples.</p><div class="alert alert-warning">
 <p>You can read the password from <code>secrets/.psql.pass</code> in the terminal as follows:</p>
-<pre><code class="pgsql hljs"><span class="hljs-keyword">password</span>=$(head -n <span class="hljs-number">1</span> secrets/.psql.pass)
+<pre><code class="yaml hljs"><span class="hljs-string">password=$(head</span> <span class="hljs-bullet">-n</span> <span class="hljs-number">1</span> <span class="hljs-string">secrets/.psql.pass)</span>
 </code></pre>
 </div><ol>
 <li>List all databases for user <code>teamx</code></li>
-</ol><pre><code class="wrap shell hljs">sqoop list-databases --connect jdbc:postgresql://hadoop-04.uni.innopolis.ru/teamx_projectdb --username teamx --password $password
+</ol><pre><code class="wrap yaml hljs"><span class="hljs-string">sqoop</span> <span class="hljs-string">list-databases</span> <span class="hljs-bullet">--connect</span> <span class="hljs-attr">jdbc:postgresql://hadoop-04.uni.innopolis.ru/teamx_projectdb</span> <span class="hljs-bullet">--username</span> <span class="hljs-string">teamx</span> <span class="hljs-bullet">--password</span> <span class="hljs-string">$password</span>
 </code></pre><ol start="2">
 <li>List all tables of database <code>teamx_projectdb</code> for user <code>teamx</code></li>
-</ol><pre><code class="wrap shell hljs">sqoop list-tables --connect jdbc:postgresql://hadoop-04.uni.innopolis.ru/teamx_projectdb --username teamx --password $password
+</ol><pre><code class="wrap yaml hljs"><span class="hljs-string">sqoop</span> <span class="hljs-string">list-tables</span> <span class="hljs-bullet">--connect</span> <span class="hljs-attr">jdbc:postgresql://hadoop-04.uni.innopolis.ru/teamx_projectdb</span> <span class="hljs-bullet">--username</span> <span class="hljs-string">teamx</span> <span class="hljs-bullet">--password</span> <span class="hljs-string">$password</span>
 </code></pre><ol start="3">
-<li>Import all tables of the database <code>emps</code> and store them in HDFS at <code>/user/teamx/project_data</code> folder. The datafiles will be compressed in Snappy and serialized in AVRO format.</li>
-</ol><pre><code class="wrap shell hljs">sqoop import-all-tables --connect jdbc:postgresql://hadoop-04.uni.innopolis.ru/teamx_projectdb --username teamx --password $password --compression-codec=snappy --compress --as-avrodatafile --warehouse-dir=/user/teamx/project_data --m 1
+<li>Import all tables of the database <code>emps</code> and store them in HDFS at <code>/user/teamx/project/warehouse</code> folder. The datafiles will be compressed in Snappy and serialized in AVRO format.</li>
+</ol><pre><code class="wrap yaml hljs"><span class="hljs-string">sqoop</span> <span class="hljs-string">import-all-tables</span> <span class="hljs-bullet">--connect</span> <span class="hljs-attr">jdbc:postgresql://hadoop-04.uni.innopolis.ru/teamx_projectdb</span> <span class="hljs-bullet">--username</span> <span class="hljs-string">teamx</span> <span class="hljs-bullet">--password</span> <span class="hljs-string">$password</span> <span class="hljs-bullet">--compression-codec=snappy</span> <span class="hljs-bullet">--compress</span> <span class="hljs-bullet">--as-avrodatafile</span> <span class="hljs-bullet">--warehouse-dir=project/warehouse</span> <span class="hljs-bullet">--m</span> <span class="hljs-number">1</span>
 </code></pre><ol start="4">
-<li>Import a specific table from the database <code>emps</code> with specific columns <code>empno, sal</code> and store it in HDFS at <code>/project</code> folder</li>
-</ol><pre><code class="wrap shell hljs">sqoop import --connect jdbc:postgresql://localhost/postgres --username teamx --password $password --compression-codec=snappy --compress --as-avrodatafile --warehouse-dir=/user/teamx/project_data --m 1 --table emps --columns empno, sal --direct
+<li>Import a specific table from the database <code>emps</code> with specific columns <code>empno, sal</code> and store it in HDFS at <code>/user/teamx/project/warehouse</code> folder</li>
+</ol><pre><code class="wrap yaml hljs"><span class="hljs-string">sqoop</span> <span class="hljs-string">import</span> <span class="hljs-bullet">--connect</span> <span class="hljs-attr">jdbc:postgresql://hadoop-04.uni.innopolis.ru/teamx_projectdb</span> <span class="hljs-bullet">--username</span> <span class="hljs-string">teamx</span> <span class="hljs-bullet">--password</span> <span class="hljs-string">$password</span> <span class="hljs-bullet">--compression-codec=snappy</span> <span class="hljs-bullet">--compress</span> <span class="hljs-bullet">--as-avrodatafile</span> <span class="hljs-bullet">--warehouse-dir=project/warehouse</span> <span class="hljs-bullet">--m</span> <span class="hljs-number">1</span> <span class="hljs-bullet">--table</span> <span class="hljs-string">emps</span> <span class="hljs-bullet">--columns</span> <span class="hljs-string">empno,</span> <span class="hljs-string">sal</span>
 </code></pre><div class="alert alert-info">
 <p>When importing data in Sqoop, you could run a SQL query using <code>--query</code> option and also filter data using <code>--where</code> option. More options in the <a href="https://sqoop.apache.org/docs/1.4.6/SqoopUserGuide.html" target="_blank" rel="noopener">documentation</a>.</p>
+</div><div class="alert alert-info">
+<p>You can use the option <code>--direct</code> if you have <code>psql</code> installed which does not create Map-reduce jobs (to run on Hadoop Map-reduce engine) and the task is executed using <code>psql</code> command. Here, we do not use <code>--direct</code> option, such that we use Mapreduce engine for running Sqoop jobs.</p>
 </div><div class="alert alert-warning">
-<p><strong>Note:</strong> Do not forget to clear the folder <code>hdfs://user/teamx/project_data</code>  if exists before importing the data.</p>
-</div><div class="alert alert-warning">
-<p>Do not forget to clear the folder <code>/project</code>  if exists before importing the data.</p>
+<p><strong>Note:</strong> Do not forget to clear the folder <code>hdfs://user/teamx/project/warehouse</code>  if exists before importing the data.</p>
 </div><div class="alert alert-danger">
 <p>For the project, you need to import the data from Postgresql to HDFS as AVRO and compressed in Snappy.</p>
-</div><h1 id="B-HDP-Sandbox"><a class="anchor hidden-xs" href="#B-HDP-Sandbox" title="B-HDP-Sandbox"><i class="fa fa-link"></i></a>B. HDP Sandbox</h1><h2 id="Initiate-the-project-repository"><a class="anchor hidden-xs" href="#Initiate-the-project-repository" title="Initiate-the-project-repository"><i class="fa fa-link"></i></a>Initiate the project repository</h2><p>Access the cluster using the credentials provided by the TA and go to your home directory which is <code>/home/teamx</code> (where <code>x</code> is your team number). Duplicate the <a href="https://github.com/firas-jolha/bigdata-final-project-iu-2024.git" target="_blank" rel="noopener">project repo</a> shared on Github. You can learn how to duplicate a repo from this <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository" target="_blank" rel="noopener">link</a>.</p><h2 id="Build-a-relational-Database-via-PostgreSQL1"><a class="anchor hidden-xs" href="#Build-a-relational-Database-via-PostgreSQL1" title="Build-a-relational-Database-via-PostgreSQL1"><i class="fa fa-link"></i></a>Build a relational Database via PostgreSQL</h2><p>In this step, you need to write SQL statements for creating the database (let’s call it  <code>project</code>) and importing the <code>csv</code> files into it. You can test the statements in an interactive mode but for project purposes, you need to write them in <code>.sql</code> file and then you execute the statements by passing the file via command <code>psql</code> which should replicate all the steps.</p><p>I will give here some of the basic steps to create the database <code>project</code> but feel free to extend it for your project purposes.</p><ol>
+</div><h1 id="B-HDP-Sandbox"><a class="anchor hidden-xs" href="#B-HDP-Sandbox" title="B-HDP-Sandbox"><i class="fa fa-link"></i></a>B. HDP Sandbox</h1><h2 id="Initiate-the-project-repository1"><a class="anchor hidden-xs" href="#Initiate-the-project-repository1" title="Initiate-the-project-repository1"><i class="fa fa-link"></i></a>Initiate the project repository</h2><p>Access the cluster using the credentials provided by the TA and go to your home directory which is <code>/home/teamx</code> (where <code>x</code> is your team number). Duplicate the <a href="https://github.com/firas-jolha/bigdata-final-project-iu-2024.git" target="_blank" rel="noopener">project repo</a> shared on Github. You can learn how to duplicate a repo from this <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository" target="_blank" rel="noopener">link</a>.</p><h2 id="Build-a-relational-Database-via-PostgreSQL1"><a class="anchor hidden-xs" href="#Build-a-relational-Database-via-PostgreSQL1" title="Build-a-relational-Database-via-PostgreSQL1"><i class="fa fa-link"></i></a>Build a relational Database via PostgreSQL</h2><p>In this step, you need to write SQL statements for creating the database (let’s call it  <code>project</code>) and importing the <code>csv</code> files into it. You can test the statements in an interactive mode but for project purposes, you need to write them in <code>.sql</code> file and then you execute the statements by passing the file via command <code>psql</code> which should replicate all the steps.</p><p>I will give here some of the basic steps to create the database <code>project</code> but feel free to extend it for your project purposes.</p><ol>
 <li>Drop the databases if exist.</li>
 </ol><pre><code class="wrap sh hljs">psql -U postgres -c '<span class="hljs-keyword">DROP</span> <span class="hljs-keyword">DATABASE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">EXISTS</span> <span class="hljs-keyword">project</span>;'
 </code></pre><ol start="2">
@@ -321,28 +321,26 @@ conn_string=<span class="hljs-string">"host=hadoop-04.uni.innopolis.ru port=5432
 </div><h2 id="Import-the-database-into-HDFS-via-Sqoop1"><a class="anchor hidden-xs" href="#Import-the-database-into-HDFS-via-Sqoop1" title="Import-the-database-into-HDFS-via-Sqoop1"><i class="fa fa-link"></i></a>Import the database into HDFS via Sqoop</h2><p>Sqoop is a command-line tool used for importing data from relational databases to HDFS. It is a data ingestion tool that enables you to bulk import and export data from a database. You can use Sqoop to import data into HDFS or directly into Hive. Sqoop is installed in HDP as a client and we will use the command <code>sqoop</code> for that purpose. We will import the tables created in PostgreSQL to HDFS and store them in <code>/project</code> folder.</p><p>First of all, we need to add some configuration for PostgreSQL as follows:<br>
 <code>host all all 0.0.0.0/0 trust</code></p><p>You need to it to the file <code>/var/lib/pgsql/data/pg_hba.conf</code>.</p><div class="alert alert-warning">
 <p><strong>Note:</strong> Do not forget to restart Postgresql service as <code>systemctl restart postgresql</code> after updating the config file.</p>
-</div><p>Then we need to download the JDBC driver for Postgresql database and put it in the lib path of Sqoop tool as follows:</p><pre><code class="sh hljs"><div class="wrapper"><div class="gutter linenumber"><span data-linenumber="1"></span>
-<span data-linenumber="2"></span>
-<span data-linenumber="3"></span></div><div class="code">wget https:<span class="hljs-regexp">//</span>jdbc.postgresql.org<span class="hljs-regexp">/download/</span>postgresql-<span class="hljs-number">42.6</span>.<span class="hljs-number">0</span>.jar --no-check-certificate
+</div><p>Then we need to download the JDBC driver for Postgresql database and put it in the lib path of Sqoop tool as follows:</p><pre><code class="wrap yaml hljs"><span class="hljs-string">wget</span> <span class="hljs-attr">https://jdbc.postgresql.org/download/postgresql-42.6.0.jar</span> <span class="hljs-bullet">--no-check-certificate</span>
 
-cp  postgresql-<span class="hljs-number">42.6</span>.<span class="hljs-number">0</span>.jar <span class="hljs-regexp">/usr/</span>hdp<span class="hljs-regexp">/current/</span>sqoop-client<span class="hljs-regexp">/lib/</span>
-</div></div></code></pre><p><img src="https://i.imgur.com/G6MHwXB.png" alt="" class="md-image md-image"></p><p>Now we are ready to run commands on Sqoop to call Postgresql databases. You run these commands on the cluster node. Here, I put some examples.</p><ol>
+<span class="hljs-string">cp</span>  <span class="hljs-string">postgresql-42.6.0.jar</span> <span class="hljs-string">/usr/hdp/current/sqoop-client/lib/</span>
+</code></pre><p><img src="https://i.imgur.com/G6MHwXB.png" alt="" class="md-image md-image"></p><p>Now we are ready to run commands on Sqoop to call Postgresql databases. You run these commands on the cluster node. Here, I put some examples.</p><ol>
 <li>List all databases for user <code>postgres</code></li>
-</ol><pre><code class="wrap sh hljs"><span class="hljs-string">sqoop </span><span class="hljs-built_in">list-databases</span> <span class="hljs-built_in">--connect</span> <span class="hljs-string">jdbc:postgresql:</span>//<span class="hljs-string">localhost/</span><span class="hljs-string">postgres </span><span class="hljs-built_in">--username</span> <span class="hljs-string">postgres
-</span><span class="hljs-comment"># here postgres in the url //localhost/postgres is used only for passing some database. It does not affect the result if we change to some other existing databases.</span>
+</ol><pre><code class="wrap yaml hljs"><span class="hljs-string">sqoop</span> <span class="hljs-string">list-databases</span> <span class="hljs-bullet">--connect</span> <span class="hljs-attr">jdbc:postgresql://localhost/postgres</span> <span class="hljs-bullet">--username</span> <span class="hljs-string">postgres</span>
+<span class="hljs-comment"># here postgres in the url //localhost/postgres is used only for passing some database. It does not affect the result if we change to some other existing databases.</span>
 </code></pre><ol start="2">
 <li>List all tables of database <code>project</code> for user <code>postgres</code></li>
-</ol><pre><code class="wrap sh hljs"><span class="hljs-string">sqoop </span><span class="hljs-built_in">list-tables</span> <span class="hljs-built_in">--connect</span> <span class="hljs-string">jdbc:postgresql:</span>//<span class="hljs-string">localhost/</span><span class="hljs-string">project </span><span class="hljs-built_in">--username</span> <span class="hljs-string">postgres
-</span></code></pre><ol start="3">
-<li>Import all tables of the database <code>emps</code> and store them in HDFS at <code>/project</code> folder.</li>
-</ol><pre><code class="wrap sh hljs">sqoop import-all-tables <span class="hljs-params">--connect</span> jdbc<span class="hljs-function">:postgresql</span>:<span class="hljs-string">//localhost/project</span> <span class="hljs-params">--username</span> postgres <span class="hljs-params">--compression-codec=snappy</span> <span class="hljs-params">--compress</span> <span class="hljs-params">--as-avrodatafile</span> <span class="hljs-params">--warehouse-dir=/project</span> <span class="hljs-params">--m</span> 1 <span class="hljs-params">--direct</span>
+</ol><pre><code class="wrap yaml hljs"><span class="hljs-string">sqoop</span> <span class="hljs-string">list-tables</span> <span class="hljs-bullet">--connect</span> <span class="hljs-attr">jdbc:postgresql://localhost/project</span> <span class="hljs-bullet">--username</span> <span class="hljs-string">postgres</span>
+</code></pre><ol start="3">
+<li>Import all tables of the database <code>emps</code> and store them in HDFS at <code>/project/warehouse</code> folder.</li>
+</ol><pre><code class="wrap yaml hljs"><span class="hljs-string">sqoop</span> <span class="hljs-string">import-all-tables</span> <span class="hljs-bullet">--connect</span> <span class="hljs-attr">jdbc:postgresql://localhost/project</span> <span class="hljs-bullet">--username</span> <span class="hljs-string">postgres</span> <span class="hljs-bullet">--compression-codec=snappy</span> <span class="hljs-bullet">--compress</span> <span class="hljs-bullet">--as-avrodatafile</span> <span class="hljs-bullet">--warehouse-dir=/project/warehouse</span> <span class="hljs-bullet">--m</span> <span class="hljs-number">1</span> <span class="hljs-bullet">--direct</span>
 </code></pre><ol start="4">
-<li>Import a specific table from the database <code>emps</code> with specific columns <code>empno, sal</code> and store it in HDFS at <code>/project</code> folder</li>
-</ol><pre><code class="wrap sh hljs">sqoop import <span class="hljs-params">--connect</span> jdbc<span class="hljs-function">:postgresql</span>:<span class="hljs-string">//localhost/postgres</span> <span class="hljs-params">--username</span> postgres <span class="hljs-params">--compression-codec=snappy</span> <span class="hljs-params">--compress</span> <span class="hljs-params">--as-avrodatafile</span> <span class="hljs-params">--warehouse-dir=/user/teamx/</span> <span class="hljs-params">--m</span> 1 <span class="hljs-params">--table</span> emps <span class="hljs-params">--columns</span> empno, sal <span class="hljs-params">--direct</span>
+<li>Import a specific table from the database <code>emps</code> with specific columns <code>empno, sal</code> and store it in HDFS at <code>/project/warehouse</code> folder</li>
+</ol><pre><code class="wrap yaml hljs"><span class="hljs-string">sqoop</span> <span class="hljs-string">import</span> <span class="hljs-bullet">--connect</span> <span class="hljs-attr">jdbc:postgresql://localhost/postgres</span> <span class="hljs-bullet">--username</span> <span class="hljs-string">postgres</span> <span class="hljs-bullet">--compression-codec=snappy</span> <span class="hljs-bullet">--compress</span> <span class="hljs-bullet">--as-avrodatafile</span> <span class="hljs-bullet">--warehouse-dir=/project/warehouse</span> <span class="hljs-bullet">--m</span> <span class="hljs-number">1</span> <span class="hljs-bullet">--table</span> <span class="hljs-string">emps</span> <span class="hljs-bullet">--columns</span> <span class="hljs-string">empno,</span> <span class="hljs-string">sal</span> <span class="hljs-bullet">--direct</span>
 </code></pre><div class="alert alert-info">
 <p>When importing data in Sqoop, you could run a SQL query using <code>--query</code> option and also filter data using <code>--where</code> option. More options in the <a href="https://sqoop.apache.org/docs/1.4.6/SqoopUserGuide.html" target="_blank" rel="noopener">documentation</a>.</p>
 </div><div class="alert alert-warning">
-<p>Do not forget to clear the folder <code>/project</code>  if exists before importing the data.</p>
+<p>Do not forget to clear the folder <code>/project/warehouse</code>  if exists before importing the data.</p>
 </div><div class="alert alert-danger">
 <p>For the project, you need to import the data from Postgresql to HDFS as AVRO and compressed in Snappy.</p>
 </div><h1 id="References"><a class="anchor hidden-xs" href="#References" title="References"><i class="fa fa-link"></i></a>References</h1><ul>
@@ -357,27 +355,27 @@ cp  postgresql-<span class="hljs-number">42.6</span>.<span class="hljs-number">0
             </a>
             <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
                 <div class="toc"><ul class="nav">
-<li class=""><a href="#Stage-I---Data-collection-and-Ingestion" title="Stage I - Data collection and Ingestion">Stage I - Data collection and Ingestion</a></li>
-<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
-<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
-<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
-<li class=""><a href="#Objectives" title="Objectives">Objectives</a></li>
-<li class=""><a href="#Description" title="Description">Description</a></li>
+<li><a href="#Stage-I---Data-collection-and-Ingestion" title="Stage I - Data collection and Ingestion">Stage I - Data collection and Ingestion</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Description" title="Description">Description</a></li>
 <li class=""><a href="#Dataset-Description" title="Dataset Description">Dataset Description</a></li>
 <li class=""><a href="#A-IU-Hadoop-cluster" title="A. IU Hadoop cluster">A. IU Hadoop cluster</a><ul class="nav">
-<li class=""><a href="#Initiate-the-project-repository0" title="Initiate the project repository">Initiate the project repository</a></li>
+<li class=""><a href="#Initiate-the-project-repository" title="Initiate the project repository">Initiate the project repository</a></li>
 <li class=""><a href="#Download-dataset" title="Download dataset">Download dataset</a></li>
 <li class=""><a href="#Build-a-relational-Database-via-PostgreSQL" title="Build a relational Database via PostgreSQL">Build a relational Database via PostgreSQL</a></li>
 <li class=""><a href="#Import-the-database-into-HDFS-via-Sqoop" title="Import the database into HDFS via Sqoop">Import the database into HDFS via Sqoop</a></li>
 </ul>
 </li>
 <li class=""><a href="#B-HDP-Sandbox" title="B. HDP Sandbox">B. HDP Sandbox</a><ul class="nav">
-<li class=""><a href="#Initiate-the-project-repository" title="Initiate the project repository">Initiate the project repository</a></li>
+<li class=""><a href="#Initiate-the-project-repository1" title="Initiate the project repository">Initiate the project repository</a></li>
 <li class=""><a href="#Build-a-relational-Database-via-PostgreSQL1" title="Build a relational Database via PostgreSQL">Build a relational Database via PostgreSQL</a></li>
-<li class=""><a href="#Import-the-database-into-HDFS-via-Sqoop1" title="Import the database into HDFS via Sqoop">Import the database into HDFS via Sqoop</a></li>
+<li><a href="#Import-the-database-into-HDFS-via-Sqoop1" title="Import the database into HDFS via Sqoop">Import the database into HDFS via Sqoop</a></li>
 </ul>
 </li>
-<li class=""><a href="#References" title="References">References</a></li>
+<li><a href="#References" title="References">References</a></li>
 </ul>
 </div><div class="toc-menu" style="">
     <a class="expand-toggle expand-all" href="#">Expand all</a>
@@ -390,27 +388,27 @@ cp  postgresql-<span class="hljs-number">42.6</span>.<span class="hljs-number">0
     </div>
     <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
         <div class="toc"><ul class="nav">
-<li class=""><a href="#Stage-I---Data-collection-and-Ingestion" title="Stage I - Data collection and Ingestion">Stage I - Data collection and Ingestion</a></li>
-<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
-<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
-<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
-<li class=""><a href="#Objectives" title="Objectives">Objectives</a></li>
-<li class=""><a href="#Description" title="Description">Description</a></li>
+<li><a href="#Stage-I---Data-collection-and-Ingestion" title="Stage I - Data collection and Ingestion">Stage I - Data collection and Ingestion</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Description" title="Description">Description</a></li>
 <li class=""><a href="#Dataset-Description" title="Dataset Description">Dataset Description</a></li>
 <li class=""><a href="#A-IU-Hadoop-cluster" title="A. IU Hadoop cluster">A. IU Hadoop cluster</a><ul class="nav">
-<li class=""><a href="#Initiate-the-project-repository0" title="Initiate the project repository">Initiate the project repository</a></li>
+<li class=""><a href="#Initiate-the-project-repository" title="Initiate the project repository">Initiate the project repository</a></li>
 <li class=""><a href="#Download-dataset" title="Download dataset">Download dataset</a></li>
 <li class=""><a href="#Build-a-relational-Database-via-PostgreSQL" title="Build a relational Database via PostgreSQL">Build a relational Database via PostgreSQL</a></li>
 <li class=""><a href="#Import-the-database-into-HDFS-via-Sqoop" title="Import the database into HDFS via Sqoop">Import the database into HDFS via Sqoop</a></li>
 </ul>
 </li>
 <li class=""><a href="#B-HDP-Sandbox" title="B. HDP Sandbox">B. HDP Sandbox</a><ul class="nav">
-<li class=""><a href="#Initiate-the-project-repository" title="Initiate the project repository">Initiate the project repository</a></li>
+<li class=""><a href="#Initiate-the-project-repository1" title="Initiate the project repository">Initiate the project repository</a></li>
 <li class=""><a href="#Build-a-relational-Database-via-PostgreSQL1" title="Build a relational Database via PostgreSQL">Build a relational Database via PostgreSQL</a></li>
-<li class=""><a href="#Import-the-database-into-HDFS-via-Sqoop1" title="Import the database into HDFS via Sqoop">Import the database into HDFS via Sqoop</a></li>
+<li><a href="#Import-the-database-into-HDFS-via-Sqoop1" title="Import the database into HDFS via Sqoop">Import the database into HDFS via Sqoop</a></li>
 </ul>
 </li>
-<li class=""><a href="#References" title="References">References</a></li>
+<li><a href="#References" title="References">References</a></li>
 </ul>
 </div><div class="toc-menu" style="">
     <a class="expand-toggle expand-all" href="#">Expand all</a>
