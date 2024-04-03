@@ -62,6 +62,7 @@
 <li><a href="#Import-the-database-into-HDFS-via-Sqoop1" title="Import the database into HDFS via Sqoop">Import the database into HDFS via Sqoop</a></li>
 </ul>
 </li>
+<li><a href="#Project-checklist0" title="Project checklist">Project checklist</a></li>
 <li><a href="#References" title="References">References</a></li>
 </ul>
 </div><p></p><h1 id="Prerequisites"><a class="anchor hidden-xs" href="#Prerequisites" title="Prerequisites"><i class="fa fa-link"></i></a>Prerequisites</h1><ul>
@@ -230,16 +231,7 @@ conn_string=<span class="hljs-string">"host=hadoop-04.uni.innopolis.ru port=5432
                         <span class="hljs-comment"># Read all records and print them                        </span>
                         pprint(cur.fetchall())
 
-</code></pre><p>We add the command to run this script to <code>scripts/stage1.sh</code> file.</p><div class="alert alert-success">
-<h3 id="Project-checklist0"><a class="anchor hidden-xs" href="#Project-checklist0" title="Project-checklist0"><i class="fa fa-link"></i></a><strong>Project checklist</strong></h3>
-<ul>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Define schema for all tables.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Create all tables.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Create all required constraints.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Load all data to all tables.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Write scripts to automate the tasks above.</li>
-</ul>
-</div><h2 id="Import-the-database-into-HDFS-via-Sqoop"><a class="anchor hidden-xs" href="#Import-the-database-into-HDFS-via-Sqoop" title="Import-the-database-into-HDFS-via-Sqoop"><i class="fa fa-link"></i></a>Import the database into HDFS via Sqoop</h2><p>Sqoop is a command-line tool used for importing data from relational databases to HDFS. It is a data ingestion tool that enables you to bulk import and export data from a relational database to/from HDFS. You can use Sqoop to import data into HDFS or directly into Hive. Sqoop is installed in the cluster as a client and we will use the command <code>sqoop</code> for that purpose. We will import the tables created in PostgreSQL to HDFS and store them in <code>/user/teamx/project/warehouse</code> folder.</p><p>Now we are ready to run commands on Sqoop to call Postgresql databases. You run these commands on the cluster node <code>hadoop-01.uni.innopolis.ru</code> where you have access in. Here, I put some examples.</p><div class="alert alert-warning">
+</code></pre><p>We add the command to run this script to <code>scripts/stage1.sh</code> file.</p><h2 id="Import-the-database-into-HDFS-via-Sqoop"><a class="anchor hidden-xs" href="#Import-the-database-into-HDFS-via-Sqoop" title="Import-the-database-into-HDFS-via-Sqoop"><i class="fa fa-link"></i></a>Import the database into HDFS via Sqoop</h2><p>Sqoop is a command-line tool used for importing data from relational databases to HDFS. It is a data ingestion tool that enables you to bulk import and export data from a relational database to/from HDFS. You can use Sqoop to import data into HDFS or directly into Hive. Sqoop is installed in the cluster as a client and we will use the command <code>sqoop</code> for that purpose. We will import the tables created in PostgreSQL to HDFS and store them in <code>/user/teamx/project/warehouse</code> folder.</p><p>Now we are ready to run commands on Sqoop to call Postgresql databases. You run these commands on the cluster node <code>hadoop-01.uni.innopolis.ru</code> where you have access in. Here, I put some examples.</p><div class="alert alert-warning">
 <p>You can read the password from <code>secrets/.psql.pass</code> in the terminal as follows:</p>
 <pre><code class="yaml hljs"><span class="hljs-string">password=$(head</span> <span class="hljs-bullet">-n</span> <span class="hljs-number">1</span> <span class="hljs-string">secrets/.psql.pass)</span>
 </code></pre>
@@ -263,16 +255,6 @@ conn_string=<span class="hljs-string">"host=hadoop-04.uni.innopolis.ru port=5432
 <p><strong>Note:</strong> Do not forget to clear the folder <code>hdfs://user/teamx/project/warehouse</code>  if exists before importing the data.</p>
 </div><div class="alert alert-danger">
 <p>For the project, you need to import the data from Postgresql to HDFS as AVRO and compressed in Snappy.</p>
-</div><div class="alert alert-success">
-<h3 id="Project-checklist0"><a class="anchor hidden-xs" href="#Project-checklist0" title="Project-checklist0"><i class="fa fa-link"></i></a><strong>Project checklist</strong></h3>
-<ul>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Import all tables to HDFS serialized in AVRO format and compressed using Snappy codec.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Put the *.avsc and *.java files in output/ folder of you repo.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Write scripts to automate the tasks above.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Run the script <code>stage1.sh</code> to test the first stage.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Check the quality of scripts in the first stage using <code>pylint</code> command.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Summarize your work in the first stage and add it to the report.</li>
-</ul>
 </div><h1 id="B-HDP-Sandbox"><a class="anchor hidden-xs" href="#B-HDP-Sandbox" title="B-HDP-Sandbox"><i class="fa fa-link"></i></a>B. HDP Sandbox</h1><h2 id="Initiate-the-project-repository1"><a class="anchor hidden-xs" href="#Initiate-the-project-repository1" title="Initiate-the-project-repository1"><i class="fa fa-link"></i></a>Initiate the project repository</h2><p>Access the cluster using the credentials provided by the TA and go to your home directory which is <code>/home/teamx</code> (where <code>x</code> is your team number). Duplicate the <a href="https://github.com/firas-jolha/bigdata-final-project-iu-2024.git" target="_blank" rel="noopener">project repo</a> shared on Github. You can learn how to duplicate a repo from this <a href="https://docs.github.com/en/repositories/creating-and-managing-repositories/duplicating-a-repository" target="_blank" rel="noopener">link</a>.</p><h2 id="Build-a-relational-Database-via-PostgreSQL1"><a class="anchor hidden-xs" href="#Build-a-relational-Database-via-PostgreSQL1" title="Build-a-relational-Database-via-PostgreSQL1"><i class="fa fa-link"></i></a>Build a relational Database via PostgreSQL</h2><p>In this step, you need to write SQL statements for creating the database (let’s call it  <code>project</code>) and importing the <code>csv</code> files into it. You can test the statements in an interactive mode but for project purposes, you need to write them in <code>.sql</code> file and then you execute the statements by passing the file via command <code>psql</code> which should replicate all the steps.</p><p>I will give here some of the basic steps to create the database <code>project</code> but feel free to extend it for your project purposes.</p><ol>
 <li>Drop the databases if exist.</li>
 </ol><pre><code class="wrap sh hljs">psql -U postgres -c '<span class="hljs-keyword">DROP</span> <span class="hljs-keyword">DATABASE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">EXISTS</span> <span class="hljs-keyword">project</span>;'
@@ -337,15 +319,6 @@ conn_string=<span class="hljs-string">"host=hadoop-04.uni.innopolis.ru port=5432
 </code></pre><div class="alert alert-warning">
 <p><strong>Note:</strong> Do not forget, that the file <code>.sql</code> should not return errors when you run it for the second time, so you should clear/drop the objects before creating new database objects.</p>
 <!-- This is true for all scripts in the pipeline. -->
-</div><div class="alert alert-success">
-<h3 id="Project-checklist"><a class="anchor hidden-xs" href="#Project-checklist" title="Project-checklist"><i class="fa fa-link"></i></a><strong>Project checklist</strong></h3>
-<ul>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Define schema for all tables.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Create all tables.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Create all required constraints.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Load all data to all tables.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Write scripts to automate the tasks above.</li>
-</ul>
 </div><h2 id="Import-the-database-into-HDFS-via-Sqoop1"><a class="anchor hidden-xs" href="#Import-the-database-into-HDFS-via-Sqoop1" title="Import-the-database-into-HDFS-via-Sqoop1"><i class="fa fa-link"></i></a>Import the database into HDFS via Sqoop</h2><p>Sqoop is a command-line tool used for importing data from relational databases to HDFS. It is a data ingestion tool that enables you to bulk import and export data from a database. You can use Sqoop to import data into HDFS or directly into Hive. Sqoop is installed in HDP as a client and we will use the command <code>sqoop</code> for that purpose. We will import the tables created in PostgreSQL to HDFS and store them in <code>/project</code> folder.</p><p>First of all, we need to add some configuration for PostgreSQL as follows:<br>
 <code>host all all 0.0.0.0/0 trust</code></p><p>You need to it to the file <code>/var/lib/pgsql/data/pg_hba.conf</code>.</p><div class="alert alert-warning">
 <p><strong>Note:</strong> Do not forget to restart Postgresql service as <code>systemctl restart postgresql</code> after updating the config file.</p>
@@ -371,15 +344,18 @@ conn_string=<span class="hljs-string">"host=hadoop-04.uni.innopolis.ru port=5432
 <p>Do not forget to clear the folder <code>/project/warehouse</code>  if exists before importing the data.</p>
 </div><div class="alert alert-danger">
 <p>For the project, you need to import the data from Postgresql to HDFS as AVRO and compressed in Snappy.</p>
-</div><div class="alert alert-success">
-<h3 id="Project-checklist1"><a class="anchor hidden-xs" href="#Project-checklist1" title="Project-checklist1"><i class="fa fa-link"></i></a><strong>Project checklist</strong></h3>
+</div><h1 id="Project-checklist0"><a class="anchor hidden-xs" href="#Project-checklist0" title="Project-checklist0"><i class="fa fa-link"></i></a>Project checklist</h1><div class="alert alert-success">
 <ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Define schema for all tables.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Create all tables.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Create all required constraints.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Load all data to all tables.</li>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Import all tables to HDFS serialized in AVRO format and compressed using Snappy codec.</li>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Put the *.avsc and *.java files in output/ folder of you repo.</li>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Write scripts to automate the tasks above.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Run the script <code>stage1.sh</code> to test the first stage.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Check the quality of scripts in the first stage using <code>pylint</code> command.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Summarize your work in the first stage and add it to the report.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Run the script <code>stage1.sh</code> to test this stage.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Check the quality of scripts in this stage using <code>pylint</code> command.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Summarize your work in this stage and add it to the report.</li>
 </ul>
 </div><h1 id="References"><a class="anchor hidden-xs" href="#References" title="References"><i class="fa fa-link"></i></a>References</h1><ul>
 <li><a href="https://www.cs.uct.ac.za/mit_notes/database/htmls/chp03.html" target="_blank" rel="noopener">toy-dataset</a></li>
@@ -393,7 +369,7 @@ conn_string=<span class="hljs-string">"host=hadoop-04.uni.innopolis.ru port=5432
             </a>
             <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
                 <div class="toc"><ul class="nav">
-<li class=""><a href="#Stage-I---Data-collection-and-Ingestion" title="Stage I - Data collection and Ingestion">Stage I - Data collection and Ingestion</a></li>
+<li><a href="#Stage-I---Data-collection-and-Ingestion" title="Stage I - Data collection and Ingestion">Stage I - Data collection and Ingestion</a></li>
 <li><a href="#Dataset" title="Dataset">Dataset</a></li>
 <li><a href="#Agenda" title="Agenda">Agenda</a></li>
 <li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
@@ -403,16 +379,17 @@ conn_string=<span class="hljs-string">"host=hadoop-04.uni.innopolis.ru port=5432
 <li class=""><a href="#A-IU-Hadoop-cluster" title="A. IU Hadoop cluster">A. IU Hadoop cluster</a><ul class="nav">
 <li><a href="#Initiate-the-project-repository" title="Initiate the project repository">Initiate the project repository</a></li>
 <li><a href="#Download-dataset" title="Download dataset">Download dataset</a></li>
-<li><a href="#Build-a-relational-Database-via-PostgreSQL" title="Build a relational Database via PostgreSQL">Build a relational Database via PostgreSQL</a></li>
-<li class=""><a href="#Import-the-database-into-HDFS-via-Sqoop" title="Import the database into HDFS via Sqoop">Import the database into HDFS via Sqoop</a></li>
+<li class=""><a href="#Build-a-relational-Database-via-PostgreSQL" title="Build a relational Database via PostgreSQL">Build a relational Database via PostgreSQL</a></li>
+<li><a href="#Import-the-database-into-HDFS-via-Sqoop" title="Import the database into HDFS via Sqoop">Import the database into HDFS via Sqoop</a></li>
 </ul>
 </li>
-<li class=""><a href="#B-HDP-Sandbox" title="B. HDP Sandbox">B. HDP Sandbox</a><ul class="nav">
-<li class=""><a href="#Initiate-the-project-repository1" title="Initiate the project repository">Initiate the project repository</a></li>
-<li class=""><a href="#Build-a-relational-Database-via-PostgreSQL1" title="Build a relational Database via PostgreSQL">Build a relational Database via PostgreSQL</a></li>
+<li><a href="#B-HDP-Sandbox" title="B. HDP Sandbox">B. HDP Sandbox</a><ul class="nav">
+<li><a href="#Initiate-the-project-repository1" title="Initiate the project repository">Initiate the project repository</a></li>
+<li><a href="#Build-a-relational-Database-via-PostgreSQL1" title="Build a relational Database via PostgreSQL">Build a relational Database via PostgreSQL</a></li>
 <li><a href="#Import-the-database-into-HDFS-via-Sqoop1" title="Import the database into HDFS via Sqoop">Import the database into HDFS via Sqoop</a></li>
 </ul>
 </li>
+<li><a href="#Project-checklist0" title="Project checklist">Project checklist</a></li>
 <li><a href="#References" title="References">References</a></li>
 </ul>
 </div><div class="toc-menu" style="">
@@ -436,16 +413,17 @@ conn_string=<span class="hljs-string">"host=hadoop-04.uni.innopolis.ru port=5432
 <li class=""><a href="#A-IU-Hadoop-cluster" title="A. IU Hadoop cluster">A. IU Hadoop cluster</a><ul class="nav">
 <li><a href="#Initiate-the-project-repository" title="Initiate the project repository">Initiate the project repository</a></li>
 <li><a href="#Download-dataset" title="Download dataset">Download dataset</a></li>
-<li><a href="#Build-a-relational-Database-via-PostgreSQL" title="Build a relational Database via PostgreSQL">Build a relational Database via PostgreSQL</a></li>
-<li class=""><a href="#Import-the-database-into-HDFS-via-Sqoop" title="Import the database into HDFS via Sqoop">Import the database into HDFS via Sqoop</a></li>
+<li class=""><a href="#Build-a-relational-Database-via-PostgreSQL" title="Build a relational Database via PostgreSQL">Build a relational Database via PostgreSQL</a></li>
+<li><a href="#Import-the-database-into-HDFS-via-Sqoop" title="Import the database into HDFS via Sqoop">Import the database into HDFS via Sqoop</a></li>
 </ul>
 </li>
-<li class=""><a href="#B-HDP-Sandbox" title="B. HDP Sandbox">B. HDP Sandbox</a><ul class="nav">
-<li class=""><a href="#Initiate-the-project-repository1" title="Initiate the project repository">Initiate the project repository</a></li>
-<li class=""><a href="#Build-a-relational-Database-via-PostgreSQL1" title="Build a relational Database via PostgreSQL">Build a relational Database via PostgreSQL</a></li>
+<li><a href="#B-HDP-Sandbox" title="B. HDP Sandbox">B. HDP Sandbox</a><ul class="nav">
+<li><a href="#Initiate-the-project-repository1" title="Initiate the project repository">Initiate the project repository</a></li>
+<li><a href="#Build-a-relational-Database-via-PostgreSQL1" title="Build a relational Database via PostgreSQL">Build a relational Database via PostgreSQL</a></li>
 <li><a href="#Import-the-database-into-HDFS-via-Sqoop1" title="Import the database into HDFS via Sqoop">Import the database into HDFS via Sqoop</a></li>
 </ul>
 </li>
+<li><a href="#Project-checklist0" title="Project checklist">Project checklist</a></li>
 <li><a href="#References" title="References">References</a></li>
 </ul>
 </div><div class="toc-menu" style="">
