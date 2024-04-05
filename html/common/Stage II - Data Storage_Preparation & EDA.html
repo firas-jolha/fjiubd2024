@@ -1,0 +1,646 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Stage II - Data Storage/Preparation &amp; EDA - CodiMD
+    </title>
+    <link rel="icon" type="image/png" href="http://localhost:3000/favicon.png">
+    <link rel="apple-touch-icon" href="http://localhost:3000/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha256-H0KfTigpUV+0/5tn2HXC0CPwhhDhWgSawJdnFd0CGCo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fork-awesome/1.1.3/css/fork-awesome.min.css" integrity="sha256-ZhApazu+kejqTYhMF+1DzNKjIzP7KXu6AzyXcC1gMus=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github-gist.min.css" integrity="sha256-tAflq+ymku3Khs+I/WcAneIlafYgDiOQ9stIHH985Wo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,300italic,300|Source+Serif+Pro|Source+Code+Pro:400,300,500&subset=latin,latin-ext);.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{padding:0 1em;color:#777;border-left:.25em solid #ddd}.night .markdown-body blockquote{color:#bcbcbc}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.night .markdown-body h1,.night .markdown-body h2,.night .markdown-body h3,.night .markdown-body h4,.night .markdown-body h5,.night .markdown-body h6{color:#ddd}.markdown-body h1 .fa-link,.markdown-body h2 .fa-link,.markdown-body h3 .fa-link,.markdown-body h4 .fa-link,.markdown-body h5 .fa-link,.markdown-body h6 .fa-link{color:#000;vertical-align:middle;visibility:hidden;font-size:16px}.night .markdown-body h1 .fa-link,.night .markdown-body h2 .fa-link,.night .markdown-body h3 .fa-link,.night .markdown-body h4 .fa-link,.night .markdown-body h5 .fa-link,.night .markdown-body h6 .fa-link{color:#fff}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .fa-link,.markdown-body h2:hover .anchor .fa-link,.markdown-body h3:hover .anchor .fa-link,.markdown-body h4:hover .anchor .fa-link,.markdown-body h5:hover .anchor .fa-link,.markdown-body h6:hover .anchor .fa-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.night .markdown-body table tr{background-color:#5f5f5f}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.night .markdown-body table tr:nth-child(2n){background-color:#4f4f4f}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.night .markdown-body code,.night .markdown-body tt{color:#eee;background-color:hsla(0,0%,90.2%,.36)}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\A0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.markdown-body kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid;border-color:#ccc #ccc #bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body pre{border:inherit!important}.night .markdown-body pre{filter:invert(100%)}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-webkit-inline-flex;display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.night .markdown-body .gist table tr:nth-child(2n){background-color:#ddd}.markdown-body code[data-gist-id]{background:none;padding:0;filter:invert(100%)}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.geo,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.night .markdown-body pre.graphviz .graph>polygon{fill:#333}.night .markdown-body pre.mermaid .sectionTitle,.night .markdown-body pre.mermaid .titleText,.night .markdown-body pre.mermaid text{fill:#fff}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{max-width:100%;height:100%}.night .markdown-body .abc path{fill:#eee}.night .markdown-body .abc path.note_selected{fill:##4DD0E1}.night tspan{fill:#fefefe}.night pre rect{fill:transparent}.night pre.flow-chart path,.night pre.flow-chart rect{stroke:#fff}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body img{background-color:transparent}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;-webkit-transition:opacity .2s;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;-webkit-transition:opacity .2s;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.geo-map{width:100%;height:250px}.markmap-container{height:300px}.markmap-container>svg{width:100%;height:100%}.MJX_Assistive_MathML{display:none}.ui-infobar{position:relative;z-index:2;max-width:758px;margin-top:25px;margin-bottom:-25px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:10000}.ui-toc-label{opacity:.9;background-color:#ccc;border:none}.ui-toc-label,.ui-toc .open .ui-toc-label{-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#5f5f5f}.ui-toc-label:focus{opacity:1;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.night .ui-toc-dropdown .nav>li>a:focus,.night .ui-toc-dropdown .nav>li>a:hover{color:#fff;border-left-color:#fff}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.night .ui-toc-dropdown .nav>.active:focus>a,.night .ui-toc-dropdown .nav>.active:hover>a,.night .ui-toc-dropdown .nav>.active>a{color:#fff;border-left:2px solid #fff}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.night .ui-toc-dropdown .nav>li>a{color:#aaa}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:50px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a{padding-right:50px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:60px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a{padding-right:60px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:hover{padding-left:49px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:hover{padding-right:49px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-left:59px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-right:59px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>a{padding-left:48px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:48px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active>a{padding-left:58px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:58px}.markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,Hiragino Kaku Gothic Pro,"\30D2\30E9\30AE\30CE\89D2\30B4   Pro W3",Osaka,Meiryo,"\30E1\30A4\30EA\30AA",MS Gothic,"\FF2D\FF33   \30B4\30B7\30C3\30AF",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,"\FF2D\FF33   \FF30\30B4\30B7\30C3\30AF",sans-serif}.markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang TC,Microsoft JhengHei,"\5FAE\8EDF\6B63\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,"\5FAE\8EDF\6B63\9ED1UI",sans-serif}.markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang SC,Microsoft YaHei,"\5FAE\8F6F\96C5\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,"\5FAE\8F6F\96C5\9ED1UI",sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:rgba(0,0,0,.85)}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:contain}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}small span{line-height:22px}small .dropdown{display:inline-block}small .dropdown a:focus,small .dropdown a:hover{text-decoration:none}.unselectable{-moz-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-o-user-select:none;user-select:none}.night .navbar{background:#333;border-bottom-color:#333;color:#eee}.night .navbar a{color:#eee}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}.focus,:focus{outline:none!important}::-moz-focus-inner{border:0!important}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid" lang="en"><h6 id="-Home-page"><a class="anchor hidden-xs" href="#-Home-page" title="-Home-page"><i class="fa fa-link"></i></a><a href="https://firas-jolha.github.io/fjiubd2024/" target="_blank" rel="noopener"><img src="https://cdn4.iconfinder.com/data/icons/bold-ui-1/60/Home_2-512.png" alt="1" width="30px" height="30px"> Home page</a></h6><h1 id="Stage-II---Data-StoragePreparation-amp-EDA"><a class="anchor hidden-xs" href="#Stage-II---Data-StoragePreparation-amp-EDA" title="Stage-II---Data-StoragePreparation-amp-EDA"><i class="fa fa-link"></i></a>Stage II - Data Storage/Preparation &amp; EDA</h1><p><strong>Course:</strong> Big Data - IU S24<br>
+<strong>Author:</strong> Firas Jolha</p><h1 id="Dataset"><a class="anchor hidden-xs" href="#Dataset" title="Dataset"><i class="fa fa-link"></i></a>Dataset</h1><ul>
+<li><a href="http://www.cems.uwe.ac.uk/~pchatter/resources/html/emp_dept_data+schema.html" target="_blank" rel="noopener">Some emps and depts</a></li>
+</ul><h1 id="Agenda"><a class="anchor hidden-xs" href="#Agenda" title="Agenda"><i class="fa fa-link"></i></a>Agenda</h1><p></p><div class="toc"><ul>
+<li><a href="#Stage-II---Data-StoragePreparation-amp-EDA" title="Stage II - Data Storage/Preparation &amp; EDA">Stage II - Data Storage/Preparation &amp; EDA</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Introduction-to-Apache-Hive" title="Introduction to Apache Hive">Introduction to Apache Hive</a></li>
+<li><a href="#Dataset-Description" title="Dataset Description">Dataset Description</a></li>
+<li><a href="#A-IU-Hadoop-cluster" title="A. IU Hadoop cluster">A. IU Hadoop cluster</a><ul>
+<li><a href="#Preparation0" title="Preparation">Preparation</a></li>
+<li><a href="#Build-Hive-Tables0" title="Build Hive Tables">Build Hive Tables</a></li>
+<li><a href="#Hive-Optimizations0" title="Hive Optimizations">Hive Optimizations</a><ul>
+<li><a href="#Partitioning-in-Hive0" title="Partitioning in Hive">Partitioning in Hive</a></li>
+</ul>
+</li>
+<li><a href="#Bucketing-in-Hive0" title="Bucketing in Hive">Bucketing in Hive</a></li>
+<li><a href="#Apache-Tez0" title="Apache Tez">Apache Tez</a></li>
+<li><a href="#Perform-Exploratory-Data-Analysis-EDA0" title="Perform Exploratory Data Analysis (EDA)">Perform Exploratory Data Analysis (EDA)</a></li>
+</ul>
+</li>
+<li><a href="#Project-checklist" title="Project checklist">Project checklist</a></li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><p></p><h1 id="Prerequisites"><a class="anchor hidden-xs" href="#Prerequisites" title="Prerequisites"><i class="fa fa-link"></i></a>Prerequisites</h1><ul>
+<li>Stage I is done
+<ul>
+<li>The relational database is built.</li>
+<li>The database is imported to HDFS via Sqoop.</li>
+<li>The tables are stored in HDFS as Avro data files and compressed in Snappy.</li>
+<li>The schema of AVRO files are still in the local file system.</li>
+</ul>
+</li>
+</ul><h1 id="Objectives"><a class="anchor hidden-xs" href="#Objectives" title="Objectives"><i class="fa fa-link"></i></a>Objectives</h1><ul>
+<li>Create Hive tables</li>
+<li>Perform EDA</li>
+</ul><h1 id="Introduction-to-Apache-Hive"><a class="anchor hidden-xs" href="#Introduction-to-Apache-Hive" title="Introduction-to-Apache-Hive"><i class="fa fa-link"></i></a>Introduction to Apache Hive</h1><p>Apache Hive is a distributed, fault-tolerant data warehouse system that enables analytics at a massive scale. It is an Apache Hadoop ecosystem component developed by Facebook to query the data stored in Hadoop Distributed File System (HDFS). Here, HDFS is the data storage layer of Hadoop that at very high level divides the data into small blocks (default 128 MB) and stores these blocks on different nodes. It is also termed Data Warehousing framework of Hadoop and provides various analytical features, such as windowing and partitioning</p><p>Hive is built on top of Apache Hadoop. As a result, Hive is closely integrated with Hadoop, and is designed to work quickly on petabytes of data. What makes Hive unique is the ability to query large datasets, leveraging Apache Tez or MapReduce, with a SQL-like interface called HiveQL.</p><p>Traditional relational databases are designed for interactive queries on small to medium datasets and do not process huge datasets well. Hive instead uses batch processing so that it works quickly across a very large distributed database.</p><p>Hive transforms HiveQL queries into MapReduce or Tez jobs that run on Apache Hadoop’s distributed job scheduling framework, Yet Another Resource Negotiator (YARN). It queries data stored in a distributed storage solution, like the Hadoop Distributed File System (HDFS) or Amazon S3.</p><p><img src="https://i.imgur.com/MO4LLOM.png" alt="" class="md-image md-image"></p><p>Hive stores the metadata of the databases and tables in a <strong>metastore</strong>, which is a database (for instance, MySQL) or file backed store that enables easy data abstraction and discovery. Hive includes <strong>HCatalog</strong>, which is a table and storage management layer that reads data from the Hive metastore to facilitate seamless integration between Hive, and MapReduce. By using the metastore, HCatalog allows MapReduce to use the same data structures as Hive, so that the metadata doesn’t have to be redefined for each engine. Custom applications or third party integrations can use <strong>WebHCat</strong>, which is a RESTful API for HCatalog to access and reuse Hive metadata.</p><p>Data in Apache Hive can be categorized into Table, Partition, and Bucket. The table in Hive is logically made up of the data being stored. It is of two types such as an internal or managed table and external table.</p><p>In this stage, we will create external Hive tables for the PostgreSQL tables imported by Sqoop. Then, we will perform Exploratory Data Analysis using HiveQL and visualize it using Apache superset.</p><h1 id="Dataset-Description"><a class="anchor hidden-xs" href="#Dataset-Description" title="Dataset-Description"><i class="fa fa-link"></i></a>Dataset Description</h1><p>The dataset is about the departments and employees in a company as well as their salary categories. It consists of two <code>.csv</code> files.</p><details>
+<p>The file <code>emps.csv</code> contains information about employees:</p>
+<ul>
+<li>EMPNO is a unique employee number; it is the primary key of the employee table.</li>
+<li>ENAME stores the employee’s name.</li>
+<li>The JOB attribute stores the name of the job the employee does.</li>
+<li>The MGR attribute contains the employee number of the employee who manages that employee. If the employee has no manager, then the MGR column for that employee is left set to null.</li>
+<li>The HIREDATE column stores the date on which the employee joined the company.</li>
+<li>The SAL column contains the details of employee salaries.</li>
+<li>The COMM attribute stores values of commission paid to employees. Not all employees receive commission, in which case the COMM field is set to null.</li>
+<li>The DEPTNO column stores the department number of the department in which each employee is based. This data item acts a foreign key, linking the employee details stored in the EMP table with the details of departments in which employees work, which are stored in the DEPT table.</li>
+</ul>
+<p>The file <code>depts.csv</code> contains information about departments:</p>
+<ul>
+<li>DEPTNO: The primary key containing the department numbers used to identify each department.</li>
+<li>DNAME: The name of each department.</li>
+<li>LOC: The location where each department is based.</li>
+</ul>
+<!-- The file `salgrade.csv` contains information about salary categories:
+- GRADE: A numeric identifier for the category of the salary.
+- LOSAL: The lowest salary in this category.
+- HISAL: The highest salary in this category.
+ -->
+<div class="alert alert-info">
+<p>I created these <code>csv</code> files from the tables provided in the link.</p>
+</div>
+</details><h1 id="A-IU-Hadoop-cluster"><a class="anchor hidden-xs" href="#A-IU-Hadoop-cluster" title="A-IU-Hadoop-cluster"><i class="fa fa-link"></i></a>A. IU Hadoop cluster</h1><p><strong>Note:</strong> We assume that your current working directory <code>.</code> is your repo root directory <code>/home/teamx/project/</code>.</p><h2 id="Preparation0"><a class="anchor hidden-xs" href="#Preparation0" title="Preparation0"><i class="fa fa-link"></i></a>Preparation</h2><p>Before starting with Hive tables, make sure that you imported the PostgreSQL tables to HDFS (<code>/user/teamx/project/warehouse</code> warehouse folder, for instance) as AVRO files and compressed using Snoppy HDFS codec. You also need to move the schemas <code>.avsc</code> from the local file system (it should be the folder where you executed sqoop command) to HDFS to a folder, for instance <code>/user/teamx/project/warehouse/avsc</code>, as follows (assuming that <code>.avsc</code> files are in the current working directory in the local file system):</p><pre><code class="wrap yaml hljs"><span class="hljs-string">hdfs</span> <span class="hljs-string">dfs</span> <span class="hljs-bullet">-mkdir</span> <span class="hljs-bullet">-p</span> <span class="hljs-string">project/warehouse/avsc</span>
+<span class="hljs-string">hdfs</span> <span class="hljs-string">dfs</span> <span class="hljs-bullet">-put</span> <span class="hljs-string">output/*.avsc</span> <span class="hljs-string">project/warehouse/avsc</span>
+</code></pre><div class="alert alert-danger">
+<p><strong>Note:</strong> In the local filesystem, you should store the *.avsc and *.java output files in <code>output/</code> folder of the project repository as follows:</p>
+<pre><code class="wrap yaml hljs"><span class="hljs-string">mv</span> <span class="hljs-string">*.avsc</span> <span class="hljs-string">output/</span>
+<span class="hljs-string">mv</span> <span class="hljs-string">*.java</span> <span class="hljs-string">output/</span>
+</code></pre>
+</div><h2 id="Build-Hive-Tables0"><a class="anchor hidden-xs" href="#Build-Hive-Tables0" title="Build-Hive-Tables0"><i class="fa fa-link"></i></a>Build Hive Tables</h2><p>In this step, you need to write HiveQL statements for creating the Hive database (let’s call it  <code>teamx_projectdb</code>) and importing the Snappy-compressed <code>avro</code> data files. You can test the statements in an interactive mode using <code>beeline</code> command but for project purposes, you need to write them in <code>.hql</code> files and then you execute the statements from the file using <code>beeline</code> tool or via <a href="https://pypi.org/project/hivejdbc/" target="_blank" rel="noopener"><code>hivejdbc</code></a> library which should replicate all the steps. Here, we will store the HiveQL statements in a file <code>db.hql</code>.</p><table>
+<thead>
+<tr>
+<th>HiveQL</th>
+<th>Description</th>
+</tr>
+</thead>
+<tbody>
+<tr>
+<td><code>SHOW DATABASES;</code></td>
+<td>Listing databases</td>
+</tr>
+<tr>
+<td><code>USE teamx_projectdb;</code></td>
+<td>Selecting the database <code>teamx_projectdb</code></td>
+</tr>
+<tr>
+<td><code>SHOW TABLES;</code></td>
+<td>Listing tables in a database</td>
+</tr>
+<tr>
+<td><code>DESCRIBE [FORMATTED|EXTENDED] depts;</code></td>
+<td>Describing the format of a table <code>depts</code></td>
+</tr>
+<tr>
+<td><code>CREATE DATABASE teamx_projectdb;</code></td>
+<td>Creating a database <code>teamx_projectdb</code></td>
+</tr>
+<tr>
+<td><code>DROP DATABASE db_name [CASCADE];</code></td>
+<td>Dropping a database <code>teamx_projectdb</code></td>
+</tr>
+<tr>
+<td></td>
+<td></td>
+</tr>
+</tbody>
+</table><p>I will give here some of the basic steps to create the Hive database <code>teamx_projectdb</code> but you need to extend it for your project purposes.</p><ol>
+<li>Drop the databases if exist.</li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">DATABASE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">EXISTS</span> teamx_projectdb;
+</code></pre><div class="alert alert-danger">
+<p>If you got the following error</p>
+<pre><code class="wrap hljs">FAILED: Execution Error, return code 1 from org.apache.hadoop.hive.ql.exec.DDLTask. InvalidOperationException(message:Database teamx_projectdb is not empty. One or more tables exist.)
+</code></pre>
+<p>Then add CASCADE as follows:</p>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">DROP</span> <span class="hljs-keyword">DATABASE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">EXISTS</span> teamx_projectdb <span class="hljs-keyword">CASCADE</span>;
+</code></pre>
+</div><ol start="2">
+<li>Create a database <code>teamx_projectdb</code> and access it.</li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> teamx_projectdb LOCATION <span class="hljs-string">"project/warehouse"</span>;
+<span class="hljs-keyword">USE</span> teamx_projectdb;
+</code></pre><ol start="3">
+<li>Create tables <code>employees</code> and <code>departments</code></li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-comment">-- Create tables</span>
+
+<span class="hljs-comment">-- emps table</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> employees <span class="hljs-keyword">STORED</span> <span class="hljs-keyword">AS</span> AVRO LOCATION <span class="hljs-string">'project/warehouse/emps'</span> TBLPROPERTIES (<span class="hljs-string">'avro.schema.url'</span>=<span class="hljs-string">'project/warehouse/avsc/emps.avsc'</span>);
+
+
+<span class="hljs-comment">-- dept table</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> departments <span class="hljs-keyword">STORED</span> <span class="hljs-keyword">AS</span> AVRO LOCATION <span class="hljs-string">'project/warehouse/depts'</span> TBLPROPERTIES (<span class="hljs-string">'avro.schema.url'</span>=<span class="hljs-string">'project/warehouse/avsc/depts.avsc'</span>);
+
+</code></pre><ol start="4">
+<li>We can check that tables are created by running some <code>select</code> queries.</li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-comment">-- For checking the content of tables</span>
+<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> employees;
+<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> departments;
+</code></pre><p>After you prepared the <code>db.hql</code> file, follow the next steps:</p><ol>
+<li>Read the password from password file.</li>
+</ol><pre><code class="wrap yaml hljs"><span class="hljs-string">password=$(head</span> <span class="hljs-bullet">-n</span> <span class="hljs-number">1</span> <span class="hljs-string">secrets/.hive.pass)</span>
+</code></pre><ol start="2">
+<li>Run the file <code>db.hql</code> via the command <code>beeline -f</code> as follows:</li>
+</ol><pre><code class="wrap yaml hljs"><span class="hljs-string">beeline</span> <span class="hljs-bullet">-u</span> <span class="hljs-attr">jdbc:hive2://hadoop-03.uni.innopolis.ru:10001</span> <span class="hljs-bullet">-n</span> <span class="hljs-string">teamx</span> <span class="hljs-bullet">-p</span> <span class="hljs-string">$password</span> <span class="hljs-bullet">-f</span> <span class="hljs-string">sql/db.hql</span>
+</code></pre><ol start="3">
+<li>The query results needs to be saved to <code>hive_results.txt</code> file. You can use the redirection operator (&gt;) to store the output in a file as follows:</li>
+</ol><pre><code class="wrap yaml hljs"><span class="hljs-string">beeline</span> <span class="hljs-bullet">-u</span> <span class="hljs-attr">jdbc:hive2://hadoop-03.uni.innopolis.ru:10001</span> <span class="hljs-bullet">-n</span> <span class="hljs-string">teamx</span> <span class="hljs-bullet">-p</span> <span class="hljs-string">$password</span> <span class="hljs-bullet">-f</span> <span class="hljs-string">sql/db.hql</span> <span class="hljs-string">&gt; output/hive_results.txt
+</span></code></pre><div class="alert alert-danger">
+<p><strong>Note:</strong> You should do the steps above for the project.</p>
+<p><strong>Note:</strong> If you want to omit the error stream of <code>beeline</code> command, redirect it into <code>/dev/null</code> as follows:</p>
+<pre><code class="wrap yaml hljs"><span class="hljs-string">beeline</span> <span class="hljs-bullet">-u</span> <span class="hljs-attr">jdbc:hive2://hadoop-03.uni.innopolis.ru:10001</span> <span class="hljs-bullet">-n</span> <span class="hljs-string">teamx</span> <span class="hljs-bullet">-p</span> <span class="hljs-string">$password</span> <span class="hljs-bullet">-f</span> <span class="hljs-string">sql/db.hql</span> <span class="hljs-string">&gt; output/hive_results.txt 2&gt; /dev/null
+</span></code></pre>
+</div><p><img src="https://i.imgur.com/a19CUmR.png" alt="" class="md-image md-image"></p><div class="alert alert-warning">
+<p><strong>Note:</strong> Do not forget, that the file <code>.hql</code> should not return errors when you run it for the second time, so you should clear/drop the objects before creating new database objects. This is true for all scripts in the pipeline.</p>
+</div><p>We can also connect to Hive Server in <em>Python</em> as follows:</p><pre><code class="wrap python hljs"><span class="hljs-keyword">from</span> hivejdbc <span class="hljs-keyword">import</span> connect, DictCursor
+<span class="hljs-keyword">import</span> os
+
+
+<span class="hljs-comment"># Read password from secrets file</span>
+file = os.path.join(<span class="hljs-string">"secrets"</span>, <span class="hljs-string">".hive.pass"</span>)
+<span class="hljs-keyword">with</span> open(file, <span class="hljs-string">"r"</span>) <span class="hljs-keyword">as</span> file:
+        password=file.read().rstrip()
+        
+<span class="hljs-comment"># Connect to HS2</span>
+conn = connect(
+    host=<span class="hljs-string">'hadoop-03.uni.innopolis.ru'</span>,
+    port=<span class="hljs-number">10001</span>,
+    driver=<span class="hljs-string">"/shared/hive-jdbc-3.1.3-standalone.jar"</span>,
+    database=<span class="hljs-string">'default'</span>,
+    user=<span class="hljs-string">'teamx'</span>,
+    password=password
+)
+
+
+<span class="hljs-comment"># Create a cursor</span>
+cur = conn.cursor()
+
+<span class="hljs-comment"># Execute one statement</span>
+cur.execute(<span class="hljs-string">"SHOW DATABASES"</span>)
+
+
+<span class="hljs-comment"># Here we assume that this code is written in scripts/ or notebooks/ folder in the repository folder</span>
+repo_folder = os.path.join(<span class="hljs-string">".."</span>)
+file_path = os.path.join(repo_folder, <span class="hljs-string">"sql"</span>, <span class="hljs-string">"db.hql"</span>)
+
+
+<span class="hljs-comment"># Read line by line</span>
+<span class="hljs-keyword">with</span> open(file_path) <span class="hljs-keyword">as</span> file:
+    <span class="hljs-keyword">for</span> line <span class="hljs-keyword">in</span> file.readlines():
+        
+        <span class="hljs-comment"># see note below</span>
+        line = line.replace(<span class="hljs-string">";"</span>, <span class="hljs-string">""</span>)
+        <span class="hljs-keyword">try</span>:
+            cur.execute(line)
+            print(cur.fetchall())
+        <span class="hljs-keyword">except</span>:
+            <span class="hljs-keyword">pass</span>
+</code></pre><div class="alert alert-danger">
+<p><strong>Note:</strong> In <code>hivejdbc</code> package, you need to remove the semicolons (;) from each line before executing the HiveQL statement.</p>
+</div><h2 id="Hive-Optimizations0"><a class="anchor hidden-xs" href="#Hive-Optimizations0" title="Hive-Optimizations0"><i class="fa fa-link"></i></a>Hive Optimizations</h2><p>Data in Apache Hive can be categorized into <strong>Table</strong>, <strong>Partition</strong>, and <strong>Bucket</strong>. The table in Hive is logically made up of the data being stored.</p><p><strong>Partitioning</strong> – Apache Hive organizes tables into <strong>partitions</strong> for grouping same type of data together based on a column or partition key. Each table in the hive can have one or more partition keys to identify a particular partition. Using partition we can <em>make it faster to run queries on slices of the data</em>.</p><p><strong>Bucketing</strong> – Hive Tables or partitions are subdivided into <strong>buckets</strong> based on the hash function of a column in the table to give extra structure to the data that may be used for <em>more efficient queries</em>.</p><h3 id="Partitioning-in-Hive0"><a class="anchor hidden-xs" href="#Partitioning-in-Hive0" title="Partitioning-in-Hive0"><i class="fa fa-link"></i></a>Partitioning in Hive</h3><p>Partitioning in Hive is used to increase query performance. Hive is very good tool to perform queries on large datasets, especially datasets that require a scan of an entire table. Generally, users are aware of their data domain, and in most of cases they want to search for a particular type of data. For such cases, a simple query takes large time to return the result because it requires the <strong>scan of the entire dataset</strong>. The concept of partitioning can be used to reduce the cost of querying the data. Partitions are like horizontal slices of data that allows the large sets of data as more manageable chunks. Table partitioning means dividing the table data into some parts based on the unique values of particular columns (for example, city and country) and segregating the input data records into different files or directories.</p><p>Partitioning in Hive is done using the <strong>PARTITIONED BY</strong> clause in the create table statement of HiveQL. Tables can have one or more partitions. A table can be partitioned on the basis of one or more columns. The columns on which partitioning is done cannot be included in the data of table. For example, you have the four fields id, name, age, and city, and you want to partition the data on the basis of the city field, then the city field will not be included in the columns of create table statement and will only be used in the PARTITIONED BY clause. You can still query the data in a normal way using where city=xyz. The result will be retrieved from the respective partition because data is stored in a different directory with the city name for each city.</p><h4 id="Managed-vs-External-tables"><a class="anchor hidden-xs" href="#Managed-vs-External-tables" title="Managed-vs-External-tables"><i class="fa fa-link"></i></a>Managed vs. External tables</h4><p>There are two main types of tables in Hive—<strong>Managed</strong> tables and <strong>External</strong> tables. By default, Hive creates an <strong>Internal</strong> table also known as the Managed table, In the managed table, Hive owns the data/files on the table meaning any data you insert or load files to the table are managed by the Hive process when you drop the table the underlying data or files are also get deleted.</p><p>Using <strong>EXTERNAL</strong> option you can create an external table, Hive does not manage the external table, when you drop an external table, only table metadata from Metastore will be removed but the underlying files will not be removed and still they can be accessed from HDFS.</p><h4 id="Static-vs-Dynamic-partitioning"><a class="anchor hidden-xs" href="#Static-vs-Dynamic-partitioning" title="Static-vs-Dynamic-partitioning"><i class="fa fa-link"></i></a>Static vs. Dynamic partitioning</h4><p>Both table types support partitioning mechanism. Partitioning can be done in one of the following two ways:</p><ul>
+<li>Static partitioning</li>
+<li>Dynamic partitioning</li>
+</ul><p>In static partitioning, you need to manually insert data in different partitions of a table. Let’s use a table partitioned on the departments of the company. For each department, you need to manually insert the data from the data source to a department partition in the partitioned table. So for 4 depts, you need to write the equivalent number of Hive queries to insert data in each partition.</p><p>Prior to Hive 0.9.0, dynamic partitioning was disabled by default whereas it is enabled in Hive 0.9.0 and later by default. You can enable it by setting the following properties in <code>beeline</code> or in <code>db.hql</code> file:</p><pre><code class="wrap sql hljs"><span class="hljs-keyword">SET</span> hive.exec.dynamic.partition=<span class="hljs-literal">true</span>;
+</code></pre><p>The configuration property <code>hive.exec.dynamic.partition.mode</code> allows to switch between strict and nonstrict modes of dynamic partition. In <code>strict</code> mode, the user must specify at least one static partition in case the user accidentally overwrites all partitions, in <code>nonstrict</code> mode all partitions are allowed to be dynamic. By default, the mode is <code>strict</code> and we can change it as follows:</p><pre><code class="sql hljs"><span class="hljs-keyword">SET</span> hive.exec.dynamic.partition.mode=nonstrict;
+</code></pre><h4 id="Create-a-Partitioned-Table-in-Hive0"><a class="anchor hidden-xs" href="#Create-a-Partitioned-Table-in-Hive0" title="Create-a-Partitioned-Table-in-Hive0"><i class="fa fa-link"></i></a>Create a Partitioned Table in Hive</h4><p>For example, we have a table <code>Employees</code> containing the employee information of some company like <code>empno, ename, job, deptno,</code>…etc. Now, if we want to perform partitioning on the basis of <code>deptno</code> column. Then the information of all the employees belonging to a particular department will be stored together in a separate partition. Physically, a partition in Hive is nothing but just a sub-directory in the table directory. For example, we have data for three departments in our <code>Employees</code> table – Accounting (deptno=10), Reseaerch (deptno=20), Operations (deptno=40) and Sales (deptno=30). Thus we will have four partitions in total for each of the departments as we can see clearly in diagram below.</p><p><img src="https://i.imgur.com/5HW3D7w.png" alt="" class="md-image md-image"></p><p>We can run the following statement to create the partitioned table.</p><pre><code class="wrap sql hljs"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> employees_part(empno <span class="hljs-built_in">int</span>, ename <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), job <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), mgr <span class="hljs-built_in">int</span>, hiredate <span class="hljs-built_in">date</span>, sal <span class="hljs-built_in">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>), comm <span class="hljs-built_in">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)) PARTITIONED <span class="hljs-keyword">BY</span> (deptno <span class="hljs-built_in">int</span>) <span class="hljs-keyword">STORED</span> <span class="hljs-keyword">AS</span> AVRO LOCATION <span class="hljs-string">'project/hive/warehouse/employees_part'</span> TBLPROPERTIES (<span class="hljs-string">'AVRO.COMPRESS'</span>=<span class="hljs-string">'SNAPPY'</span>);
+
+
+<span class="hljs-comment">-- insert some data in nonstrict mode</span>
+<span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> employees_part <span class="hljs-keyword">partition</span> (deptno=<span class="hljs-number">20</span>) <span class="hljs-keyword">values</span> (<span class="hljs-number">7369</span>,<span class="hljs-string">'SMITH'</span>,<span class="hljs-string">'CLERK'</span>,<span class="hljs-number">7902</span>,<span class="hljs-string">'93/6/13'</span>,<span class="hljs-number">800</span>,<span class="hljs-number">0.00</span>);
+</code></pre><p>When you run the previous <code>insert</code> statement, you may get the following error.</p><p><img src="https://i.imgur.com/qZpKGys.png" alt="" class="md-image md-image"></p><p>This is due to the fact that strict mode is enabled but we can insert the data as follows:</p><pre><code class="wrap sql hljs"><span class="hljs-comment">-- insert some data in strict mode</span>
+<span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> employees_part <span class="hljs-keyword">values</span> (<span class="hljs-number">7369</span>,<span class="hljs-string">'SMITH'</span>,<span class="hljs-string">'CLERK'</span>,<span class="hljs-number">7902</span>,<span class="hljs-string">'93/6/13'</span>,<span class="hljs-number">800</span>,<span class="hljs-number">0.00</span>,<span class="hljs-number">20</span>);
+</code></pre><p>Once <code>nonstrict</code> mode is enabled, we can create partitions for all unique values for any columns, say <code>deptno</code> of the <code>employees_part</code> table, as follows:</p><pre><code class="wrap sql hljs"><span class="hljs-keyword">insert</span> <span class="hljs-keyword">into</span> employees_part <span class="hljs-keyword">partition</span> (deptno) <span class="hljs-keyword">values</span> (<span class="hljs-number">7369</span>,<span class="hljs-string">'SMITH'</span>,<span class="hljs-string">'CLERK'</span>,<span class="hljs-number">7902</span>,<span class="hljs-string">'93/6/13'</span>,<span class="hljs-number">800</span>,<span class="hljs-number">0.00</span>,<span class="hljs-number">20</span>);
+</code></pre><p>We can insert the data from our unpartitioned table <code>employees</code> to the partitioned table <code>employees_part</code>.</p><pre><code class="wrap sql hljs"><span class="hljs-comment">-- Strict mode</span>
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> employees_part <span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> employees;
+
+
+<span class="hljs-comment">-- Nonstrict mode</span>
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> employees_part <span class="hljs-keyword">partition</span> (deptno) <span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> employees;
+</code></pre><p>The previous query would fail since the <code>hiredate</code> is stored as <code>bigint</code> and it is the <em>milliseconds of the unix timestamp</em>. You need to cast it into date using date time functions in Hive as follows:</p><pre><code class="wrap sql hljs"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> employees_part <span class="hljs-keyword">SELECT</span> empno, ename, job, mgr, from_unixtime(<span class="hljs-keyword">FLOOR</span>(<span class="hljs-keyword">CAST</span>(hiredate <span class="hljs-keyword">AS</span> <span class="hljs-built_in">BIGINT</span>)/<span class="hljs-number">1000</span>), <span class="hljs-string">'yyyy-MM-dd HH:mm:ss.SSS'</span>) <span class="hljs-keyword">AS</span> hiredate, sal, comm, deptno <span class="hljs-keyword">FROM</span> employees;
+
+<span class="hljs-comment">-- Using CAST(hiredate AS BIGINT) is not needed here since we know that hiredate is stored as BIGINT but `hiredate/1000` returns double and here we need to cast to BIGINT as input to from_unixtime</span>
+
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> employees_part <span class="hljs-keyword">SELECT</span> empno, ename, job, mgr, from_unixtime(<span class="hljs-keyword">CAST</span>(hiredate/<span class="hljs-number">1000</span> <span class="hljs-keyword">AS</span> <span class="hljs-built_in">BIGINT</span>), <span class="hljs-string">'yyyy-MM-dd HH:mm:ss.SSS'</span>) <span class="hljs-keyword">AS</span> hiredate, sal, comm, deptno <span class="hljs-keyword">FROM</span> employees;
+</code></pre><p>For each department we will have all the data regarding that department residing in a separate sub–directory under the table directory in HDFS as follows:</p><ul>
+<li>…/employees_part/deptno=10</li>
+<li>…/employees_part/deptno=20</li>
+<li>…/employees_part/deptno=30</li>
+<li>…/employees_part/deptno=40</li>
+</ul><p>For instance, the queries regarding Sales department, we would only have to look through the data present in the Sales partition (deptno=30) as follows:</p><pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> EMPLOYEES_PART <span class="hljs-keyword">WHERE</span> deptno=<span class="hljs-number">30</span>;
+</code></pre><p>Therefore from above example, we can conclude that partitioning is very useful. It reduces the query latency by scanning only relevant partitioned data instead of the whole data set.</p><h2 id="Bucketing-in-Hive0"><a class="anchor hidden-xs" href="#Bucketing-in-Hive0" title="Bucketing-in-Hive0"><i class="fa fa-link"></i></a>Bucketing in Hive</h2><p>In the scenario where we query on unique values of the partition column in partitioned table, partitioning is not a good fit. If we perform partitioning based on a column with a lot of unique values like <code>ID</code>, it would create a large number of small datasets in HDFS and partition entries in the metastore, thus increasing the load on NameNode and the metastore service. To optimize queries on such a dataset, we group the data into a particular number of buckets and the data is divided into the maximum number of <strong>buckets</strong>.</p><p>We can create buckets on <code>empno</code> column of <code>employees_part</code> as follows:</p><pre><code class="wrap sql hljs"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> employees_part_buck(
+    empno <span class="hljs-built_in">int</span>, 
+    ename <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), 
+    job <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), 
+    mgr <span class="hljs-built_in">int</span>, 
+    hiredate <span class="hljs-built_in">date</span>, 
+    sal <span class="hljs-built_in">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>), 
+    comm <span class="hljs-built_in">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)
+) 
+    PARTITIONED <span class="hljs-keyword">BY</span> (deptno <span class="hljs-built_in">int</span>) 
+    CLUSTERED <span class="hljs-keyword">BY</span> (empno) <span class="hljs-keyword">into</span> <span class="hljs-number">7</span> buckets
+    <span class="hljs-keyword">STORED</span> <span class="hljs-keyword">AS</span> AVRO LOCATION <span class="hljs-string">'project/hive/warehouse/employees_part_buck'</span> 
+    TBLPROPERTIES (<span class="hljs-string">'AVRO.COMPRESS'</span>=<span class="hljs-string">'SNAPPY'</span>);
+</code></pre><ul>
+<li>Insert data from unpartitioned table.</li>
+</ul><pre><code class="wrap sql hljs"><span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> employees_part_buck
+<span class="hljs-keyword">SELECT</span> empno, ename, job, mgr,
+    from_unixtime(<span class="hljs-keyword">CAST</span>(hiredate/<span class="hljs-number">1000</span> <span class="hljs-keyword">AS</span> <span class="hljs-built_in">BIGINT</span>)) <span class="hljs-keyword">AS</span> hiredate, 
+    sal, comm, deptno 
+<span class="hljs-keyword">FROM</span> employees;
+</code></pre><ul>
+<li>Query some data</li>
+</ul><pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> EMPLOYEES_PART <span class="hljs-keyword">WHERE</span> deptno=<span class="hljs-number">30</span> <span class="hljs-keyword">AND</span> empno&lt;<span class="hljs-number">7900</span>;
+</code></pre><h2 id="Apache-Tez0"><a class="anchor hidden-xs" href="#Apache-Tez0" title="Apache-Tez0"><i class="fa fa-link"></i></a>Apache Tez</h2><p>Hive supports two engines by default for running HiveQL queries. The default engine is Apache Tez but if it is not working for some reason, then you can use the traditional MapReduce by changing configurations which needs to be requested from the TA.</p><p><strong>Tez</strong> is a new application framework built on Hadoop Yarn that can execute complex directed acyclic graphs of general data processing tasks. In many ways it can be thought of as a more flexible and powerful successor of the map-reduce framework.</p><p><img src="https://i.imgur.com/DwaGJd5.png" alt="" class="md-image md-image"></p><p>It generalizes map and reduce tasks by exposing interfaces for generic data processing tasks, which consist of a triplet of interfaces: input, output and processor. These tasks are the <strong>vertices</strong> in the execution graph. <strong>Edges</strong> (i.e.: data connections between tasks) are first class citizens in Tez and together with the input/output interfaces greatly increase the flexibility of how data is transferred between tasks.</p><p>Tez also greatly extends the possible ways of which individual tasks can be linked together; In fact any arbitrary DAG can be executed directly in Tez.</p><p><img src="https://i.imgur.com/g4W68Va.png" alt="" class="md-image md-image"></p><p>In Tez, a map-reduce job is basically a simple DAG consisting of a single map and reduce vertices connected by a “bipartite” edge (i.e.: the edge connects every map task to every reduce task). Map input and reduce outputs are HDFS inputs and outputs respectively. The map output class locally sorts and partitions the data by a certain key, while the reduce input class merge-sorts its data on the same key.</p><h2 id="Perform-Exploratory-Data-Analysis-EDA0"><a class="anchor hidden-xs" href="#Perform-Exploratory-Data-Analysis-EDA0" title="Perform-Exploratory-Data-Analysis-EDA0"><i class="fa fa-link"></i></a>Perform Exploratory Data Analysis (EDA)</h2><p><strong>EDA</strong> is a data analytics process to understand the data in depth and learn the different data characteristics, often with visual means. This allows you to get a better feel of your data and find useful patterns in it.</p><p>We will use HiveQL to analyze the data. We need to provide insights about the data. We will create charts for the insights using Apache Superset. Here I will give some examples. For each query <code>qx</code> we should do as follows:</p><ol>
+<li>Write the HiveQL query <code>qx</code> using SQL editor of Apache superset or any text editor and save the query in a file <code>sql/eda.hql</code>.</li>
+<li>Create a managed or external Hive Table <code>qx_results</code> to store the results of the query. Add it to <code>eda.hql</code>.</li>
+<li>Save the results of the query in the table <code>qx_results</code>. Add it to <code>eda.hql</code>.</li>
+<li>In Apache Superset, Run the queries in <code>eda.hql</code>.</li>
+<li>Also export the table <code>qx__results</code> to a file <code>output/qx</code> (for first query it is <code>output/q1</code>).</li>
+<li>In Apache Superset, create a dataset for the table <code>qx_results</code>.</li>
+<li>Create a chart for the dataset, add the name/description of the chart and save it.</li>
+</ol><div class="alert alert-warning">
+<p><strong>Note:</strong> This chart will be added to the dashboard in stage 4.</p>
+</div><p>The implementation of the steps for q1 on my dataset.</p><ol>
+<li>Write the HiveQL query <code>qx</code> using SQL editor of Apache superset or any text editor and save the query in a file <code>sql/eda.hql</code>.</li>
+</ol><pre><code class="sql hljs"><span class="hljs-comment">-- the query q1</span>
+<span class="hljs-keyword">SELECT</span> dname,
+<span class="hljs-keyword">SUM</span>(sal) <span class="hljs-keyword">AS</span> total_sal
+<span class="hljs-keyword">FROM</span> departments <span class="hljs-keyword">AS</span> d
+<span class="hljs-keyword">JOIN</span> employees <span class="hljs-keyword">AS</span> e <span class="hljs-keyword">ON</span> d.deptno = e.deptno
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> dname
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> total_sal <span class="hljs-keyword">DESC</span>
+<span class="hljs-keyword">LIMIT</span> <span class="hljs-number">10</span>;
+</code></pre><ol start="2">
+<li>Create a managed or external Hive Table <code>qx_results</code> to store the results of the query. Add it to <code>eda.hql</code>.</li>
+</ol><pre><code class="wrap sql hljs"><span class="hljs-keyword">USE</span> teamx_projectdb;
+
+<span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> q1_results;
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> q1_results(
+Dname <span class="hljs-keyword">STRING</span>,
+Total_Salaries <span class="hljs-built_in">FLOAT</span>)
+<span class="hljs-keyword">ROW</span> <span class="hljs-keyword">FORMAT</span> <span class="hljs-keyword">DELIMITED</span>
+<span class="hljs-keyword">FIELDS</span> <span class="hljs-keyword">TERMINATED</span> <span class="hljs-keyword">BY</span> <span class="hljs-string">','</span>
+location <span class="hljs-string">'project/hive/warehouse'</span>; 
+</code></pre><ol start="3">
+<li>Save the results of the query in the table <code>qx_results</code>. Add it to <code>eda.hql</code>.</li>
+</ol><pre><code class="wrap sql hljs">
+<span class="hljs-keyword">USE</span> teamx_projectdb;
+
+<span class="hljs-comment">-- to not display table names with column names</span>
+<span class="hljs-keyword">SET</span> hive.resultset.use.unique.column.names = <span class="hljs-literal">false</span>;
+
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> q1_results
+<span class="hljs-keyword">SELECT</span> dname,
+<span class="hljs-keyword">SUM</span>(sal) <span class="hljs-keyword">AS</span> total_sal
+<span class="hljs-keyword">FROM</span> departments <span class="hljs-keyword">AS</span> d
+<span class="hljs-keyword">JOIN</span> employees <span class="hljs-keyword">AS</span> e <span class="hljs-keyword">ON</span> d.deptno = e.deptno
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> dname
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> total_sal <span class="hljs-keyword">DESC</span>
+<span class="hljs-keyword">LIMIT</span> <span class="hljs-number">10</span>;
+
+<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> q1_results;
+
+</code></pre><ol start="4">
+<li>Run the queries in <code>eda.hql</code> as follows:</li>
+</ol><pre><code class="wrap yaml hljs"><span class="hljs-string">beeline</span> <span class="hljs-bullet">-u</span> <span class="hljs-attr">jdbc:hive2://hadoop-03.uni.innopolis.ru:10001</span> <span class="hljs-bullet">-n</span> <span class="hljs-string">teamx</span> <span class="hljs-bullet">-p</span> <span class="hljs-string">$password</span> <span class="hljs-bullet">-f</span> <span class="hljs-string">sql/eda.hql</span>
+</code></pre><ol start="5">
+<li>
+<p>Also export the table <code>qx_results</code> to a file. We have two ways:</p>
+<ul>
+<li>Method 1: Redirecting the output of beeline to a local file <code>output/q1</code>. The file <code>output/q1</code> contains only the output of the query and it is not a csv file.
+<ul>
+<li>Save the following query in <code>sql/q1.hql</code>.</li>
+</ul>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">USE</span> teamx_projectdb; 
+<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> q1_results;
+</code></pre>
+<ul>
+<li>Run the query as follows</li>
+</ul>
+<pre><code class="wrap yaml hljs"><span class="hljs-string">beeline</span> <span class="hljs-bullet">-u</span> <span class="hljs-attr">jdbc:hive2://hadoop-03.uni.innopolis.ru:10001</span> <span class="hljs-bullet">-n</span> <span class="hljs-string">teamx</span> <span class="hljs-bullet">-p</span> <span class="hljs-string">$password</span> <span class="hljs-bullet">-f</span> <span class="hljs-string">sql/q1.hql</span> <span class="hljs-bullet">--hiveconf</span> <span class="hljs-string">hive.resultset.use.unique.column.names=false</span> <span class="hljs-string">&gt; output/q1.csv
+</span></code></pre>
+<ul>
+<li>The file <code>output/q1</code> will be saved in the local file system.</li>
+</ul>
+</li>
+<li>Method 2: Exporting the table to a csv file <code>output/q1.csv</code>. The file <code>output/q1.csv</code> contains the csv representation of the table  <code>q1_results</code>.
+<ul>
+<li>Save the following query in <code>sql/q1.hql</code>.</li>
+</ul>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">USE</span> teamx_projectdb;
+
+<span class="hljs-keyword">INSERT</span> OVERWRITE <span class="hljs-keyword">DIRECTORY</span> <span class="hljs-string">'project/output/q1'</span> 
+<span class="hljs-keyword">ROW</span> <span class="hljs-keyword">FORMAT</span> <span class="hljs-keyword">DELIMITED</span> <span class="hljs-keyword">FIELDS</span> 
+<span class="hljs-keyword">TERMINATED</span> <span class="hljs-keyword">BY</span> <span class="hljs-string">','</span> 
+<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> q1_results;
+</code></pre>
+<ul>
+<li>Run the query as follows:</li>
+</ul>
+<pre><code class="wrap yaml hljs"><span class="hljs-string">beeline</span> <span class="hljs-bullet">-u</span> <span class="hljs-attr">jdbc:hive2://hadoop-03.uni.innopolis.ru:10001</span> <span class="hljs-bullet">-n</span> <span class="hljs-string">teamx</span> <span class="hljs-bullet">-p</span> <span class="hljs-string">$password</span> <span class="hljs-bullet">-f</span> <span class="hljs-string">sql/q1.hql</span>
+</code></pre>
+<ul>
+<li>The file <code>project/output/q1</code> will be saved in HDFS. You can bring it into the local file system. Add a header to the csv file, concatenate all its partitions and redirect the output to the local file system.</li>
+</ul>
+<pre><code class="wrap yaml hljs"><span class="hljs-comment">#  concatenate all file partitions</span>
+<span class="hljs-string">echo</span> <span class="hljs-string">"dname,total_salaries"</span> <span class="hljs-string">&gt; output/q1.csv
+hdfs dfs -cat project/output/q1/* &gt;&gt; output/q1.csv
+</span></code></pre>
+</li>
+</ul>
+</li>
+<li>
+<p>In Apache Superset, create a dataset for the Hive table <code>qx_results</code>.<br>
+<img src="https://i.imgur.com/a4beYSc.png" alt="" class="md-image md-image"></p>
+</li>
+<li>
+<p>Create a chart for the dataset, add the name/description of the chart and save it.<br>
+<img src="https://i.imgur.com/svGwUSB.png" alt="" class="md-image md-image"></p>
+</li>
+</ol><div class="alert alert-warning">
+<p>You should extract 5 different inisights from your data in the project.</p>
+</div><div class="alert alert-warning">
+<p>Keep these charts for the Presentation stage (stage 4) when we will create the dashboard and add the charts.</p>
+</div><div class="alert alert-info">
+<p>I removed the HDP Sandbox approach since no teams are using it.</p>
+</div><h1 id="Project-checklist"><a class="anchor hidden-xs" href="#Project-checklist" title="Project-checklist"><i class="fa fa-link"></i></a>Project checklist</h1><div class="alert alert-success">
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Put the *.avsc files from stage 1 to HDFS in a folder like <code>project/warehouse/avsc</code>.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Create a hive database in <code>project/hive/warehouse</code> and access it.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Create external Hive tables for the data that are imported to HDFS in stage 1.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Check the datatypes of the columns of the new tables.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Create external, partitioned and bucketing Hive tables for one of the tables above.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Check whether you can query data from the tables above.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Perform EDA (Extract 5 different insights). For each data insight:
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Write the query.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Export query results.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Create the dataset and the chart in Apache Superset.</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Write scripts to automate the tasks above except the tasks in Apache Superset of creating datasets and charts.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Run the script <code>stage2.sh</code> to test this stage.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Check the quality of scripts in this stage using <code>pylint</code> command.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Summarize your work in this stage and add it to the report.</li>
+</ul>
+</div><h1 id="References"><a class="anchor hidden-xs" href="#References" title="References"><i class="fa fa-link"></i></a>References</h1><ul>
+<li><a href="https://www.cs.uct.ac.za/mit_notes/database/htmls/chp03.html" target="_blank" rel="noopener">toy-dataset</a></li>
+<li><a href="https://www.postgresql.org/docs/current/sql-copy.html" target="_blank" rel="noopener">PostgreSQL documentation</a></li>
+<li><a href="https://cwiki.apache.org/confluence/display/Hive/Home" target="_blank" rel="noopener">Hive documentation</a></li>
+<li><a href="https://hortonworks.com/wp-content/uploads/2013/05/hql_cheat_sheet.pdf" target="_blank" rel="noopener">HiveQL Cheat Sheet</a></li>
+<li><a href="https://hashdork.com/apache-hive-tutorial/" target="_blank" rel="noopener">https://hashdork.com/apache-hive-tutorial/</a></li>
+</ul></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#Stage-II---Data-StoragePreparation-amp-EDA" title="Stage II - Data Storage/Preparation &amp; EDA">Stage II - Data Storage/Preparation &amp; EDA</a></li>
+<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li class=""><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li class=""><a href="#Introduction-to-Apache-Hive" title="Introduction to Apache Hive">Introduction to Apache Hive</a></li>
+<li class=""><a href="#Dataset-Description" title="Dataset Description">Dataset Description</a></li>
+<li class=""><a href="#A-IU-Hadoop-cluster" title="A. IU Hadoop cluster">A. IU Hadoop cluster</a><ul class="nav">
+<li class=""><a href="#Preparation0" title="Preparation">Preparation</a></li>
+<li class=""><a href="#Build-Hive-Tables0" title="Build Hive Tables">Build Hive Tables</a></li>
+<li class=""><a href="#Hive-Optimizations0" title="Hive Optimizations">Hive Optimizations</a><ul class="nav">
+<li class=""><a href="#Partitioning-in-Hive0" title="Partitioning in Hive">Partitioning in Hive</a></li>
+</ul>
+</li>
+<li class=""><a href="#Bucketing-in-Hive0" title="Bucketing in Hive">Bucketing in Hive</a></li>
+<li class=""><a href="#Apache-Tez0" title="Apache Tez">Apache Tez</a></li>
+<li class=""><a href="#Perform-Exploratory-Data-Analysis-EDA0" title="Perform Exploratory Data Analysis (EDA)">Perform Exploratory Data Analysis (EDA)</a></li>
+</ul>
+</li>
+<li><a href="#Project-checklist" title="Project checklist">Project checklist</a></li>
+<li class=""><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#Stage-II---Data-StoragePreparation-amp-EDA" title="Stage II - Data Storage/Preparation &amp; EDA">Stage II - Data Storage/Preparation &amp; EDA</a></li>
+<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li class=""><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li class=""><a href="#Introduction-to-Apache-Hive" title="Introduction to Apache Hive">Introduction to Apache Hive</a></li>
+<li class=""><a href="#Dataset-Description" title="Dataset Description">Dataset Description</a></li>
+<li class=""><a href="#A-IU-Hadoop-cluster" title="A. IU Hadoop cluster">A. IU Hadoop cluster</a><ul class="nav">
+<li class=""><a href="#Preparation0" title="Preparation">Preparation</a></li>
+<li class=""><a href="#Build-Hive-Tables0" title="Build Hive Tables">Build Hive Tables</a></li>
+<li class=""><a href="#Hive-Optimizations0" title="Hive Optimizations">Hive Optimizations</a><ul class="nav">
+<li class=""><a href="#Partitioning-in-Hive0" title="Partitioning in Hive">Partitioning in Hive</a></li>
+</ul>
+</li>
+<li class=""><a href="#Bucketing-in-Hive0" title="Bucketing in Hive">Bucketing in Hive</a></li>
+<li class=""><a href="#Apache-Tez0" title="Apache Tez">Apache Tez</a></li>
+<li class=""><a href="#Perform-Exploratory-Data-Analysis-EDA0" title="Perform Exploratory Data Analysis (EDA)">Perform Exploratory Data Analysis (EDA)</a></li>
+</ul>
+</li>
+<li><a href="#Project-checklist" title="Project checklist">Project checklist</a></li>
+<li class=""><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha256-kJrlY+s09+QoWjpkOrXXwhxeaoDz9FW5SaxF8I0DibQ=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
