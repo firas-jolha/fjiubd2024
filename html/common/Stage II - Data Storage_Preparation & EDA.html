@@ -52,9 +52,9 @@
 <li><a href="#Partitioning-in-Hive0" title="Partitioning in Hive">Partitioning in Hive</a></li>
 </ul>
 </li>
-<li><a href="#Bucketing-in-Hive0" title="Bucketing in Hive">Bucketing in Hive</a></li>
-<li><a href="#Apache-Tez0" title="Apache Tez">Apache Tez</a></li>
-<li><a href="#Perform-Exploratory-Data-Analysis-EDA0" title="Perform Exploratory Data Analysis (EDA)">Perform Exploratory Data Analysis (EDA)</a></li>
+<li><a href="#Bucketing-in-Hive" title="Bucketing in Hive">Bucketing in Hive</a></li>
+<li><a href="#Apache-Tez" title="Apache Tez">Apache Tez</a></li>
+<li><a href="#Perform-Exploratory-Data-Analysis-EDA" title="Perform Exploratory Data Analysis (EDA)">Perform Exploratory Data Analysis (EDA)</a></li>
 </ul>
 </li>
 <li><a href="#Project-checklist" title="Project checklist">Project checklist</a></li>
@@ -154,7 +154,7 @@
 </code></pre>
 </div><ol start="2">
 <li>Create a database <code>teamx_projectdb</code> and access it.</li>
-</ol><pre><code class="wrap sql hljs"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> teamx_projectdb LOCATION <span class="hljs-string">"project/warehouse"</span>;
+</ol><pre><code class="wrap sql hljs"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">DATABASE</span> teamx_projectdb LOCATION <span class="hljs-string">"project/hive/warehouse"</span>;
 <span class="hljs-keyword">USE</span> teamx_projectdb;
 </code></pre><ol start="3">
 <li>Create tables <code>employees</code> and <code>departments</code></li>
@@ -216,7 +216,7 @@ cur.execute(<span class="hljs-string">"SHOW DATABASES"</span>)
 
 
 <span class="hljs-comment"># Here we assume that this code is written in scripts/ or notebooks/ folder in the repository folder</span>
-repo_folder = os.path.join(<span class="hljs-string">".."</span>)
+repo_folder = os.path.join(<span class="hljs-string">"."</span>)
 file_path = os.path.join(repo_folder, <span class="hljs-string">"sql"</span>, <span class="hljs-string">"db.hql"</span>)
 
 
@@ -233,12 +233,7 @@ file_path = os.path.join(repo_folder, <span class="hljs-string">"sql"</span>, <s
             <span class="hljs-keyword">pass</span>
 </code></pre><div class="alert alert-danger">
 <p><strong>Note:</strong> In <code>hivejdbc</code> package, you need to remove the semicolons (;) from each line before executing the HiveQL statement.</p>
-</div><h2 id="Hive-Optimizations0"><a class="anchor hidden-xs" href="#Hive-Optimizations0" title="Hive-Optimizations0"><i class="fa fa-link"></i></a>Hive Optimizations</h2><p>Data in Apache Hive can be categorized into <strong>Table</strong>, <strong>Partition</strong>, and <strong>Bucket</strong>. The table in Hive is logically made up of the data being stored.</p><p><strong>Partitioning</strong> – Apache Hive organizes tables into <strong>partitions</strong> for grouping same type of data together based on a column or partition key. Each table in the hive can have one or more partition keys to identify a particular partition. Using partition we can <em>make it faster to run queries on slices of the data</em>.</p><p><strong>Bucketing</strong> – Hive Tables or partitions are subdivided into <strong>buckets</strong> based on the hash function of a column in the table to give extra structure to the data that may be used for <em>more efficient queries</em>.</p><h3 id="Partitioning-in-Hive0"><a class="anchor hidden-xs" href="#Partitioning-in-Hive0" title="Partitioning-in-Hive0"><i class="fa fa-link"></i></a>Partitioning in Hive</h3><p>Partitioning in Hive is used to increase query performance. Hive is very good tool to perform queries on large datasets, especially datasets that require a scan of an entire table. Generally, users are aware of their data domain, and in most of cases they want to search for a particular type of data. For such cases, a simple query takes large time to return the result because it requires the <strong>scan of the entire dataset</strong>. The concept of partitioning can be used to reduce the cost of querying the data. Partitions are like horizontal slices of data that allows the large sets of data as more manageable chunks. Table partitioning means dividing the table data into some parts based on the unique values of particular columns (for example, city and country) and segregating the input data records into different files or directories.</p><p>Partitioning in Hive is done using the <strong>PARTITIONED BY</strong> clause in the create table statement of HiveQL. Tables can have one or more partitions. A table can be partitioned on the basis of one or more columns. The columns on which partitioning is done cannot be included in the data of table. For example, you have the four fields id, name, age, and city, and you want to partition the data on the basis of the city field, then the city field will not be included in the columns of create table statement and will only be used in the PARTITIONED BY clause. You can still query the data in a normal way using where city=xyz. The result will be retrieved from the respective partition because data is stored in a different directory with the city name for each city.</p><h4 id="Managed-vs-External-tables"><a class="anchor hidden-xs" href="#Managed-vs-External-tables" title="Managed-vs-External-tables"><i class="fa fa-link"></i></a>Managed vs. External tables</h4><p>There are two main types of tables in Hive—<strong>Managed</strong> tables and <strong>External</strong> tables. By default, Hive creates an <strong>Internal</strong> table also known as the Managed table, In the managed table, Hive owns the data/files on the table meaning any data you insert or load files to the table are managed by the Hive process when you drop the table the underlying data or files are also get deleted.</p><p>Using <strong>EXTERNAL</strong> option you can create an external table, Hive does not manage the external table, when you drop an external table, only table metadata from Metastore will be removed but the underlying files will not be removed and still they can be accessed from HDFS.</p><h4 id="Static-vs-Dynamic-partitioning"><a class="anchor hidden-xs" href="#Static-vs-Dynamic-partitioning" title="Static-vs-Dynamic-partitioning"><i class="fa fa-link"></i></a>Static vs. Dynamic partitioning</h4><p>Both table types support partitioning mechanism. Partitioning can be done in one of the following two ways:</p><ul>
-<li>Static partitioning</li>
-<li>Dynamic partitioning</li>
-</ul><p>In static partitioning, you need to manually insert data in different partitions of a table. Let’s use a table partitioned on the departments of the company. For each department, you need to manually insert the data from the data source to a department partition in the partitioned table. So for 4 depts, you need to write the equivalent number of Hive queries to insert data in each partition.</p><p>Prior to Hive 0.9.0, dynamic partitioning was disabled by default whereas it is enabled in Hive 0.9.0 and later by default. You can enable it by setting the following properties in <code>beeline</code> or in <code>db.hql</code> file:</p><pre><code class="wrap sql hljs"><span class="hljs-keyword">SET</span> hive.exec.dynamic.partition=<span class="hljs-literal">true</span>;
-</code></pre><p>The configuration property <code>hive.exec.dynamic.partition.mode</code> allows to switch between strict and nonstrict modes of dynamic partition. In <code>strict</code> mode, the user must specify at least one static partition in case the user accidentally overwrites all partitions, in <code>nonstrict</code> mode all partitions are allowed to be dynamic. By default, the mode is <code>strict</code> and we can change it as follows:</p><pre><code class="sql hljs"><span class="hljs-keyword">SET</span> hive.exec.dynamic.partition.mode=nonstrict;
-</code></pre><h4 id="Create-a-Partitioned-Table-in-Hive0"><a class="anchor hidden-xs" href="#Create-a-Partitioned-Table-in-Hive0" title="Create-a-Partitioned-Table-in-Hive0"><i class="fa fa-link"></i></a>Create a Partitioned Table in Hive</h4><p>For example, we have a table <code>Employees</code> containing the employee information of some company like <code>empno, ename, job, deptno,</code>…etc. Now, if we want to perform partitioning on the basis of <code>deptno</code> column. Then the information of all the employees belonging to a particular department will be stored together in a separate partition. Physically, a partition in Hive is nothing but just a sub-directory in the table directory. For example, we have data for three departments in our <code>Employees</code> table – Accounting (deptno=10), Reseaerch (deptno=20), Operations (deptno=40) and Sales (deptno=30). Thus we will have four partitions in total for each of the departments as we can see clearly in diagram below.</p><p><img src="https://i.imgur.com/5HW3D7w.png" alt="" class="md-image md-image"></p><p>We can run the following statement to create the partitioned table.</p><pre><code class="wrap sql hljs"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> employees_part(empno <span class="hljs-built_in">int</span>, ename <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), job <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), mgr <span class="hljs-built_in">int</span>, hiredate <span class="hljs-built_in">date</span>, sal <span class="hljs-built_in">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>), comm <span class="hljs-built_in">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)) PARTITIONED <span class="hljs-keyword">BY</span> (deptno <span class="hljs-built_in">int</span>) <span class="hljs-keyword">STORED</span> <span class="hljs-keyword">AS</span> AVRO LOCATION <span class="hljs-string">'project/hive/warehouse/employees_part'</span> TBLPROPERTIES (<span class="hljs-string">'AVRO.COMPRESS'</span>=<span class="hljs-string">'SNAPPY'</span>);
+</div><h2 id="Hive-Optimizations0"><a class="anchor hidden-xs" href="#Hive-Optimizations0" title="Hive-Optimizations0"><i class="fa fa-link"></i></a>Hive Optimizations</h2><p>Data in Apache Hive can be categorized into <strong>Table</strong>, <strong>Partition</strong>, and <strong>Bucket</strong>. The table in Hive is logically made up of the data being stored.</p><p><strong>Partitioning</strong> – Apache Hive organizes tables into <strong>partitions</strong> for grouping same type of data together based on a column or partition key. Each table in the hive can have one or more partition keys to identify a particular partition. Using partition we can <em>make it faster to run queries on slices of the data</em>.</p><p><strong>Bucketing</strong> – Hive Tables or partitions are subdivided into <strong>buckets</strong> based on the hash function of a column in the table to give extra structure to the data that may be used for <em>more efficient queries</em>.</p><h3 id="Partitioning-in-Hive0"><a class="anchor hidden-xs" href="#Partitioning-in-Hive0" title="Partitioning-in-Hive0"><i class="fa fa-link"></i></a>Partitioning in Hive</h3><p>Partitioning in Hive is used to increase query performance. Hive is very good tool to perform queries on large datasets, especially datasets that require a scan of an entire table. Generally, users are aware of their data domain, and in most of cases they want to search for a particular type of data. For such cases, a simple query takes large time to return the result because it requires the <strong>scan of the entire dataset</strong>. The concept of partitioning can be used to reduce the cost of querying the data. Partitions are like horizontal slices of data that allows the large sets of data as more manageable chunks. Table partitioning means dividing the table data into some parts based on the unique values of particular columns (for example, city and country) and segregating the input data records into different files or directories.</p><p>Partitioning in Hive is done using the <strong>PARTITIONED BY</strong> clause in the create table statement of HiveQL. Tables can have one or more partitions. A table can be partitioned on the basis of one or more columns. The columns on which partitioning is done cannot be included in the data of table. For example, you have the four fields id, name, age, and city, and you want to partition the data on the basis of the city field, then the city field will not be included in the columns of create table statement and will only be used in the PARTITIONED BY clause. You can still query the data in a normal way using where city=xyz. The result will be retrieved from the respective partition because data is stored in a different directory with the city name for each city.</p><h4 id="Managed-vs-External-tables"><a class="anchor hidden-xs" href="#Managed-vs-External-tables" title="Managed-vs-External-tables"><i class="fa fa-link"></i></a>Managed vs. External tables</h4><p>There are two main types of tables in Hive—<strong>Managed</strong> tables and <strong>External</strong> tables. By default, Hive creates an <strong>Internal</strong> table also known as the Managed table, In the managed table, Hive owns the data/files on the table meaning any data you insert or load files to the table are managed by the Hive process when you drop the table the underlying data or files are also get deleted.</p><p>Using <strong>EXTERNAL</strong> option you can create an external table, Hive does not manage the external table, when you drop an external table, only table metadata from Metastore will be removed but the underlying files will not be removed and still they can be accessed from HDFS.</p><h4 id="Create-a-Partitioned-Table-in-Hive0"><a class="anchor hidden-xs" href="#Create-a-Partitioned-Table-in-Hive0" title="Create-a-Partitioned-Table-in-Hive0"><i class="fa fa-link"></i></a>Create a Partitioned Table in Hive</h4><p>For example, we have a table <code>Employees</code> containing the employee information of some company like <code>empno, ename, job, deptno,</code>…etc. Now, if we want to perform partitioning on the basis of <code>deptno</code> column. Then the information of all the employees belonging to a particular department will be stored together in a separate partition. Physically, a partition in Hive is nothing but just a sub-directory in the table directory. For example, we have data for three departments in our <code>Employees</code> table – Accounting (deptno=10), Reseaerch (deptno=20), Operations (deptno=40) and Sales (deptno=30). Thus we will have four partitions in total for each of the departments as we can see clearly in diagram below.</p><p><img src="https://i.imgur.com/5HW3D7w.png" alt="" class="md-image md-image"></p><p>We can run the following statement to create the partitioned table.</p><pre><code class="wrap sql hljs"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> employees_part(empno <span class="hljs-built_in">int</span>, ename <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), job <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), mgr <span class="hljs-built_in">int</span>, hiredate <span class="hljs-built_in">date</span>, sal <span class="hljs-built_in">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>), comm <span class="hljs-built_in">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)) PARTITIONED <span class="hljs-keyword">BY</span> (deptno <span class="hljs-built_in">int</span>) <span class="hljs-keyword">STORED</span> <span class="hljs-keyword">AS</span> AVRO LOCATION <span class="hljs-string">'project/hive/warehouse/employees_part'</span> TBLPROPERTIES (<span class="hljs-string">'AVRO.COMPRESS'</span>=<span class="hljs-string">'SNAPPY'</span>);
 
 
 <span class="hljs-comment">-- insert some data in nonstrict mode</span>
@@ -263,7 +258,127 @@ file_path = os.path.join(repo_folder, <span class="hljs-string">"sql"</span>, <s
 <li>…/employees_part/deptno=30</li>
 <li>…/employees_part/deptno=40</li>
 </ul><p>For instance, the queries regarding Sales department, we would only have to look through the data present in the Sales partition (deptno=30) as follows:</p><pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> EMPLOYEES_PART <span class="hljs-keyword">WHERE</span> deptno=<span class="hljs-number">30</span>;
-</code></pre><p>Therefore from above example, we can conclude that partitioning is very useful. It reduces the query latency by scanning only relevant partitioned data instead of the whole data set.</p><h2 id="Bucketing-in-Hive0"><a class="anchor hidden-xs" href="#Bucketing-in-Hive0" title="Bucketing-in-Hive0"><i class="fa fa-link"></i></a>Bucketing in Hive</h2><p>In the scenario where we query on unique values of the partition column in partitioned table, partitioning is not a good fit. If we perform partitioning based on a column with a lot of unique values like <code>ID</code>, it would create a large number of small datasets in HDFS and partition entries in the metastore, thus increasing the load on NameNode and the metastore service. To optimize queries on such a dataset, we group the data into a particular number of buckets and the data is divided into the maximum number of <strong>buckets</strong>.</p><p>We can create buckets on <code>empno</code> column of <code>employees_part</code> as follows:</p><pre><code class="wrap sql hljs"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> employees_part_buck(
+</code></pre><p>Therefore from above example, we can conclude that partitioning is very useful. It reduces the query latency by scanning only relevant partitioned data instead of the whole data set.</p><h4 id="Static-vs-Dynamic-partitioning"><a class="anchor hidden-xs" href="#Static-vs-Dynamic-partitioning" title="Static-vs-Dynamic-partitioning"><i class="fa fa-link"></i></a>Static vs. Dynamic partitioning</h4><p>Both table types support partitioning mechanism. Partitioning can be done in one of the following two ways:</p><ul>
+<li>Static partitioning</li>
+<li>Dynamic partitioning</li>
+</ul><p>In static partitioning, you need to manually insert data in different partitions of a table. Let’s use a table partitioned on the departments of the company. For each department, you need to manually insert the data from the data source to a department partition in the partitioned table. So for 4 depts, you need to write the equivalent number of Hive queries to insert data in each partition.</p><h5 id="Example-on-static-partitioning0"><a class="anchor hidden-xs" href="#Example-on-static-partitioning0" title="Example-on-static-partitioning0"><i class="fa fa-link"></i></a>Example on static partitioning</h5><p>The table <code>employees</code> contains 3 unique departments <code>deptno=10</code>, <code>deptno=20</code> and <code>deptno=30</code> and 5 distinct jobs <code>job=ANALYST</code>, <code>job=CLERK</code>, <code>job=MANAGER</code>, <code>job=PRESIDENT</code>, and <code>job=SALESMAN</code>. In total, we will create at most 15 partitions.</p><pre><code class="wrap sql hljs"><span class="hljs-comment">-- Set the option</span>
+<span class="hljs-keyword">SET</span> hive.exec.dynamic.partition=<span class="hljs-literal">false</span>;
+
+<span class="hljs-comment">-- Create a table with two partition columns (job, deptno)</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> employees_part2(empno <span class="hljs-built_in">int</span>, ename <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), mgr <span class="hljs-built_in">int</span>, hiredate <span class="hljs-built_in">date</span>, sal <span class="hljs-built_in">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>), comm <span class="hljs-built_in">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)) PARTITIONED <span class="hljs-keyword">BY</span> (job <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), deptno <span class="hljs-built_in">int</span>) <span class="hljs-keyword">STORED</span> <span class="hljs-keyword">AS</span> AVRO LOCATION <span class="hljs-string">'project/hive/warehouse/employees_part2'</span> TBLPROPERTIES (<span class="hljs-string">'AVRO.COMPRESS'</span>=<span class="hljs-string">'SNAPPY'</span>);
+ 
+ 
+<span class="hljs-comment">-- For each partition, we need to manually insert the data</span>
+<span class="hljs-comment">-- The number of queries equals to number of partitions</span>
+ 
+<span class="hljs-comment">-- insert data on a static partition (job='Analyst', deptno=10)</span>
+<span class="hljs-keyword">INSERT</span> overwrite <span class="hljs-keyword">TABLE</span> employees_part2
+<span class="hljs-keyword">PARTITION</span> (job=<span class="hljs-string">'Analyst'</span>,deptno=<span class="hljs-number">10</span>)
+<span class="hljs-keyword">SELECT</span> empno, ename, mgr, from_unixtime(<span class="hljs-keyword">CAST</span>(hiredate/<span class="hljs-number">1000</span> <span class="hljs-keyword">AS</span> <span class="hljs-built_in">BIGINT</span>), <span class="hljs-string">'yyyy-MM-dd HH:mm:ss.SSS'</span>) <span class="hljs-keyword">AS</span> hiredate, sal, comm <span class="hljs-keyword">FROM</span> employees <span class="hljs-keyword">WHERE</span> deptno=<span class="hljs-number">10</span> <span class="hljs-keyword">AND</span> job=<span class="hljs-string">"'ANALYST'"</span>;
+
+<span class="hljs-comment">-- insert data on a static partition (job='Analyst', deptno=20)</span>
+<span class="hljs-keyword">INSERT</span> overwrite <span class="hljs-keyword">TABLE</span> employees_part2
+<span class="hljs-keyword">PARTITION</span> (job=<span class="hljs-string">'Analyst'</span>,deptno=<span class="hljs-number">20</span>)
+<span class="hljs-keyword">SELECT</span> empno, ename, mgr, from_unixtime(<span class="hljs-keyword">CAST</span>(hiredate/<span class="hljs-number">1000</span> <span class="hljs-keyword">AS</span> <span class="hljs-built_in">BIGINT</span>), <span class="hljs-string">'yyyy-MM-dd HH:mm:ss.SSS'</span>) <span class="hljs-keyword">AS</span> hiredate, sal, comm <span class="hljs-keyword">FROM</span> employees <span class="hljs-keyword">WHERE</span> deptno=<span class="hljs-number">20</span> <span class="hljs-keyword">AND</span> job=<span class="hljs-string">"'ANALYST'"</span>;
+
+
+<span class="hljs-comment">-- insert data on a static partition (job='Analyst', deptno=30)</span>
+<span class="hljs-keyword">INSERT</span> overwrite <span class="hljs-keyword">TABLE</span> employees_part2
+<span class="hljs-keyword">PARTITION</span> (job=<span class="hljs-string">'Analyst'</span>,deptno=<span class="hljs-number">30</span>)
+<span class="hljs-keyword">SELECT</span> empno, ename, mgr, from_unixtime(<span class="hljs-keyword">CAST</span>(hiredate/<span class="hljs-number">1000</span> <span class="hljs-keyword">AS</span> <span class="hljs-built_in">BIGINT</span>), <span class="hljs-string">'yyyy-MM-dd HH:mm:ss.SSS'</span>) <span class="hljs-keyword">AS</span> hiredate, sal, comm <span class="hljs-keyword">FROM</span> employees <span class="hljs-keyword">WHERE</span> deptno=<span class="hljs-number">30</span> <span class="hljs-keyword">AND</span> job=<span class="hljs-string">"'ANALYST'"</span>;
+
+
+<span class="hljs-comment">-- insert data on a static partition (job='Clerk', deptno=10)</span>
+<span class="hljs-keyword">INSERT</span> overwrite <span class="hljs-keyword">TABLE</span> employees_part2
+<span class="hljs-keyword">PARTITION</span> (job=<span class="hljs-string">'Clerk'</span>,deptno=<span class="hljs-number">10</span>)
+<span class="hljs-keyword">SELECT</span> empno, ename, mgr, from_unixtime(<span class="hljs-keyword">CAST</span>(hiredate/<span class="hljs-number">1000</span> <span class="hljs-keyword">AS</span> <span class="hljs-built_in">BIGINT</span>), <span class="hljs-string">'yyyy-MM-dd HH:mm:ss.SSS'</span>) <span class="hljs-keyword">AS</span> hiredate, sal, comm <span class="hljs-keyword">FROM</span> employees <span class="hljs-keyword">WHERE</span> deptno=<span class="hljs-number">10</span> <span class="hljs-keyword">AND</span> job=<span class="hljs-string">"'CLERK'"</span>;
+
+
+<span class="hljs-comment">-- ....etc</span>
+
+<span class="hljs-comment">-- You should write 15 queries like this</span>
+</code></pre><p>The partitions in HDFS will be stored as follows:<br>
+<img src="https://i.imgur.com/x85JQTW.png" alt="" class="md-image md-image"></p><pre><code class="wrap sql hljs"><span class="hljs-comment">-- Displays the partitions of the table employees_part2</span>
+<span class="hljs-keyword">SHOW</span> <span class="hljs-keyword">PARTITIONS</span> employees_part2;
+</code></pre><p>What if you have 1000 different departments and 10 different jobs or you have some other partitioning column like year and month? You have to create those manually and that is no FUN!! This is where dynamic partitioning helps us.</p><p>Prior to Hive 0.9.0, dynamic partitioning was disabled by default whereas it is enabled in Hive 0.9.0 and later by default. You can enable it by setting the following properties in <code>beeline</code> or in <code>db.hql</code> file:</p><pre><code class="wrap sql hljs"><span class="hljs-keyword">SET</span> hive.exec.dynamic.partition=<span class="hljs-literal">true</span>;
+</code></pre><p>The configuration property <code>hive.exec.dynamic.partition.mode</code> allows to switch between strict and nonstrict modes of dynamic partition. In <code>strict</code> mode, the user must specify at least one static partition in case the user accidentally overwrites all partitions, in <code>nonstrict</code> mode all partitions are allowed to be dynamic. By default, the mode is <code>strict</code> and we can change it as follows:</p><pre><code class="sql hljs"><span class="hljs-keyword">SET</span> hive.exec.dynamic.partition.mode=nonstrict;
+</code></pre><div class="alert alert-warning">
+<p><strong>Note:</strong> The static partition columns will be added as the last columns to the table.</p>
+</div><h5 id="Example-on-dynamic-partitioning-–-strict-mode"><a class="anchor hidden-xs" href="#Example-on-dynamic-partitioning-–-strict-mode" title="Example-on-dynamic-partitioning-–-strict-mode"><i class="fa fa-link"></i></a>Example on dynamic partitioning – strict mode</h5><p>The table <code>employees</code> contains 3 unique departments <code>deptno=10</code>, <code>deptno=20</code> and <code>deptno=30</code> and 5 distinct jobs <code>job=ANALYST</code>, <code>job=CLERK</code>, <code>job=MANAGER</code>, <code>job=PRESIDENT</code>, and <code>job=SALESMAN</code>. In total, we will create at most 15 partitions.</p><pre><code class="wrap sql hljs"><span class="hljs-comment">-- Set the options</span>
+<span class="hljs-keyword">SET</span> hive.exec.dynamic.partition=<span class="hljs-literal">true</span>;
+<span class="hljs-keyword">SET</span> hive.exec.dynamic.partition.mode=<span class="hljs-keyword">strict</span>;
+
+<span class="hljs-comment">-- Create a table with two partition columns (job, deptno)</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> employees_part2(empno <span class="hljs-built_in">int</span>, ename <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), mgr <span class="hljs-built_in">int</span>, hiredate <span class="hljs-built_in">date</span>, sal <span class="hljs-built_in">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>), comm <span class="hljs-built_in">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)) 
+PARTITIONED <span class="hljs-keyword">BY</span> (job <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), deptno <span class="hljs-built_in">int</span>) 
+<span class="hljs-keyword">STORED</span> <span class="hljs-keyword">AS</span> AVRO LOCATION <span class="hljs-string">'project/hive/warehouse/employees_part2'</span> 
+TBLPROPERTIES (<span class="hljs-string">'AVRO.COMPRESS'</span>=<span class="hljs-string">'SNAPPY'</span>);
+
+ 
+<span class="hljs-comment">-- insert data using dynamic partitioning (job='Clerk', deptno) where the static partition job='Clerk' is a parent of the dynamic partition deptno (strict mode)</span>
+<span class="hljs-keyword">INSERT</span> overwrite <span class="hljs-keyword">TABLE</span> employees_part2
+<span class="hljs-keyword">PARTITION</span> (job=<span class="hljs-string">'Clerk'</span>,deptno)
+<span class="hljs-keyword">SELECT</span> empno, ename, mgr, from_unixtime(<span class="hljs-keyword">CAST</span>(hiredate/<span class="hljs-number">1000</span> <span class="hljs-keyword">AS</span> <span class="hljs-built_in">BIGINT</span>), <span class="hljs-string">'yyyy-MM-dd HH:mm:ss.SSS'</span>) <span class="hljs-keyword">AS</span> hiredate, sal, comm, deptno <span class="hljs-keyword">FROM</span> employees <span class="hljs-keyword">WHERE</span> job=<span class="hljs-string">"'CLERK'"</span>;
+
+<span class="hljs-comment">-- insert data using dynamic partitioning (job='Analyst', deptno) where the static partition job='Analyst' is a parent of the dynamic partition deptno (strict mode)</span>
+<span class="hljs-keyword">INSERT</span> overwrite <span class="hljs-keyword">TABLE</span> employees_part2
+<span class="hljs-keyword">PARTITION</span> (job=<span class="hljs-string">'Analyst'</span>,deptno)
+<span class="hljs-keyword">SELECT</span> empno, ename, mgr, from_unixtime(<span class="hljs-keyword">CAST</span>(hiredate/<span class="hljs-number">1000</span> <span class="hljs-keyword">AS</span> <span class="hljs-built_in">BIGINT</span>), <span class="hljs-string">'yyyy-MM-dd HH:mm:ss.SSS'</span>) <span class="hljs-keyword">AS</span> hiredate, sal, comm, deptno <span class="hljs-keyword">FROM</span> employees <span class="hljs-keyword">WHERE</span> job=<span class="hljs-string">"'ANALYST'"</span>;
+
+<span class="hljs-comment">-- insert data using dynamic partitioning (job='Manager', deptno) where the static partition job='Manager' is a parent of the dynamic partition deptno (strict mode)</span>
+<span class="hljs-keyword">INSERT</span> overwrite <span class="hljs-keyword">TABLE</span> employees_part2
+<span class="hljs-keyword">PARTITION</span> (job=<span class="hljs-string">'Manager'</span>,deptno)
+<span class="hljs-keyword">SELECT</span> empno, ename, mgr, from_unixtime(<span class="hljs-keyword">CAST</span>(hiredate/<span class="hljs-number">1000</span> <span class="hljs-keyword">AS</span> <span class="hljs-built_in">BIGINT</span>), <span class="hljs-string">'yyyy-MM-dd HH:mm:ss.SSS'</span>) <span class="hljs-keyword">AS</span> hiredate, sal, comm, deptno <span class="hljs-keyword">FROM</span> employees <span class="hljs-keyword">WHERE</span> job=<span class="hljs-string">"'MANAGER'"</span>;
+
+<span class="hljs-comment">-- insert data using dynamic partitioning (job='President', deptno) where the static partition job='President' is a parent of the dynamic partition deptno (strict mode)</span>
+<span class="hljs-keyword">INSERT</span> overwrite <span class="hljs-keyword">TABLE</span> employees_part2
+<span class="hljs-keyword">PARTITION</span> (job=<span class="hljs-string">'President'</span>,deptno)
+<span class="hljs-keyword">SELECT</span> empno, ename, mgr, from_unixtime(<span class="hljs-keyword">CAST</span>(hiredate/<span class="hljs-number">1000</span> <span class="hljs-keyword">AS</span> <span class="hljs-built_in">BIGINT</span>), <span class="hljs-string">'yyyy-MM-dd HH:mm:ss.SSS'</span>) <span class="hljs-keyword">AS</span> hiredate, sal, comm, deptno <span class="hljs-keyword">FROM</span> employees <span class="hljs-keyword">WHERE</span> job=<span class="hljs-string">"'PRESIDENT'"</span>;
+
+<span class="hljs-comment">-- insert data using dynamic partitioning (job='Salesman', deptno) where the static partition job='Salesman' is a parent of the dynamic partition deptno (strict mode)</span>
+<span class="hljs-keyword">INSERT</span> overwrite <span class="hljs-keyword">TABLE</span> employees_part2
+<span class="hljs-keyword">PARTITION</span> (job=<span class="hljs-string">'Salesman'</span>,deptno)
+<span class="hljs-keyword">SELECT</span> empno, ename, mgr, from_unixtime(<span class="hljs-keyword">CAST</span>(hiredate/<span class="hljs-number">1000</span> <span class="hljs-keyword">AS</span> <span class="hljs-built_in">BIGINT</span>), <span class="hljs-string">'yyyy-MM-dd HH:mm:ss.SSS'</span>) <span class="hljs-keyword">AS</span> hiredate, sal, comm, deptno <span class="hljs-keyword">FROM</span> employees <span class="hljs-keyword">WHERE</span> job=<span class="hljs-string">"'SALESMAN'"</span>;
+
+
+<span class="hljs-comment">-- We needed 5 queries.</span>
+</code></pre><p>The partitions in HDFS will be stored as follows:<br>
+<img src="https://i.imgur.com/3lPcOwc.png" alt="" class="md-image md-image"></p><div class="alert alert-warning">
+<p><strong>Note:</strong> If you try to execute the following query in <code>strict</code> mode.</p>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">INSERT</span> overwrite <span class="hljs-keyword">TABLE</span> employees_part2
+<span class="hljs-keyword">PARTITION</span> (job, deptno)
+<span class="hljs-keyword">SELECT</span> empno, ename, mgr, from_unixtime(<span class="hljs-keyword">CAST</span>(hiredate/<span class="hljs-number">1000</span> <span class="hljs-keyword">AS</span> <span class="hljs-built_in">BIGINT</span>), <span class="hljs-string">'yyyy-MM-dd HH:mm:ss.SSS'</span>) <span class="hljs-keyword">AS</span> hiredate, sal, comm, job, deptno <span class="hljs-keyword">FROM</span> employees;
+</code></pre>
+<p>You will get the following error:</p>
+<pre><code class="wrap fix hljs"><span class="hljs-attr">Error: Error while compiling statement: FAILED: SemanticException [Error 10096]: Dynamic partition strict mode requires at least one static partition column. To turn this off set hive.exec.dynamic.partition.mode</span>=<span class="hljs-string">nonstrict (state=42000,code=10096)
+</span></code></pre>
+</div><div class="alert alert-warning">
+<p><strong>Note:</strong> If you try to execute the following query in <code>strict</code> mode.</p>
+<pre><code class="wrap sql hljs"><span class="hljs-keyword">INSERT</span> overwrite <span class="hljs-keyword">TABLE</span> employees_part2
+<span class="hljs-keyword">PARTITION</span> (job, deptno=<span class="hljs-number">10</span>)
+<span class="hljs-keyword">SELECT</span> empno, ename, mgr, from_unixtime(<span class="hljs-keyword">CAST</span>(hiredate/<span class="hljs-number">1000</span> <span class="hljs-keyword">AS</span> <span class="hljs-built_in">BIGINT</span>), <span class="hljs-string">'yyyy-MM-dd HH:mm:ss.SSS'</span>) <span class="hljs-keyword">AS</span> hiredate, sal, comm, job <span class="hljs-keyword">FROM</span> employees <span class="hljs-keyword">WHERE</span> deptno=<span class="hljs-number">10</span>;
+</code></pre>
+<p>You will get the following error:</p>
+<pre><code class="wrap fix hljs"><span class="hljs-attr">Error: Error while compiling statement: FAILED: SemanticException [Error 10094]: Line 2:11 Dynamic partition cannot be the parent of a static partition '10' (state</span>=<span class="hljs-string">42000,code=10094)
+</span></code></pre>
+</div><h5 id="Example-on-dynamic-partitioning-–-nonstrict-mode"><a class="anchor hidden-xs" href="#Example-on-dynamic-partitioning-–-nonstrict-mode" title="Example-on-dynamic-partitioning-–-nonstrict-mode"><i class="fa fa-link"></i></a>Example on dynamic partitioning – nonstrict mode</h5><p>The table <code>employees</code> contains 3 unique departments <code>deptno=10</code>, <code>deptno=20</code> and <code>deptno=30</code> and 5 distinct jobs <code>job=ANALYST</code>, <code>job=CLERK</code>, <code>job=MANAGER</code>, <code>job=PRESIDENT</code>, and <code>job=SALESMAN</code>. In total, we will create at most 15 partitions.</p><pre><code class="wrap sql hljs"><span class="hljs-comment">-- Set the option</span>
+<span class="hljs-keyword">SET</span> hive.exec.dynamic.partition=<span class="hljs-literal">true</span>;
+<span class="hljs-keyword">SET</span> hive.exec.dynamic.partition.mode=nonstrict;
+
+<span class="hljs-comment">-- Create a table with two partition columns (job, deptno)</span>
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> employees_part2(empno <span class="hljs-built_in">int</span>, ename <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), mgr <span class="hljs-built_in">int</span>, hiredate <span class="hljs-built_in">date</span>, sal <span class="hljs-built_in">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>), comm <span class="hljs-built_in">decimal</span>(<span class="hljs-number">10</span>,<span class="hljs-number">2</span>)) 
+PARTITIONED <span class="hljs-keyword">BY</span> (job <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), deptno <span class="hljs-built_in">int</span>) 
+<span class="hljs-keyword">STORED</span> <span class="hljs-keyword">AS</span> AVRO LOCATION <span class="hljs-string">'project/hive/warehouse/employees_part2'</span> 
+TBLPROPERTIES (<span class="hljs-string">'AVRO.COMPRESS'</span>=<span class="hljs-string">'SNAPPY'</span>);
+ 
+<span class="hljs-comment">-- insert data using dynamic partitioning (job, deptno) where both are dynamic partition columns (nonstrict mode)</span>
+<span class="hljs-keyword">INSERT</span> overwrite <span class="hljs-keyword">TABLE</span> employees_part2
+<span class="hljs-keyword">PARTITION</span> (job, deptno)
+<span class="hljs-keyword">SELECT</span> empno, ename, mgr, from_unixtime(<span class="hljs-keyword">CAST</span>(hiredate/<span class="hljs-number">1000</span> <span class="hljs-keyword">AS</span> <span class="hljs-built_in">BIGINT</span>), <span class="hljs-string">'yyyy-MM-dd HH:mm:ss.SSS'</span>) <span class="hljs-keyword">AS</span> hiredate, sal, comm, job, deptno <span class="hljs-keyword">FROM</span> employees;
+
+<span class="hljs-comment">-- We need only one query</span>
+</code></pre><p>The partitions in HDFS will be stored as follows:<br>
+<img src="https://i.imgur.com/3lPcOwc.png" alt="" class="md-image md-image"></p><h2 id="Bucketing-in-Hive"><a class="anchor hidden-xs" href="#Bucketing-in-Hive" title="Bucketing-in-Hive"><i class="fa fa-link"></i></a>Bucketing in Hive</h2><p>In the scenario where we query on unique values of the partition column in partitioned table, partitioning is not a good fit. If we perform partitioning based on a column with a lot of unique values like <code>ID</code>, it would create a large number of small datasets in HDFS and partition entries in the metastore, thus increasing the load on NameNode and the metastore service. To optimize queries on such a dataset, we group the data into a particular number of buckets and the data is divided into the maximum number of <strong>buckets</strong>.</p><p>We can create buckets on <code>empno</code> column of <code>employees_part</code> as follows:</p><pre><code class="wrap sql hljs"><span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> employees_part_buck(
     empno <span class="hljs-built_in">int</span>, 
     ename <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), 
     job <span class="hljs-built_in">varchar</span>(<span class="hljs-number">50</span>), 
@@ -285,19 +400,20 @@ file_path = os.path.join(repo_folder, <span class="hljs-string">"sql"</span>, <s
 <span class="hljs-keyword">FROM</span> employees;
 </code></pre><ul>
 <li>Query some data</li>
-</ul><pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> EMPLOYEES_PART <span class="hljs-keyword">WHERE</span> deptno=<span class="hljs-number">30</span> <span class="hljs-keyword">AND</span> empno&lt;<span class="hljs-number">7900</span>;
-</code></pre><h2 id="Apache-Tez0"><a class="anchor hidden-xs" href="#Apache-Tez0" title="Apache-Tez0"><i class="fa fa-link"></i></a>Apache Tez</h2><p>Hive supports two engines by default for running HiveQL queries. The default engine is Apache Tez but if it is not working for some reason, then you can use the traditional MapReduce by changing configurations which needs to be requested from the TA.</p><p><strong>Tez</strong> is a new application framework built on Hadoop Yarn that can execute complex directed acyclic graphs of general data processing tasks. In many ways it can be thought of as a more flexible and powerful successor of the map-reduce framework.</p><p><img src="https://i.imgur.com/DwaGJd5.png" alt="" class="md-image md-image"></p><p>It generalizes map and reduce tasks by exposing interfaces for generic data processing tasks, which consist of a triplet of interfaces: input, output and processor. These tasks are the <strong>vertices</strong> in the execution graph. <strong>Edges</strong> (i.e.: data connections between tasks) are first class citizens in Tez and together with the input/output interfaces greatly increase the flexibility of how data is transferred between tasks.</p><p>Tez also greatly extends the possible ways of which individual tasks can be linked together; In fact any arbitrary DAG can be executed directly in Tez.</p><p><img src="https://i.imgur.com/g4W68Va.png" alt="" class="md-image md-image"></p><p>In Tez, a map-reduce job is basically a simple DAG consisting of a single map and reduce vertices connected by a “bipartite” edge (i.e.: the edge connects every map task to every reduce task). Map input and reduce outputs are HDFS inputs and outputs respectively. The map output class locally sorts and partitions the data by a certain key, while the reduce input class merge-sorts its data on the same key.</p><h2 id="Perform-Exploratory-Data-Analysis-EDA0"><a class="anchor hidden-xs" href="#Perform-Exploratory-Data-Analysis-EDA0" title="Perform-Exploratory-Data-Analysis-EDA0"><i class="fa fa-link"></i></a>Perform Exploratory Data Analysis (EDA)</h2><p><strong>EDA</strong> is a data analytics process to understand the data in depth and learn the different data characteristics, often with visual means. This allows you to get a better feel of your data and find useful patterns in it.</p><p>We will use HiveQL to analyze the data. We need to provide insights about the data. We will create charts for the insights using Apache Superset. Here I will give some examples. For each query <code>qx</code> we should do as follows:</p><ol>
-<li>Write the HiveQL query <code>qx</code> using SQL editor of Apache superset or any text editor and save the query in a file <code>sql/eda.hql</code>.</li>
-<li>Create a managed or external Hive Table <code>qx_results</code> to store the results of the query. Add it to <code>eda.hql</code>.</li>
-<li>Save the results of the query in the table <code>qx_results</code>. Add it to <code>eda.hql</code>.</li>
-<li>In Apache Superset, Run the queries in <code>eda.hql</code>.</li>
+</ul><pre><code class="wrap sql hljs"><span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> employees_part_buck <span class="hljs-keyword">WHERE</span> deptno=<span class="hljs-number">30</span> <span class="hljs-keyword">AND</span> empno&lt;<span class="hljs-number">7900</span>;
+</code></pre><h2 id="Apache-Tez"><a class="anchor hidden-xs" href="#Apache-Tez" title="Apache-Tez"><i class="fa fa-link"></i></a>Apache Tez</h2><p>Hive supports two engines by default for running HiveQL queries. The default engine is Apache Tez but if it is not working for some reason, then you can use the traditional MapReduce by changing configurations which needs to be requested from the TA.</p><p><strong>Tez</strong> is a new application framework built on Hadoop Yarn that can execute complex directed acyclic graphs of general data processing tasks. In many ways it can be thought of as a more flexible and powerful successor of the map-reduce framework.</p><p><img src="https://i.imgur.com/DwaGJd5.png" alt="" class="md-image md-image"></p><p>It generalizes map and reduce tasks by exposing interfaces for generic data processing tasks, which consist of a triplet of interfaces: input, output and processor. These tasks are the <strong>vertices</strong> in the execution graph. <strong>Edges</strong> (i.e.: data connections between tasks) are first class citizens in Tez and together with the input/output interfaces greatly increase the flexibility of how data is transferred between tasks.</p><p>Tez also greatly extends the possible ways of which individual tasks can be linked together; In fact any arbitrary DAG can be executed directly in Tez.</p><p><img src="https://i.imgur.com/g4W68Va.png" alt="" class="md-image md-image"></p><p>In Tez, a map-reduce job is basically a simple DAG consisting of a single map and reduce vertices connected by a “bipartite” edge (i.e.: the edge connects every map task to every reduce task). Map input and reduce outputs are HDFS inputs and outputs respectively. The map output class locally sorts and partitions the data by a certain key, while the reduce input class merge-sorts its data on the same key.</p><h2 id="Perform-Exploratory-Data-Analysis-EDA"><a class="anchor hidden-xs" href="#Perform-Exploratory-Data-Analysis-EDA" title="Perform-Exploratory-Data-Analysis-EDA"><i class="fa fa-link"></i></a>Perform Exploratory Data Analysis (EDA)</h2><p><strong>EDA</strong> is a data analytics process to understand the data in depth and learn the different data characteristics, often with visual means. This allows you to get a better feel of your data and find useful patterns in it.</p><p>The concept of <strong>Online Analytical Processing (OLAP)</strong> has been widely discussed through the years and many papers have been written on the subject. OLTP is often used to handle large amounts of short and repetitive transactions in a constant flow, such as bank transactions or order entries. The database systems are designed to keep the data consistent and to maximize transaction throughput. OLAP databases are at the other hand used to store historical data over a long period of time, often collected from several data sources, and the size of a typical OLAP database is often orders of magnitude larger than that of an ordinary OLTP database. OLAP databases are not updated constantly, but they are loaded on a regular basis such as every night, every week-end or at the end of the month. This leads to few and large transactions, and query response time is more important than transaction throughput since querying is the main usage of an OLAP database. <strong>Hive</strong> supports Online Analytical Processing (OLAP), but not Online Transaction Processing (OLTP)</p><p><img src="https://www.researchgate.net/publication/321450004/figure/fig1/AS:982812731658240@1611332223146/Three-dimensional-cube-of-sales-data-with-the-dimensions-Store-Time-and-Product-and.ppm" alt="" class="md-image md-image"></p><p>The core of the OLAP technology is the <strong>data cube</strong>, which is a multidimensional database model. The model consists of <strong>dimensions</strong> and numeric metrics which are referred to as <strong>measures</strong>. The measures are numerical data such as revenue, cost, sales and budget. Those are dependent upon the dimensions, which are used to group the data similar to the group by operator in relational databases. Typical dimensions are time, location and product, and they are often organized in hierarchies. A hierarchy is a structure that defines levels of granularity of a dimension and the relationship between those levels. A time dimension can for example have hours as the finest granularity, and higher up the hierarchy can contain days, months and years. When a cube is queried for a certain measure, ranges of one or several dimensions can be selected to filter the data. For more info on <strong>Multidimensional data analysis</strong> <a href="https://www.diva-portal.org/smash/get/diva2:1137039/FULLTEXT01.pdf" target="_blank" rel="noopener">(read this book)</a>.</p><p>We will use HiveQL to analyze the data. We need to provide insights about the data. We will create charts for the insights using Apache Superset. Here I will give some examples. For each query <code>qx</code> we should do as follows:</p><ol>
+<li>Write the HiveQL query <code>qx</code> using SQL editor of Apache superset or any text editor and save the query in a file <code>sql/q1.hql</code>.</li>
+<li>Create a managed or external Hive Table <code>qx_results</code> to store the results of the query. Add HiveQL statements to <code>q1.hql</code>.</li>
+<li>Save the results of the query in the table <code>qx_results</code>. Add HiveQL statements to <code>q1.hql</code>.</li>
+<li>Using beeline, Run the queries in <code>q1.hql</code>.</li>
 <li>Also export the table <code>qx__results</code> to a file <code>output/qx</code> (for first query it is <code>output/q1</code>).</li>
 <li>In Apache Superset, create a dataset for the table <code>qx_results</code>.</li>
 <li>Create a chart for the dataset, add the name/description of the chart and save it.</li>
+<li>Export the chart as <code>qx.jpg</code> and store it in <code>output</code> folder.</li>
 </ol><div class="alert alert-warning">
 <p><strong>Note:</strong> This chart will be added to the dashboard in stage 4.</p>
-</div><p>The implementation of the steps for q1 on my dataset.</p><ol>
-<li>Write the HiveQL query <code>qx</code> using SQL editor of Apache superset or any text editor and save the query in a file <code>sql/eda.hql</code>.</li>
+</div><p>The implementation of the steps for <code>q1</code> on my dataset.</p><ol>
+<li>Write the HiveQL query <code>qx</code> using SQL editor of Apache superset or any text editor and save the query in a file <code>sql/q1.hql</code>.</li>
 </ol><pre><code class="sql hljs"><span class="hljs-comment">-- the query q1</span>
 <span class="hljs-keyword">SELECT</span> dname,
 <span class="hljs-keyword">SUM</span>(sal) <span class="hljs-keyword">AS</span> total_sal
@@ -307,18 +423,18 @@ file_path = os.path.join(repo_folder, <span class="hljs-string">"sql"</span>, <s
 <span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> total_sal <span class="hljs-keyword">DESC</span>
 <span class="hljs-keyword">LIMIT</span> <span class="hljs-number">10</span>;
 </code></pre><ol start="2">
-<li>Create a managed or external Hive Table <code>qx_results</code> to store the results of the query. Add it to <code>eda.hql</code>.</li>
+<li>Create a managed or external Hive Table <code>qx_results</code> to store the results of the query. Add HiveQL statements to <code>q1.hql</code>.</li>
 </ol><pre><code class="wrap sql hljs"><span class="hljs-keyword">USE</span> teamx_projectdb;
 
-<span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> q1_results;
-<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">NOT</span> <span class="hljs-keyword">EXISTS</span> q1_results(
+<span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">EXISTS</span> q1_results;
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> q1_results(
 Dname <span class="hljs-keyword">STRING</span>,
 Total_Salaries <span class="hljs-built_in">FLOAT</span>)
 <span class="hljs-keyword">ROW</span> <span class="hljs-keyword">FORMAT</span> <span class="hljs-keyword">DELIMITED</span>
 <span class="hljs-keyword">FIELDS</span> <span class="hljs-keyword">TERMINATED</span> <span class="hljs-keyword">BY</span> <span class="hljs-string">','</span>
-location <span class="hljs-string">'project/hive/warehouse'</span>; 
+location <span class="hljs-string">'project/hive/warehouse/q1'</span>; 
 </code></pre><ol start="3">
-<li>Save the results of the query in the table <code>qx_results</code>. Add it to <code>eda.hql</code>.</li>
+<li>Save the results of the query in the table <code>qx_results</code>. Add HiveQL statements to <code>q1.hql</code>.</li>
 </ol><pre><code class="wrap sql hljs">
 <span class="hljs-keyword">USE</span> teamx_projectdb;
 
@@ -337,15 +453,41 @@ location <span class="hljs-string">'project/hive/warehouse'</span>;
 <span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> q1_results;
 
 </code></pre><ol start="4">
-<li>Run the queries in <code>eda.hql</code> as follows:</li>
-</ol><pre><code class="wrap yaml hljs"><span class="hljs-string">beeline</span> <span class="hljs-bullet">-u</span> <span class="hljs-attr">jdbc:hive2://hadoop-03.uni.innopolis.ru:10001</span> <span class="hljs-bullet">-n</span> <span class="hljs-string">teamx</span> <span class="hljs-bullet">-p</span> <span class="hljs-string">$password</span> <span class="hljs-bullet">-f</span> <span class="hljs-string">sql/eda.hql</span>
+<li>Using beeline, Run the queries in <code>q1.hql</code> as follows:</li>
+</ol><pre><code class="wrap yaml hljs"><span class="hljs-string">beeline</span> <span class="hljs-bullet">-u</span> <span class="hljs-attr">jdbc:hive2://hadoop-03.uni.innopolis.ru:10001</span> <span class="hljs-bullet">-n</span> <span class="hljs-string">teamx</span> <span class="hljs-bullet">-p</span> <span class="hljs-string">$password</span> <span class="hljs-bullet">-f</span> <span class="hljs-string">sql/q1.hql</span>
+</code></pre><pre><code class="wrap sql hljs"><span class="hljs-comment">-- sql/q1.hql content</span>
+
+<span class="hljs-keyword">USE</span> teamx_projectdb;
+
+<span class="hljs-keyword">DROP</span> <span class="hljs-keyword">TABLE</span> <span class="hljs-keyword">IF</span> <span class="hljs-keyword">EXISTS</span> q1_results;
+<span class="hljs-keyword">CREATE</span> <span class="hljs-keyword">EXTERNAL</span> <span class="hljs-keyword">TABLE</span> q1_results(
+Dname <span class="hljs-keyword">STRING</span>,
+Total_Salaries <span class="hljs-built_in">FLOAT</span>)
+<span class="hljs-keyword">ROW</span> <span class="hljs-keyword">FORMAT</span> <span class="hljs-keyword">DELIMITED</span>
+<span class="hljs-keyword">FIELDS</span> <span class="hljs-keyword">TERMINATED</span> <span class="hljs-keyword">BY</span> <span class="hljs-string">','</span>
+location <span class="hljs-string">'project/hive/warehouse/q1'</span>; 
+
+<span class="hljs-comment">-- to not display table names with column names</span>
+<span class="hljs-keyword">SET</span> hive.resultset.use.unique.column.names = <span class="hljs-literal">false</span>;
+
+<span class="hljs-keyword">INSERT</span> <span class="hljs-keyword">INTO</span> q1_results
+<span class="hljs-keyword">SELECT</span> dname,
+<span class="hljs-keyword">SUM</span>(sal) <span class="hljs-keyword">AS</span> total_sal
+<span class="hljs-keyword">FROM</span> departments <span class="hljs-keyword">AS</span> d
+<span class="hljs-keyword">JOIN</span> employees <span class="hljs-keyword">AS</span> e <span class="hljs-keyword">ON</span> d.deptno = e.deptno
+<span class="hljs-keyword">GROUP</span> <span class="hljs-keyword">BY</span> dname
+<span class="hljs-keyword">ORDER</span> <span class="hljs-keyword">BY</span> total_sal <span class="hljs-keyword">DESC</span>
+<span class="hljs-keyword">LIMIT</span> <span class="hljs-number">10</span>;
+
+<span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> q1_results;
+
 </code></pre><ol start="5">
 <li>
-<p>Also export the table <code>qx_results</code> to a file. We have two ways:</p>
+<p>Also export the table <code>qx_results</code> to a file. We have two ways (You can use one of them):</p>
 <ul>
-<li>Method 1: Redirecting the output of beeline to a local file <code>output/q1</code>. The file <code>output/q1</code> contains only the output of the query and it is not a csv file.
+<li>Method 1: Redirecting the output of beeline from step 4 to a local file <code>output/q1.csv</code>. The file <code>output/q1.csv</code> contains only the output of the query and it is not a csv file.
 <ul>
-<li>Save the following query in <code>sql/q1.hql</code>.</li>
+<li>Make sure that you have the following query in <code>sql/q1.hql</code>.</li>
 </ul>
 <pre><code class="wrap sql hljs"><span class="hljs-keyword">USE</span> teamx_projectdb; 
 <span class="hljs-keyword">SELECT</span> * <span class="hljs-keyword">FROM</span> q1_results;
@@ -356,12 +498,12 @@ location <span class="hljs-string">'project/hive/warehouse'</span>;
 <pre><code class="wrap yaml hljs"><span class="hljs-string">beeline</span> <span class="hljs-bullet">-u</span> <span class="hljs-attr">jdbc:hive2://hadoop-03.uni.innopolis.ru:10001</span> <span class="hljs-bullet">-n</span> <span class="hljs-string">teamx</span> <span class="hljs-bullet">-p</span> <span class="hljs-string">$password</span> <span class="hljs-bullet">-f</span> <span class="hljs-string">sql/q1.hql</span> <span class="hljs-bullet">--hiveconf</span> <span class="hljs-string">hive.resultset.use.unique.column.names=false</span> <span class="hljs-string">&gt; output/q1.csv
 </span></code></pre>
 <ul>
-<li>The file <code>output/q1</code> will be saved in the local file system.</li>
+<li>The file <code>output/q1.csv</code> will be saved in the local file system.</li>
 </ul>
 </li>
 <li>Method 2: Exporting the table to a csv file <code>output/q1.csv</code>. The file <code>output/q1.csv</code> contains the csv representation of the table  <code>q1_results</code>.
 <ul>
-<li>Save the following query in <code>sql/q1.hql</code>.</li>
+<li>Make sure that you have the following query in <code>sql/q1.hql</code>.</li>
 </ul>
 <pre><code class="wrap sql hljs"><span class="hljs-keyword">USE</span> teamx_projectdb;
 
@@ -376,12 +518,14 @@ location <span class="hljs-string">'project/hive/warehouse'</span>;
 <pre><code class="wrap yaml hljs"><span class="hljs-string">beeline</span> <span class="hljs-bullet">-u</span> <span class="hljs-attr">jdbc:hive2://hadoop-03.uni.innopolis.ru:10001</span> <span class="hljs-bullet">-n</span> <span class="hljs-string">teamx</span> <span class="hljs-bullet">-p</span> <span class="hljs-string">$password</span> <span class="hljs-bullet">-f</span> <span class="hljs-string">sql/q1.hql</span>
 </code></pre>
 <ul>
-<li>The file <code>project/output/q1</code> will be saved in HDFS. You can bring it into the local file system. Add a header to the csv file, concatenate all its partitions and redirect the output to the local file system.</li>
+<li>The folder <code>project/output/q1</code> will contain the output data in HDFS. You can bring it into the local file system. Add a header to the csv file, concatenate all its partitions and redirect the output to the local file system.</li>
 </ul>
-<pre><code class="wrap yaml hljs"><span class="hljs-comment">#  concatenate all file partitions</span>
-<span class="hljs-string">echo</span> <span class="hljs-string">"dname,total_salaries"</span> <span class="hljs-string">&gt; output/q1.csv
+<pre><code class="wrap python hljs"><span class="hljs-comment"># Add a header to the output file</span>
+echo <span class="hljs-string">"dname,total_salaries"</span> &gt; output/q1.csv 
+<span class="hljs-comment"># concatenate all file partitions and </span>
+<span class="hljs-comment"># append the output to the file output/q1.csv</span>
 hdfs dfs -cat project/output/q1/* &gt;&gt; output/q1.csv
-</span></code></pre>
+</code></pre>
 </li>
 </ul>
 </li>
@@ -391,9 +535,15 @@ hdfs dfs -cat project/output/q1/* &gt;&gt; output/q1.csv
 </li>
 <li>
 <p>Create a chart for the dataset, add the name/description of the chart and save it.<br>
-<img src="https://i.imgur.com/svGwUSB.png" alt="" class="md-image md-image"></p>
+<img src="https://i.imgur.com/PwA7m7i.png" alt="" class="md-image md-image"></p>
 </li>
-</ol><div class="alert alert-warning">
+<li>
+<p>Export the chart as <code>qx.jpg</code> and store it in <code>output</code> folder.<br>
+<img src="https://i.imgur.com/sJDjQoo.png" alt="" class="md-image md-image"></p>
+</li>
+</ol><p>We can upload it to the output folder via <code>Jupyter Lab</code> as follows.<br>
+<img src="https://i.imgur.com/xwI1lB9.png" alt="" class="md-image md-image"><br>
+<img src="https://i.imgur.com/HmEaAHV.png" alt="" class="md-image md-image"></p><div class="alert alert-warning">
 <p>You should extract 5 different inisights from your data in the project.</p>
 </div><div class="alert alert-warning">
 <p>Keep these charts for the Presentation stage (stage 4) when we will create the dashboard and add the charts.</p>
@@ -401,30 +551,49 @@ hdfs dfs -cat project/output/q1/* &gt;&gt; output/q1.csv
 <p>I removed the HDP Sandbox approach since no teams are using it.</p>
 </div><h1 id="Project-checklist"><a class="anchor hidden-xs" href="#Project-checklist" title="Project-checklist"><i class="fa fa-link"></i></a>Project checklist</h1><div class="alert alert-success">
 <ul>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Put the *.avsc files from stage 1 to HDFS in a folder like <code>project/warehouse/avsc</code>.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Create a hive database in <code>project/hive/warehouse</code> and access it.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Create external Hive tables for the data that are imported to HDFS in stage 1.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Check the datatypes of the columns of the new tables.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Create external, partitioned and bucketing Hive tables for one of the tables above.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Check whether you can query data from the tables above.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Perform EDA (Extract 5 different insights). For each data insight:
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Put the *.avsc files from stage 1 to HDFS in a folder like <code>project/warehouse/avsc</code>.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Create a hive database like <code>teamx_projectdb</code> in <code>project/hive/warehouse</code> and access it.
 <ul>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Write the query.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Export query results.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Create the dataset and the chart in Apache Superset.</li>
+<li>Do not use same location in HDFS where you stored the tables imported via Sqoop.</li>
 </ul>
 </li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Write scripts to automate the tasks above except the tasks in Apache Superset of creating datasets and charts.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Run the script <code>stage2.sh</code> to test this stage.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Check the quality of scripts in this stage using <code>pylint</code> command.</li>
-<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" disabled="disabled"><label></label>Summarize your work in this stage and add it to the report.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Create external Hive tables for the tables that are imported to HDFS in stage 1.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Check the datatypes of the columns of the new tables.
+<ul>
+<li>Maybe some columns needs conversion.</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Create external, partitioned and bucketing Hive tables for one of the Hive tables above.
+<ul>
+<li>The table should use partitioning and backeting.</li>
+<li>If you have more than one table, then you may use partitioning in one table and bucketing in another table.</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Check whether you can query data from the tables above.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Delete the unpartitioned Hive tables from your database and for the EDA use only partititioned and bucketing Hive tables.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Perform EDA (Extract 5 different insights). For each data insight <code>x</code>:
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Write the query <code>qx</code>.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Create a Hive table <code>qx_results</code> to store the results of the query.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Store the query results in the table <code>qx_results</code>.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Export the table <code>qx_results</code> to <code>output/qx.csv</code>.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Create the dataset and the chart in Apache Superset.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Export the chart as image <code>qx.jpg</code> and put it in <code>output</code> folder.</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Write scripts to automate the tasks above except the tasks in Apache Superset of creating datasets and charts.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Run the script <code>stage2.sh</code> to test this stage.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Check the quality of scripts in this stage using <code>pylint</code> command.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Summarize your work in this stage and add it to the report.</li>
 </ul>
 </div><h1 id="References"><a class="anchor hidden-xs" href="#References" title="References"><i class="fa fa-link"></i></a>References</h1><ul>
+<li><a href="https://avro.apache.org/docs/1.8.1/spec.html" target="_blank" rel="noopener">Avro 1.8.1 Specification</a></li>
+<li><a href="https://cwiki.apache.org/confluence/display/Hive/LanguageManual" target="_blank" rel="noopener">Hive Language Manual</a></li>
 <li><a href="https://www.cs.uct.ac.za/mit_notes/database/htmls/chp03.html" target="_blank" rel="noopener">toy-dataset</a></li>
-<li><a href="https://www.postgresql.org/docs/current/sql-copy.html" target="_blank" rel="noopener">PostgreSQL documentation</a></li>
 <li><a href="https://cwiki.apache.org/confluence/display/Hive/Home" target="_blank" rel="noopener">Hive documentation</a></li>
 <li><a href="https://hortonworks.com/wp-content/uploads/2013/05/hql_cheat_sheet.pdf" target="_blank" rel="noopener">HiveQL Cheat Sheet</a></li>
 <li><a href="https://hashdork.com/apache-hive-tutorial/" target="_blank" rel="noopener">https://hashdork.com/apache-hive-tutorial/</a></li>
+<li><a href="https://analyticshut.com/static-vs-dynamic-partitioning-in-hive/" target="_blank" rel="noopener">static vs dynamic partitioning in Hive</a></li>
 </ul></div>
     <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
         <div class="pull-right dropdown">
@@ -447,13 +616,13 @@ hdfs dfs -cat project/output/q1/* &gt;&gt; output/q1.csv
 <li class=""><a href="#Partitioning-in-Hive0" title="Partitioning in Hive">Partitioning in Hive</a></li>
 </ul>
 </li>
-<li class=""><a href="#Bucketing-in-Hive0" title="Bucketing in Hive">Bucketing in Hive</a></li>
-<li class=""><a href="#Apache-Tez0" title="Apache Tez">Apache Tez</a></li>
-<li class=""><a href="#Perform-Exploratory-Data-Analysis-EDA0" title="Perform Exploratory Data Analysis (EDA)">Perform Exploratory Data Analysis (EDA)</a></li>
+<li><a href="#Bucketing-in-Hive" title="Bucketing in Hive">Bucketing in Hive</a></li>
+<li><a href="#Apache-Tez" title="Apache Tez">Apache Tez</a></li>
+<li><a href="#Perform-Exploratory-Data-Analysis-EDA" title="Perform Exploratory Data Analysis (EDA)">Perform Exploratory Data Analysis (EDA)</a></li>
 </ul>
 </li>
 <li><a href="#Project-checklist" title="Project checklist">Project checklist</a></li>
-<li class=""><a href="#References" title="References">References</a></li>
+<li><a href="#References" title="References">References</a></li>
 </ul>
 </div><div class="toc-menu" style="">
     <a class="expand-toggle expand-all" href="#">Expand all</a>
@@ -480,13 +649,13 @@ hdfs dfs -cat project/output/q1/* &gt;&gt; output/q1.csv
 <li class=""><a href="#Partitioning-in-Hive0" title="Partitioning in Hive">Partitioning in Hive</a></li>
 </ul>
 </li>
-<li class=""><a href="#Bucketing-in-Hive0" title="Bucketing in Hive">Bucketing in Hive</a></li>
-<li class=""><a href="#Apache-Tez0" title="Apache Tez">Apache Tez</a></li>
-<li class=""><a href="#Perform-Exploratory-Data-Analysis-EDA0" title="Perform Exploratory Data Analysis (EDA)">Perform Exploratory Data Analysis (EDA)</a></li>
+<li><a href="#Bucketing-in-Hive" title="Bucketing in Hive">Bucketing in Hive</a></li>
+<li><a href="#Apache-Tez" title="Apache Tez">Apache Tez</a></li>
+<li><a href="#Perform-Exploratory-Data-Analysis-EDA" title="Perform Exploratory Data Analysis (EDA)">Perform Exploratory Data Analysis (EDA)</a></li>
 </ul>
 </li>
 <li><a href="#Project-checklist" title="Project checklist">Project checklist</a></li>
-<li class=""><a href="#References" title="References">References</a></li>
+<li><a href="#References" title="References">References</a></li>
 </ul>
 </div><div class="toc-menu" style="">
     <a class="expand-toggle expand-all" href="#">Expand all</a>
