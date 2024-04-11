@@ -1,0 +1,702 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Stage III - Predictive Data Analytics - CodiMD
+    </title>
+    <link rel="icon" type="image/png" href="http://localhost:3000/favicon.png">
+    <link rel="apple-touch-icon" href="http://localhost:3000/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha256-H0KfTigpUV+0/5tn2HXC0CPwhhDhWgSawJdnFd0CGCo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fork-awesome/1.1.3/css/fork-awesome.min.css" integrity="sha256-ZhApazu+kejqTYhMF+1DzNKjIzP7KXu6AzyXcC1gMus=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github-gist.min.css" integrity="sha256-tAflq+ymku3Khs+I/WcAneIlafYgDiOQ9stIHH985Wo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,300italic,300|Source+Serif+Pro|Source+Code+Pro:400,300,500&subset=latin,latin-ext);.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{padding:0 1em;color:#777;border-left:.25em solid #ddd}.night .markdown-body blockquote{color:#bcbcbc}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.night .markdown-body h1,.night .markdown-body h2,.night .markdown-body h3,.night .markdown-body h4,.night .markdown-body h5,.night .markdown-body h6{color:#ddd}.markdown-body h1 .fa-link,.markdown-body h2 .fa-link,.markdown-body h3 .fa-link,.markdown-body h4 .fa-link,.markdown-body h5 .fa-link,.markdown-body h6 .fa-link{color:#000;vertical-align:middle;visibility:hidden;font-size:16px}.night .markdown-body h1 .fa-link,.night .markdown-body h2 .fa-link,.night .markdown-body h3 .fa-link,.night .markdown-body h4 .fa-link,.night .markdown-body h5 .fa-link,.night .markdown-body h6 .fa-link{color:#fff}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .fa-link,.markdown-body h2:hover .anchor .fa-link,.markdown-body h3:hover .anchor .fa-link,.markdown-body h4:hover .anchor .fa-link,.markdown-body h5:hover .anchor .fa-link,.markdown-body h6:hover .anchor .fa-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.night .markdown-body table tr{background-color:#5f5f5f}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.night .markdown-body table tr:nth-child(2n){background-color:#4f4f4f}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.night .markdown-body code,.night .markdown-body tt{color:#eee;background-color:hsla(0,0%,90.2%,.36)}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\A0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.markdown-body kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid;border-color:#ccc #ccc #bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body pre{border:inherit!important}.night .markdown-body pre{filter:invert(100%)}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-webkit-inline-flex;display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.night .markdown-body .gist table tr:nth-child(2n){background-color:#ddd}.markdown-body code[data-gist-id]{background:none;padding:0;filter:invert(100%)}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.geo,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.night .markdown-body pre.graphviz .graph>polygon{fill:#333}.night .markdown-body pre.mermaid .sectionTitle,.night .markdown-body pre.mermaid .titleText,.night .markdown-body pre.mermaid text{fill:#fff}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{max-width:100%;height:100%}.night .markdown-body .abc path{fill:#eee}.night .markdown-body .abc path.note_selected{fill:##4DD0E1}.night tspan{fill:#fefefe}.night pre rect{fill:transparent}.night pre.flow-chart path,.night pre.flow-chart rect{stroke:#fff}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body img{background-color:transparent}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;-webkit-transition:opacity .2s;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;-webkit-transition:opacity .2s;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.geo-map{width:100%;height:250px}.markmap-container{height:300px}.markmap-container>svg{width:100%;height:100%}.MJX_Assistive_MathML{display:none}.ui-infobar{position:relative;z-index:2;max-width:758px;margin-top:25px;margin-bottom:-25px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:10000}.ui-toc-label{opacity:.9;background-color:#ccc;border:none}.ui-toc-label,.ui-toc .open .ui-toc-label{-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#5f5f5f}.ui-toc-label:focus{opacity:1;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.night .ui-toc-dropdown .nav>li>a:focus,.night .ui-toc-dropdown .nav>li>a:hover{color:#fff;border-left-color:#fff}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.night .ui-toc-dropdown .nav>.active:focus>a,.night .ui-toc-dropdown .nav>.active:hover>a,.night .ui-toc-dropdown .nav>.active>a{color:#fff;border-left:2px solid #fff}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.night .ui-toc-dropdown .nav>li>a{color:#aaa}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:50px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a{padding-right:50px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:60px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a{padding-right:60px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:hover{padding-left:49px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:hover{padding-right:49px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-left:59px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-right:59px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>a{padding-left:48px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:48px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active>a{padding-left:58px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:58px}.markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,Hiragino Kaku Gothic Pro,"\30D2\30E9\30AE\30CE\89D2\30B4   Pro W3",Osaka,Meiryo,"\30E1\30A4\30EA\30AA",MS Gothic,"\FF2D\FF33   \30B4\30B7\30C3\30AF",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,"\FF2D\FF33   \FF30\30B4\30B7\30C3\30AF",sans-serif}.markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang TC,Microsoft JhengHei,"\5FAE\8EDF\6B63\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,"\5FAE\8EDF\6B63\9ED1UI",sans-serif}.markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang SC,Microsoft YaHei,"\5FAE\8F6F\96C5\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,"\5FAE\8F6F\96C5\9ED1UI",sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:rgba(0,0,0,.85)}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:contain}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}small span{line-height:22px}small .dropdown{display:inline-block}small .dropdown a:focus,small .dropdown a:hover{text-decoration:none}.unselectable{-moz-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-o-user-select:none;user-select:none}.night .navbar{background:#333;border-bottom-color:#333;color:#eee}.night .navbar a{color:#eee}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}.focus,:focus{outline:none!important}::-moz-focus-inner{border:0!important}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid" lang="en"><h1 id="Stage-III---Predictive-Data-Analytics"><a class="anchor hidden-xs" href="#Stage-III---Predictive-Data-Analytics" title="Stage-III---Predictive-Data-Analytics"><i class="fa fa-link"></i></a>Stage III - Predictive Data Analytics</h1><p><strong>Course:</strong> Big Data - IU S24<br>
+<strong>Author:</strong> Firas Jolha</p><h1 id="Dataset"><a class="anchor hidden-xs" href="#Dataset" title="Dataset"><i class="fa fa-link"></i></a>Dataset</h1><ul>
+<li><a href="http://www.cems.uwe.ac.uk/~pchatter/resources/html/emp_dept_data+schema.html" target="_blank" rel="noopener">Some emps and depts</a></li>
+</ul><h1 id="Agenda"><a class="anchor hidden-xs" href="#Agenda" title="Agenda"><i class="fa fa-link"></i></a>Agenda</h1><p></p><div class="toc"><ul>
+<li><a href="#Stage-III---Predictive-Data-Analytics" title="Stage III - Predictive Data Analytics">Stage III - Predictive Data Analytics</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li><a href="#Description" title="Description">Description</a></li>
+<li><a href="#Dataset-Description" title="Dataset Description">Dataset Description</a></li>
+<li><a href="#Preparation" title="Preparation">Preparation</a></li>
+<li><a href="#Modeling-in-Spark-ML" title="Modeling in Spark ML">Modeling in Spark ML</a><ul>
+<li><a href="#1-Running-Spark-apps" title="1. Running Spark apps">1. Running Spark apps</a><ul>
+<li><a href="#1-Interactive-analysis-via-jupyter-notebook" title="1. Interactive analysis via jupyter notebook">1. Interactive analysis via jupyter notebook</a></li>
+<li><a href="#2-Non-interactive-analysis-via-spark-submit" title="2. Non-interactive analysis via spark-submit">2. Non-interactive analysis via spark-submit</a></li>
+<li><a href="#3-Interactive-analysis-via-pyspark-shell" title="3. Interactive analysis via pyspark shell">3. Interactive analysis via pyspark shell</a></li>
+</ul>
+</li>
+<li><a href="#2-Read-Hive-tables" title="2. Read Hive tables">2. Read Hive tables</a></li>
+<li><a href="#3-ML-Modeling" title="3. ML Modeling">3. ML Modeling</a><ul>
+<li><a href="#1-Preprocessing-the-data" title="1. Preprocessing the data">1. Preprocessing the data</a></li>
+<li><a href="#2-Modeling" title="2. Modeling">2. Modeling</a></li>
+<li><a href="#3-Prediction" title="3. Prediction">3. Prediction</a></li>
+<li><a href="#4-Evaluation" title="4. Evaluation">4. Evaluation</a></li>
+<li><a href="#5-Saving-the-results-Spark-DataFrame-as-csv-file" title="5. Saving the results (Spark DataFrame as csv file)">5. Saving the results (Spark DataFrame as csv file)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li><a href="#Upcoming-lab" title="Upcoming lab">Upcoming lab</a></li>
+<li><a href="#Project-checklist" title="Project checklist">Project checklist</a></li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><p></p><h1 id="Prerequisites"><a class="anchor hidden-xs" href="#Prerequisites" title="Prerequisites"><i class="fa fa-link"></i></a>Prerequisites</h1><ul>
+<li>Stage I is done
+<ul>
+<li>The relational database is built.</li>
+<li>The database is imported to HDFS via Sqoop.</li>
+<li>The tables are stored in HDFS as Avro data files and compressed in Snappy.</li>
+<li>The schema of AVRO files are stored in HDFS.</li>
+</ul>
+</li>
+<li>Stage II is done
+<ul>
+<li>The Hive table are created.</li>
+<li>You performed EDA on the data stored in HDFS.</li>
+</ul>
+</li>
+</ul><h1 id="Objectives"><a class="anchor hidden-xs" href="#Objectives" title="Objectives"><i class="fa fa-link"></i></a>Objectives</h1><ul>
+<li>Build Spark ML models</li>
+<li>Train and evaluate the models</li>
+<li>Hyperparameter tuning and Grid search</li>
+</ul><h1 id="Description"><a class="anchor hidden-xs" href="#Description" title="Description"><i class="fa fa-link"></i></a>Description</h1><p>In this stage, we will build Spark ML models for the dataset that we have and perform hyperparameter tuning via GridSearch.</p><div class="alert alert-danger">
+<p><strong>Important note:</strong> You can use <code>pyspark.ml</code> or <code>pyspark.mllib</code> subpackages based on the ML task you specified in the <code>project.info</code> sheet. If the <code>pyspark</code> package does not satisfy your requirements, then you can use 3rd party libraries but you need to verify it with your instructor before that.</p>
+<p><strong>Important note:</strong> It is not allowed to run the spark application in local mode and the ML model should be trained on Yarn cluster (<code>--master=yarn</code>) in a distributed environment so your data should be processed as distributed Spark Dataframes.</p>
+</div><h1 id="Dataset-Description"><a class="anchor hidden-xs" href="#Dataset-Description" title="Dataset-Description"><i class="fa fa-link"></i></a>Dataset Description</h1><p>The dataset is about the departments and employees in a company. It consists of two <code>.csv</code> files.</p><details>
+<p>The file <code>emps.csv</code> contains information about employees:</p>
+<ul>
+<li>EMPNO is a unique employee number; it is the primary key of the employee table.</li>
+<li>ENAME stores the employee’s name.</li>
+<li>The JOB attribute stores the name of the job the employee does.</li>
+<li>The MGR attribute contains the employee number of the employee who manages that employee. If the employee has no manager, then the MGR column for that employee is left set to null.</li>
+<li>The HIREDATE column stores the date on which the employee joined the company.</li>
+<li>The SAL column contains the details of employee salaries.</li>
+<li>The COMM attribute stores values of commission paid to employees. Not all employees receive commission, in which case the COMM field is set to null.</li>
+<li>The DEPTNO column stores the department number of the department in which each employee is based. This data item acts a foreign key, linking the employee details stored in the EMP table with the details of departments in which employees work, which are stored in the DEPT table.</li>
+</ul>
+<p>The file <code>depts.csv</code> contains information about departments:</p>
+<ul>
+<li>DEPTNO: The primary key containing the department numbers used to identify each department.</li>
+<li>DNAME: The name of each department.</li>
+<li>LOC: The location where each department is based.</li>
+</ul>
+<!-- The file `salgrade.csv` contains information about salary categories:
+- GRADE: A numeric identifier for the category of the salary.
+- LOSAL: The lowest salary in this category.
+- HISAL: The highest salary in this category.
+ -->
+<div class="alert alert-info">
+<p>I created these <code>csv</code> files from the tables provided in the link.</p>
+</div>
+</details><h1 id="Preparation"><a class="anchor hidden-xs" href="#Preparation" title="Preparation"><i class="fa fa-link"></i></a>Preparation</h1><p>Before starting with Spark ML, make sure that you built Hive tables and tested them via EDA in the previous stage.</p><h1 id="Modeling-in-Spark-ML"><a class="anchor hidden-xs" href="#Modeling-in-Spark-ML" title="Modeling-in-Spark-ML"><i class="fa fa-link"></i></a>Modeling in Spark ML</h1><p>In this part of the project, we will build an ML model. Here I will explain two modes for performing predictive analysis in the cluster. The first one is used for production and the second one is used for development and debugging. We suggest to use both of them and perform the analysis in an interactive JupyterLab notebook then run the code via <code>spark-submit</code>.</p><p>Performing PDA should basically include (check the Project Checklist for the full list of steps):<br>
+- building the models.<br>
+- Tune the model hyper-parameters via grid search and cross validation.<br>
+- Compare models.<br>
+- Performing predictions on best models.</p><div class="alert alert-danger">
+<p><strong>Note:</strong> For the project, you need to use Hive tables created in Hive via partitioning and/or bucketing. Check the project checklist.</p>
+</div><h2 id="1-Running-Spark-apps"><a class="anchor hidden-xs" href="#1-Running-Spark-apps" title="1-Running-Spark-apps"><i class="fa fa-link"></i></a>1. Running Spark apps</h2><h3 id="1-Interactive-analysis-via-jupyter-notebook"><a class="anchor hidden-xs" href="#1-Interactive-analysis-via-jupyter-notebook" title="1-Interactive-analysis-via-jupyter-notebook"><i class="fa fa-link"></i></a>1. Interactive analysis via <code>jupyter notebook</code></h3><ol>
+<li>Connect to Hive.</li>
+</ol><pre><code class="wrap python hljs"><span class="hljs-keyword">from</span> pyspark.sql <span class="hljs-keyword">import</span> SparkSession
+
+<span class="hljs-comment"># Add here your team number teamx</span>
+team = 
+
+<span class="hljs-comment"># location of your Hive database in HDFS</span>
+warehouse = <span class="hljs-string">"project/hive/warehouse"</span>
+
+spark = SparkSession.builder\
+        .appName(<span class="hljs-string">"{} - spark ML"</span>.format(team))\
+        .master(<span class="hljs-string">"yarn"</span>)\
+        .config(<span class="hljs-string">"hive.metastore.uris"</span>, <span class="hljs-string">"thrift://hadoop-02.uni.innopolis.ru:9883"</span>)\
+        .config(<span class="hljs-string">"spark.sql.warehouse.dir"</span>, warehouse)\
+        .config(<span class="hljs-string">"spark.sql.avro.compression.codec"</span>, <span class="hljs-string">"snappy"</span>)\
+        .enableHiveSupport()\
+        .getOrCreate()
+
+<span class="hljs-comment">#We can also add</span>
+<span class="hljs-comment"># .config("spark.sql.catalogImplementation","hive")\ </span>
+<span class="hljs-comment"># But this is the default configuration</span>
+<span class="hljs-comment"># You can switch to Spark Catalog by setting "in-memory" for "spark.sql.catalogImplementation"</span>
+</code></pre><ol start="2">
+<li>Use Spark SQL to run HiveQL queries.</li>
+</ol><pre><code class="wrap python hljs">spark.sql(<span class="hljs-string">"SHOW DATABASES"</span>).show()
+spark.sql(<span class="hljs-string">"USE teamx_projectdb"</span>).show()
+spark.sql(<span class="hljs-string">"SHOW TABLES"</span>).show()
+spark.sql(<span class="hljs-string">"SELECT * FROM &lt;db_name&gt;.&lt;table_name&gt;"</span>).show()
+</code></pre><div class="alert alert-info">
+<p><strong>Note:</strong> The output for <code>spark.sql</code> function is a Spark DataFrame.</p>
+</div><h3 id="2-Non-interactive-analysis-via-spark-submit"><a class="anchor hidden-xs" href="#2-Non-interactive-analysis-via-spark-submit" title="2-Non-interactive-analysis-via-spark-submit"><i class="fa fa-link"></i></a>2. Non-interactive analysis via <code>spark-submit</code></h3><p>You can save the code above in a file <code>scripts/model.py</code> and run it on Spark using <code>spark-submit</code> tool as follows:</p><pre><code class="wrap yaml hljs"><span class="hljs-string">spark-submit</span> <span class="hljs-bullet">--master</span> <span class="hljs-string">yarn</span> <span class="hljs-string">scripts/model.py</span>
+</code></pre><h3 id="3-Interactive-analysis-via-pyspark-shell"><a class="anchor hidden-xs" href="#3-Interactive-analysis-via-pyspark-shell" title="3-Interactive-analysis-via-pyspark-shell"><i class="fa fa-link"></i></a>3. Interactive analysis via <code>pyspark shell</code></h3><ol>
+<li>Add Hive configs and start the shell</li>
+</ol><pre><code class="wrap yaml hljs"><span class="hljs-string">pyspark</span> <span class="hljs-bullet">--master</span> <span class="hljs-string">yarn</span> <span class="hljs-bullet">--conf</span> <span class="hljs-string">"spark.driver.extraJavaOptions=-Dhive.metastore.uris=thrift://hadoop-02.uni.innopolis.ru:9883"</span>
+</code></pre><ol start="2">
+<li>Use Spark SQL to run HiveQL queries.</li>
+</ol><pre><code class="wrap python hljs">spark.sql(<span class="hljs-string">"SHOW DATABASES"</span>).show()
+spark.sql(<span class="hljs-string">"USE teamx_projectdb"</span>).show()
+spark.sql(<span class="hljs-string">"SHOW TABLES"</span>).show()
+spark.sql(<span class="hljs-string">"SELECT * FROM &lt;db_name&gt;.&lt;table_name&gt;"</span>).show()
+</code></pre><div class="alert alert-warning">
+<p><strong>Note:</strong> You need to use <code>jupyter notebook</code> to analyze the data and then automate the tasks to run via <code>spark-submit</code>.</p>
+</div><div class="alert alert-danger">
+<p><strong>Note:</strong> Do not run spark applications via <code>python3</code> but use <code>spark-submit</code> tool.</p>
+</div><h2 id="2-Read-Hive-tables"><a class="anchor hidden-xs" href="#2-Read-Hive-tables" title="2-Read-Hive-tables"><i class="fa fa-link"></i></a>2. Read Hive tables</h2><ol>
+<li>Connect to Hive.</li>
+</ol><pre><code class="wrap python hljs"><span class="hljs-keyword">from</span> pyspark.sql <span class="hljs-keyword">import</span> SparkSession
+
+<span class="hljs-comment"># Add here your team number teamx</span>
+team = 
+
+<span class="hljs-comment"># location of your Hive database in HDFS</span>
+warehouse = <span class="hljs-string">"project/hive/warehouse"</span>
+
+spark = SparkSession.builder\
+        .appName(<span class="hljs-string">"{} - spark ML"</span>.format(team))\
+        .master(<span class="hljs-string">"yarn"</span>)\
+        .config(<span class="hljs-string">"hive.metastore.uris"</span>, <span class="hljs-string">"thrift://hadoop-02.uni.innopolis.ru:9883"</span>)\
+        .config(<span class="hljs-string">"spark.sql.warehouse.dir"</span>, warehouse)\
+        .config(<span class="hljs-string">"spark.sql.avro.compression.codec"</span>, <span class="hljs-string">"snappy"</span>)\
+        .enableHiveSupport()\
+        .getOrCreate()
+
+<span class="hljs-comment">#We can also add</span>
+<span class="hljs-comment"># .config("spark.sql.catalogImplementation","hive")\ </span>
+<span class="hljs-comment"># But this is the default configuration</span>
+<span class="hljs-comment"># You can switch to Spark Catalog by setting "in-memory" for "spark.sql.catalogImplementation"</span>
+</code></pre><ol start="2">
+<li>List all databases</li>
+</ol><pre><code class="wrap python hljs">print(spark.catalog.listDatabases())
+
+<span class="hljs-comment"># OR</span>
+<span class="hljs-comment"># spark.sql("SHOW DATABASES;").show()</span>
+</code></pre><ol start="3">
+<li>List all tables</li>
+</ol><pre><code class="wrap python hljs">print(spark.catalog.listTables(<span class="hljs-string">"teamx_projectdb"</span>))
+
+<span class="hljs-comment"># OR</span>
+<span class="hljs-comment"># spark.sql("USE teamx_projectdb;")</span>
+<span class="hljs-comment"># print(spark.sql("SHOW TABLES;"))</span>
+</code></pre><ol start="4">
+<li>Read Hive table</li>
+</ol><pre><code class="wrap python hljs">emps = spark.read.format(<span class="hljs-string">"avro"</span>).table(<span class="hljs-string">'teamx_projectdb.employees_part'</span>)
+
+<span class="hljs-comment"># Creates a temporary view</span>
+<span class="hljs-comment"># emps.createOrReplaceTempView('employees') </span>
+
+depts = spark.read.format(<span class="hljs-string">"avro"</span>).table(<span class="hljs-string">'teamx_projectdb.departments'</span>)
+
+<span class="hljs-comment"># Creates a temporary view</span>
+<span class="hljs-comment"># depts.createOrReplaceTempView('departments')</span>
+</code></pre><p>Now we can use <code>depts</code> and <code>emps</code> as input dataframes for our ML model.</p><ol start="5">
+<li>Run some queries</li>
+</ol><pre><code class="wrap python hljs">emps.printSchema()
+depts.printSchema()
+
+spark.sql(<span class="hljs-string">"SELECT * FROM employees WHERE deptno=10"</span>).show()
+
+spark.sql(<span class="hljs-string">"SELECT * FROM departments"</span>).show()
+
+spark.sql(<span class="hljs-string">"SELECT AVG(SAL) FROM employees;"</span>).show()
+
+spark.sql(<span class="hljs-string">"SELECT * from employees where comm is NULL;"</span>).show()
+</code></pre><div class="alert alert-warning">
+<p>You can also run HiveQL queries here via Spark SQL too for EDA part of the project.</p>
+</div><h2 id="3-ML-Modeling"><a class="anchor hidden-xs" href="#3-ML-Modeling" title="3-ML-Modeling"><i class="fa fa-link"></i></a>3. ML Modeling</h2><p>Here I will show a simple example to predict the salaries of the employees via linear regression.</p><h3 id="1-Preprocessing-the-data"><a class="anchor hidden-xs" href="#1-Preprocessing-the-data" title="1-Preprocessing-the-data"><i class="fa fa-link"></i></a>1. Preprocessing the data</h3><div class="alert alert-danger">
+<p><strong>Note1:</strong> If you have time/datetime types in your dataset, then Sqoop probably will convert it to AVRO timestamp and you will get the time/datetime in unix_time format. You should not encode it as numerical feature and you need to convert it into time/datetime, decompose and encode its parts as cyclical features. You can use <em>sin_cos_transformation</em> as follows:</p>
+<ol>
+<li>Decompose time/datetime field into six parts (year, month, days, hours, minutes, seconds). If you have only time, then it will be three parts.</li>
+<li>You can encode the <code>year</code> part as a numerical feature since it is not cyclical.</li>
+<li>For other parts (month, days, hours, minutes, seconds), build a custom <code>pyspark.ml.Transformer</code> for each part. Check this <a href="https://csyhuang.github.io/2020/08/01/custom-transformer/" target="_blank" rel="noopener">example</a> to see how you can build a custom transformer.</li>
+<li>This transformation encodes each input into two components, one component on <code>sin</code> wave and the other one on <code>cos</code> wave. For instance, the month part of the time/datetime field, after encoding, will have two columns as follows (<span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-3993-Frame" tabindex="0" style="position: relative;" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>s</mi><mi>i</mi><mi>n</mi></mrow></msub></math>" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-131791" style="width: 4.636em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.99em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1003.99em, 2.697em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-131792"><span class="mi" id="MathJax-Span-131793" style="font-family: MathJax_Math-italic;">m</span><span class="mi" id="MathJax-Span-131794" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-131795" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-131796" style="font-family: MathJax_Math-italic;">t</span><span class="msubsup" id="MathJax-Span-131797"><span style="display: inline-block; position: relative; width: 1.673em; height: 0px;"><span style="position: absolute; clip: rect(3.128em, 1000.54em, 4.151em, -999.997em); top: -3.984em; left: 0em;"><span class="mi" id="MathJax-Span-131798" style="font-family: MathJax_Math-italic;">h</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; top: -3.823em; left: 0.595em;"><span class="texatom" id="MathJax-Span-131799"><span class="mrow" id="MathJax-Span-131800"><span class="mi" id="MathJax-Span-131801" style="font-size: 70.7%; font-family: MathJax_Math-italic;">s</span><span class="mi" id="MathJax-Span-131802" style="font-size: 70.7%; font-family: MathJax_Math-italic;">i</span><span class="mi" id="MathJax-Span-131803" style="font-size: 70.7%; font-family: MathJax_Math-italic;">n</span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.247em; border-left: 0px solid; width: 0px; height: 1.128em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class="MJX-TeXAtom-ORD"><mi>s</mi><mi>i</mi><mi>n</mi></mrow></msub></math></span></span><script type="math/tex" id="MathJax-Element-3993">month_{sin}</script></span>, <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-3994-Frame" tabindex="0" style="position: relative;" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>c</mi><mi>o</mi><mi>s</mi></mrow></msub></math>" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-131804" style="width: 4.582em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.936em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1003.94em, 2.697em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-131805"><span class="mi" id="MathJax-Span-131806" style="font-family: MathJax_Math-italic;">m</span><span class="mi" id="MathJax-Span-131807" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-131808" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-131809" style="font-family: MathJax_Math-italic;">t</span><span class="msubsup" id="MathJax-Span-131810"><span style="display: inline-block; position: relative; width: 1.619em; height: 0px;"><span style="position: absolute; clip: rect(3.128em, 1000.54em, 4.151em, -999.997em); top: -3.984em; left: 0em;"><span class="mi" id="MathJax-Span-131811" style="font-family: MathJax_Math-italic;">h</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; top: -3.823em; left: 0.595em;"><span class="texatom" id="MathJax-Span-131812"><span class="mrow" id="MathJax-Span-131813"><span class="mi" id="MathJax-Span-131814" style="font-size: 70.7%; font-family: MathJax_Math-italic;">c</span><span class="mi" id="MathJax-Span-131815" style="font-size: 70.7%; font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-131816" style="font-size: 70.7%; font-family: MathJax_Math-italic;">s</span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.247em; border-left: 0px solid; width: 0px; height: 1.128em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class="MJX-TeXAtom-ORD"><mi>c</mi><mi>o</mi><mi>s</mi></mrow></msub></math></span></span><script type="math/tex" id="MathJax-Element-3994">month_{cos}</script></span>). It is given by <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-3995-Frame" tabindex="0" style="text-align: center; position: relative;" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>s</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><mi>p</mi><mi>y</mi><mi>s</mi><mi>p</mi><mi>a</mi><mi>r</mi><mi>k</mi><mo>.</mo><mi>s</mi><mi>q</mi><mi>l</mi><mo>.</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mi>s</mi><mo>.</mo><mi>s</mi><mi>i</mi><mi>n</mi><mrow><mo>(</mo><mfrac><mrow><mn>2</mn><mo>&amp;#x2217;</mo><mi>m</mi><mi>a</mi><mi>t</mi><mi>h</mi><mo>.</mo><mi>p</mi><mi>i</mi><mo>&amp;#x2217;</mo><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>h</mi></mrow><mn>12</mn></mfrac><mo>)</mo></mrow></math>" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-131817" style="width: 32.6em; display: inline-block;"><span style="display: inline-block; position: relative; width: 28.074em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.781em, 1027.86em, 4.529em, -999.997em); top: -3.392em; left: 0em;"><span class="mrow" id="MathJax-Span-131818"><span class="mi" id="MathJax-Span-131819" style="font-family: MathJax_Math-italic;">m</span><span class="mi" id="MathJax-Span-131820" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-131821" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-131822" style="font-family: MathJax_Math-italic;">t</span><span class="msubsup" id="MathJax-Span-131823"><span style="display: inline-block; position: relative; width: 1.673em; height: 0px;"><span style="position: absolute; clip: rect(3.128em, 1000.54em, 4.151em, -999.997em); top: -3.984em; left: 0em;"><span class="mi" id="MathJax-Span-131824" style="font-family: MathJax_Math-italic;">h</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; top: -3.823em; left: 0.595em;"><span class="texatom" id="MathJax-Span-131825"><span class="mrow" id="MathJax-Span-131826"><span class="mi" id="MathJax-Span-131827" style="font-size: 70.7%; font-family: MathJax_Math-italic;">s</span><span class="mi" id="MathJax-Span-131828" style="font-size: 70.7%; font-family: MathJax_Math-italic;">i</span><span class="mi" id="MathJax-Span-131829" style="font-size: 70.7%; font-family: MathJax_Math-italic;">n</span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span></span><span class="mo" id="MathJax-Span-131830" style="font-family: MathJax_Main; padding-left: 0.272em;">=</span><span class="mi" id="MathJax-Span-131831" style="font-family: MathJax_Math-italic; padding-left: 0.272em;">p</span><span class="mi" id="MathJax-Span-131832" style="font-family: MathJax_Math-italic;">y<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-131833" style="font-family: MathJax_Math-italic;">s</span><span class="mi" id="MathJax-Span-131834" style="font-family: MathJax_Math-italic;">p</span><span class="mi" id="MathJax-Span-131835" style="font-family: MathJax_Math-italic;">a</span><span class="mi" id="MathJax-Span-131836" style="font-family: MathJax_Math-italic;">r</span><span class="mi" id="MathJax-Span-131837" style="font-family: MathJax_Math-italic;">k</span><span class="mo" id="MathJax-Span-131838" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-131839" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">s</span><span class="mi" id="MathJax-Span-131840" style="font-family: MathJax_Math-italic;">q<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-131841" style="font-family: MathJax_Math-italic;">l</span><span class="mo" id="MathJax-Span-131842" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-131843" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">f<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.057em;"></span></span><span class="mi" id="MathJax-Span-131844" style="font-family: MathJax_Math-italic;">u</span><span class="mi" id="MathJax-Span-131845" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-131846" style="font-family: MathJax_Math-italic;">c</span><span class="mi" id="MathJax-Span-131847" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-131848" style="font-family: MathJax_Math-italic;">i</span><span class="mi" id="MathJax-Span-131849" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-131850" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-131851" style="font-family: MathJax_Math-italic;">s</span><span class="mo" id="MathJax-Span-131852" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-131853" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">s</span><span class="mi" id="MathJax-Span-131854" style="font-family: MathJax_Math-italic;">i</span><span class="mi" id="MathJax-Span-131855" style="font-family: MathJax_Math-italic;">n</span><span class="mrow" id="MathJax-Span-131856" style="padding-left: 0.164em;"><span class="mo" id="MathJax-Span-131857" style="vertical-align: 0em;"><span style="font-family: MathJax_Size3;">(</span></span><span class="mfrac" id="MathJax-Span-131858"><span style="display: inline-block; position: relative; width: 9.054em; height: 0px; margin-right: 0.11em; margin-left: 0.11em;"><span style="position: absolute; clip: rect(3.128em, 1008.89em, 4.367em, -999.997em); top: -4.685em; left: 50%; margin-left: -4.469em;"><span class="mrow" id="MathJax-Span-131859"><span class="mn" id="MathJax-Span-131860" style="font-family: MathJax_Main;">2</span><span class="mo" id="MathJax-Span-131861" style="font-family: MathJax_Main; padding-left: 0.218em;">∗</span><span class="mi" id="MathJax-Span-131862" style="font-family: MathJax_Math-italic; padding-left: 0.218em;">m</span><span class="mi" id="MathJax-Span-131863" style="font-family: MathJax_Math-italic;">a</span><span class="mi" id="MathJax-Span-131864" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-131865" style="font-family: MathJax_Math-italic;">h</span><span class="mo" id="MathJax-Span-131866" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-131867" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">p</span><span class="mi" id="MathJax-Span-131868" style="font-family: MathJax_Math-italic;">i</span><span class="mo" id="MathJax-Span-131869" style="font-family: MathJax_Main; padding-left: 0.218em;">∗</span><span class="mi" id="MathJax-Span-131870" style="font-family: MathJax_Math-italic; padding-left: 0.218em;">m</span><span class="mi" id="MathJax-Span-131871" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-131872" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-131873" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-131874" style="font-family: MathJax_Math-italic;">h</span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(3.182em, 1000.97em, 4.151em, -999.997em); top: -3.284em; left: 50%; margin-left: -0.482em;"><span class="mn" id="MathJax-Span-131875" style="font-family: MathJax_Main;">12</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(0.865em, 1009.05em, 1.242em, -999.997em); top: -1.29em; left: 0em;"><span style="display: inline-block; overflow: hidden; vertical-align: 0em; border-top: 1.3px solid; width: 9.054em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.08em;"></span></span></span></span><span class="mo" id="MathJax-Span-131876" style="vertical-align: 0em;"><span style="font-family: MathJax_Size3;">)</span></span></span></span><span style="display: inline-block; width: 0px; height: 3.397em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -1.184em; border-left: 0px solid; width: 0px; height: 2.941em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class="MJX-TeXAtom-ORD"><mi>s</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><mi>p</mi><mi>y</mi><mi>s</mi><mi>p</mi><mi>a</mi><mi>r</mi><mi>k</mi><mo>.</mo><mi>s</mi><mi>q</mi><mi>l</mi><mo>.</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mi>s</mi><mo>.</mo><mi>s</mi><mi>i</mi><mi>n</mi><mrow><mo>(</mo><mfrac><mrow><mn>2</mn><mo>∗</mo><mi>m</mi><mi>a</mi><mi>t</mi><mi>h</mi><mo>.</mo><mi>p</mi><mi>i</mi><mo>∗</mo><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>h</mi></mrow><mn>12</mn></mfrac><mo>)</mo></mrow></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-3995">month_{sin} = pyspark.sql.functions.sin\left(\frac{2 * math.pi * month}{12}\right)</script></span> <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-3996-Frame" tabindex="0" style="text-align: center; position: relative;" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>c</mi><mi>o</mi><mi>s</mi></mrow></msub><mo>=</mo><mi>p</mi><mi>y</mi><mi>s</mi><mi>p</mi><mi>a</mi><mi>r</mi><mi>k</mi><mo>.</mo><mi>s</mi><mi>q</mi><mi>l</mi><mo>.</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mi>s</mi><mo>.</mo><mi>c</mi><mi>o</mi><mi>s</mi><mrow><mo>(</mo><mfrac><mrow><mn>2</mn><mo>&amp;#x2217;</mo><mi>m</mi><mi>a</mi><mi>t</mi><mi>h</mi><mo>.</mo><mi>p</mi><mi>i</mi><mo>&amp;#x2217;</mo><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>h</mi></mrow><mn>12</mn></mfrac><mo>)</mo></mrow></math>" role="presentation"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-131877" style="width: 32.438em; display: inline-block;"><span style="display: inline-block; position: relative; width: 27.966em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.781em, 1027.75em, 4.529em, -999.997em); top: -3.392em; left: 0em;"><span class="mrow" id="MathJax-Span-131878"><span class="mi" id="MathJax-Span-131879" style="font-family: MathJax_Math-italic;">m</span><span class="mi" id="MathJax-Span-131880" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-131881" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-131882" style="font-family: MathJax_Math-italic;">t</span><span class="msubsup" id="MathJax-Span-131883"><span style="display: inline-block; position: relative; width: 1.619em; height: 0px;"><span style="position: absolute; clip: rect(3.128em, 1000.54em, 4.151em, -999.997em); top: -3.984em; left: 0em;"><span class="mi" id="MathJax-Span-131884" style="font-family: MathJax_Math-italic;">h</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; top: -3.823em; left: 0.595em;"><span class="texatom" id="MathJax-Span-131885"><span class="mrow" id="MathJax-Span-131886"><span class="mi" id="MathJax-Span-131887" style="font-size: 70.7%; font-family: MathJax_Math-italic;">c</span><span class="mi" id="MathJax-Span-131888" style="font-size: 70.7%; font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-131889" style="font-size: 70.7%; font-family: MathJax_Math-italic;">s</span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span></span><span class="mo" id="MathJax-Span-131890" style="font-family: MathJax_Main; padding-left: 0.272em;">=</span><span class="mi" id="MathJax-Span-131891" style="font-family: MathJax_Math-italic; padding-left: 0.272em;">p</span><span class="mi" id="MathJax-Span-131892" style="font-family: MathJax_Math-italic;">y<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-131893" style="font-family: MathJax_Math-italic;">s</span><span class="mi" id="MathJax-Span-131894" style="font-family: MathJax_Math-italic;">p</span><span class="mi" id="MathJax-Span-131895" style="font-family: MathJax_Math-italic;">a</span><span class="mi" id="MathJax-Span-131896" style="font-family: MathJax_Math-italic;">r</span><span class="mi" id="MathJax-Span-131897" style="font-family: MathJax_Math-italic;">k</span><span class="mo" id="MathJax-Span-131898" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-131899" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">s</span><span class="mi" id="MathJax-Span-131900" style="font-family: MathJax_Math-italic;">q<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-131901" style="font-family: MathJax_Math-italic;">l</span><span class="mo" id="MathJax-Span-131902" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-131903" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">f<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.057em;"></span></span><span class="mi" id="MathJax-Span-131904" style="font-family: MathJax_Math-italic;">u</span><span class="mi" id="MathJax-Span-131905" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-131906" style="font-family: MathJax_Math-italic;">c</span><span class="mi" id="MathJax-Span-131907" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-131908" style="font-family: MathJax_Math-italic;">i</span><span class="mi" id="MathJax-Span-131909" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-131910" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-131911" style="font-family: MathJax_Math-italic;">s</span><span class="mo" id="MathJax-Span-131912" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-131913" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">c</span><span class="mi" id="MathJax-Span-131914" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-131915" style="font-family: MathJax_Math-italic;">s</span><span class="mrow" id="MathJax-Span-131916" style="padding-left: 0.164em;"><span class="mo" id="MathJax-Span-131917" style="vertical-align: 0em;"><span style="font-family: MathJax_Size3;">(</span></span><span class="mfrac" id="MathJax-Span-131918"><span style="display: inline-block; position: relative; width: 9.054em; height: 0px; margin-right: 0.11em; margin-left: 0.11em;"><span style="position: absolute; clip: rect(3.128em, 1008.89em, 4.367em, -999.997em); top: -4.685em; left: 50%; margin-left: -4.469em;"><span class="mrow" id="MathJax-Span-131919"><span class="mn" id="MathJax-Span-131920" style="font-family: MathJax_Main;">2</span><span class="mo" id="MathJax-Span-131921" style="font-family: MathJax_Main; padding-left: 0.218em;">∗</span><span class="mi" id="MathJax-Span-131922" style="font-family: MathJax_Math-italic; padding-left: 0.218em;">m</span><span class="mi" id="MathJax-Span-131923" style="font-family: MathJax_Math-italic;">a</span><span class="mi" id="MathJax-Span-131924" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-131925" style="font-family: MathJax_Math-italic;">h</span><span class="mo" id="MathJax-Span-131926" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-131927" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">p</span><span class="mi" id="MathJax-Span-131928" style="font-family: MathJax_Math-italic;">i</span><span class="mo" id="MathJax-Span-131929" style="font-family: MathJax_Main; padding-left: 0.218em;">∗</span><span class="mi" id="MathJax-Span-131930" style="font-family: MathJax_Math-italic; padding-left: 0.218em;">m</span><span class="mi" id="MathJax-Span-131931" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-131932" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-131933" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-131934" style="font-family: MathJax_Math-italic;">h</span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(3.182em, 1000.97em, 4.151em, -999.997em); top: -3.284em; left: 50%; margin-left: -0.482em;"><span class="mn" id="MathJax-Span-131935" style="font-family: MathJax_Main;">12</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(0.865em, 1009.05em, 1.242em, -999.997em); top: -1.29em; left: 0em;"><span style="display: inline-block; overflow: hidden; vertical-align: 0em; border-top: 1.3px solid; width: 9.054em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.08em;"></span></span></span></span><span class="mo" id="MathJax-Span-131936" style="vertical-align: 0em;"><span style="font-family: MathJax_Size3;">)</span></span></span></span><span style="display: inline-block; width: 0px; height: 3.397em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -1.184em; border-left: 0px solid; width: 0px; height: 2.941em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class="MJX-TeXAtom-ORD"><mi>c</mi><mi>o</mi><mi>s</mi></mrow></msub><mo>=</mo><mi>p</mi><mi>y</mi><mi>s</mi><mi>p</mi><mi>a</mi><mi>r</mi><mi>k</mi><mo>.</mo><mi>s</mi><mi>q</mi><mi>l</mi><mo>.</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mi>s</mi><mo>.</mo><mi>c</mi><mi>o</mi><mi>s</mi><mrow><mo>(</mo><mfrac><mrow><mn>2</mn><mo>∗</mo><mi>m</mi><mi>a</mi><mi>t</mi><mi>h</mi><mo>.</mo><mi>p</mi><mi>i</mi><mo>∗</mo><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>h</mi></mrow><mn>12</mn></mfrac><mo>)</mo></mrow></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-3996">month_{cos} = pyspark.sql.functions.cos\left(\frac{2 * math.pi * month}{12}\right)</script></span></li>
+</ol>
+<p><strong>Note2:</strong> Scale the data if necessary. You can use scalers in <code>pyspark.ml.feature</code> to scale the data or any additional methods to increase the performance of the system.</p>
+<p><strong>Note3:</strong> If you have multiple tables, then you need to join them (if possible) to form one Dataframe for the ML task.</p>
+<p><strong>Note4:</strong> You cannot drop features from the input dataframe unless you use some feature selection methods like <a href="https://spark.apache.org/docs/latest/ml-features#variancethresholdselector" target="_blank" rel="noopener">Variance Threshold Selector</a> where you aim to improve your ML model performance. Such decisions need to be added to the report with appropriate explanation.</p>
+</div><h4 id="A-Selecting-the-features"><a class="anchor hidden-xs" href="#A-Selecting-the-features" title="A-Selecting-the-features"><i class="fa fa-link"></i></a>A. Selecting the features</h4><pre><code class="wrap python hljs"><span class="hljs-comment"># We will use the following features</span>
+<span class="hljs-comment"># Excluded 'comm' because it has a lot of nulls</span>
+<span class="hljs-comment"># Excuded hiredate because it is given as practice to implement the cos_sin_transformation for the student</span>
+features = [<span class="hljs-string">'empno'</span>, <span class="hljs-string">'ename'</span>, <span class="hljs-string">'job'</span>, <span class="hljs-string">'mgr'</span>, <span class="hljs-string">'deptno'</span>]
+
+<span class="hljs-comment"># The output/target of our model</span>
+label = <span class="hljs-string">'sal'</span>
+
+<span class="hljs-keyword">import</span> pyspark.sql.functions <span class="hljs-keyword">as</span> F
+
+<span class="hljs-comment"># Remove the quotes before and after each string in job and ename columns.</span>
+emps = emps.withColumn(<span class="hljs-string">"job"</span>, F.translate(<span class="hljs-string">"job"</span>,<span class="hljs-string">"'"</span>,<span class="hljs-string">""</span>))
+emps.show()
+emps = emps.withColumn(<span class="hljs-string">"ename"</span>, F.translate(<span class="hljs-string">"ename"</span>,<span class="hljs-string">"'"</span>,<span class="hljs-string">""</span>))
+emps.show()
+
+
+<span class="hljs-comment"># I am thinking of generating a new column out of ename and job.</span>
+<span class="hljs-comment"># The column will have ename and job concatenated with '_' </span>
+<span class="hljs-comment"># Then we use word2Vec to encode it</span>
+emps = emps.select(features + [label]).na.drop()
+emps = emps.withColumn(<span class="hljs-string">"ename_job"</span>, F.concat(F.col(<span class="hljs-string">'ename'</span>), F.lit(<span class="hljs-string">"_"</span>), F.col(<span class="hljs-string">'job'</span>)))
+emps = emps.withColumnRenamed(<span class="hljs-string">"sal"</span>,<span class="hljs-string">"label"</span>)
+
+emps.show()
+</code></pre><h4 id="B-Building-the-Pipeline"><a class="anchor hidden-xs" href="#B-Building-the-Pipeline" title="B-Building-the-Pipeline"><i class="fa fa-link"></i></a>B. Building the Pipeline</h4><pre><code class="wrap python hljs">
+<span class="hljs-keyword">from</span> pyspark.ml <span class="hljs-keyword">import</span> Pipeline
+<span class="hljs-keyword">from</span> pyspark.ml.feature <span class="hljs-keyword">import</span> StringIndexer, OneHotEncoder, VectorAssembler, Word2Vec, Tokenizer, RegexTokenizer
+<span class="hljs-keyword">from</span> pyspark.sql.functions <span class="hljs-keyword">import</span> col
+
+categoricalCols = [<span class="hljs-string">'deptno'</span>]
+textCols = [<span class="hljs-string">'ename_job'</span>]
+others = [<span class="hljs-string">'empno'</span>, <span class="hljs-string">'mgr'</span>]
+
+
+<span class="hljs-comment"># Since the tokenizer only return tokens separated by white spaces, I used RegexTokenizer to tokenize by '_'</span>
+<span class="hljs-comment"># Then created word2Vec model</span>
+
+<span class="hljs-comment"># tokenizer = Tokenizer(inputCol="ename", outputCol="ename_tokens")</span>
+<span class="hljs-comment"># emps_tok = tokenizer.transform(emps)</span>
+tokenizer = RegexTokenizer(inputCol=textCols[<span class="hljs-number">0</span>], outputCol=<span class="hljs-string">"ename_job_tokens"</span>, pattern=<span class="hljs-string">"_"</span>)
+<span class="hljs-comment"># emps_tok = tokenizer.transform(emps)</span>
+<span class="hljs-comment"># emps_tok.show()</span>
+
+word2Vec = Word2Vec(vectorSize=<span class="hljs-number">5</span>, seed=<span class="hljs-number">42</span>, minCount=<span class="hljs-number">1</span>, inputCol=<span class="hljs-string">"ename_job_tokens"</span>, outputCol=<span class="hljs-string">"ename_enc"</span>)
+<span class="hljs-comment"># word2VecModel = word2Vec.fit(emps_tok)</span>
+<span class="hljs-comment"># print(word2VecModel)</span>
+
+<span class="hljs-comment"># emps_tok = word2VecModel.transform(emps_tok)</span>
+<span class="hljs-comment"># emps_tok.show()</span>
+
+<span class="hljs-comment"># Adding the encoded ename_job to the list of other columns</span>
+<span class="hljs-comment"># others += [ename_enc]</span>
+
+
+<span class="hljs-comment"># Create String indexer to assign index for the string fields where each unique string will get a unique index</span>
+<span class="hljs-comment"># String Indexer is required as an input for One-Hot Encoder </span>
+<span class="hljs-comment"># We set the case as `skip` for any string out of the input strings</span>
+indexers = [ StringIndexer(inputCol=c, outputCol=<span class="hljs-string">"{0}_indexed"</span>.format(c)).setHandleInvalid(<span class="hljs-string">"skip"</span>) <span class="hljs-keyword">for</span> c <span class="hljs-keyword">in</span> categoricalCols ]
+
+<span class="hljs-comment"># Encode the strings using One Hot encoding</span>
+<span class="hljs-comment"># default setting: dropLast=True ==&gt; For example with 5 categories, an input value of 2.0 would map to an output vector of [0.0, 0.0, 1.0, 0.0]. The last category is not included by default (configurable via dropLast), because it makes the vector entries sum up to one, and hence linearly dependent. So an input value of 4.0 maps to [0.0, 0.0, 0.0, 0.0].</span>
+encoders = [ OneHotEncoder(inputCol=indexer.getOutputCol(), outputCol=<span class="hljs-string">"{0}_encoded"</span>.format(indexer.getOutputCol())) <span class="hljs-keyword">for</span> indexer <span class="hljs-keyword">in</span> indexers ]
+
+<span class="hljs-comment"># This will concatenate the input cols into a single column.</span>
+assembler = VectorAssembler(inputCols=[encoder.getOutputCol() <span class="hljs-keyword">for</span> encoder <span class="hljs-keyword">in</span> encoders] + others, outputCol= <span class="hljs-string">"features"</span>)
+
+<span class="hljs-comment"># You can create a pipeline to use only a single fit and transform on the data.</span>
+pipeline = Pipeline(stages=[tokenizer, word2Vec] + indexers + encoders + [assembler])
+
+
+<span class="hljs-comment"># Fit the pipeline ==&gt; This will call the fit functions for all transformers if exist</span>
+model=pipeline.fit(emps)
+<span class="hljs-comment"># Fit the pipeline ==&gt; This will call the transform functions for all transformers</span>
+data = model.transform(emps)
+
+data.show()
+
+<span class="hljs-comment"># We delete all features and keep only the features and label columns</span>
+data = data.select([<span class="hljs-string">"features"</span>, <span class="hljs-string">"label"</span>])
+
+
+<span class="hljs-keyword">from</span> pyspark.ml.regression <span class="hljs-keyword">import</span> LinearRegression
+<span class="hljs-keyword">from</span> pyspark.ml.feature <span class="hljs-keyword">import</span> VectorIndexer
+<span class="hljs-keyword">from</span> pyspark.ml.evaluation <span class="hljs-keyword">import</span> RegressionEvaluator
+
+<span class="hljs-comment"># Automatically identify categorical features, and index them.</span>
+<span class="hljs-comment"># We specify maxCategories so features with &gt; 4</span>
+<span class="hljs-comment"># distinct values are treated as continuous.</span>
+featureIndexer = VectorIndexer(inputCol=<span class="hljs-string">"features"</span>, outputCol=<span class="hljs-string">"indexedFeatures"</span>, maxCategories=<span class="hljs-number">4</span>).fit(data)
+transformed = featureIndexer.transform(data)
+
+<span class="hljs-comment"># Display the output Spark DataFrame</span>
+transformed.show()
+</code></pre><h4 id="Split-the-dataset"><a class="anchor hidden-xs" href="#Split-the-dataset" title="Split-the-dataset"><i class="fa fa-link"></i></a>Split the dataset</h4><pre><code class="wrap python hljs"><span class="hljs-comment">#  split the data into 60% training and 40% test (it is not stratified)</span>
+(train_data, test_data) = transformed.randomSplit([<span class="hljs-number">0.6</span>, <span class="hljs-number">0.4</span>])
+
+train_data.select(<span class="hljs-string">"features"</span>, <span class="hljs-string">"label"</span>)\
+    .coalesce(<span class="hljs-number">1</span>)\
+    .write\
+    .mode(<span class="hljs-string">"overwrite"</span>)\
+    .format(<span class="hljs-string">"json"</span>)\
+    .save(<span class="hljs-string">"project/data/train"</span>)
+
+test_data.select(<span class="hljs-string">"features"</span>, <span class="hljs-string">"label"</span>)\
+    .coalesce(<span class="hljs-number">1</span>)\
+    .write\
+    .mode(<span class="hljs-string">"overwrite"</span>)\
+    .format(<span class="hljs-string">"json"</span>)\
+    .save(<span class="hljs-string">"project/data/test"</span>)
+</code></pre><h3 id="2-Modeling"><a class="anchor hidden-xs" href="#2-Modeling" title="2-Modeling"><i class="fa fa-link"></i></a>2. Modeling</h3><pre><code class="wrap python hljs"><span class="hljs-comment"># Create Linear Regression Model</span>
+lr = LinearRegression()
+
+<span class="hljs-comment"># Fit the data to the pipeline stages</span>
+model_lr = lr.fit(trainingData)
+</code></pre><h3 id="3-Prediction"><a class="anchor hidden-xs" href="#3-Prediction" title="3-Prediction"><i class="fa fa-link"></i></a>3. Prediction</h3><pre><code class="wrap python hljs"><span class="hljs-comment"># Transform the data (Prediction)</span>
+predictions = model_lr.transform(testData)
+
+<span class="hljs-comment"># Display the predictions</span>
+predictions.show()
+</code></pre><h3 id="4-Evaluation"><a class="anchor hidden-xs" href="#4-Evaluation" title="4-Evaluation"><i class="fa fa-link"></i></a>4. Evaluation</h3><pre><code class="wrap python hljs"><span class="hljs-keyword">from</span> pyspark.ml.evaluation <span class="hljs-keyword">import</span> RegressionEvaluator 
+
+<span class="hljs-comment"># Evaluate the performance of the model</span>
+evaluator = RegressionEvaluator(labelCol=<span class="hljs-string">"label"</span>, predictionCol=<span class="hljs-string">"prediction"</span>, metricName=<span class="hljs-string">"rmse"</span>)
+rmse = evaluator.evaluate(predictions)
+print(<span class="hljs-string">"Root Mean Squared Error (RMSE) on test data = %g"</span> % rmse)
+</code></pre><h3 id="5-Saving-the-results-Spark-DataFrame-as-csv-file"><a class="anchor hidden-xs" href="#5-Saving-the-results-Spark-DataFrame-as-csv-file" title="5-Saving-the-results-Spark-DataFrame-as-csv-file"><i class="fa fa-link"></i></a>5. Saving the results (Spark DataFrame as csv file)</h3><p>You can export the results of prediction to <code>csv</code> file as follows:</p><pre><code class="wrap python hljs">predictions.select(<span class="hljs-string">"label"</span>, <span class="hljs-string">"prediction"</span>)\
+    .coalesce(<span class="hljs-number">1</span>)\
+    .write\
+    .mode(<span class="hljs-string">"overwrite"</span>)\
+    .format(<span class="hljs-string">"csv"</span>)\
+    .option(<span class="hljs-string">"sep"</span>, <span class="hljs-string">","</span>)\
+    .option(<span class="hljs-string">"header"</span>,<span class="hljs-string">"true"</span>)\
+    .save(<span class="hljs-string">"project/output/model1_predictions.csv"</span>)
+</code></pre><p>The file will be stored in HDFS as shown below, but you can move it to local file system and put it in <code>output</code> of the project repository using <code>hdfs dfs</code> commands.</p><p><img src="https://i.imgur.com/ZAckFwV.png" alt="" class="md-image md-image"></p><div class="alert alert-info">
+<p>We used <code>coalesce</code> function to repartition the dataframe and get only one csv file, otherwise you could get multiple files due to the multiple partitions of the dataframe.</p>
+<p>For other options for <code>mode</code>, check the documentation.<br>
+<img src="https://i.imgur.com/TvDPbVD.png" alt="" class="md-image md-image"></p>
+</div><h1 id="Upcoming-lab"><a class="anchor hidden-xs" href="#Upcoming-lab" title="Upcoming-lab"><i class="fa fa-link"></i></a>Upcoming lab</h1><ul>
+<li>Build a Dashboard for presentation stage.</li>
+<li>Presenting the project results and data insights in the dashboard.</li>
+</ul><h1 id="Project-checklist"><a class="anchor hidden-xs" href="#Project-checklist" title="Project-checklist"><i class="fa fa-link"></i></a>Project checklist</h1><div class="alert alert-warning">
+<p>Check the notebook <code>/shared/ml.ipynb</code> in the cluster for a template for this stage.</p>
+</div><div class="alert alert-success">
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Read the hive tables as dataframes.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Build and fit a feature extraction pipeline.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Split the input dataset into train and test datasets. Save them in HDFS as json files like <code>project/data/train</code>, <code>project/data/test</code>  and put them later in <code>data/train.json</code>, <code>data/test.json</code> files of the repository.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Select two types of ML models based on the ML task specified in <code>project.info</code> sheet.
+<ul>
+<li>The model type should be from <a href="http://pyspark.ml" target="_blank" rel="noopener">pyspark.ml</a> or pyspark.mllib</li>
+<li>Or any 3rd party library where you need to verify its usage with the TA and the library should train the model distributively on the cluster.</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>First model type.
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Build and train the model.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Predict for the test data.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Evaluate the model.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Specify at least 2 hyperparameters for it and the settings of grid search and cross validation.
+<ul>
+<li>The hyperparameters should be related to the model type and not a training parameter like max iterations.</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Optimize its hyperparameters using cross validation and grid search on the training data only.
+<ul>
+<li>You cannot use the test data here.</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Select the best model (model1) from grid search.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Save the model1 to HDFS in location like <code>project/models/model1</code> and later put it in <code>models/model1</code> folder in the repository.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Predict for the test data using the model1.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Save the prediction results in HDFS in a CSV file like <code>project/output/model1_predictions</code> and later save it in <code>output/model1_predictions.csv</code> folder in the repository…
+<ul>
+<li>Keep only <code>label</code> and <code>prediction</code> columns.</li>
+<li>Save it as one partition.</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Evaluate the best model (model1) on the test data.</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Second model type.
+<ul>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Build and train the model.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Predict for the test data.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Evaluate the model.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Specify at least 2 hyperparameters for it and the settings of grid search and cross validation.
+<ul>
+<li>The hyperparameters should be related to the model type and not a training parameter like max iterations.</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Optimize its hyperparameters using cross validation and grid search on the training data only.
+<ul>
+<li>You cannot use the test data here.</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Select the best model (model2) from grid search.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Save the model2 to HDFS in location like <code>project/models/model2</code> and later put it in <code>models/model2</code> folder in the repository.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Predict for the test data using the model2.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Save the prediction results in HDFS in a CSV file like <code>project/output/model2_predictions</code> and later save it in <code>output/model2_predictions.csv</code> folder in the repository.
+<ul>
+<li>Keep only <code>label</code> and <code>prediction</code> columns.</li>
+<li>Save it as one partition.</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Evaluate the best model (model2) on the test data.</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Compare the models (model1, model2) on the test data.
+<ul>
+<li>The comparison is based on the evaluation results.</li>
+<li>Create a dataframe as follows:<br>
+<img src="https://i.imgur.com/ebY4Pio.png" alt="" class="md-image md-image"><br>
+<strong><center>This is just an example</center></strong></li>
+<li>store the dataframe in HDFS in location <code>project/output/evaluation</code> and put it in CSV file <code>output/evaluation.csv</code> of project repository.</li>
+</ul>
+</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Write scripts to automate the tasks above.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Run the script <code>stage3.sh</code> to test this stage.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Check the quality of scripts in this stage using <code>pylint</code> command.</li>
+<li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Summarize your work in this stage and add it to the report.</li>
+</ul>
+</div><h1 id="References"><a class="anchor hidden-xs" href="#References" title="References"><i class="fa fa-link"></i></a>References</h1><ul>
+<li><a href="https://www.cs.uct.ac.za/mit_notes/database/htmls/chp03.html" target="_blank" rel="noopener">emps-depts-dataset</a></li>
+<li><a href="https://spark.apache.org/docs/latest/ml-guide.html" target="_blank" rel="noopener">Spark ML guide</a></li>
+<li><a href="https://spark.apache.org/docs/latest/sql-data-sources-hive-tables.html" target="_blank" rel="noopener">Hive Tables - Spark SQL data source</a></li>
+</ul></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#Stage-III---Predictive-Data-Analytics" title="Stage III - Predictive Data Analytics">Stage III - Predictive Data Analytics</a></li>
+<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li class=""><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li class=""><a href="#Description" title="Description">Description</a></li>
+<li class=""><a href="#Dataset-Description" title="Dataset Description">Dataset Description</a></li>
+<li class=""><a href="#Preparation" title="Preparation">Preparation</a></li>
+<li class=""><a href="#Modeling-in-Spark-ML" title="Modeling in Spark ML">Modeling in Spark ML</a><ul class="nav">
+<li class=""><a href="#1-Running-Spark-apps" title="1. Running Spark apps">1. Running Spark apps</a><ul class="nav">
+<li class=""><a href="#1-Interactive-analysis-via-jupyter-notebook" title="1. Interactive analysis via jupyter notebook">1. Interactive analysis via jupyter notebook</a></li>
+<li class=""><a href="#2-Non-interactive-analysis-via-spark-submit" title="2. Non-interactive analysis via spark-submit">2. Non-interactive analysis via spark-submit</a></li>
+<li class=""><a href="#3-Interactive-analysis-via-pyspark-shell" title="3. Interactive analysis via pyspark shell">3. Interactive analysis via pyspark shell</a></li>
+</ul>
+</li>
+<li class=""><a href="#2-Read-Hive-tables" title="2. Read Hive tables">2. Read Hive tables</a></li>
+<li class=""><a href="#3-ML-Modeling" title="3. ML Modeling">3. ML Modeling</a><ul class="nav">
+<li class=""><a href="#1-Preprocessing-the-data" title="1. Preprocessing the data">1. Preprocessing the data</a></li>
+<li class=""><a href="#2-Modeling" title="2. Modeling">2. Modeling</a></li>
+<li class=""><a href="#3-Prediction" title="3. Prediction">3. Prediction</a></li>
+<li class=""><a href="#4-Evaluation" title="4. Evaluation">4. Evaluation</a></li>
+<li class=""><a href="#5-Saving-the-results-Spark-DataFrame-as-csv-file" title="5. Saving the results (Spark DataFrame as csv file)">5. Saving the results (Spark DataFrame as csv file)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#Upcoming-lab" title="Upcoming lab">Upcoming lab</a></li>
+<li class=""><a href="#Project-checklist" title="Project checklist">Project checklist</a></li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#Stage-III---Predictive-Data-Analytics" title="Stage III - Predictive Data Analytics">Stage III - Predictive Data Analytics</a></li>
+<li class=""><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li class=""><a href="#Objectives" title="Objectives">Objectives</a></li>
+<li class=""><a href="#Description" title="Description">Description</a></li>
+<li class=""><a href="#Dataset-Description" title="Dataset Description">Dataset Description</a></li>
+<li class=""><a href="#Preparation" title="Preparation">Preparation</a></li>
+<li class=""><a href="#Modeling-in-Spark-ML" title="Modeling in Spark ML">Modeling in Spark ML</a><ul class="nav">
+<li class=""><a href="#1-Running-Spark-apps" title="1. Running Spark apps">1. Running Spark apps</a><ul class="nav">
+<li class=""><a href="#1-Interactive-analysis-via-jupyter-notebook" title="1. Interactive analysis via jupyter notebook">1. Interactive analysis via jupyter notebook</a></li>
+<li class=""><a href="#2-Non-interactive-analysis-via-spark-submit" title="2. Non-interactive analysis via spark-submit">2. Non-interactive analysis via spark-submit</a></li>
+<li class=""><a href="#3-Interactive-analysis-via-pyspark-shell" title="3. Interactive analysis via pyspark shell">3. Interactive analysis via pyspark shell</a></li>
+</ul>
+</li>
+<li class=""><a href="#2-Read-Hive-tables" title="2. Read Hive tables">2. Read Hive tables</a></li>
+<li class=""><a href="#3-ML-Modeling" title="3. ML Modeling">3. ML Modeling</a><ul class="nav">
+<li class=""><a href="#1-Preprocessing-the-data" title="1. Preprocessing the data">1. Preprocessing the data</a></li>
+<li class=""><a href="#2-Modeling" title="2. Modeling">2. Modeling</a></li>
+<li class=""><a href="#3-Prediction" title="3. Prediction">3. Prediction</a></li>
+<li class=""><a href="#4-Evaluation" title="4. Evaluation">4. Evaluation</a></li>
+<li class=""><a href="#5-Saving-the-results-Spark-DataFrame-as-csv-file" title="5. Saving the results (Spark DataFrame as csv file)">5. Saving the results (Spark DataFrame as csv file)</a></li>
+</ul>
+</li>
+</ul>
+</li>
+<li class=""><a href="#Upcoming-lab" title="Upcoming lab">Upcoming lab</a></li>
+<li class=""><a href="#Project-checklist" title="Project checklist">Project checklist</a></li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha256-kJrlY+s09+QoWjpkOrXXwhxeaoDz9FW5SaxF8I0DibQ=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
