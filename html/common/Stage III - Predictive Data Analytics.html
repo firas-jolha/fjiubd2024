@@ -57,9 +57,7 @@
 <li><a href="#3-ML-Modeling" title="3. ML Modeling">3. ML Modeling</a><ul>
 <li><a href="#1-Preprocessing-the-data" title="1. Preprocessing the data">1. Preprocessing the data</a></li>
 <li><a href="#2-Modeling" title="2. Modeling">2. Modeling</a></li>
-<li><a href="#3-Prediction" title="3. Prediction">3. Prediction</a></li>
-<li><a href="#4-Evaluation" title="4. Evaluation">4. Evaluation</a></li>
-<li><a href="#5-Saving-the-results-Spark-DataFrame-as-csv-file" title="5. Saving the results (Spark DataFrame as csv file)">5. Saving the results (Spark DataFrame as csv file)</a></li>
+<li><a href="#Compare-best-models" title="Compare best models">Compare best models</a></li>
 </ul>
 </li>
 </ul>
@@ -228,7 +226,7 @@ spark.sql(<span class="hljs-string">"SELECT AVG(SAL) FROM employees;"</span>).sh
 spark.sql(<span class="hljs-string">"SELECT * from employees where comm is NULL;"</span>).show()
 </code></pre><div class="alert alert-warning">
 <p>You can also run HiveQL queries here via Spark SQL too for EDA part of the project.</p>
-</div><h2 id="3-ML-Modeling"><a class="anchor hidden-xs" href="#3-ML-Modeling" title="3-ML-Modeling"><i class="fa fa-link"></i></a>3. ML Modeling</h2><p>Here I will show a simple example to predict the salaries of the employees via linear regression.</p><h3 id="1-Preprocessing-the-data"><a class="anchor hidden-xs" href="#1-Preprocessing-the-data" title="1-Preprocessing-the-data"><i class="fa fa-link"></i></a>1. Preprocessing the data</h3><div class="alert alert-danger">
+</div><h2 id="3-ML-Modeling"><a class="anchor hidden-xs" href="#3-ML-Modeling" title="3-ML-Modeling"><i class="fa fa-link"></i></a>3. ML Modeling</h2><p>Here I will predict the salaries of the employees.</p><h3 id="1-Preprocessing-the-data"><a class="anchor hidden-xs" href="#1-Preprocessing-the-data" title="1-Preprocessing-the-data"><i class="fa fa-link"></i></a>1. Preprocessing the data</h3><div class="alert alert-danger">
 <p><strong>Note1:</strong> If you have time/datetime types in your dataset, then Sqoop probably will convert it to AVRO timestamp and you will get the time/datetime in unix_time format. You should not encode it as numerical feature and you need to convert it into time/datetime, decompose and encode its parts as cyclical features. You can use <em>sin_cos_transformation</em> as follows:</p>
 <ol>
 <li>Decompose time/datetime field into six parts (year, month, days, hours, minutes, seconds). If you have only time, then it will be three parts.</li>
@@ -321,9 +319,7 @@ data.show()
 data = data.select([<span class="hljs-string">"features"</span>, <span class="hljs-string">"label"</span>])
 
 
-<span class="hljs-keyword">from</span> pyspark.ml.regression <span class="hljs-keyword">import</span> LinearRegression
 <span class="hljs-keyword">from</span> pyspark.ml.feature <span class="hljs-keyword">import</span> VectorIndexer
-<span class="hljs-keyword">from</span> pyspark.ml.evaluation <span class="hljs-keyword">import</span> RegressionEvaluator
 
 <span class="hljs-comment"># Automatically identify categorical features, and index them.</span>
 <span class="hljs-comment"># We specify maxCategories so features with &gt; 4</span>
@@ -334,7 +330,13 @@ transformed = featureIndexer.transform(data)
 <span class="hljs-comment"># Display the output Spark DataFrame</span>
 transformed.show()
 </code></pre><h4 id="Split-the-dataset"><a class="anchor hidden-xs" href="#Split-the-dataset" title="Split-the-dataset"><i class="fa fa-link"></i></a>Split the dataset</h4><pre><code class="wrap python hljs"><span class="hljs-comment">#  split the data into 60% training and 40% test (it is not stratified)</span>
-(train_data, test_data) = transformed.randomSplit([<span class="hljs-number">0.6</span>, <span class="hljs-number">0.4</span>])
+(train_data, test_data) = transformed.randomSplit([<span class="hljs-number">0.6</span>, <span class="hljs-number">0.4</span>], seed = <span class="hljs-number">10</span>)
+
+
+<span class="hljs-comment"># A function to run commands</span>
+<span class="hljs-keyword">import</span> os
+<span class="hljs-function"><span class="hljs-keyword">def</span> <span class="hljs-title">run</span><span class="hljs-params">(command)</span>:</span>
+    <span class="hljs-keyword">return</span> os.popen(command).read()
 
 train_data.select(<span class="hljs-string">"features"</span>, <span class="hljs-string">"label"</span>)\
     .coalesce(<span class="hljs-number">1</span>)\
@@ -343,29 +345,67 @@ train_data.select(<span class="hljs-string">"features"</span>, <span class="hljs
     .format(<span class="hljs-string">"json"</span>)\
     .save(<span class="hljs-string">"project/data/train"</span>)
 
+<span class="hljs-comment"># Run it from root directory of the repository</span>
+run(<span class="hljs-string">"hdfs dfs -cat project/data/train/*.json &gt; data/train.json"</span>)
+
 test_data.select(<span class="hljs-string">"features"</span>, <span class="hljs-string">"label"</span>)\
     .coalesce(<span class="hljs-number">1</span>)\
     .write\
     .mode(<span class="hljs-string">"overwrite"</span>)\
     .format(<span class="hljs-string">"json"</span>)\
     .save(<span class="hljs-string">"project/data/test"</span>)
-</code></pre><h3 id="2-Modeling"><a class="anchor hidden-xs" href="#2-Modeling" title="2-Modeling"><i class="fa fa-link"></i></a>2. Modeling</h3><pre><code class="wrap python hljs"><span class="hljs-comment"># Create Linear Regression Model</span>
+
+<span class="hljs-comment"># Run it from root directory of the repository</span>
+run(<span class="hljs-string">"hdfs dfs -cat project/data/test/*.json &gt; data/test.json"</span>)
+</code></pre><h3 id="2-Modeling"><a class="anchor hidden-xs" href="#2-Modeling" title="2-Modeling"><i class="fa fa-link"></i></a>2. Modeling</h3><p>Here I will show one model type to predict the salaries of the employees via linear regression. In the notebook template in folder <code>/shared/ml.ipynb</code> of the cluster, you will see that two models are built and that is required for the project.</p><h4 id="21-Model-training"><a class="anchor hidden-xs" href="#21-Model-training" title="21-Model-training"><i class="fa fa-link"></i></a>2.1. Model training</h4><pre><code class="wrap python hljs"><span class="hljs-keyword">from</span> pyspark.ml.regression <span class="hljs-keyword">import</span> LinearRegression
+<span class="hljs-comment"># Create Linear Regression Model</span>
 lr = LinearRegression()
 
-<span class="hljs-comment"># Fit the data to the pipeline stages</span>
-model_lr = lr.fit(trainingData)
-</code></pre><h3 id="3-Prediction"><a class="anchor hidden-xs" href="#3-Prediction" title="3-Prediction"><i class="fa fa-link"></i></a>3. Prediction</h3><pre><code class="wrap python hljs"><span class="hljs-comment"># Transform the data (Prediction)</span>
+<span class="hljs-comment"># Fit the data to the lr model</span>
+model_lr = lr.fit(train_data)
+</code></pre><h4 id="22-Prediction0"><a class="anchor hidden-xs" href="#22-Prediction0" title="22-Prediction0"><i class="fa fa-link"></i></a>2.2. Prediction</h4><pre><code class="wrap python hljs"><span class="hljs-comment"># Transform the data (Prediction)</span>
 predictions = model_lr.transform(testData)
 
 <span class="hljs-comment"># Display the predictions</span>
 predictions.show()
-</code></pre><h3 id="4-Evaluation"><a class="anchor hidden-xs" href="#4-Evaluation" title="4-Evaluation"><i class="fa fa-link"></i></a>4. Evaluation</h3><pre><code class="wrap python hljs"><span class="hljs-keyword">from</span> pyspark.ml.evaluation <span class="hljs-keyword">import</span> RegressionEvaluator 
+</code></pre><h4 id="23-Evaluation"><a class="anchor hidden-xs" href="#23-Evaluation" title="23-Evaluation"><i class="fa fa-link"></i></a>2.3. Evaluation</h4><pre><code class="wrap python hljs"><span class="hljs-keyword">from</span> pyspark.ml.evaluation <span class="hljs-keyword">import</span> RegressionEvaluator 
 
 <span class="hljs-comment"># Evaluate the performance of the model</span>
 evaluator = RegressionEvaluator(labelCol=<span class="hljs-string">"label"</span>, predictionCol=<span class="hljs-string">"prediction"</span>, metricName=<span class="hljs-string">"rmse"</span>)
 rmse = evaluator.evaluate(predictions)
 print(<span class="hljs-string">"Root Mean Squared Error (RMSE) on test data = %g"</span> % rmse)
-</code></pre><h3 id="5-Saving-the-results-Spark-DataFrame-as-csv-file"><a class="anchor hidden-xs" href="#5-Saving-the-results-Spark-DataFrame-as-csv-file" title="5-Saving-the-results-Spark-DataFrame-as-csv-file"><i class="fa fa-link"></i></a>5. Saving the results (Spark DataFrame as csv file)</h3><p>You can export the results of prediction to <code>csv</code> file as follows:</p><pre><code class="wrap python hljs">predictions.select(<span class="hljs-string">"label"</span>, <span class="hljs-string">"prediction"</span>)\
+</code></pre><h4 id="24-Hyperparameter-optimization"><a class="anchor hidden-xs" href="#24-Hyperparameter-optimization" title="24-Hyperparameter-optimization"><i class="fa fa-link"></i></a>2.4. Hyperparameter optimization</h4><pre><code class="wrap python hljs"><span class="hljs-keyword">from</span> pyspark.ml.tuning <span class="hljs-keyword">import</span> ParamGridBuilder, CrossValidator 
+
+<span class="hljs-keyword">import</span> numpy <span class="hljs-keyword">as</span> np
+
+
+grid = ParamGridBuilder()
+grid = grid.addGrid(
+                    model_lr.aggregationDepth, [<span class="hljs-number">2</span>, <span class="hljs-number">3</span>, <span class="hljs-number">4</span>])\
+                    .addGrid(model_lr.regParam, np.logspace(<span class="hljs-number">1e-3</span>,<span class="hljs-number">1e-1</span>)
+                    )\
+                    .build()
+
+cv = CrossValidator(estimator = lr, 
+                    estimatorParamMaps = grid, 
+                    evaluator = evaluator1,
+                    parallelism = <span class="hljs-number">5</span>,
+                    numFolds=<span class="hljs-number">3</span>)
+
+cvModel = cv.fit(train_data)
+bestModel = cvModel.bestModel
+bestModel
+</code></pre><h4 id="25-Select-best-model"><a class="anchor hidden-xs" href="#25-Select-best-model" title="25-Select-best-model"><i class="fa fa-link"></i></a>2.5. Select best model</h4><pre><code class="wrap python hljs"><span class="hljs-keyword">from</span> pprint <span class="hljs-keyword">import</span> pprint
+model1 = bestModel
+pprint(model1.extractParamMap())
+</code></pre><h4 id="26-Save-the-model-to-HDFS"><a class="anchor hidden-xs" href="#26-Save-the-model-to-HDFS" title="26-Save-the-model-to-HDFS"><i class="fa fa-link"></i></a>2.6. Save the model to HDFS</h4><pre><code class="python hljs">model1.write().overwrite().save(<span class="hljs-string">"project/models/model1"</span>)
+
+<span class="hljs-comment"># Run it from root directory of the repository</span>
+run(<span class="hljs-string">"hdfs dfs -get project/models/model1 models/model1"</span>)
+</code></pre><h4 id="27-Prediction"><a class="anchor hidden-xs" href="#27-Prediction" title="27-Prediction"><i class="fa fa-link"></i></a>2.7. Prediction</h4><pre><code class="wrap python hljs">predictions = model1.transform(test_data)
+predictions.show()
+
+predictions.select(<span class="hljs-string">"label"</span>, <span class="hljs-string">"prediction"</span>)\
     .coalesce(<span class="hljs-number">1</span>)\
     .write\
     .mode(<span class="hljs-string">"overwrite"</span>)\
@@ -373,11 +413,39 @@ print(<span class="hljs-string">"Root Mean Squared Error (RMSE) on test data = %
     .option(<span class="hljs-string">"sep"</span>, <span class="hljs-string">","</span>)\
     .option(<span class="hljs-string">"header"</span>,<span class="hljs-string">"true"</span>)\
     .save(<span class="hljs-string">"project/output/model1_predictions.csv"</span>)
-</code></pre><p>The file will be stored in HDFS as shown below, but you can move it to local file system and put it in <code>output</code> of the project repository using <code>hdfs dfs</code> commands.</p><p><img src="https://i.imgur.com/ZAckFwV.png" alt="" class="md-image md-image"></p><div class="alert alert-info">
-<p>We used <code>coalesce</code> function to repartition the dataframe and get only one csv file, otherwise you could get multiple files due to the multiple partitions of the dataframe.</p>
-<p>For other options for <code>mode</code>, check the documentation.<br>
-<img src="https://i.imgur.com/TvDPbVD.png" alt="" class="md-image md-image"></p>
-</div><h1 id="Upcoming-lab"><a class="anchor hidden-xs" href="#Upcoming-lab" title="Upcoming-lab"><i class="fa fa-link"></i></a>Upcoming lab</h1><ul>
+
+<span class="hljs-comment"># Run it from root directory of the repository</span>
+run(<span class="hljs-string">"hdfs dfs -cat project/output/model1_predictions.csv/*.csv &gt; output/model1_predictions.csv"</span>)
+</code></pre><h4 id="28-Evaluation"><a class="anchor hidden-xs" href="#28-Evaluation" title="28-Evaluation"><i class="fa fa-link"></i></a>2.8. Evaluation</h4><pre><code class="wrap python hljs"><span class="hljs-keyword">from</span> pyspark.ml.evaluation <span class="hljs-keyword">import</span> RegressionEvaluator 
+
+<span class="hljs-comment"># Evaluate the performance of the model</span>
+evaluator1 = RegressionEvaluator(labelCol=<span class="hljs-string">"label"</span>, predictionCol=<span class="hljs-string">"prediction"</span>, metricName=<span class="hljs-string">"rmse"</span>)
+rmse1 = evaluator1.evaluate(predictions)
+print(<span class="hljs-string">"Root Mean Squared Error (RMSE) on test data = %g"</span> % rmse1)
+</code></pre><div class="alert alert-warning">
+<p>Here I put the code of only the first model but in the template you can find the second model.</p>
+</div><h3 id="Compare-best-models"><a class="anchor hidden-xs" href="#Compare-best-models" title="Compare-best-models"><i class="fa fa-link"></i></a>Compare best models</h3><pre><code class="wrap python hljs"><span class="hljs-comment"># Create data frame to report performance of the models</span>
+models = [[str(model1),rmse1, r21], [str(model2),rmse2, r22]]
+
+<span class="hljs-comment">#temp = list(map(list, models.items()))</span>
+df = spark.createDataFrame(models, [<span class="hljs-string">"model"</span>, <span class="hljs-string">"RMSE"</span>, <span class="hljs-string">"R2"</span>])
+df.show(truncate=<span class="hljs-literal">False</span>)
+<span class="hljs-comment">#temp</span>
+
+
+<span class="hljs-comment"># Save it to HDFS</span>
+df.coalesce(<span class="hljs-number">1</span>)\
+    .write\
+    .mode(<span class="hljs-string">"overwrite"</span>)\
+    .format(<span class="hljs-string">"csv"</span>)\
+    .option(<span class="hljs-string">"sep"</span>, <span class="hljs-string">","</span>)\
+    .option(<span class="hljs-string">"header"</span>,<span class="hljs-string">"true"</span>)\
+    .save(<span class="hljs-string">"project/output/evaluation.csv"</span>)
+
+<span class="hljs-comment"># Run it from root directory of the repository</span>
+run(<span class="hljs-string">"hdfs dfs -cat project/output/evaluation.csv/*.csv &gt; output/evaluation.csv"</span>)
+</code></pre><p>The dataframe would look like as follows:<br>
+<img src="https://i.imgur.com/kThQLrC.png" alt="" class="md-image md-image"></p><h1 id="Upcoming-lab"><a class="anchor hidden-xs" href="#Upcoming-lab" title="Upcoming-lab"><i class="fa fa-link"></i></a>Upcoming lab</h1><ul>
 <li>Build a Dashboard for presentation stage.</li>
 <li>Presenting the project results and data insights in the dashboard.</li>
 </ul><h1 id="Project-checklist"><a class="anchor hidden-xs" href="#Project-checklist" title="Project-checklist"><i class="fa fa-link"></i></a>Project checklist</h1><div class="alert alert-warning">
@@ -405,6 +473,7 @@ print(<span class="hljs-string">"Root Mean Squared Error (RMSE) on test data = %
 </li>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Optimize its hyperparameters using cross validation and grid search on the training data only.
 <ul>
+<li>Use one of the optimization metrics.</li>
 <li>You cannot use the test data here.</li>
 </ul>
 </li>
@@ -432,6 +501,7 @@ print(<span class="hljs-string">"Root Mean Squared Error (RMSE) on test data = %
 </li>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Optimize its hyperparameters using cross validation and grid search on the training data only.
 <ul>
+<li>Use one of the optimization metrics.</li>
 <li>You cannot use the test data here.</li>
 </ul>
 </li>
@@ -451,9 +521,9 @@ print(<span class="hljs-string">"Root Mean Squared Error (RMSE) on test data = %
 <ul>
 <li>The comparison is based on the evaluation results.</li>
 <li>Create a dataframe as follows:<br>
-<img src="https://i.imgur.com/ebY4Pio.png" alt="" class="md-image md-image"><br>
+<img src="https://i.imgur.com/kThQLrC.png" alt="" class="md-image md-image"><br>
 <strong><center>This is just an example</center></strong></li>
-<li>store the dataframe in HDFS in location <code>project/output/evaluation</code> and put it in CSV file <code>output/evaluation.csv</code> of project repository.</li>
+<li>Store the dataframe in HDFS in location <code>project/output/evaluation</code> and put it in CSV file <code>output/evaluation.csv</code> of project repository.</li>
 </ul>
 </li>
 <li class="task-list-item"><input type="checkbox" class="task-list-item-checkbox" ><label></label>Write scripts to automate the tasks above.</li>
@@ -492,9 +562,7 @@ print(<span class="hljs-string">"Root Mean Squared Error (RMSE) on test data = %
 <li class=""><a href="#3-ML-Modeling" title="3. ML Modeling">3. ML Modeling</a><ul class="nav">
 <li class=""><a href="#1-Preprocessing-the-data" title="1. Preprocessing the data">1. Preprocessing the data</a></li>
 <li class=""><a href="#2-Modeling" title="2. Modeling">2. Modeling</a></li>
-<li class=""><a href="#3-Prediction" title="3. Prediction">3. Prediction</a></li>
-<li class=""><a href="#4-Evaluation" title="4. Evaluation">4. Evaluation</a></li>
-<li class=""><a href="#5-Saving-the-results-Spark-DataFrame-as-csv-file" title="5. Saving the results (Spark DataFrame as csv file)">5. Saving the results (Spark DataFrame as csv file)</a></li>
+<li class=""><a href="#Compare-best-models" title="Compare best models">Compare best models</a></li>
 </ul>
 </li>
 </ul>
@@ -533,9 +601,7 @@ print(<span class="hljs-string">"Root Mean Squared Error (RMSE) on test data = %
 <li class=""><a href="#3-ML-Modeling" title="3. ML Modeling">3. ML Modeling</a><ul class="nav">
 <li class=""><a href="#1-Preprocessing-the-data" title="1. Preprocessing the data">1. Preprocessing the data</a></li>
 <li class=""><a href="#2-Modeling" title="2. Modeling">2. Modeling</a></li>
-<li class=""><a href="#3-Prediction" title="3. Prediction">3. Prediction</a></li>
-<li class=""><a href="#4-Evaluation" title="4. Evaluation">4. Evaluation</a></li>
-<li class=""><a href="#5-Saving-the-results-Spark-DataFrame-as-csv-file" title="5. Saving the results (Spark DataFrame as csv file)">5. Saving the results (Spark DataFrame as csv file)</a></li>
+<li class=""><a href="#Compare-best-models" title="Compare best models">Compare best models</a></li>
 </ul>
 </li>
 </ul>
