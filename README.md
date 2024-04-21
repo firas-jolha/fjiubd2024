@@ -32,7 +32,7 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Lab 6 - Apache Spark ML](html/common/Lab 6 - Apache Spark MLlib.html)
 
-### [Lab 7 - Apache Spark Streaming](html/common/Lab 7 - Stream processing with Apache Spark.html)
+### [Lab 7 - Stream processing with Apache Spark](html/common/Lab 7 - Stream processing with Apache Spark.html)
 
 ## Assignments/Tests
 
