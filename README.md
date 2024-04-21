@@ -32,7 +32,7 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Lab 6 - Apache Spark ML](html/common/Lab 6 - Apache Spark MLlib.html)
 
-<!-- ### [Lab 7 - Apache Spark Streaming](html/common/Lab 7 - Apache Spark Streaming.html) -->
+### [Lab 7 - Apache Spark Streaming](html/common/Lab 7 - Stream processing with Apache Spark.html)
 
 ## Assignments/Tests
 
@@ -50,8 +50,6 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Test 5 - Spark Core & SQL (only Colab template)](https://colab.research.google.com/drive/1iKOJkuXleIDfoDngle1QGNT9pwMF9ZN1?usp=sharing)
 
-### [Assignment 6 - Spark ML](html/common/Assignment 6 - Spark ML.html)
+### [Bachelor's students - Assignment 6 - Spark ML](html/bachelors/Assignment 6 - Spark ML.html)
 
-<!-- ### [Assignment 4 - Mongodb](html/common/Assignment 4 - Mongodb.html) -->
-
-<!-- docker cp hackmd-codimd-1:/home/hackmd/app/public/uploads "C:\\Users\\Admin\\Documents\\Inno\\bigdata2024\\github\\fjiubd2024\\html\\common" -->
+### [Master's students - Extra assignment](html/masters/Extra Assignment.html)
