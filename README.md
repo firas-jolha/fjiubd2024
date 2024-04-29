@@ -52,4 +52,4 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Bachelor's students - Assignment 6 - Spark ML](html/bachelors/Assignment 6 - Spark ML.html)
 
-### [Master's students - Extra assignment](html/masters/Extra Assignment.html)
+### [Master's students - Extra assignment](html/masters/Extra Assignment - Apache Spark ML.html)

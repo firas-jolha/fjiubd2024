@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        Extra Assignment - Apache Spark ML - CodiMD
+    </title>
+    <link rel="icon" type="image/png" href="http://localhost:3000/favicon.png">
+    <link rel="apple-touch-icon" href="http://localhost:3000/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha256-H0KfTigpUV+0/5tn2HXC0CPwhhDhWgSawJdnFd0CGCo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fork-awesome/1.1.3/css/fork-awesome.min.css" integrity="sha256-ZhApazu+kejqTYhMF+1DzNKjIzP7KXu6AzyXcC1gMus=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github-gist.min.css" integrity="sha256-tAflq+ymku3Khs+I/WcAneIlafYgDiOQ9stIHH985Wo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,300italic,300|Source+Serif+Pro|Source+Code+Pro:400,300,500&subset=latin,latin-ext);.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{padding:0 1em;color:#777;border-left:.25em solid #ddd}.night .markdown-body blockquote{color:#bcbcbc}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.night .markdown-body h1,.night .markdown-body h2,.night .markdown-body h3,.night .markdown-body h4,.night .markdown-body h5,.night .markdown-body h6{color:#ddd}.markdown-body h1 .fa-link,.markdown-body h2 .fa-link,.markdown-body h3 .fa-link,.markdown-body h4 .fa-link,.markdown-body h5 .fa-link,.markdown-body h6 .fa-link{color:#000;vertical-align:middle;visibility:hidden;font-size:16px}.night .markdown-body h1 .fa-link,.night .markdown-body h2 .fa-link,.night .markdown-body h3 .fa-link,.night .markdown-body h4 .fa-link,.night .markdown-body h5 .fa-link,.night .markdown-body h6 .fa-link{color:#fff}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .fa-link,.markdown-body h2:hover .anchor .fa-link,.markdown-body h3:hover .anchor .fa-link,.markdown-body h4:hover .anchor .fa-link,.markdown-body h5:hover .anchor .fa-link,.markdown-body h6:hover .anchor .fa-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.night .markdown-body table tr{background-color:#5f5f5f}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.night .markdown-body table tr:nth-child(2n){background-color:#4f4f4f}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.night .markdown-body code,.night .markdown-body tt{color:#eee;background-color:hsla(0,0%,90.2%,.36)}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\A0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.markdown-body kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid;border-color:#ccc #ccc #bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body pre{border:inherit!important}.night .markdown-body pre{filter:invert(100%)}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-webkit-inline-flex;display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.night .markdown-body .gist table tr:nth-child(2n){background-color:#ddd}.markdown-body code[data-gist-id]{background:none;padding:0;filter:invert(100%)}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.geo,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.night .markdown-body pre.graphviz .graph>polygon{fill:#333}.night .markdown-body pre.mermaid .sectionTitle,.night .markdown-body pre.mermaid .titleText,.night .markdown-body pre.mermaid text{fill:#fff}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{max-width:100%;height:100%}.night .markdown-body .abc path{fill:#eee}.night .markdown-body .abc path.note_selected{fill:##4DD0E1}.night tspan{fill:#fefefe}.night pre rect{fill:transparent}.night pre.flow-chart path,.night pre.flow-chart rect{stroke:#fff}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body img{background-color:transparent}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;-webkit-transition:opacity .2s;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;-webkit-transition:opacity .2s;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.geo-map{width:100%;height:250px}.markmap-container{height:300px}.markmap-container>svg{width:100%;height:100%}.MJX_Assistive_MathML{display:none}.ui-infobar{position:relative;z-index:2;max-width:758px;margin-top:25px;margin-bottom:-25px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:10000}.ui-toc-label{opacity:.9;background-color:#ccc;border:none}.ui-toc-label,.ui-toc .open .ui-toc-label{-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#5f5f5f}.ui-toc-label:focus{opacity:1;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.night .ui-toc-dropdown .nav>li>a:focus,.night .ui-toc-dropdown .nav>li>a:hover{color:#fff;border-left-color:#fff}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.night .ui-toc-dropdown .nav>.active:focus>a,.night .ui-toc-dropdown .nav>.active:hover>a,.night .ui-toc-dropdown .nav>.active>a{color:#fff;border-left:2px solid #fff}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.night .ui-toc-dropdown .nav>li>a{color:#aaa}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:50px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a{padding-right:50px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:60px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a{padding-right:60px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:hover{padding-left:49px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:hover{padding-right:49px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-left:59px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-right:59px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>a{padding-left:48px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:48px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active>a{padding-left:58px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:58px}.markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,Hiragino Kaku Gothic Pro,"\30D2\30E9\30AE\30CE\89D2\30B4   Pro W3",Osaka,Meiryo,"\30E1\30A4\30EA\30AA",MS Gothic,"\FF2D\FF33   \30B4\30B7\30C3\30AF",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,"\FF2D\FF33   \FF30\30B4\30B7\30C3\30AF",sans-serif}.markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang TC,Microsoft JhengHei,"\5FAE\8EDF\6B63\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,"\5FAE\8EDF\6B63\9ED1UI",sans-serif}.markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang SC,Microsoft YaHei,"\5FAE\8F6F\96C5\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,"\5FAE\8F6F\96C5\9ED1UI",sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:rgba(0,0,0,.85)}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:contain}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}small span{line-height:22px}small .dropdown{display:inline-block}small .dropdown a:focus,small .dropdown a:hover{text-decoration:none}.unselectable{-moz-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-o-user-select:none;user-select:none}.night .navbar{background:#333;border-bottom-color:#333;color:#eee}.night .navbar a{color:#eee}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}.focus,:focus{outline:none!important}::-moz-focus-inner{border:0!important}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid" lang="en"><h1 id="Extra-Assignment---Apache-Spark-ML"><a class="anchor hidden-xs" href="#Extra-Assignment---Apache-Spark-ML" title="Extra-Assignment---Apache-Spark-ML"><i class="fa fa-link"></i></a>Extra Assignment - Apache Spark ML</h1><p><strong>Course:</strong> Big Data S24<br>
+<strong>Author:</strong> Firas Jolha<br>
+<strong>Due DateTime:</strong> May 9 - 6:00 pm</p><h1 id="Dataset"><a class="anchor hidden-xs" href="#Dataset" title="Dataset"><i class="fa fa-link"></i></a>Dataset</h1><ul>
+<li>A sample of Amazon Video games dataset (~110MB)
+<ul>
+<li><a href="https://disk.yandex.com/d/zTUK-lAvm_iqtg" target="_blank" rel="noopener">products.csv</a></li>
+<li><a href="https://disk.yandex.com/d/i45IVU2mtYMBoQ" target="_blank" rel="noopener">reviews.csv</a></li>
+</ul>
+</li>
+</ul><h1 id="Agenda"><a class="anchor hidden-xs" href="#Agenda" title="Agenda"><i class="fa fa-link"></i></a>Agenda</h1><p></p><div class="toc"><ul>
+<li><a href="#Extra-Assignment---Apache-Spark-ML" title="Extra Assignment - Apache Spark ML">Extra Assignment - Apache Spark ML</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Instructions" title="Instructions">Instructions</a></li>
+<li><a href="#Assignment-Description" title="Assignment Description">Assignment Description</a></li>
+<li><a href="#Dataset-Description" title="Dataset Description">Dataset Description</a></li>
+<li><a href="#Tasks-on-Spark-ML-library" title="Tasks on Spark ML library">Tasks on Spark ML library</a></li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><p></p><h1 id="Prerequisites"><a class="anchor hidden-xs" href="#Prerequisites" title="Prerequisites"><i class="fa fa-link"></i></a>Prerequisites</h1><ul>
+<li>Google account for Colab notebook</li>
+</ul><h1 id="Instructions"><a class="anchor hidden-xs" href="#Instructions" title="Instructions"><i class="fa fa-link"></i></a>Instructions</h1><p>You need to install Spark on Colab notebook and work on a Colab notebook. You need to submit only the notebook to Moodle.</p><div class="alert alert-danger">
+<p><strong>Important notes:</strong></p>
+<ol>
+<li>The cells of the notebook should be have been executed and also should have had outputs. The cells which do not have an output or not executed or edited but not executed again will <strong>not</strong> be evaluated.</li>
+<li>Each cell should have at least an execution order and an output (if  it gives an output).</li>
+<li>Do not forget to add your comments if it is necessary.</li>
+<li>The test is individual and the student is <strong>NOT</strong> allowed to copy from their colleagues nor from AI-based support tools like chatgpt. The <em>plagiarism detection</em> will be strictly applied in this assignment.</li>
+</ol>
+</div><h1 id="Assignment-Description"><a class="anchor hidden-xs" href="#Assignment-Description" title="Assignment-Description"><i class="fa fa-link"></i></a>Assignment Description</h1><p>This assignment will be dedicated to practise on Apache Spark machine learning libraries. For this task, you can use the legacy RDD-based MLlib in <code>pyspark.mllib</code> and DataFrame-based MLlib <code>pyspark.ml</code> for Python. You have to work on different ML tasks using the same dataset. You also need to train a recommendation system for suggesting video games to Amazon users. You have to work on a sample of Amazon Video games dataset.</p><center>
+<img src="https://i.imgur.com/1aUDHcs.png" width="250">
+</center><p>The dataset includes <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-153-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>m</mi><mo>=</mo><mn>10</mn><mo>,</mo><mn>000</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1776" style="width: 5.929em; display: inline-block;"><span style="display: inline-block; position: relative; width: 5.121em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.565em, 1005.07em, 2.751em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-1777"><span class="mi" id="MathJax-Span-1778" style="font-family: MathJax_Math-italic;">m</span><span class="mo" id="MathJax-Span-1779" style="font-family: MathJax_Main; padding-left: 0.272em;">=</span><span class="mn" id="MathJax-Span-1780" style="font-family: MathJax_Main; padding-left: 0.272em;">10</span><span class="mo" id="MathJax-Span-1781" style="font-family: MathJax_Main;">,</span><span class="mn" id="MathJax-Span-1782" style="font-family: MathJax_Main; padding-left: 0.164em;">000</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.309em; border-left: 0px solid; width: 0px; height: 1.128em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>m</mi><mo>=</mo><mn>10</mn><mo>,</mo><mn>000</mn></math></span></span><script type="math/tex" id="MathJax-Element-153">m=10,000</script></span> Amazon users who rated <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-154-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>n</mi><mo>=</mo><mn>66</mn><mo>,</mo><mn>614</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1783" style="width: 5.66em; display: inline-block;"><span style="display: inline-block; position: relative; width: 4.852em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1004.8em, 2.751em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-1784"><span class="mi" id="MathJax-Span-1785" style="font-family: MathJax_Math-italic;">n</span><span class="mo" id="MathJax-Span-1786" style="font-family: MathJax_Main; padding-left: 0.272em;">=</span><span class="mn" id="MathJax-Span-1787" style="font-family: MathJax_Main; padding-left: 0.272em;">66</span><span class="mo" id="MathJax-Span-1788" style="font-family: MathJax_Main;">,</span><span class="mn" id="MathJax-Span-1789" style="font-family: MathJax_Main; padding-left: 0.164em;">614</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.309em; border-left: 0px solid; width: 0px; height: 1.128em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>n</mi><mo>=</mo><mn>66</mn><mo>,</mo><mn>614</mn></math></span></span><script type="math/tex" id="MathJax-Element-154">n=66,614</script></span> products and added <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-155-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>r</mi><mo>=</mo><mn>36</mn><mo>,</mo><mn>774</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-1790" style="width: 5.498em; display: inline-block;"><span style="display: inline-block; position: relative; width: 4.744em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1004.69em, 2.751em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-1791"><span class="mi" id="MathJax-Span-1792" style="font-family: MathJax_Math-italic;">r</span><span class="mo" id="MathJax-Span-1793" style="font-family: MathJax_Main; padding-left: 0.272em;">=</span><span class="mn" id="MathJax-Span-1794" style="font-family: MathJax_Main; padding-left: 0.272em;">36</span><span class="mo" id="MathJax-Span-1795" style="font-family: MathJax_Main;">,</span><span class="mn" id="MathJax-Span-1796" style="font-family: MathJax_Main; padding-left: 0.164em;">774</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.309em; border-left: 0px solid; width: 0px; height: 1.128em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>r</mi><mo>=</mo><mn>36</mn><mo>,</mo><mn>774</mn></math></span></span><script type="math/tex" id="MathJax-Element-155">r=36,774</script></span> reviews. Each review has a sentiment belongs to one of the three categories (positive, neutral, negative).</p><h1 id="Dataset-Description"><a class="anchor hidden-xs" href="#Dataset-Description" title="Dataset-Description"><i class="fa fa-link"></i></a>Dataset Description</h1><p>This dataset consists of two <code>csv</code> files. <code>reviews.csv</code> contains users’ reviews for video games on Amazon. <code>products.csv</code> contains the product product metadata (descriptions, category information, price, brand, and image features).</p><p>The description of fields in <code>reviews.csv</code> as follows:</p><ul>
+<li><em>sentiment</em> - sentiment of the reviewText. The value is -1 for negative, 1 for positive and 0 for neutral.</li>
+<li><em>rating</em> - rating of the product</li>
+<li><em>reviewerID</em> - ID of the reviewer, e.g. A2SUAM1J3GNN3B</li>
+<li><em>product_id</em> - ID of the product, e.g. 0000013714</li>
+<li><em>reviewerName</em> - name of the reviewer</li>
+<li><em>vote</em> - helpful votes of the review</li>
+<li><em>style</em> - a disctionary of the product metadata, e.g., “Format” is “Hardcover”</li>
+<li><em>reviewText</em> - text of the review</li>
+<li><em>reviewTime</em> - time of the review (raw)</li>
+<li><em>image</em> - links of images that users post after they have received the product</li>
+</ul><p>The description of fields in <code>products.csv</code> as follows:</p><ul>
+<li><em>product_id</em> - ID of the product, e.g. 0000031852</li>
+<li><em>date</em> - the release date of the product</li>
+<li><em>title</em> - name of the product</li>
+<li><em>feature</em> - bullet-point format features of the product</li>
+<li><em>details</em> - gives more details about the product</li>
+<li><em>description</em> - description of the product</li>
+<li><em>price</em> - price in US dollars (at time of crawl)</li>
+<li><em>rank</em> - sales rank information</li>
+<li><em>brand</em> - brand name</li>
+<li><em>category</em> - list of categories the product belongs to</li>
+<li><em>main_cat</em> - the main category the product belongs to</li>
+</ul><h1 id="Tasks-on-Spark-ML-library"><a class="anchor hidden-xs" href="#Tasks-on-Spark-ML-library" title="Tasks-on-Spark-ML-library"><i class="fa fa-link"></i></a>Tasks on Spark ML library</h1><div class="alert alert-danger">
+<p><b>NOTE:</b></p>
+<blockquote>
+<p><i style="color:red;"> Proof of implementation </i></p>
+<blockquote>
+<p>Such BLOCK outlines the results of the task that need to be presented as an evidence for grading purposes. They need to be followed as part of the tasks.</p>
+</blockquote>
+</blockquote>
+</div><div class="alert alert-success">
+<p><strong>Note: You have to use here only Pyspark APIs. Using other packages which operate on single machines or cores are not allowed.</strong></p>
+<ol>
+<li><strong>[1 point]</strong> Download the data from the attached links.</li>
+<li><strong>[6 points]</strong> Read the data as Spark DataFrame, show the size of the dataframes (rows and columns) for each one, and check that you parsed the fields with correct datatypes (build an appropriate schema). Check if cleaning the data is required for some fields. Do not remove the sample if  some of its fields are not nan.  Show some samples of the dataframes.</li>
+</ol>
+<blockquote>
+<p><i style="color:red;"> Proof of implementation </i></p>
+<blockquote>
+<ol>
+<li>Show the size of the dataframes (rows and columns) for each one.</li>
+<li>Show the schema of the dataframes after reading.</li>
+<li>Show first 10 samples of the dataframes.</li>
+</ol>
+</blockquote>
+</blockquote>
+<ol start="3">
+<li><strong>[5 points]</strong> Write Python functions to generate <strong>non-personalized recommendations</strong> where you need to suggest/retrieve the following products for any user.
+<ul>
+<li>Top-10 rated products</li>
+<li>Top-5 most recently published products</li>
+<li>Top-5 cheapest games</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><i style="color:red;"> Proof of implementation </i></p>
+<blockquote>
+<ol>
+<li>Run each function only once and print the output.</li>
+</ol>
+</blockquote>
+</blockquote>
+<ol start="4">
+<li><strong>[18 points] Regression task</strong>: Here you need to predict the price of the product from other features.
+<ul>
+<li>You have to use <code>products</code> dataframe.</li>
+<li>Preprocess the data and encode the non-numerical features.
+<ul>
+<li>For encoding long text fields (like title, brand, and main_cat), use <code>TF-IDF</code> or <code>Word2Vec</code> with embedding size not less than 20 (you can find them in <code>pyspark.ml.feature</code>). You can see some example <a href="https://spark.apache.org/docs/latest/mllib-feature-extraction.html" target="_blank" rel="noopener">here</a>.</li>
+<li>For numerical fields like <code>price</code>, remove the missing values. <code>price</code> is the output column and you should not alter it. You take into consideration only the products whose price is known. For other numerical features, you encode as suggested.</li>
+<li>For array type fields like feature and category, you can remove them if you want (for simplicity) OR you can create a row for each value in the array. You can use <code>explode</code> function for that purpose. See example <a href="https://sparkbyexamples.com/spark/explode-spark-array-and-map-dataframe-column/" target="_blank" rel="noopener">here</a>. Then you can encode with one-hot encoder or any other encoder.</li>
+<li>For date field, decompose it into three parts (day, month and year), drop the day part and keep only month and year parts, then build a custom <code>pyspark.ml.Transformer</code> for the month part whereas the year part can be treated as a numerical feature. Check this <a href="https://csyhuang.github.io/2020/08/01/custom-transformer/" target="_blank" rel="noopener">example</a> to see how you can build a custom transformer. For month part of the date field, use the <code>sin and cos transformation</code> (one of the common ways to encode cyclical features). This transformation encodes each input into two components, one component on <code>sin</code> wave and the other one on <code>cos</code> wave. After encoding, you will get two columns for month as follows (<span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-5799-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>s</mi><mi>i</mi><mi>n</mi></mrow></msub></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-164818" style="width: 4.636em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.99em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1003.99em, 2.697em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-164819"><span class="mi" id="MathJax-Span-164820" style="font-family: MathJax_Math-italic;">m</span><span class="mi" id="MathJax-Span-164821" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-164822" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-164823" style="font-family: MathJax_Math-italic;">t</span><span class="msubsup" id="MathJax-Span-164824"><span style="display: inline-block; position: relative; width: 1.673em; height: 0px;"><span style="position: absolute; clip: rect(3.128em, 1000.54em, 4.151em, -999.997em); top: -3.984em; left: 0em;"><span class="mi" id="MathJax-Span-164825" style="font-family: MathJax_Math-italic;">h</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; top: -3.823em; left: 0.595em;"><span class="texatom" id="MathJax-Span-164826"><span class="mrow" id="MathJax-Span-164827"><span class="mi" id="MathJax-Span-164828" style="font-size: 70.7%; font-family: MathJax_Math-italic;">s</span><span class="mi" id="MathJax-Span-164829" style="font-size: 70.7%; font-family: MathJax_Math-italic;">i</span><span class="mi" id="MathJax-Span-164830" style="font-size: 70.7%; font-family: MathJax_Math-italic;">n</span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.247em; border-left: 0px solid; width: 0px; height: 1.128em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class="MJX-TeXAtom-ORD"><mi>s</mi><mi>i</mi><mi>n</mi></mrow></msub></math></span></span><script type="math/tex" id="MathJax-Element-5799">month_{sin}</script></span>, <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-5800-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>c</mi><mi>o</mi><mi>s</mi></mrow></msub></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-164831" style="width: 4.582em; display: inline-block;"><span style="display: inline-block; position: relative; width: 3.936em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.511em, 1003.94em, 2.697em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-164832"><span class="mi" id="MathJax-Span-164833" style="font-family: MathJax_Math-italic;">m</span><span class="mi" id="MathJax-Span-164834" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-164835" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-164836" style="font-family: MathJax_Math-italic;">t</span><span class="msubsup" id="MathJax-Span-164837"><span style="display: inline-block; position: relative; width: 1.619em; height: 0px;"><span style="position: absolute; clip: rect(3.128em, 1000.54em, 4.151em, -999.997em); top: -3.984em; left: 0em;"><span class="mi" id="MathJax-Span-164838" style="font-family: MathJax_Math-italic;">h</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; top: -3.823em; left: 0.595em;"><span class="texatom" id="MathJax-Span-164839"><span class="mrow" id="MathJax-Span-164840"><span class="mi" id="MathJax-Span-164841" style="font-size: 70.7%; font-family: MathJax_Math-italic;">c</span><span class="mi" id="MathJax-Span-164842" style="font-size: 70.7%; font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-164843" style="font-size: 70.7%; font-family: MathJax_Math-italic;">s</span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span></span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.247em; border-left: 0px solid; width: 0px; height: 1.128em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class="MJX-TeXAtom-ORD"><mi>c</mi><mi>o</mi><mi>s</mi></mrow></msub></math></span></span><script type="math/tex" id="MathJax-Element-5800">month_{cos}</script></span>). It is given by <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-5801-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>s</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><mi>p</mi><mi>y</mi><mi>s</mi><mi>p</mi><mi>a</mi><mi>r</mi><mi>k</mi><mo>.</mo><mi>s</mi><mi>q</mi><mi>l</mi><mo>.</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mi>s</mi><mo>.</mo><mi>s</mi><mi>i</mi><mi>n</mi><mrow><mo>(</mo><mfrac><mrow><mn>2</mn><mo>&amp;#x2217;</mo><mi>m</mi><mi>a</mi><mi>t</mi><mi>h</mi><mo>.</mo><mi>p</mi><mi>i</mi><mo>&amp;#x2217;</mo><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>h</mi></mrow><mn>12</mn></mfrac><mo>)</mo></mrow></math>" role="presentation" style="text-align: center; position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-164844" style="width: 32.6em; display: inline-block;"><span style="display: inline-block; position: relative; width: 28.074em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.781em, 1027.86em, 4.529em, -999.997em); top: -3.392em; left: 0em;"><span class="mrow" id="MathJax-Span-164845"><span class="mi" id="MathJax-Span-164846" style="font-family: MathJax_Math-italic;">m</span><span class="mi" id="MathJax-Span-164847" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-164848" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-164849" style="font-family: MathJax_Math-italic;">t</span><span class="msubsup" id="MathJax-Span-164850"><span style="display: inline-block; position: relative; width: 1.673em; height: 0px;"><span style="position: absolute; clip: rect(3.128em, 1000.54em, 4.151em, -999.997em); top: -3.984em; left: 0em;"><span class="mi" id="MathJax-Span-164851" style="font-family: MathJax_Math-italic;">h</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; top: -3.823em; left: 0.595em;"><span class="texatom" id="MathJax-Span-164852"><span class="mrow" id="MathJax-Span-164853"><span class="mi" id="MathJax-Span-164854" style="font-size: 70.7%; font-family: MathJax_Math-italic;">s</span><span class="mi" id="MathJax-Span-164855" style="font-size: 70.7%; font-family: MathJax_Math-italic;">i</span><span class="mi" id="MathJax-Span-164856" style="font-size: 70.7%; font-family: MathJax_Math-italic;">n</span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span></span><span class="mo" id="MathJax-Span-164857" style="font-family: MathJax_Main; padding-left: 0.272em;">=</span><span class="mi" id="MathJax-Span-164858" style="font-family: MathJax_Math-italic; padding-left: 0.272em;">p</span><span class="mi" id="MathJax-Span-164859" style="font-family: MathJax_Math-italic;">y<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-164860" style="font-family: MathJax_Math-italic;">s</span><span class="mi" id="MathJax-Span-164861" style="font-family: MathJax_Math-italic;">p</span><span class="mi" id="MathJax-Span-164862" style="font-family: MathJax_Math-italic;">a</span><span class="mi" id="MathJax-Span-164863" style="font-family: MathJax_Math-italic;">r</span><span class="mi" id="MathJax-Span-164864" style="font-family: MathJax_Math-italic;">k</span><span class="mo" id="MathJax-Span-164865" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-164866" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">s</span><span class="mi" id="MathJax-Span-164867" style="font-family: MathJax_Math-italic;">q<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-164868" style="font-family: MathJax_Math-italic;">l</span><span class="mo" id="MathJax-Span-164869" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-164870" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">f<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.057em;"></span></span><span class="mi" id="MathJax-Span-164871" style="font-family: MathJax_Math-italic;">u</span><span class="mi" id="MathJax-Span-164872" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-164873" style="font-family: MathJax_Math-italic;">c</span><span class="mi" id="MathJax-Span-164874" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-164875" style="font-family: MathJax_Math-italic;">i</span><span class="mi" id="MathJax-Span-164876" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-164877" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-164878" style="font-family: MathJax_Math-italic;">s</span><span class="mo" id="MathJax-Span-164879" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-164880" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">s</span><span class="mi" id="MathJax-Span-164881" style="font-family: MathJax_Math-italic;">i</span><span class="mi" id="MathJax-Span-164882" style="font-family: MathJax_Math-italic;">n</span><span class="mrow" id="MathJax-Span-164883" style="padding-left: 0.164em;"><span class="mo" id="MathJax-Span-164884" style="vertical-align: 0em;"><span style="font-family: MathJax_Size3;">(</span></span><span class="mfrac" id="MathJax-Span-164885"><span style="display: inline-block; position: relative; width: 9.054em; height: 0px; margin-right: 0.11em; margin-left: 0.11em;"><span style="position: absolute; clip: rect(3.128em, 1008.89em, 4.367em, -999.997em); top: -4.685em; left: 50%; margin-left: -4.469em;"><span class="mrow" id="MathJax-Span-164886"><span class="mn" id="MathJax-Span-164887" style="font-family: MathJax_Main;">2</span><span class="mo" id="MathJax-Span-164888" style="font-family: MathJax_Main; padding-left: 0.218em;">∗</span><span class="mi" id="MathJax-Span-164889" style="font-family: MathJax_Math-italic; padding-left: 0.218em;">m</span><span class="mi" id="MathJax-Span-164890" style="font-family: MathJax_Math-italic;">a</span><span class="mi" id="MathJax-Span-164891" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-164892" style="font-family: MathJax_Math-italic;">h</span><span class="mo" id="MathJax-Span-164893" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-164894" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">p</span><span class="mi" id="MathJax-Span-164895" style="font-family: MathJax_Math-italic;">i</span><span class="mo" id="MathJax-Span-164896" style="font-family: MathJax_Main; padding-left: 0.218em;">∗</span><span class="mi" id="MathJax-Span-164897" style="font-family: MathJax_Math-italic; padding-left: 0.218em;">m</span><span class="mi" id="MathJax-Span-164898" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-164899" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-164900" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-164901" style="font-family: MathJax_Math-italic;">h</span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(3.182em, 1000.97em, 4.151em, -999.997em); top: -3.284em; left: 50%; margin-left: -0.482em;"><span class="mn" id="MathJax-Span-164902" style="font-family: MathJax_Main;">12</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(0.865em, 1009.05em, 1.242em, -999.997em); top: -1.29em; left: 0em;"><span style="display: inline-block; overflow: hidden; vertical-align: 0em; border-top: 1.3px solid; width: 9.054em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.08em;"></span></span></span></span><span class="mo" id="MathJax-Span-164903" style="vertical-align: 0em;"><span style="font-family: MathJax_Size3;">)</span></span></span></span><span style="display: inline-block; width: 0px; height: 3.397em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -1.184em; border-left: 0px solid; width: 0px; height: 2.941em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class="MJX-TeXAtom-ORD"><mi>s</mi><mi>i</mi><mi>n</mi></mrow></msub><mo>=</mo><mi>p</mi><mi>y</mi><mi>s</mi><mi>p</mi><mi>a</mi><mi>r</mi><mi>k</mi><mo>.</mo><mi>s</mi><mi>q</mi><mi>l</mi><mo>.</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mi>s</mi><mo>.</mo><mi>s</mi><mi>i</mi><mi>n</mi><mrow><mo>(</mo><mfrac><mrow><mn>2</mn><mo>∗</mo><mi>m</mi><mi>a</mi><mi>t</mi><mi>h</mi><mo>.</mo><mi>p</mi><mi>i</mi><mo>∗</mo><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>h</mi></mrow><mn>12</mn></mfrac><mo>)</mo></mrow></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-5801">month_{sin} = pyspark.sql.functions.sin\left(\frac{2 * math.pi * month}{12}\right)</script></span> <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-5802-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class=&quot;MJX-TeXAtom-ORD&quot;><mi>c</mi><mi>o</mi><mi>s</mi></mrow></msub><mo>=</mo><mi>p</mi><mi>y</mi><mi>s</mi><mi>p</mi><mi>a</mi><mi>r</mi><mi>k</mi><mo>.</mo><mi>s</mi><mi>q</mi><mi>l</mi><mo>.</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mi>s</mi><mo>.</mo><mi>c</mi><mi>o</mi><mi>s</mi><mrow><mo>(</mo><mfrac><mrow><mn>2</mn><mo>&amp;#x2217;</mo><mi>m</mi><mi>a</mi><mi>t</mi><mi>h</mi><mo>.</mo><mi>p</mi><mi>i</mi><mo>&amp;#x2217;</mo><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>h</mi></mrow><mn>12</mn></mfrac><mo>)</mo></mrow></math>" role="presentation" style="text-align: center; position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-164904" style="width: 32.438em; display: inline-block;"><span style="display: inline-block; position: relative; width: 27.966em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.781em, 1027.75em, 4.529em, -999.997em); top: -3.392em; left: 0em;"><span class="mrow" id="MathJax-Span-164905"><span class="mi" id="MathJax-Span-164906" style="font-family: MathJax_Math-italic;">m</span><span class="mi" id="MathJax-Span-164907" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-164908" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-164909" style="font-family: MathJax_Math-italic;">t</span><span class="msubsup" id="MathJax-Span-164910"><span style="display: inline-block; position: relative; width: 1.619em; height: 0px;"><span style="position: absolute; clip: rect(3.128em, 1000.54em, 4.151em, -999.997em); top: -3.984em; left: 0em;"><span class="mi" id="MathJax-Span-164911" style="font-family: MathJax_Math-italic;">h</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; top: -3.823em; left: 0.595em;"><span class="texatom" id="MathJax-Span-164912"><span class="mrow" id="MathJax-Span-164913"><span class="mi" id="MathJax-Span-164914" style="font-size: 70.7%; font-family: MathJax_Math-italic;">c</span><span class="mi" id="MathJax-Span-164915" style="font-size: 70.7%; font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-164916" style="font-size: 70.7%; font-family: MathJax_Math-italic;">s</span></span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span></span></span><span class="mo" id="MathJax-Span-164917" style="font-family: MathJax_Main; padding-left: 0.272em;">=</span><span class="mi" id="MathJax-Span-164918" style="font-family: MathJax_Math-italic; padding-left: 0.272em;">p</span><span class="mi" id="MathJax-Span-164919" style="font-family: MathJax_Math-italic;">y<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-164920" style="font-family: MathJax_Math-italic;">s</span><span class="mi" id="MathJax-Span-164921" style="font-family: MathJax_Math-italic;">p</span><span class="mi" id="MathJax-Span-164922" style="font-family: MathJax_Math-italic;">a</span><span class="mi" id="MathJax-Span-164923" style="font-family: MathJax_Math-italic;">r</span><span class="mi" id="MathJax-Span-164924" style="font-family: MathJax_Math-italic;">k</span><span class="mo" id="MathJax-Span-164925" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-164926" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">s</span><span class="mi" id="MathJax-Span-164927" style="font-family: MathJax_Math-italic;">q<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.003em;"></span></span><span class="mi" id="MathJax-Span-164928" style="font-family: MathJax_Math-italic;">l</span><span class="mo" id="MathJax-Span-164929" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-164930" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">f<span style="display: inline-block; overflow: hidden; height: 1px; width: 0.057em;"></span></span><span class="mi" id="MathJax-Span-164931" style="font-family: MathJax_Math-italic;">u</span><span class="mi" id="MathJax-Span-164932" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-164933" style="font-family: MathJax_Math-italic;">c</span><span class="mi" id="MathJax-Span-164934" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-164935" style="font-family: MathJax_Math-italic;">i</span><span class="mi" id="MathJax-Span-164936" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-164937" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-164938" style="font-family: MathJax_Math-italic;">s</span><span class="mo" id="MathJax-Span-164939" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-164940" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">c</span><span class="mi" id="MathJax-Span-164941" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-164942" style="font-family: MathJax_Math-italic;">s</span><span class="mrow" id="MathJax-Span-164943" style="padding-left: 0.164em;"><span class="mo" id="MathJax-Span-164944" style="vertical-align: 0em;"><span style="font-family: MathJax_Size3;">(</span></span><span class="mfrac" id="MathJax-Span-164945"><span style="display: inline-block; position: relative; width: 9.054em; height: 0px; margin-right: 0.11em; margin-left: 0.11em;"><span style="position: absolute; clip: rect(3.128em, 1008.89em, 4.367em, -999.997em); top: -4.685em; left: 50%; margin-left: -4.469em;"><span class="mrow" id="MathJax-Span-164946"><span class="mn" id="MathJax-Span-164947" style="font-family: MathJax_Main;">2</span><span class="mo" id="MathJax-Span-164948" style="font-family: MathJax_Main; padding-left: 0.218em;">∗</span><span class="mi" id="MathJax-Span-164949" style="font-family: MathJax_Math-italic; padding-left: 0.218em;">m</span><span class="mi" id="MathJax-Span-164950" style="font-family: MathJax_Math-italic;">a</span><span class="mi" id="MathJax-Span-164951" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-164952" style="font-family: MathJax_Math-italic;">h</span><span class="mo" id="MathJax-Span-164953" style="font-family: MathJax_Main;">.</span><span class="mi" id="MathJax-Span-164954" style="font-family: MathJax_Math-italic; padding-left: 0.164em;">p</span><span class="mi" id="MathJax-Span-164955" style="font-family: MathJax_Math-italic;">i</span><span class="mo" id="MathJax-Span-164956" style="font-family: MathJax_Main; padding-left: 0.218em;">∗</span><span class="mi" id="MathJax-Span-164957" style="font-family: MathJax_Math-italic; padding-left: 0.218em;">m</span><span class="mi" id="MathJax-Span-164958" style="font-family: MathJax_Math-italic;">o</span><span class="mi" id="MathJax-Span-164959" style="font-family: MathJax_Math-italic;">n</span><span class="mi" id="MathJax-Span-164960" style="font-family: MathJax_Math-italic;">t</span><span class="mi" id="MathJax-Span-164961" style="font-family: MathJax_Math-italic;">h</span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(3.182em, 1000.97em, 4.151em, -999.997em); top: -3.284em; left: 50%; margin-left: -0.482em;"><span class="mn" id="MathJax-Span-164962" style="font-family: MathJax_Main;">12</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(0.865em, 1009.05em, 1.242em, -999.997em); top: -1.29em; left: 0em;"><span style="display: inline-block; overflow: hidden; vertical-align: 0em; border-top: 1.3px solid; width: 9.054em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.08em;"></span></span></span></span><span class="mo" id="MathJax-Span-164963" style="vertical-align: 0em;"><span style="font-family: MathJax_Size3;">)</span></span></span></span><span style="display: inline-block; width: 0px; height: 3.397em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -1.184em; border-left: 0px solid; width: 0px; height: 2.941em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><msub><mi>h</mi><mrow class="MJX-TeXAtom-ORD"><mi>c</mi><mi>o</mi><mi>s</mi></mrow></msub><mo>=</mo><mi>p</mi><mi>y</mi><mi>s</mi><mi>p</mi><mi>a</mi><mi>r</mi><mi>k</mi><mo>.</mo><mi>s</mi><mi>q</mi><mi>l</mi><mo>.</mo><mi>f</mi><mi>u</mi><mi>n</mi><mi>c</mi><mi>t</mi><mi>i</mi><mi>o</mi><mi>n</mi><mi>s</mi><mo>.</mo><mi>c</mi><mi>o</mi><mi>s</mi><mrow><mo>(</mo><mfrac><mrow><mn>2</mn><mo>∗</mo><mi>m</mi><mi>a</mi><mi>t</mi><mi>h</mi><mo>.</mo><mi>p</mi><mi>i</mi><mo>∗</mo><mi>m</mi><mi>o</mi><mi>n</mi><mi>t</mi><mi>h</mi></mrow><mn>12</mn></mfrac><mo>)</mo></mrow></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-5802">month_{cos} = pyspark.sql.functions.cos\left(\frac{2 * math.pi * month}{12}\right)</script></span></li>
+<li>Do not forget to scale the data if necessary.<br>
+<strong>Note:</strong> You can use scalers in <code>pyspark.ml.feature</code> to scale the data or any additional methods to increase the performance of the system.</li>
+<li>Split the dataset into 70% training and 30% test.</li>
+<li>Build an estimator of your choice for predicting the price (use only train data).</li>
+<li>Evaluate the performance of the estimator using <code>rmse</code> metric (use only test data).</li>
+<li>Try to enhance the performance of the estimator manually by using different hyperparameters/settings and evaluate the performance again.</li>
+<li>For the game <code>Tom Clancy's H.A.W.X 2</code>, predict the price using the optimized model.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><i style="color:red;"> Proof of implementation </i></p>
+<blockquote>
+<ol>
+<li>Show the first 10 samples of <code>products</code> dataframe before encoding.</li>
+<li>Show the first 10 samples of <code>products</code> dataframe <strong>after</strong> encoding.</li>
+<li>Show the size of the train and test dataframes (only number of rows).</li>
+<li>Show the value of <code>rmse</code> for the first model (before optimization).</li>
+<li>Show the value of the hyperparameters/settings before and after optimization.</li>
+<li>Show the value of <code>rmse</code> for the first model (<strong>after</strong> optimization).</li>
+<li>Show the predicted price of the game <code>Tom Clancy's H.A.W.X 2</code>.</li>
+</ol>
+</blockquote>
+</blockquote>
+<ol start="5">
+<li><strong>[10 points]</strong> <strong>Sentiment Analysis</strong> is the process of analyzing digital text to determine if the emotional tone of the text is positive, negative, or neutral. Today, companies have large volumes of text data like emails, social media comments, and reviews on products in e-commerce websites. Companies use the insights from sentiment analysis to improve customer service and increase brand reputation.
+<ul>
+<li>You have to use reviews data. You have the freedom to select any features but you must use reviewText at least.</li>
+<li>You have the freedom to use any transformers for encoding the features.</li>
+<li>Split the data into 70% training and 30% test set. Do not forget to seed the random state.</li>
+<li>Fit a Random Forest Classifier for the ratings data. (The performance should not be less than 60%)</li>
+<li>Fit another classifier of your choice (such as Naive Bayes). (The performance should not be less than 60%)</li>
+<li>Evaluate the performance of both classifiers using <code>f1</code> metric. Use the test data.
+<ul>
+<li>Which one is better?</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><i style="color:red;"> Proof of implementation </i></p>
+<blockquote>
+<ol>
+<li>Show the first 10 samples of <code>reviews</code> dataframe before encoding.</li>
+<li>Show the first 10 samples of <code>reviews</code> dataframe <strong>after</strong> encoding.</li>
+<li>Show the size of the train and test dataframes (only number of rows).</li>
+<li>Show the value of <code>f1</code> for the first model.</li>
+<li>Show the value of <code>f1</code> for the second model.</li>
+</ol>
+</blockquote>
+</blockquote>
+<ol start="6">
+<li><strong>[60 points]</strong> <strong>Matrix factorization based collaborative filtering</strong> Here you need to implement a matrix factorization method and use it for generating recommendations.
+<ul>
+<li>Use ALS algorithm from <code>pyspark.ml.recommendation</code> to fit the rating data.</li>
+<li>Split the data into 80% training and 20% test set. Do not forget to seed the random state.</li>
+<li>Find top-5 personalized recommendations (recommended products) for the first 10 users.</li>
+<li>Evaluate the performance of the system using <code>meanAveragePrecision</code> for the top-5 results. Use the test data.</li>
+<li>Test 3 different settings for ALS algorithm and add add your observations as comments to your code.</li>
+<li>Select the best model and calculate its performance on the test data.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><i style="color:red;"> Proof of implementation </i></p>
+<blockquote>
+<ol>
+<li>Show the size of the train and test dataframes (only number of rows).</li>
+<li>Show the first 10 samples of <code>rating</code> train data.</li>
+<li>Show the first 10 unique users from your dataset.</li>
+<li>Show top-5 recommended products for the first 10 users. You should show all records of the dataframe.</li>
+<li>Show the value of <code>meanAveragePrecision</code> for the <span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><span class="MathJax" id="MathJax-Element-5803-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot;><mi>k</mi><mo>=</mo><mn>5</mn></math>" role="presentation" style="position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-164964" style="width: 2.81em; display: inline-block;"><span style="display: inline-block; position: relative; width: 2.416em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(1.48em, 1002.37em, 2.466em, -999.998em); top: -2.313em; left: 0em;"><span class="mrow" id="MathJax-Span-164965"><span class="mi" id="MathJax-Span-164966" style="font-family: MathJax_Math-italic;">k</span><span class="mo" id="MathJax-Span-164967" style="font-family: MathJax_Main; padding-left: 0.298em;">=</span><span class="mn" id="MathJax-Span-164968" style="font-family: MathJax_Main; padding-left: 0.298em;">5</span></span><span style="display: inline-block; width: 0px; height: 2.318em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.054em; border-left: 0px solid; width: 0px; height: 0.974em;"></span></span></nobr><span class="MJX_Assistive_MathML" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML"><mi>k</mi><mo>=</mo><mn>5</mn></math></span></span><script type="math/tex" id="MathJax-Element-5803">k=5</script></span>.</li>
+<li>Show the 3 different settings for ALS algorithm.</li>
+<li>Show the value of <code>meanAveragePrecision</code> for each of the 3 different settings.</li>
+<li>Show the performance <code>meanAveragePrecision</code> of the best model.</li>
+</ol>
+</blockquote>
+</blockquote>
+<!-- **Note: While you train the models, please take a look at Spark UI to track your Spark app.** -->
+</div><h1 id="References"><a class="anchor hidden-xs" href="#References" title="References"><i class="fa fa-link"></i></a>References</h1><ul>
+<li>Rainer Gemulla, Erik Nijkamp, Peter J. Haas, and Yannis Sismanis. 2011. Large-scale matrix factorization with distributed stochastic gradient descent. In Proceedings of the 17th ACM SIGKDD international conference on Knowledge discovery and data mining (KDD '11). Association for Computing Machinery, New York, NY, USA, 69–77. <a href="https://doi.org/10.1145/2020408.2020426" target="_blank" rel="noopener">https://doi.org/10.1145/2020408.2020426</a></li>
+<li><a href="https://www.ijert.org/research/recommender-systems-types-of-filtering-techniques-IJERTV3IS110197.pdf" target="_blank" rel="noopener">Recommender Systems: Types of Filtering Techniques</a></li>
+<li><a href="https://www.fabiopetroni.com/Download/IntroductionRecommenderSystems_Petroni.pdf" target="_blank" rel="noopener">Introduction to recommender systems</a></li>
+<li><a href="https://michael.hahsler.net/other_courses/ICMA_Recommendation_Tools/material/intro/Recomm_intro.pdf" target="_blank" rel="noopener">Recommender Systems - Harnessing the Power of Personalization</a></li>
+<li>Shah, Shalin. “Introduction to matrix factorization for recommender systems.” (2018).</li>
+</ul></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#Extra-Assignment---Apache-Spark-ML" title="Extra Assignment - Apache Spark ML">Extra Assignment - Apache Spark ML</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Instructions" title="Instructions">Instructions</a></li>
+<li><a href="#Assignment-Description" title="Assignment Description">Assignment Description</a></li>
+<li><a href="#Dataset-Description" title="Dataset Description">Dataset Description</a></li>
+<li class=""><a href="#Tasks-on-Spark-ML-library" title="Tasks on Spark ML library">Tasks on Spark ML library</a></li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
+        <div class="toc"><ul class="nav">
+<li><a href="#Extra-Assignment---Apache-Spark-ML" title="Extra Assignment - Apache Spark ML">Extra Assignment - Apache Spark ML</a></li>
+<li><a href="#Dataset" title="Dataset">Dataset</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Instructions" title="Instructions">Instructions</a></li>
+<li><a href="#Assignment-Description" title="Assignment Description">Assignment Description</a></li>
+<li class=""><a href="#Dataset-Description" title="Dataset Description">Dataset Description</a></li>
+<li class=""><a href="#Tasks-on-Spark-ML-library" title="Tasks on Spark ML library">Tasks on Spark ML library</a></li>
+<li><a href="#References" title="References">References</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha256-kJrlY+s09+QoWjpkOrXXwhxeaoDz9FW5SaxF8I0DibQ=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
