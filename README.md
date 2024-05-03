@@ -50,6 +50,6 @@ The materials are split into three parts. There are materials for labs, project 
 
 ### [Test 5 - Spark Core & SQL (only Colab template)](https://colab.research.google.com/drive/1iKOJkuXleIDfoDngle1QGNT9pwMF9ZN1?usp=sharing)
 
-### [Bachelor's students - Assignment 6 - Spark ML](html/bachelors/Assignment 6 - Spark ML.html)
+### [Bachelor's students - Assignment 6 - Spark ML](html/bachelors/BS - Assignment 6 - Spark ML.html)
 
 ### [Master's students - Extra assignment](html/masters/Extra Assignment - Apache Spark ML.html)

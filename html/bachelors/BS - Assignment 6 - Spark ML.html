@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+
+<html lang="en">
+
+<head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="mobile-web-app-capable" content="yes">
+    <title>
+        BS - Assignment 6 - Spark ML - CodiMD
+    </title>
+    <link rel="icon" type="image/png" href="http://localhost:3000/favicon.png">
+    <link rel="apple-touch-icon" href="http://localhost:3000/apple-touch-icon.png">
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/css/bootstrap.min.css" integrity="sha256-H0KfTigpUV+0/5tn2HXC0CPwhhDhWgSawJdnFd0CGCo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/fork-awesome/1.1.3/css/fork-awesome.min.css" integrity="sha256-ZhApazu+kejqTYhMF+1DzNKjIzP7KXu6AzyXcC1gMus=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/ionicons/2.0.1/css/ionicons.min.css" integrity="sha256-3iu9jgsy9TpTwXKb7bNQzqWekRX7pPK+2OLj3R922fo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/prism/1.5.1/themes/prism.min.css" integrity="sha256-vtR0hSWRc3Tb26iuN2oZHt3KRUomwTufNIf5/4oeCyg=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.12.0/styles/github-gist.min.css" integrity="sha256-tAflq+ymku3Khs+I/WcAneIlafYgDiOQ9stIHH985Wo=" crossorigin="anonymous" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/@hackmd/emojify.js@2.1.0/dist/css/basic/emojify.min.css" integrity="sha256-UOrvMOsSDSrW6szVLe8ZDZezBxh5IoIfgTwdNDgTjiU=" crossorigin="anonymous" />
+    <style>
+        @import url(https://fonts.googleapis.com/css?family=Source+Sans+Pro:400,400italic,600,600italic,300italic,300|Source+Serif+Pro|Source+Code+Pro:400,300,500&subset=latin,latin-ext);.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;font-size:16px;line-height:1.5;word-wrap:break-word}.markdown-body:after,.markdown-body:before{display:table;content:""}.markdown-body:after{clear:both}.markdown-body>:first-child{margin-top:0!important}.markdown-body>:last-child{margin-bottom:0!important}.markdown-body a:not([href]){color:inherit;text-decoration:none}.markdown-body .absent{color:#c00}.markdown-body .anchor{float:left;padding-right:4px;margin-left:-20px;line-height:1}.markdown-body .anchor:focus{outline:none}.markdown-body blockquote,.markdown-body dl,.markdown-body ol,.markdown-body p,.markdown-body pre,.markdown-body table,.markdown-body ul{margin-top:0;margin-bottom:16px}.markdown-body hr{height:.25em;padding:0;margin:24px 0;background-color:#e7e7e7;border:0}.markdown-body blockquote{padding:0 1em;color:#777;border-left:.25em solid #ddd}.night .markdown-body blockquote{color:#bcbcbc}.markdown-body blockquote>:first-child{margin-top:0}.markdown-body blockquote>:last-child{margin-bottom:0}.markdown-body .loweralpha{list-style-type:lower-alpha}.markdown-body h1,.markdown-body h2,.markdown-body h3,.markdown-body h4,.markdown-body h5,.markdown-body h6{margin-top:24px;margin-bottom:16px;font-weight:600;line-height:1.25}.night .markdown-body h1,.night .markdown-body h2,.night .markdown-body h3,.night .markdown-body h4,.night .markdown-body h5,.night .markdown-body h6{color:#ddd}.markdown-body h1 .fa-link,.markdown-body h2 .fa-link,.markdown-body h3 .fa-link,.markdown-body h4 .fa-link,.markdown-body h5 .fa-link,.markdown-body h6 .fa-link{color:#000;vertical-align:middle;visibility:hidden;font-size:16px}.night .markdown-body h1 .fa-link,.night .markdown-body h2 .fa-link,.night .markdown-body h3 .fa-link,.night .markdown-body h4 .fa-link,.night .markdown-body h5 .fa-link,.night .markdown-body h6 .fa-link{color:#fff}.markdown-body h1:hover .anchor,.markdown-body h2:hover .anchor,.markdown-body h3:hover .anchor,.markdown-body h4:hover .anchor,.markdown-body h5:hover .anchor,.markdown-body h6:hover .anchor{text-decoration:none}.markdown-body h1:hover .anchor .fa-link,.markdown-body h2:hover .anchor .fa-link,.markdown-body h3:hover .anchor .fa-link,.markdown-body h4:hover .anchor .fa-link,.markdown-body h5:hover .anchor .fa-link,.markdown-body h6:hover .anchor .fa-link{visibility:visible}.markdown-body h1 code,.markdown-body h1 tt,.markdown-body h2 code,.markdown-body h2 tt,.markdown-body h3 code,.markdown-body h3 tt,.markdown-body h4 code,.markdown-body h4 tt,.markdown-body h5 code,.markdown-body h5 tt,.markdown-body h6 code,.markdown-body h6 tt{font-size:inherit}.markdown-body h1{font-size:2em}.markdown-body h1,.markdown-body h2{padding-bottom:.3em;border-bottom:1px solid #eee}.markdown-body h2{font-size:1.5em}.markdown-body h3{font-size:1.25em}.markdown-body h4{font-size:1em}.markdown-body h5{font-size:.875em}.markdown-body h6{font-size:.85em;color:#777}.markdown-body ol,.markdown-body ul{padding-left:2em}.markdown-body ol.no-list,.markdown-body ul.no-list{padding:0;list-style-type:none}.markdown-body ol ol,.markdown-body ol ul,.markdown-body ul ol,.markdown-body ul ul{margin-top:0;margin-bottom:0}.markdown-body li>p{margin-top:16px}.markdown-body li+li{margin-top:.25em}.markdown-body dl{padding:0}.markdown-body dl dt{padding:0;margin-top:16px;font-size:1em;font-style:italic;font-weight:700}.markdown-body dl dd{padding:0 16px;margin-bottom:16px}.markdown-body table{display:block;width:100%;overflow:auto;word-break:normal;word-break:keep-all}.markdown-body table th{font-weight:700}.markdown-body table td,.markdown-body table th{padding:6px 13px;border:1px solid #ddd}.markdown-body table tr{background-color:#fff;border-top:1px solid #ccc}.night .markdown-body table tr{background-color:#5f5f5f}.markdown-body table tr:nth-child(2n){background-color:#f8f8f8}.night .markdown-body table tr:nth-child(2n){background-color:#4f4f4f}.markdown-body img{max-width:100%;box-sizing:content-box;background-color:#fff}.markdown-body img[align=right]{padding-left:20px}.markdown-body img[align=left]{padding-right:20px}.markdown-body .emoji{max-width:none;vertical-align:text-top;background-color:transparent}.markdown-body span.frame{display:block;overflow:hidden}.markdown-body span.frame>span{display:block;float:left;width:auto;padding:7px;margin:13px 0 0;overflow:hidden;border:1px solid #ddd}.markdown-body span.frame span img{display:block;float:left}.markdown-body span.frame span span{display:block;padding:5px 0 0;clear:both;color:#333}.markdown-body span.align-center{display:block;overflow:hidden;clear:both}.markdown-body span.align-center>span{display:block;margin:13px auto 0;overflow:hidden;text-align:center}.markdown-body span.align-center span img{margin:0 auto;text-align:center}.markdown-body span.align-right{display:block;overflow:hidden;clear:both}.markdown-body span.align-right>span{display:block;margin:13px 0 0;overflow:hidden;text-align:right}.markdown-body span.align-right span img{margin:0;text-align:right}.markdown-body span.float-left{display:block;float:left;margin-right:13px;overflow:hidden}.markdown-body span.float-left span{margin:13px 0 0}.markdown-body span.float-right{display:block;float:right;margin-left:13px;overflow:hidden}.markdown-body span.float-right>span{display:block;margin:13px auto 0;overflow:hidden;text-align:right}.markdown-body code,.markdown-body tt{padding:.2em 0;margin:0;font-size:85%;background-color:rgba(0,0,0,.04);border-radius:3px}.night .markdown-body code,.night .markdown-body tt{color:#eee;background-color:hsla(0,0%,90.2%,.36)}.markdown-body code:after,.markdown-body code:before,.markdown-body tt:after,.markdown-body tt:before{letter-spacing:-.2em;content:"\A0"}.markdown-body code br,.markdown-body tt br{display:none}.markdown-body del code{text-decoration:inherit}.markdown-body pre{word-wrap:normal}.markdown-body pre>code{padding:0;margin:0;font-size:100%;word-break:normal;white-space:pre;background:transparent;border:0}.markdown-body .highlight{margin-bottom:16px}.markdown-body .highlight pre{margin-bottom:0;word-break:normal}.markdown-body .highlight pre,.markdown-body pre{padding:16px;overflow:auto;font-size:85%;line-height:1.45;background-color:#f7f7f7;border-radius:3px}.markdown-body pre code,.markdown-body pre tt{display:inline;max-width:auto;padding:0;margin:0;overflow:visible;line-height:inherit;word-wrap:normal;background-color:transparent;border:0}.markdown-body pre code:after,.markdown-body pre code:before,.markdown-body pre tt:after,.markdown-body pre tt:before{content:normal}.markdown-body .csv-data td,.markdown-body .csv-data th{padding:5px;overflow:hidden;font-size:12px;line-height:1;text-align:left;white-space:nowrap}.markdown-body .csv-data .blob-line-num{padding:10px 8px 9px;text-align:right;background:#fff;border:0}.markdown-body .csv-data tr{border-top:0}.markdown-body .csv-data th{font-weight:700;background:#f8f8f8;border-top:0}.markdown-body kbd{display:inline-block;padding:3px 5px;font-size:11px;line-height:10px;color:#555;vertical-align:middle;background-color:#fcfcfc;border:1px solid;border-color:#ccc #ccc #bbb;border-radius:3px;box-shadow:inset 0 -1px 0 #bbb}.news .alert .markdown-body blockquote{padding:0 0 0 40px;border:0}.activity-tab .news .alert .commits,.activity-tab .news .markdown-body blockquote{padding-left:0}.task-list-item{list-style-type:none}.task-list-item label{font-weight:400}.task-list-item.enabled label{cursor:pointer}.task-list-item+.task-list-item{margin-top:3px}.task-list-item-checkbox{float:left;margin:.31em 0 .2em -1.3em!important;vertical-align:middle;cursor:default!important}.markdown-body{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol;padding-top:40px;padding-bottom:40px;max-width:758px;overflow:visible!important}.markdown-body pre{border:inherit!important}.night .markdown-body pre{filter:invert(100%)}.markdown-body code{color:inherit!important}.markdown-body pre code .wrapper{display:-webkit-inline-flex;display:-moz-inline-flex;display:-ms-inline-flex;display:-o-inline-flex;display:inline-flex}.markdown-body pre code .gutter{float:left;overflow:hidden;-webkit-user-select:none;user-select:none}.markdown-body pre code .gutter.linenumber{text-align:right;position:relative;display:inline-block;cursor:default;z-index:4;padding:0 8px 0 0;min-width:20px;box-sizing:content-box;color:#afafaf!important;border-right:3px solid #6ce26c!important}.markdown-body pre code .gutter.linenumber>span:before{content:attr(data-linenumber)}.markdown-body pre code .code{float:left;margin:0 0 0 16px}.markdown-body .gist .line-numbers{border-left:none;border-top:none;border-bottom:none}.markdown-body .gist .line-data{border:none}.markdown-body .gist table{border-spacing:0;border-collapse:inherit!important}.night .markdown-body .gist table tr:nth-child(2n){background-color:#ddd}.markdown-body code[data-gist-id]{background:none;padding:0;filter:invert(100%)}.markdown-body code[data-gist-id]:after,.markdown-body code[data-gist-id]:before{content:""}.markdown-body code[data-gist-id] .blob-num{border:unset}.markdown-body code[data-gist-id] table{overflow:unset;margin-bottom:unset}.markdown-body code[data-gist-id] table tr{background:unset}.markdown-body[dir=rtl] pre{direction:ltr}.markdown-body[dir=rtl] code{direction:ltr;unicode-bidi:embed}.markdown-body .alert>p{margin-bottom:0}.markdown-body pre.abc,.markdown-body pre.flow-chart,.markdown-body pre.geo,.markdown-body pre.graphviz,.markdown-body pre.mermaid,.markdown-body pre.sequence-diagram,.markdown-body pre.vega{text-align:center;background-color:inherit;border-radius:0;white-space:inherit}.night .markdown-body pre.graphviz .graph>polygon{fill:#333}.night .markdown-body pre.mermaid .sectionTitle,.night .markdown-body pre.mermaid .titleText,.night .markdown-body pre.mermaid text{fill:#fff}.markdown-body pre.abc>code,.markdown-body pre.flow-chart>code,.markdown-body pre.graphviz>code,.markdown-body pre.mermaid>code,.markdown-body pre.sequence-diagram>code,.markdown-body pre.vega>code{text-align:left}.markdown-body pre.abc>svg,.markdown-body pre.flow-chart>svg,.markdown-body pre.graphviz>svg,.markdown-body pre.mermaid>svg,.markdown-body pre.sequence-diagram>svg,.markdown-body pre.vega>svg{max-width:100%;height:100%}.night .markdown-body .abc path{fill:#eee}.night .markdown-body .abc path.note_selected{fill:##4DD0E1}.night tspan{fill:#fefefe}.night pre rect{fill:transparent}.night pre.flow-chart path,.night pre.flow-chart rect{stroke:#fff}.markdown-body pre>code.wrap{white-space:pre-wrap;white-space:-moz-pre-wrap;white-space:-pre-wrap;white-space:-o-pre-wrap;word-wrap:break-word}.markdown-body .alert>p,.markdown-body .alert>ul{margin-bottom:0}.markdown-body summary{display:list-item}.markdown-body summary:focus{outline:none}.markdown-body details summary{cursor:pointer}.markdown-body details:not([open])>:not(summary){display:none}.markdown-body figure{margin:1em 40px}.markdown-body img{background-color:transparent}.vimeo,.youtube{cursor:pointer;display:table;text-align:center;background-position:50%;background-repeat:no-repeat;background-size:contain;background-color:#000;overflow:hidden}.vimeo,.youtube{position:relative;width:100%}.youtube{padding-bottom:56.25%}.vimeo img{width:100%;object-fit:contain;z-index:0}.youtube img{object-fit:cover;z-index:0}.vimeo iframe,.youtube iframe,.youtube img{width:100%;height:100%;position:absolute;top:0;left:0}.vimeo iframe,.youtube iframe{vertical-align:middle;z-index:1}.vimeo .icon,.youtube .icon{position:absolute;height:auto;width:auto;top:50%;left:50%;transform:translate(-50%,-50%);color:#fff;opacity:.3;-webkit-transition:opacity .2s;transition:opacity .2s;z-index:0}.vimeo:hover .icon,.youtube:hover .icon{opacity:.6;-webkit-transition:opacity .2s;transition:opacity .2s}.slideshare .inner,.speakerdeck .inner{position:relative;width:100%}.slideshare .inner iframe,.speakerdeck .inner iframe{position:absolute;top:0;bottom:0;left:0;right:0;width:100%;height:100%}.geo-map{width:100%;height:250px}.markmap-container{height:300px}.markmap-container>svg{width:100%;height:100%}.MJX_Assistive_MathML{display:none}.ui-infobar{position:relative;z-index:2;max-width:758px;margin-top:25px;margin-bottom:-25px;color:#777}.toc .invisable-node{list-style-type:none}.ui-toc{position:fixed;bottom:20px;z-index:10000}.ui-toc-label{opacity:.9;background-color:#ccc;border:none}.ui-toc-label,.ui-toc .open .ui-toc-label{-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc .open .ui-toc-label{opacity:1;color:#5f5f5f}.ui-toc-label:focus{opacity:1;background-color:#ccc;color:#000}.ui-toc-label:hover{opacity:1;background-color:#ccc;-webkit-transition:opacity .2s;transition:opacity .2s}.ui-toc-dropdown{margin-top:23px;margin-bottom:20px;padding-left:10px;padding-right:10px;max-width:45vw;width:25vw;max-height:70vh;overflow:auto;text-align:inherit}.ui-toc-dropdown>.toc{max-height:calc(70vh - 100px);overflow:auto}.ui-toc-dropdown[dir=rtl] .nav{padding-right:0;letter-spacing:.0029em}.ui-toc-dropdown a{overflow:hidden;text-overflow:ellipsis;white-space:pre}.ui-toc-dropdown .nav>li>a{display:block;padding:4px 20px;font-size:13px;font-weight:500;color:#767676}.ui-toc-dropdown .nav>li:first-child:last-child>ul,.ui-toc-dropdown .toc.expand ul{display:block}.ui-toc-dropdown .nav>li>a:focus,.ui-toc-dropdown .nav>li>a:hover{padding-left:19px;color:#000;text-decoration:none;background-color:transparent;border-left:1px solid #000}.night .ui-toc-dropdown .nav>li>a:focus,.night .ui-toc-dropdown .nav>li>a:hover{color:#fff;border-left-color:#fff}.ui-toc-dropdown[dir=rtl] .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav>li>a:hover{padding-right:19px;border-left:none;border-right:1px solid #000}.ui-toc-dropdown .nav>.active:focus>a,.ui-toc-dropdown .nav>.active:hover>a,.ui-toc-dropdown .nav>.active>a{padding-left:18px;font-weight:700;color:#000;background-color:transparent;border-left:2px solid #000}.night .ui-toc-dropdown .nav>.active:focus>a,.night .ui-toc-dropdown .nav>.active:hover>a,.night .ui-toc-dropdown .nav>.active>a{color:#fff;border-left:2px solid #fff}.ui-toc-dropdown[dir=rtl] .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav>.active>a{padding-right:18px;border-left:none;border-right:2px solid #000}.ui-toc-dropdown .nav .nav{display:none;padding-bottom:10px}.ui-toc-dropdown .nav>.active>ul{display:block}.ui-toc-dropdown .nav .nav>li>a{padding-top:1px;padding-bottom:1px;padding-left:30px;font-size:12px;font-weight:400}.night .ui-toc-dropdown .nav>li>a{color:#aaa}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a{padding-right:30px}.ui-toc-dropdown .nav .nav>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:40px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a{padding-right:40px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:50px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a{padding-right:50px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a{padding-top:1px;padding-bottom:1px;padding-left:60px;font-size:12px;font-weight:400}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a{padding-right:60px}.ui-toc-dropdown .nav .nav>li>a:focus,.ui-toc-dropdown .nav .nav>li>a:hover{padding-left:29px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>a:hover{padding-right:29px}.ui-toc-dropdown .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>a:hover{padding-left:39px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>a:hover{padding-right:39px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>a:hover{padding-left:49px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>a:hover{padding-right:49px}.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-left:59px}.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:focus,.ui-toc-dropdown[dir=rtl] .nav .nav>li>ul>li>ul>li>ul>li>a:hover{padding-right:59px}.ui-toc-dropdown .nav .nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>a{padding-left:28px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>a{padding-right:28px}.ui-toc-dropdown .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>a{padding-left:38px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active:hover>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>a{padding-right:38px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>a{padding-left:48px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:48px}.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a,.ui-toc-dropdown .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active>a{padding-left:58px;font-weight:500}.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.active>.nav>.nav>.active>.nav>.active>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:focus>a,.ui-toc-dropdown[dir=rtl] .nav .nav>.active>.nav>.active>.nav>.active>.nav>.active:hover>a{padding-right:58px}.markdown-body[lang^=ja]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,Hiragino Kaku Gothic Pro,"\30D2\30E9\30AE\30CE\89D2\30B4   Pro W3",Osaka,Meiryo,"\30E1\30A4\30EA\30AA",MS Gothic,"\FF2D\FF33   \30B4\30B7\30C3\30AF",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang^=ja]{font-family:Source Sans Pro,Helvetica,Arial,Meiryo UI,MS PGothic,"\FF2D\FF33   \FF30\30B4\30B7\30C3\30AF",sans-serif}.markdown-body[lang=zh-tw]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang TC,Microsoft JhengHei,"\5FAE\8EDF\6B63\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-tw]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft JhengHei UI,"\5FAE\8EDF\6B63\9ED1UI",sans-serif}.markdown-body[lang=zh-cn]{font-family:-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Helvetica Neue,Helvetica,Arial,PingFang SC,Microsoft YaHei,"\5FAE\8F6F\96C5\9ED1",sans-serif,Apple Color Emoji,Segoe UI Emoji,Segoe UI Symbol}.ui-toc-dropdown[lang=zh-cn]{font-family:Source Sans Pro,Helvetica,Arial,Microsoft YaHei UI,"\5FAE\8F6F\96C5\9ED1UI",sans-serif}.ui-affix-toc{position:fixed;top:0;max-width:15vw;max-height:70vh;overflow:auto}.back-to-top,.expand-toggle,.go-to-bottom{display:block;padding:4px 10px;margin-top:10px;margin-left:10px;font-size:12px;font-weight:500;color:rgba(0,0,0,.85)}.back-to-top:focus,.back-to-top:hover,.expand-toggle:focus,.expand-toggle:hover,.go-to-bottom:focus,.go-to-bottom:hover{color:#563d7c;text-decoration:none}.back-to-top,.go-to-bottom{margin-top:0}.ui-user-icon{width:20px;height:20px;display:block;border-radius:3px;margin-top:2px;margin-bottom:2px;margin-right:5px;background-position:50%;background-repeat:no-repeat;background-size:contain}.ui-user-icon.small{width:18px;height:18px;display:inline-block;vertical-align:middle;margin:0 0 .2em}small span{line-height:22px}small .dropdown{display:inline-block}small .dropdown a:focus,small .dropdown a:hover{text-decoration:none}.unselectable{-moz-user-select:none;-khtml-user-select:none;-webkit-user-select:none;-o-user-select:none;user-select:none}.night .navbar{background:#333;border-bottom-color:#333;color:#eee}.night .navbar a{color:#eee}@media print{blockquote,div,img,pre,table{page-break-inside:avoid!important}a[href]:after{font-size:12px!important}}.markdown-body.slides{position:relative;z-index:1;color:#222}.markdown-body.slides:before{content:"";display:block;position:absolute;top:0;left:0;right:0;bottom:0;z-index:-1;background-color:currentColor;box-shadow:0 0 0 50vw}.markdown-body.slides section[data-markdown]{position:relative;margin-bottom:1.5em;background-color:#fff;text-align:center}.markdown-body.slides section[data-markdown] code{text-align:left}.markdown-body.slides section[data-markdown]:before{content:"";display:block;padding-bottom:56.23%}.markdown-body.slides section[data-markdown]>div:first-child{position:absolute;top:50%;left:1em;right:1em;transform:translateY(-50%);max-height:100%;overflow:hidden}.markdown-body.slides section[data-markdown]>ul{display:inline-block}.markdown-body.slides>section>section+section:after{content:"";position:absolute;top:-1.5em;right:1em;height:1.5em;border:3px solid #777}body{font-smoothing:subpixel-antialiased!important;-webkit-font-smoothing:subpixel-antialiased!important;-moz-osx-font-smoothing:auto!important;text-shadow:0 0 1em transparent,1px 1px 1.2px rgba(0,0,0,.004);-webkit-overflow-scrolling:touch;font-family:Source Sans Pro,Helvetica,Arial,sans-serif;letter-spacing:.025em}.focus,:focus{outline:none!important}::-moz-focus-inner{border:0!important}body.modal-open{overflow-y:auto;padding-right:0!important}
+    </style>
+    <!-- HTML5 shim and Respond.js for IE8 support of HTML5 elements and media queries -->
+    <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+    <!--[if lt IE 9]>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/html5shiv/3.7.3/html5shiv.min.js" integrity="sha256-3Jy/GbSLrg0o9y5Z5n1uw0qxZECH7C6OQpVBgNFYa0g=" crossorigin="anonymous"></script>
+    	<script src="https://cdnjs.cloudflare.com/ajax/libs/respond.js/1.4.2/respond.min.js" integrity="sha256-g6iAfvZp+nDQ2TdTR/VVKJf3bGro4ub5fvWSWVRi2NE=" crossorigin="anonymous"></script>
+		<script src="https://cdnjs.cloudflare.com/ajax/libs/es5-shim/4.5.9/es5-shim.min.js" integrity="sha256-8E4Is26QH0bD52WoQpcB+R/tcWQtpzlCojrybUd7Mxo=" crossorigin="anonymous"></script>
+    <![endif]-->
+</head>
+
+<body>
+    <div id="doc" class="markdown-body container-fluid" lang="en"><h1 id="BS---Assignment-6---Spark-ML"><a class="anchor hidden-xs" href="#BS---Assignment-6---Spark-ML" title="BS---Assignment-6---Spark-ML"><i class="fa fa-link"></i></a>BS - Assignment 6 - Spark ML</h1><p><strong>Course:</strong> Intro to Big Data - IU S24<br>
+<strong>Author:</strong> Firas Jolha<br>
+<strong>Date:</strong> May 3<br>
+<strong>Duration:</strong> 85 minutes + 5 minutes for submission<br>
+<strong>Start time:</strong> 15:30</p><h1 id="Choices-form"><a class="anchor hidden-xs" href="#Choices-form" title="Choices-form"><i class="fa fa-link"></i></a>Choices form</h1><ul>
+<li><a href="https://form.everestwebdeals.co/?form=1c535b3ea89f1bfcc3f592804c0009ce" target="_blank" rel="noopener">Assignment 06 - Spark ML</a>
+<ul>
+<li>Submit your choices here.</li>
+</ul>
+</li>
+</ul><h1 id="Choices-sheet"><a class="anchor hidden-xs" href="#Choices-sheet" title="Choices-sheet"><i class="fa fa-link"></i></a>Choices sheet</h1><ul>
+<li><a href="https://docs.google.com/spreadsheets/d/16A-OKI32oxfkAHJJHkW074DEspr27zwrrRYj68Osv70/edit?usp=sharing" target="_blank" rel="noopener">Assignment 06 - Spark ML</a>
+<ul>
+<li>Check your choices here.</li>
+</ul>
+</li>
+</ul><h1 id="Moodle-Submission"><a class="anchor hidden-xs" href="#Moodle-Submission" title="Moodle-Submission"><i class="fa fa-link"></i></a>Moodle Submission</h1><ul>
+<li><a href="https://moodle.innopolis.university/mod/assign/view.php?id=110109" target="_blank" rel="noopener">Assignment 06</a></li>
+</ul><h1 id="Colab-Notebook-template"><a class="anchor hidden-xs" href="#Colab-Notebook-template" title="Colab-Notebook-template"><i class="fa fa-link"></i></a>Colab Notebook template</h1><ul>
+<li><a href="https://colab.research.google.com/drive/1vzBE1I5u9v2vd8nbQmyuUc9VuOu1DK-K?usp=sharing" target="_blank" rel="noopener">Assignment06.Spark.ML.ipynb</a></li>
+</ul><h1 id="Agenda"><a class="anchor hidden-xs" href="#Agenda" title="Agenda"><i class="fa fa-link"></i></a>Agenda</h1><p></p><div class="toc"><ul>
+<li><a href="#BS---Assignment-6---Spark-ML" title="BS - Assignment 6 - Spark ML">BS - Assignment 6 - Spark ML</a></li>
+<li><a href="#Choices-form" title="Choices form">Choices form</a></li>
+<li><a href="#Choices-sheet" title="Choices sheet">Choices sheet</a></li>
+<li><a href="#Moodle-Submission" title="Moodle Submission">Moodle Submission</a></li>
+<li><a href="#Colab-Notebook-template" title="Colab Notebook template">Colab Notebook template</a></li>
+<li><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li><a href="#Data-Description" title="Data Description">Data Description</a><ul>
+<li><a href="#Dataset-1---Classification-task---Estimation-of-Obesity-Levels-Based-On-Eating-Habits-and-Physical-Condition" title="Dataset #1 - Classification task - Estimation of Obesity Levels Based On Eating Habits and Physical Condition.">Dataset #1 - Classification task - Estimation of Obesity Levels Based On Eating Habits and Physical Condition.</a></li>
+<li><a href="#Dataset-2---Regression-task---Solar-Flare" title="Dataset #2 - Regression task - Solar Flare">Dataset #2 - Regression task - Solar Flare</a></li>
+<li><a href="#Dataset-3---Classification-task---Fertility" title="Dataset #3 - Classification task - Fertility">Dataset #3 - Classification task - Fertility</a></li>
+<li><a href="#Dataset-4---Regression-task---Wine-Quality" title="Dataset #4 - Regression task - Wine Quality">Dataset #4 - Regression task - Wine Quality</a></li>
+<li><a href="#Dataset-5---Regression-task---Abalone" title="Dataset #5 - Regression task - Abalone">Dataset #5 - Regression task - Abalone</a></li>
+<li><a href="#Dataset-6---Classification-task---AI4I-2020-Predictive-Maintenance-Dataset" title="Dataset #6 - Classification task - AI4I 2020 Predictive Maintenance Dataset">Dataset #6 - Classification task - AI4I 2020 Predictive Maintenance Dataset</a></li>
+<li><a href="#Dataset-7---Regression-task---Metro-Interstate-Traffic-Volume" title="Dataset #7 - Regression task - Metro Interstate Traffic Volume">Dataset #7 - Regression task - Metro Interstate Traffic Volume</a></li>
+<li><a href="#Dataset-8---Classification-task---Website-Phishing" title="Dataset #8 - Classification task - Website Phishing">Dataset #8 - Classification task - Website Phishing</a></li>
+</ul>
+</li>
+<li><a href="#Instructions" title="Instructions">Instructions</a></li>
+<li><a href="#Exercises" title="Exercises">Exercises</a></li>
+</ul>
+</div><p></p><h1 id="Prerequisites"><a class="anchor hidden-xs" href="#Prerequisites" title="Prerequisites"><i class="fa fa-link"></i></a>Prerequisites</h1><ul>
+<li>A Google account to run tasks on Google Colab notebooks.</li>
+</ul><h1 id="Data-Description"><a class="anchor hidden-xs" href="#Data-Description" title="Data-Description"><i class="fa fa-link"></i></a>Data Description</h1><p>Here you can see the description of each dataset. Please, notice that <strong>when you select a dataset, you are also selecting an ML task</strong>.</p><h2 id="Dataset-1---Classification-task---Estimation-of-Obesity-Levels-Based-On-Eating-Habits-and-Physical-Condition"><a class="anchor hidden-xs" href="#Dataset-1---Classification-task---Estimation-of-Obesity-Levels-Based-On-Eating-Habits-and-Physical-Condition" title="Dataset-1---Classification-task---Estimation-of-Obesity-Levels-Based-On-Eating-Habits-and-Physical-Condition"><i class="fa fa-link"></i></a>Dataset #1 - Classification task - Estimation of Obesity Levels Based On Eating Habits and Physical Condition.</h2><center>
+<p><img src="https://storage.googleapis.com/kaggle-datasets-images/1788798/2918196/892c16066d401e9ea3df71dd4d000133/dataset-card.jpg?t=2024-02-15-16-48-24" alt="" width="200" height="200" class="md-image md-image"></p>
+</center><ul>
+<li>You can check the data description in:<br>
+<a href="https://archive.ics.uci.edu/dataset/544/estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition" target="_blank" rel="noopener">https://archive.ics.uci.edu/dataset/544/estimation+of+obesity+levels+based+on+eating+habits+and+physical+condition</a></li>
+<li>Direct link to the <code>data.csv</code>
+<ul>
+<li><a href="https://archive.ics.uci.edu/static/public/544/data.csv" target="_blank" rel="noopener">https://archive.ics.uci.edu/static/public/544/data.csv</a></li>
+</ul>
+</li>
+<li>Target
+<ul>
+<li>NObeyesdad
+<ul>
+<li>Categorical</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Input features
+<ul>
+<li>Categorical
+<ul>
+<li>Gender</li>
+<li>family_history_with_overweight</li>
+<li>FAVC</li>
+<li>CAEC</li>
+<li>SMOKE</li>
+<li>SCC</li>
+<li>CALC</li>
+<li>MTRANS</li>
+</ul>
+</li>
+<li>Numerical
+<ul>
+<li>Age</li>
+<li>Height</li>
+<li>Weight</li>
+<li>FCVC</li>
+<li>NCP</li>
+<li>CH2O</li>
+<li>FAF</li>
+<li>TUE</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Dropped columns
+<ul>
+<li><em>None</em></li>
+</ul>
+</li>
+</ul><h2 id="Dataset-2---Regression-task---Solar-Flare"><a class="anchor hidden-xs" href="#Dataset-2---Regression-task---Solar-Flare" title="Dataset-2---Regression-task---Solar-Flare"><i class="fa fa-link"></i></a>Dataset #2 - Regression task - Solar Flare</h2><center>
+<p><img src="https://archive.ics.uci.edu/static/public/89/Thumbnails/Large.jpg?155" alt="" class="md-image md-image"></p>
+</center><ul>
+<li>You can check the data description in:
+<ul>
+<li><a href="https://archive.ics.uci.edu/dataset/89/solar+flare" target="_blank" rel="noopener">https://archive.ics.uci.edu/dataset/89/solar+flare</a></li>
+</ul>
+</li>
+<li>Direct link to the <code>data.csv</code>
+<ul>
+<li><a href="https://archive.ics.uci.edu/static/public/89/data.csv" target="_blank" rel="noopener">https://archive.ics.uci.edu/static/public/89/data.csv</a></li>
+</ul>
+</li>
+<li>Target
+<ul>
+<li>common flares
+<ul>
+<li>Numerical</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Input features
+<ul>
+<li>Categorical
+<ul>
+<li>modified Zurich class</li>
+<li>largest spot size</li>
+<li>spot distribution</li>
+<li>activity</li>
+<li>evolution</li>
+<li>previous 24 hour flare activity</li>
+<li>historically-complex</li>
+<li>became complex on this pass</li>
+<li>area</li>
+<li>area of largest spot</li>
+</ul>
+</li>
+<li>Numerical
+<ul>
+<li><em>None</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Dropped columns
+<ul>
+<li>severe flares</li>
+<li>moderate flares</li>
+</ul>
+</li>
+</ul><h2 id="Dataset-3---Classification-task---Fertility"><a class="anchor hidden-xs" href="#Dataset-3---Classification-task---Fertility" title="Dataset-3---Classification-task---Fertility"><i class="fa fa-link"></i></a>Dataset #3 - Classification task - Fertility</h2><center>
+<p><img src="https://media.springernature.com/lw1200/springer-static/image/art%3A10.1038%2Fs41585-022-00626-w/MediaObjects/41585_2022_626_Fig1_HTML.png" alt="" width="200" height="200" class="md-image md-image"></p>
+</center><ul>
+<li>You can check the data description in:
+<ul>
+<li><a href="https://archive.ics.uci.edu/dataset/244/fertility" target="_blank" rel="noopener">https://archive.ics.uci.edu/dataset/244/fertility</a></li>
+</ul>
+</li>
+<li>Direct link to the <code>data.csv</code>
+<ul>
+<li><a href="https://archive.ics.uci.edu/static/public/244/data.csv" target="_blank" rel="noopener">https://archive.ics.uci.edu/static/public/244/data.csv</a></li>
+</ul>
+</li>
+<li>Target
+<ul>
+<li>diagnosis
+<ul>
+<li>Categorical</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Input features
+<ul>
+<li>Categorical
+<ul>
+<li>season</li>
+<li>child_diseases</li>
+<li>accident</li>
+<li>surgical_intervention</li>
+<li>high_fevers</li>
+<li>alcohol</li>
+<li>smoking</li>
+</ul>
+</li>
+<li>Numerical
+<ul>
+<li>age</li>
+<li>hrs_sitting</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Dropped columns
+<ul>
+<li><em>None</em></li>
+</ul>
+</li>
+</ul><div class="alert alert-info">
+<p>Note that the features in this dataset are normalized.</p>
+</div><h2 id="Dataset-4---Regression-task---Wine-Quality"><a class="anchor hidden-xs" href="#Dataset-4---Regression-task---Wine-Quality" title="Dataset-4---Regression-task---Wine-Quality"><i class="fa fa-link"></i></a>Dataset #4 - Regression task - Wine Quality</h2><center>
+<p><img src="https://archive.ics.uci.edu/static/public/186/Thumbnails/Large.jpg?259" alt="" class="md-image md-image"></p>
+</center><ul>
+<li>You can check the data description in:
+<ul>
+<li><a href="https://archive.ics.uci.edu/dataset/186/wine+quality" target="_blank" rel="noopener">https://archive.ics.uci.edu/dataset/186/wine+quality</a></li>
+</ul>
+</li>
+<li>Direct link to the <code>data.csv</code>
+<ul>
+<li><a href="https://archive.ics.uci.edu/static/public/186/data.csv" target="_blank" rel="noopener">https://archive.ics.uci.edu/static/public/186/data.csv</a></li>
+</ul>
+</li>
+<li>Target
+<ul>
+<li>quality
+<ul>
+<li>Numerical</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Input features
+<ul>
+<li>Categorical
+<ul>
+<li>color</li>
+</ul>
+</li>
+<li>Numerical
+<ul>
+<li>fixed_acidity</li>
+<li>volatile_acidity</li>
+<li>citric_acid</li>
+<li>residual_sugar</li>
+<li>chlorides</li>
+<li>free_sulfur_dioxide</li>
+<li>total_sulfur_dioxide</li>
+<li>density</li>
+<li>pH</li>
+<li>sulphates</li>
+<li>alcohol</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Dropped columns
+<ul>
+<li><em>None</em></li>
+</ul>
+</li>
+</ul><h2 id="Dataset-5---Regression-task---Abalone"><a class="anchor hidden-xs" href="#Dataset-5---Regression-task---Abalone" title="Dataset-5---Regression-task---Abalone"><i class="fa fa-link"></i></a>Dataset #5 - Regression task - Abalone</h2><center>
+<p><img src="https://archive.ics.uci.edu/static/public/1/Thumbnails/Large.jpg?71" alt="" class="md-image md-image"></p>
+</center><ul>
+<li>You can check the data description in:
+<ul>
+<li><a href="https://archive.ics.uci.edu/dataset/1/abalone" target="_blank" rel="noopener">https://archive.ics.uci.edu/dataset/1/abalone</a></li>
+</ul>
+</li>
+<li>Direct link to the <code>data.csv</code>
+<ul>
+<li><a href="https://archive.ics.uci.edu/static/public/1/data.csv" target="_blank" rel="noopener">https://archive.ics.uci.edu/static/public/1/data.csv</a></li>
+</ul>
+</li>
+<li>Target
+<ul>
+<li>Rings
+<ul>
+<li>Numerical</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Input features
+<ul>
+<li>Categorical
+<ul>
+<li>Sex</li>
+</ul>
+</li>
+<li>Numerical
+<ul>
+<li>Length</li>
+<li>Diameter</li>
+<li>Height</li>
+<li>Whole_weight</li>
+<li>Shucked_weight</li>
+<li>Viscera_weight</li>
+<li>Shell_weight</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Dropped columns
+<ul>
+<li><em>None</em></li>
+</ul>
+</li>
+</ul><h2 id="Dataset-6---Classification-task---AI4I-2020-Predictive-Maintenance-Dataset"><a class="anchor hidden-xs" href="#Dataset-6---Classification-task---AI4I-2020-Predictive-Maintenance-Dataset" title="Dataset-6---Classification-task---AI4I-2020-Predictive-Maintenance-Dataset"><i class="fa fa-link"></i></a>Dataset #6 - Classification task - AI4I 2020 Predictive Maintenance Dataset</h2><center>
+<p><img src="https://7834705.fs1.hubspotusercontent-na1.net/hubfs/7834705/Predictive%20Maintenance.jpg" alt="" width="250" height="150" class="md-image md-image"></p>
+</center><ul>
+<li>You can check the data description in:
+<ul>
+<li><a href="https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset" target="_blank" rel="noopener">https://archive.ics.uci.edu/dataset/601/ai4i+2020+predictive+maintenance+dataset</a></li>
+</ul>
+</li>
+<li>Direct link to the <code>data.csv</code>
+<ul>
+<li><a href="https://archive.ics.uci.edu/static/public/601/data.csv" target="_blank" rel="noopener">https://archive.ics.uci.edu/static/public/601/data.csv</a></li>
+</ul>
+</li>
+<li>Target
+<ul>
+<li>Machine failure
+<ul>
+<li>Categorical</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Input features
+<ul>
+<li>Categorical
+<ul>
+<li>Type</li>
+<li>Product ID</li>
+</ul>
+</li>
+<li>Numerical
+<ul>
+<li>Air temperature</li>
+<li>Process temperature</li>
+<li>Rotational speed</li>
+<li>Torque</li>
+<li>Tool wear</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Dropped columns
+<ul>
+<li>TWF</li>
+<li>HDF</li>
+<li>PWF</li>
+<li>OSF</li>
+<li>RNF</li>
+<li>UID</li>
+</ul>
+</li>
+</ul><h2 id="Dataset-7---Regression-task---Metro-Interstate-Traffic-Volume"><a class="anchor hidden-xs" href="#Dataset-7---Regression-task---Metro-Interstate-Traffic-Volume" title="Dataset-7---Regression-task---Metro-Interstate-Traffic-Volume"><i class="fa fa-link"></i></a>Dataset #7 - Regression task - Metro Interstate Traffic Volume</h2><center>
+<p><img src="https://storage.googleapis.com/kaggle-datasets-images/4169612/7207127/c1ae22ec804f4d1481f35f45e39b2735/dataset-card.jpg?t=2023-12-15-07-56-14" alt="" width="250" height="250" class="md-image md-image"></p>
+</center><ul>
+<li>You can check the data description in:
+<ul>
+<li><a href="https://archive.ics.uci.edu/dataset/492/metro+interstate+traffic+volume" target="_blank" rel="noopener">https://archive.ics.uci.edu/dataset/492/metro+interstate+traffic+volume</a></li>
+</ul>
+</li>
+<li>Direct link to the <code>data.csv</code>
+<ul>
+<li><a href="https://archive.ics.uci.edu/static/public/492/data.csv" target="_blank" rel="noopener">https://archive.ics.uci.edu/static/public/492/data.csv</a></li>
+</ul>
+</li>
+<li>Target
+<ul>
+<li>traffic_volume
+<ul>
+<li>Numerical</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Input features
+<ul>
+<li>Categorical
+<ul>
+<li>holiday</li>
+<li>weather_main</li>
+<li>weather_description</li>
+</ul>
+</li>
+<li>Numerical
+<ul>
+<li>temp</li>
+<li>rain_1h</li>
+<li>snow_1h</li>
+<li>clouds_all</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Dropped columns
+<ul>
+<li>date_time</li>
+</ul>
+</li>
+</ul><h2 id="Dataset-8---Classification-task---Website-Phishing"><a class="anchor hidden-xs" href="#Dataset-8---Classification-task---Website-Phishing" title="Dataset-8---Classification-task---Website-Phishing"><i class="fa fa-link"></i></a>Dataset #8 - Classification task - Website Phishing</h2><center>
+<p><img src="https://cdn.activestate.com/wp-content/uploads/2021/02/phishing-detection-with-Python.jpg" alt="" width="300" height="200" class="md-image md-image"></p>
+</center><ul>
+<li>
+<p>You can check the data description in:</p>
+<ul>
+<li><a href="https://archive.ics.uci.edu/dataset/379/website+phishing" target="_blank" rel="noopener">https://archive.ics.uci.edu/dataset/379/website+phishing</a></li>
+</ul>
+</li>
+<li>
+<p>Direct link to the <code>data.csv</code></p>
+<ul>
+<li><a href="https://archive.ics.uci.edu/static/public/379/data.csv" target="_blank" rel="noopener">https://archive.ics.uci.edu/static/public/379/data.csv</a></li>
+</ul>
+</li>
+<li>
+<p>Target</p>
+<ul>
+<li>Result
+<ul>
+<li>Categorical</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Input features</p>
+<ul>
+<li>Categorical
+<ul>
+<li>SFH</li>
+<li>popUpWindow</li>
+<li>SSLfinal_State</li>
+<li>Request_URL</li>
+<li>URL_of_Anchor</li>
+<li>web_traffic</li>
+<li>URL_Length</li>
+<li>age_of_domain</li>
+<li>having_IP_Address</li>
+</ul>
+</li>
+<li>Numerical
+<ul>
+<li><em>None</em></li>
+</ul>
+</li>
+</ul>
+</li>
+<li>
+<p>Dropped columns</p>
+<ul>
+<li><em>None</em></li>
+</ul>
+</li>
+</ul><div class="alert alert-info">
+<p>Note that the features in this dataset are anonymized.</p>
+</div><h1 id="Instructions"><a class="anchor hidden-xs" href="#Instructions" title="Instructions"><i class="fa fa-link"></i></a>Instructions</h1><p>This assignment will be dedicated to test on using Apache Spark machine learning libraries. For this task, you can use the legacy RDD-based MLlib in <code>pyspark.mllib</code> and DataFrame-based MLlib <code>pyspark.ml</code> for Python. you need to work on Spark ML. You need to download your dataset, and analyze it using Spark ML libraries.</p><center>
+<p><img src="https://media.dev.to/cdn-cgi/image/width=1000,height=420,fit=cover,gravity=auto,format=auto/https%3A%2F%2Fdev-to-uploads.s3.amazonaws.com%2Fi%2Fppxg39pv9m9g2cnafr5g.png" alt="Spark ML" width="300" height="150" class="md-image md-image"></p>
+</center><p>You will prepare a Colab notebook with analysis results.</p><div class="alert alert-danger">
+<p><strong>Important note:</strong> The cells of the notebook should be executed and should have output. The cells which do not have an output or not executed or edited but not executed again will <strong>not</strong> be evaluated.</p>
+<p>Each cell should have at least an execution order and an output (if  gives an output).</p>
+</div><p>You need to submit only the Colab notebook to Moodle.</p><p>The total points for this assignment will be 150. The 50 points above 100 are considered as extra points and can be used only for compensating assignment and test grades as follows:<br>
+<span class="mathjax"><span class="MathJax_Preview" style="color: inherit;"></span><div class="MathJax_Display" style="text-align: center;"><span class="MathJax" id="MathJax-Element-167-Frame" tabindex="0" data-mathml="<math xmlns=&quot;http://www.w3.org/1998/Math/MathML&quot; display=&quot;block&quot;><mtext>labs total</mtext><mo>=</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy=&quot;false&quot;>(</mo><mn>35</mn><mo>,</mo><mtext>labs total</mtext><mo>+</mo><mfrac><mrow><mtext>your extra points</mtext><mo>&amp;#x2217;</mo><mn>6</mn></mrow><mn>100</mn></mfrac><mo stretchy=&quot;false&quot;>)</mo></math>" role="presentation" style="text-align: center; position: relative;"><nobr aria-hidden="true"><span class="math" id="MathJax-Span-2919" style="width: 27.804em; display: inline-block;"><span style="display: inline-block; position: relative; width: 23.979em; height: 0px; font-size: 116%;"><span style="position: absolute; clip: rect(0.865em, 1023.87em, 3.235em, -999.997em); top: -2.368em; left: 0em;"><span class="mrow" id="MathJax-Span-2920"><span class="mtext" id="MathJax-Span-2921" style="font-family: MathJax_Main;">labs total</span><span class="mo" id="MathJax-Span-2922" style="font-family: MathJax_Main; padding-left: 0.272em;">=</span><span class="mi" id="MathJax-Span-2923" style="font-family: MathJax_Math-italic; padding-left: 0.272em;">m</span><span class="mi" id="MathJax-Span-2924" style="font-family: MathJax_Math-italic;">a</span><span class="mi" id="MathJax-Span-2925" style="font-family: MathJax_Math-italic;">x</span><span class="mo" id="MathJax-Span-2926" style="font-family: MathJax_Main;">(</span><span class="mn" id="MathJax-Span-2927" style="font-family: MathJax_Main;">35</span><span class="mo" id="MathJax-Span-2928" style="font-family: MathJax_Main;">,</span><span class="mtext" id="MathJax-Span-2929" style="font-family: MathJax_Main; padding-left: 0.164em;">labs total</span><span class="mo" id="MathJax-Span-2930" style="font-family: MathJax_Main; padding-left: 0.218em;">+</span><span class="mfrac" id="MathJax-Span-2931" style="padding-left: 0.218em;"><span style="display: inline-block; position: relative; width: 8.947em; height: 0px; margin-right: 0.11em; margin-left: 0.11em;"><span style="position: absolute; clip: rect(3.182em, 1008.78em, 4.367em, -999.997em); top: -4.685em; left: 50%; margin-left: -4.415em;"><span class="mrow" id="MathJax-Span-2932"><span class="mtext" id="MathJax-Span-2933" style="font-family: MathJax_Main;">your extra points</span><span class="mo" id="MathJax-Span-2934" style="font-family: MathJax_Main; padding-left: 0.218em;">∗</span><span class="mn" id="MathJax-Span-2935" style="font-family: MathJax_Main; padding-left: 0.218em;">6</span></span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(3.182em, 1001.46em, 4.151em, -999.997em); top: -3.284em; left: 50%; margin-left: -0.752em;"><span class="mn" id="MathJax-Span-2936" style="font-family: MathJax_Main;">100</span><span style="display: inline-block; width: 0px; height: 3.99em;"></span></span><span style="position: absolute; clip: rect(0.865em, 1008.95em, 1.242em, -999.997em); top: -1.29em; left: 0em;"><span style="display: inline-block; overflow: hidden; vertical-align: 0em; border-top: 1.3px solid; width: 8.947em; height: 0px;"></span><span style="display: inline-block; width: 0px; height: 1.08em;"></span></span></span></span><span class="mo" id="MathJax-Span-2937" style="font-family: MathJax_Main;">)</span></span><span style="display: inline-block; width: 0px; height: 2.373em;"></span></span></span><span style="display: inline-block; overflow: hidden; vertical-align: -0.872em; border-left: 0px solid; width: 0px; height: 2.503em;"></span></span></nobr><span class="MJX_Assistive_MathML MJX_Assistive_MathML_Block" role="presentation"><math xmlns="http://www.w3.org/1998/Math/MathML" display="block"><mtext>labs total</mtext><mo>=</mo><mi>m</mi><mi>a</mi><mi>x</mi><mo stretchy="false">(</mo><mn>35</mn><mo>,</mo><mtext>labs total</mtext><mo>+</mo><mfrac><mrow><mtext>your extra points</mtext><mo>∗</mo><mn>6</mn></mrow><mn>100</mn></mfrac><mo stretchy="false">)</mo></math></span></span></div><script type="math/tex; mode=display" id="MathJax-Element-167">\text{labs total} = max(35, \text{labs total}+\frac{\text{your extra points} * 6}{100})</script></span></p><div class="alert alert-danger">
+<p><strong>Note:</strong> The test is individual and the student is <strong>NOT</strong> allowed to copy from their colleagues nor from AI-based support tools like chatgpt. The <em>plagiarism detection</em> will be strictly applied in this assignment.</p>
+</div><div class="alert alert-danger">
+<p><b>NOTE:</b></p>
+<blockquote>
+<p><i style="color:red;"> Proof of implementation </i></p>
+<blockquote>
+<p>Such BLOCK outlines the results of the task that need to be presented as an evidence for grading purposes. They need to be followed as part of the tasks.</p>
+</blockquote>
+</blockquote>
+</div><div class="alert alert-danger">
+<p><strong>Note:</strong> Perform the exercises based on your selected choices. Working on different choices than what you select will evaluate your work to zero grade.</p>
+</div><h1 id="Exercises"><a class="anchor hidden-xs" href="#Exercises" title="Exercises"><i class="fa fa-link"></i></a>Exercises</h1><div class="alert alert-danger">
+<p><strong>Note: Make sure that you submitted your choices before you start the exercises.</strong></p>
+</div><div class="alert alert-success">
+<p><strong>Note: You have to use here only Pyspark APIs. Using other packages which operate on single machines or cores are not allowed.</strong></p>
+<ol>
+<li><strong>[5 points - 5 mins] Data loading</strong>
+<ul>
+<li>Download the data.</li>
+<li>Read the data as spark dataframe. You can define a schema as you prefer.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><i style="color:red;"> Proof of implementation </i></p>
+<blockquote>
+<ol>
+<li>Show the size of the dataframe (rows and columns).</li>
+<li>Show the schema of the dataframe after reading.</li>
+<li>Show first 10 samples of the dataframe.</li>
+</ol>
+</blockquote>
+</blockquote>
+<ol start="2">
+<li><strong>[20 points - 15 mins] Feature extraction</strong>
+<ul>
+<li>Remove data samples which contain null/empty values in any column.</li>
+<li>Check the description of your dataset to know which features are categorical and which are numerical and which should be dropped.</li>
+<li>Extract the categorical and numerical input features. Extract the output feature (target).</li>
+<li>Build a pipeline to:
+<ul>
+<li>encode categorical features using one hot encoder. You can use other feature transformers like string indexer or vector indexer…etc before or after one hot encoding.</li>
+<li>Scale all encoded features (including numerical features) using the scaler you selected.</li>
+<li>After encoding features, assemble all encoded features in <code>features</code> column and store the labels in <code>label</code> column.</li>
+</ul>
+</li>
+<li>Save the pipeline to the disk in <code>pipeline</code> folder.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><i style="color:red;"> Proof of implementation </i></p>
+<blockquote>
+<ol>
+<li>Show how many samples you dropped from the dataset.</li>
+<li>Show the features and which are categorical and which are numerical.</li>
+<li>Show first 10 samples of the dataframe with the selected features.</li>
+<li>Show all input and output columns for the first 10 samples of the dataframe after running the pipeline. Make sure that the dataframe contains all output and input columns for each stage in the pipeline.</li>
+</ol>
+</blockquote>
+</blockquote>
+<ol start="3">
+<li><strong>[30 points - 10 mins] ML modeling</strong>
+<ul>
+<li>Split the dataset into train and test data. Use your best split ratio for the data you have.</li>
+<li>Build a model you selected.</li>
+<li>Train the model using the train data.</li>
+<li>Predict for the whole test data.</li>
+<li>Evaluate the performance of your model using the whole test data.
+<ul>
+<li>You should use the following performance metrics (<a href="https://spark.apache.org/docs/latest/mllib-evaluation-metrics.html" target="_blank" rel="noopener">reference</a>):
+<ul>
+<li>Accuracy and F1 for multiclass classification tasks</li>
+<li>Area Under ROC and Area Under PR for binary classification tasks.</li>
+<li>RMSE and R2 for regression tasks.</li>
+</ul>
+</li>
+</ul>
+</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><i style="color:red;"> Proof of implementation </i></p>
+<blockquote>
+<ol>
+<li>Show split ratio, the size of both train and test data.</li>
+<li>Show the first 10 samples of prediction dataframe.</li>
+<li>Show the performance of your model. You need to show two performance metrics.</li>
+</ol>
+</blockquote>
+</blockquote>
+<ol start="4">
+<li><strong>[25 points - 15 mins] Hyperparameter Optimization</strong>
+<ul>
+<li>Select two hyperparameters related to the model you selected and optimize them.</li>
+<li>Use a grid search to find the optimized values for the hyper-params.</li>
+<li>Use at least two values for each hyper-param.</li>
+<li>Use k&gt;2 folds for cross validation.</li>
+<li>Get the best model.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><i style="color:red;"> Proof of implementation </i></p>
+<blockquote>
+<ol>
+<li>Show the hyperparameters selected and their range of values for the grid search.</li>
+<li>Show the values of hyperparameters after the grid search.</li>
+</ol>
+</blockquote>
+</blockquote>
+<ol start="5">
+<li><strong>[10 points - 5 mins] Evaluation</strong>
+<ul>
+<li>Evaluate the performance of your best model using the test data.
+<ul>
+<li>You should use the following performance metrics (<a href="https://spark.apache.org/docs/latest/mllib-evaluation-metrics.html" target="_blank" rel="noopener">reference</a>):
+<ul>
+<li>Accuracy and F1 for multiclass classification tasks</li>
+<li>Area Under ROC and Area Under PR for binary classification tasks.</li>
+<li>RMSE and R2 for regression tasks.</li>
+</ul>
+</li>
+</ul>
+</li>
+<li>Compare it with your first model. Make sure that the performance here is improved.</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><i style="color:red;"> Proof of implementation </i></p>
+<blockquote>
+<ol>
+<li>Show the performance of your best model. You need to show two performance metrics.</li>
+<li>Show the performance of both models (the first and best ones) and show the difference before and after optimization for each metric.</li>
+</ol>
+</blockquote>
+</blockquote>
+<ol start="6">
+<li><strong>[60 points - 35 mins] Questions:</strong> Without overwriting the source code in the previous sections, you need to provide response for the following questions as a text answer and an implementation for the answer. You need to add new source code and do not edit or overwrite the code before this section. You can use the variables you defined before in this section.
+<h4 id="A-15-points---10-mins-How-you-can-increase-the-performance-of-the-best-model-by-making-changes-in-the-feature-extraction-step-Perform-some-changes-which-can-increase-the-performance-of-the-model-Here-we-consider-that-you-have-the-freedom-to-use-any-feature-transformers"><a class="anchor hidden-xs" href="#A-15-points---10-mins-How-you-can-increase-the-performance-of-the-best-model-by-making-changes-in-the-feature-extraction-step-Perform-some-changes-which-can-increase-the-performance-of-the-model-Here-we-consider-that-you-have-the-freedom-to-use-any-feature-transformers" title="A-15-points---10-mins-How-you-can-increase-the-performance-of-the-best-model-by-making-changes-in-the-feature-extraction-step-Perform-some-changes-which-can-increase-the-performance-of-the-model-Here-we-consider-that-you-have-the-freedom-to-use-any-feature-transformers"><i class="fa fa-link"></i></a>A. [15 points - 10 mins] How you can increase the performance of the best model by making changes in the feature extraction step? Perform some changes which can increase the performance of the model. Here, we consider that you have the freedom to use any feature transformers.</h4>
+<ul>
+<li>Add the code to make such changes and build only one new model and evaluate it.</li>
+<li>Make sure that these changes improve the model performance.</li>
+</ul>
+<h4 id="B-15-points---5-mins-Which-features-are-highly-correlated-with-the-target-Select-the-top-5-most-correlated-input-features-with-the-target"><a class="anchor hidden-xs" href="#B-15-points---5-mins-Which-features-are-highly-correlated-with-the-target-Select-the-top-5-most-correlated-input-features-with-the-target" title="B-15-points---5-mins-Which-features-are-highly-correlated-with-the-target-Select-the-top-5-most-correlated-input-features-with-the-target"><i class="fa fa-link"></i></a>B. [15 points - 5 mins] Which features are highly correlated with the target? Select the top 5 most correlated  input features with the target.</h4>
+<ul>
+<li>Add the relevant code.</li>
+<li>You apply the correlation on the features before encoding step.</li>
+<li>If the feature is numerical then you use <code>pearson</code> correlation, whereas we use <code>spearman</code> correlation for categorical features. Check <a href="https://spark.apache.org/docs/latest/api/python/reference/api/pyspark.ml.stat.Correlation.html" target="_blank" rel="noopener">docs</a> for more info.</li>
+</ul>
+<h4 id="C-15-points---10-mins-Perform-PCA-select-1ltklt6-on-the-whole-dataset-excluding-the-target-and-dropped-features-and-calculate-the-explained-variance-after-PCA-What-do-you-conclude"><a class="anchor hidden-xs" href="#C-15-points---10-mins-Perform-PCA-select-1ltklt6-on-the-whole-dataset-excluding-the-target-and-dropped-features-and-calculate-the-explained-variance-after-PCA-What-do-you-conclude" title="C-15-points---10-mins-Perform-PCA-select-1ltklt6-on-the-whole-dataset-excluding-the-target-and-dropped-features-and-calculate-the-explained-variance-after-PCA-What-do-you-conclude"><i class="fa fa-link"></i></a>C. [15 points - 10 mins] Perform PCA (select 1&lt;k&lt;6) on the whole dataset excluding the target and dropped features and calculate the explained variance after PCA. What do you conclude?</h4>
+<ul>
+<li>Add the relevant code.</li>
+<li>You can use the encoded features.</li>
+</ul>
+<h4 id="D-15-points---10-mins-How-to-increase-the-speed-of-training-in-spark-ml-Specify-what-change-you-have-to-make-to-the-code-Train-two-models-for-this-purpose-and-measure-their-execution-time-using-the-magic-command-time-if-you-do-not-know-it-here-are-some-examples-Justify-the-change-why-are-you-getting-such-different-execution-times"><a class="anchor hidden-xs" href="#D-15-points---10-mins-How-to-increase-the-speed-of-training-in-spark-ml-Specify-what-change-you-have-to-make-to-the-code-Train-two-models-for-this-purpose-and-measure-their-execution-time-using-the-magic-command-time-if-you-do-not-know-it-here-are-some-examples-Justify-the-change-why-are-you-getting-such-different-execution-times" title="D-15-points---10-mins-How-to-increase-the-speed-of-training-in-spark-ml-Specify-what-change-you-have-to-make-to-the-code-Train-two-models-for-this-purpose-and-measure-their-execution-time-using-the-magic-command-time-if-you-do-not-know-it-here-are-some-examples-Justify-the-change-why-are-you-getting-such-different-execution-times"><i class="fa fa-link"></i></a>D. [15 points - 10 mins] How to increase the speed of training in spark ml? Specify what change you have to make to the code. Train two models for this purpose and measure their execution time using the magic command <code>%%time</code> (if you do not know it, <a href="https://colab.research.google.com/github/jakevdp/PythonDataScienceHandbook/blob/master/notebooks/01.03-Magic-Commands.ipynb" target="_blank" rel="noopener">here</a> are some examples). Justify the change (why are you getting such different execution times?).</h4>
+<ul>
+<li>Add the relevant code.</li>
+<li>The changes here should not be to the feature extraction step or hyperparameter optimization step.</li>
+<li>Make sure that the models give very different execution times (we do not mean to get close execution times to each other).</li>
+</ul>
+</li>
+</ol>
+<blockquote>
+<p><i style="color:red;"> Proof of implementation </i></p>
+<blockquote>
+<p>A.</p>
+<blockquote>
+<ol>
+<li>Show what you changed in the feature extraction step.</li>
+<li>Show the model performance before and after the change.</li>
+</ol>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>B.</p>
+<blockquote>
+<ol>
+<li>Show the correlation coeifficents for all features.</li>
+<li>Show the top 5 highly correlated features.</li>
+</ol>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>C.</p>
+<blockquote>
+<ol>
+<li>Show the value of k.</li>
+<li>Show the value of explained variance.</li>
+<li>Show some 10 samples of the dataframe after PCA.</li>
+<li>Answer the question.</li>
+</ol>
+</blockquote>
+</blockquote>
+</blockquote>
+<blockquote>
+<blockquote>
+<p>D.</p>
+<blockquote>
+<ol>
+<li>Show the execution times of the training for both models.</li>
+<li>Show the change that you made.</li>
+<li>Answer the question.</li>
+</ol>
+</blockquote>
+</blockquote>
+</blockquote>
+</div><pre><div class="markmap-container"><svg class="mm-zq6c6u-1"><style>.mm-zq6c6u-1 a { color: #0097e6; }
+.mm-zq6c6u-1 a:hover { color: #00a8ff; }
+.mm-zq6c6u-1-g &gt; path { fill: none; }
+.mm-zq6c6u-1-fo &gt; div { display: inline-block; font: 300 16px/20px sans-serif; white-space: nowrap; }
+.mm-zq6c6u-1-fo code { padding: .2em .4em; font-size: calc(1em - 2px); color: #555; background-color: #f0f0f0; border-radius: 2px; }
+.mm-zq6c6u-1-fo del { text-decoration: line-through; }
+.mm-zq6c6u-1-fo em { font-style: italic; }
+.mm-zq6c6u-1-fo strong { font-weight: bolder; }
+.mm-zq6c6u-1-fo pre { margin: 0; }
+.mm-zq6c6u-1-fo pre[class*=language-] { padding: 0; }
+.mm-zq6c6u-1-g &gt; g { cursor: pointer; }
+
+</style><g class="mm-zq6c6u-1-g" transform="translate(98.01239013671875,150) scale(2)"><g transform="translate(80,-10)"><rect x="-1" y="18" width="92" height="4" fill="rgb(31, 119, 180)"></rect><foreignObject class="mm-zq6c6u-1-fo" x="8" y="0" height="20" width="74" style="opacity: 1;"><div xmlns="http://www.w3.org/1999/xhtml">The END!</div></foreignObject></g></g></svg></div></pre></div>
+    <div class="ui-toc dropup unselectable hidden-print" style="display:none;">
+        <div class="pull-right dropdown">
+            <a id="tocLabel" class="ui-toc-label btn btn-default" data-toggle="dropdown" href="#" role="button" aria-haspopup="true" aria-expanded="false" title="Table of content">
+                <i class="fa fa-bars"></i>
+            </a>
+            <ul id="ui-toc" class="ui-toc-dropdown dropdown-menu" aria-labelledby="tocLabel">
+                <div class="toc"><ul class="nav">
+<li class=""><a href="#BS---Assignment-6---Spark-ML" title="BS - Assignment 6 - Spark ML">BS - Assignment 6 - Spark ML</a></li>
+<li class=""><a href="#Choices-form" title="Choices form">Choices form</a></li>
+<li class=""><a href="#Choices-sheet" title="Choices sheet">Choices sheet</a></li>
+<li class=""><a href="#Moodle-Submission" title="Moodle Submission">Moodle Submission</a></li>
+<li class=""><a href="#Colab-Notebook-template" title="Colab Notebook template">Colab Notebook template</a></li>
+<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li class=""><a href="#Data-Description" title="Data Description">Data Description</a><ul class="nav">
+<li class=""><a href="#Dataset-1---Classification-task---Estimation-of-Obesity-Levels-Based-On-Eating-Habits-and-Physical-Condition" title="Dataset #1 - Classification task - Estimation of Obesity Levels Based On Eating Habits and Physical Condition.">Dataset #1 - Classification task - Estimation of Obesity Levels Based On Eating Habits and Physical Condition.</a></li>
+<li class=""><a href="#Dataset-2---Regression-task---Solar-Flare" title="Dataset #2 - Regression task - Solar Flare">Dataset #2 - Regression task - Solar Flare</a></li>
+<li class=""><a href="#Dataset-3---Classification-task---Fertility" title="Dataset #3 - Classification task - Fertility">Dataset #3 - Classification task - Fertility</a></li>
+<li class=""><a href="#Dataset-4---Regression-task---Wine-Quality" title="Dataset #4 - Regression task - Wine Quality">Dataset #4 - Regression task - Wine Quality</a></li>
+<li class=""><a href="#Dataset-5---Regression-task---Abalone" title="Dataset #5 - Regression task - Abalone">Dataset #5 - Regression task - Abalone</a></li>
+<li class=""><a href="#Dataset-6---Classification-task---AI4I-2020-Predictive-Maintenance-Dataset" title="Dataset #6 - Classification task - AI4I 2020 Predictive Maintenance Dataset">Dataset #6 - Classification task - AI4I 2020 Predictive Maintenance Dataset</a></li>
+<li class=""><a href="#Dataset-7---Regression-task---Metro-Interstate-Traffic-Volume" title="Dataset #7 - Regression task - Metro Interstate Traffic Volume">Dataset #7 - Regression task - Metro Interstate Traffic Volume</a></li>
+<li class=""><a href="#Dataset-8---Classification-task---Website-Phishing" title="Dataset #8 - Classification task - Website Phishing">Dataset #8 - Classification task - Website Phishing</a></li>
+</ul>
+</li>
+<li class=""><a href="#Instructions" title="Instructions">Instructions</a></li>
+<li class=""><a href="#Exercises" title="Exercises">Exercises</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+            </ul>
+        </div>
+    </div>
+    <div id="ui-toc-affix" class="ui-affix-toc ui-toc-dropdown unselectable hidden-print" data-spy="affix" style="top:17px;display:none;"  >
+        <div class="toc"><ul class="nav">
+<li class=""><a href="#BS---Assignment-6---Spark-ML" title="BS - Assignment 6 - Spark ML">BS - Assignment 6 - Spark ML</a></li>
+<li class=""><a href="#Choices-form" title="Choices form">Choices form</a></li>
+<li class=""><a href="#Choices-sheet" title="Choices sheet">Choices sheet</a></li>
+<li class=""><a href="#Moodle-Submission" title="Moodle Submission">Moodle Submission</a></li>
+<li class=""><a href="#Colab-Notebook-template" title="Colab Notebook template">Colab Notebook template</a></li>
+<li class=""><a href="#Agenda" title="Agenda">Agenda</a></li>
+<li class=""><a href="#Prerequisites" title="Prerequisites">Prerequisites</a></li>
+<li class=""><a href="#Data-Description" title="Data Description">Data Description</a><ul class="nav">
+<li class=""><a href="#Dataset-1---Classification-task---Estimation-of-Obesity-Levels-Based-On-Eating-Habits-and-Physical-Condition" title="Dataset #1 - Classification task - Estimation of Obesity Levels Based On Eating Habits and Physical Condition.">Dataset #1 - Classification task - Estimation of Obesity Levels Based On Eating Habits and Physical Condition.</a></li>
+<li class=""><a href="#Dataset-2---Regression-task---Solar-Flare" title="Dataset #2 - Regression task - Solar Flare">Dataset #2 - Regression task - Solar Flare</a></li>
+<li class=""><a href="#Dataset-3---Classification-task---Fertility" title="Dataset #3 - Classification task - Fertility">Dataset #3 - Classification task - Fertility</a></li>
+<li class=""><a href="#Dataset-4---Regression-task---Wine-Quality" title="Dataset #4 - Regression task - Wine Quality">Dataset #4 - Regression task - Wine Quality</a></li>
+<li class=""><a href="#Dataset-5---Regression-task---Abalone" title="Dataset #5 - Regression task - Abalone">Dataset #5 - Regression task - Abalone</a></li>
+<li class=""><a href="#Dataset-6---Classification-task---AI4I-2020-Predictive-Maintenance-Dataset" title="Dataset #6 - Classification task - AI4I 2020 Predictive Maintenance Dataset">Dataset #6 - Classification task - AI4I 2020 Predictive Maintenance Dataset</a></li>
+<li class=""><a href="#Dataset-7---Regression-task---Metro-Interstate-Traffic-Volume" title="Dataset #7 - Regression task - Metro Interstate Traffic Volume">Dataset #7 - Regression task - Metro Interstate Traffic Volume</a></li>
+<li class=""><a href="#Dataset-8---Classification-task---Website-Phishing" title="Dataset #8 - Classification task - Website Phishing">Dataset #8 - Classification task - Website Phishing</a></li>
+</ul>
+</li>
+<li class=""><a href="#Instructions" title="Instructions">Instructions</a></li>
+<li class=""><a href="#Exercises" title="Exercises">Exercises</a></li>
+</ul>
+</div><div class="toc-menu" style="">
+    <a class="expand-toggle expand-all" href="#">Expand all</a>
+    <a class="expand-toggle collapse-all" href="#" style="display: none;">Collapse all</a>
+    <a class="back-to-top" href="#">Back to top</a>
+    <a class="go-to-bottom" href="#">Go to bottom</a>
+</div>
+    </div>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js" integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/twitter-bootstrap/3.4.0/js/bootstrap.min.js" integrity="sha256-kJrlY+s09+QoWjpkOrXXwhxeaoDz9FW5SaxF8I0DibQ=" crossorigin="anonymous" defer></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gist-embed/2.6.0/gist-embed.min.js" integrity="sha256-KyF2D6xPIJUW5sUDSs93vWyZm+1RzIpKCexxElmxl8g=" crossorigin="anonymous" defer></script>
+    <script>
+        var markdown = $(".markdown-body");
+        //smooth all hash trigger scrolling
+        function smoothHashScroll() {
+            var hashElements = $("a[href^='#']").toArray();
+            for (var i = 0; i < hashElements.length; i++) {
+                var element = hashElements[i];
+                var $element = $(element);
+                var hash = element.hash;
+                if (hash) {
+                    $element.on('click', function (e) {
+                        // store hash
+                        var hash = this.hash;
+                        if ($(hash).length <= 0) return;
+                        // prevent default anchor click behavior
+                        e.preventDefault();
+                        // animate
+                        $('body, html').stop(true, true).animate({
+                            scrollTop: $(hash).offset().top
+                        }, 100, "linear", function () {
+                            // when done, add hash to url
+                            // (default click behaviour)
+                            window.location.hash = hash;
+                        });
+                    });
+                }
+            }
+        }
+
+        smoothHashScroll();
+        var toc = $('.ui-toc');
+        var tocAffix = $('.ui-affix-toc');
+        var tocDropdown = $('.ui-toc-dropdown');
+        //toc
+        tocDropdown.click(function (e) {
+            e.stopPropagation();
+        });
+
+        var enoughForAffixToc = true;
+
+        function generateScrollspy() {
+            $(document.body).scrollspy({
+                target: ''
+            });
+            $(document.body).scrollspy('refresh');
+            if (enoughForAffixToc) {
+                toc.hide();
+                tocAffix.show();
+            } else {
+                tocAffix.hide();
+                toc.show();
+            }
+            $(document.body).scroll();
+        }
+
+        function windowResize() {
+            //toc right
+            var paddingRight = parseFloat(markdown.css('padding-right'));
+            var right = ($(window).width() - (markdown.offset().left + markdown.outerWidth() - paddingRight));
+            toc.css('right', right + 'px');
+            //affix toc left
+            var newbool;
+            var rightMargin = (markdown.parent().outerWidth() - markdown.outerWidth()) / 2;
+            //for ipad or wider device
+            if (rightMargin >= 133) {
+                newbool = true;
+                var affixLeftMargin = (tocAffix.outerWidth() - tocAffix.width()) / 2;
+                var left = markdown.offset().left + markdown.outerWidth() - affixLeftMargin;
+                tocAffix.css('left', left + 'px');
+            } else {
+                newbool = false;
+            }
+            if (newbool != enoughForAffixToc) {
+                enoughForAffixToc = newbool;
+                generateScrollspy();
+            }
+        }
+        $(window).resize(function () {
+            windowResize();
+        });
+        $(document).ready(function () {
+            windowResize();
+            generateScrollspy();
+        });
+
+        //remove hash
+        function removeHash() {
+            window.location.hash = '';
+        }
+
+        var backtotop = $('.back-to-top');
+        var gotobottom = $('.go-to-bottom');
+
+        backtotop.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToTop)
+                scrollToTop();
+            removeHash();
+        });
+        gotobottom.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            if (scrollToBottom)
+                scrollToBottom();
+            removeHash();
+        });
+
+        var toggle = $('.expand-toggle');
+        var tocExpand = false;
+
+        checkExpandToggle();
+        toggle.click(function (e) {
+            e.preventDefault();
+            e.stopPropagation();
+            tocExpand = !tocExpand;
+            checkExpandToggle();
+        })
+
+        function checkExpandToggle () {
+            var toc = $('.ui-toc-dropdown .toc');
+            var toggle = $('.expand-toggle');
+            if (!tocExpand) {
+                toc.removeClass('expand');
+                toggle.text('Expand all');
+            } else {
+                toc.addClass('expand');
+                toggle.text('Collapse all');
+            }
+        }
+
+        function scrollToTop() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: 0
+            }, 100, "linear");
+        }
+
+        function scrollToBottom() {
+            $('body, html').stop(true, true).animate({
+                scrollTop: $(document.body)[0].scrollHeight
+            }, 100, "linear");
+        }
+    </script>
+</body>
+
+</html>
